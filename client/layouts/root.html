@@ -1,14 +1,22 @@
 <template name="rootLayout">
     <div class="rootLayout">
-        <aside>
-            {{> myShopsMenu}}
-            {{> menu}}
-            {{> login}}
-        </aside>
-        <section>
-            {{> yield}}
-        </section>
-        <aside>
-        </aside>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+                    <aside>
+                        {{> menu}}
+                        <h3>Management</h3>
+                        {{> myShopsMenu}}
+                        <h3>Sign in</h3>
+                        {{> login}}
+                    </aside>
+                </div>
+                <div class="col-xs-9">
+                    <section>
+                        {{> yield}}
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
