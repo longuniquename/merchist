@@ -13,15 +13,14 @@ Router.route('/marketplace', function () {
 
 Router.route('/management/shops/new', function () {
     this.layout('rootLayout');
-    this.render('shopEdit', {data: {shop: {}}});
+    this.render('shopEdit');
 }, {
     name: 'shops.create'
 });
 
 Router.route('/management/shops/:shopId', function () {
-    var shop = Shops.findOne(this.params.shopId);
     this.layout('rootLayout');
-    this.render('shopEdit', {data: {shop: shop}});
+    this.render('shopEdit', {data: {shopId: this.params.shopId}});
 }, {
     name: 'shops.edit'
 });
