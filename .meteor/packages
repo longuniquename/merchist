@@ -7,4 +7,9 @@ meteor-platform
 autopublish
 insecure
 less
+accounts-facebook
+accounts-google
+accounts-password
+accounts-twitter
+iron:router
 
