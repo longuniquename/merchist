@@ -8,7 +8,7 @@ Template.shopEdit.events({
 
         if (!this.shop._id) {
             var shopId = Shops.insert(data);
-            Router.go('management.shops.edit', {shopId: shopId});
+            Router.go('shops.edit', {shopId: shopId});
         } else {
             Shops.update(this.shop._id, {$set: data});
         }
