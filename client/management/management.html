@@ -1,0 +1,10 @@
+<template name="management">
+    <section id="marketplace">
+        <a href="/management/shops/new">Add shop</a>
+        <div class="shopsList">
+            {{ #each shops }}
+            {{> shopCard }}
+            {{ /each }}
+        </div>
+    </section>
+</template>

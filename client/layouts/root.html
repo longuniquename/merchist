@@ -1,0 +1,14 @@
+<template name="rootLayout">
+    <div class="rootLayout">
+        <aside>
+            {{> myShopsMenu}}
+            {{> menu}}
+            {{> login}}
+        </aside>
+        <section>
+            {{> yield}}
+        </section>
+        <aside>
+        </aside>
+    </div>
+</template>
