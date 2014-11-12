@@ -71,5 +71,8 @@ Template.shopEdit.events({
             document.getElementById('logoImage').src = canvas.toDataURL();
         };
         logoReader.readAsDataURL(logoFile);
+    },
+    'click .uploadBtn': function(e, template){
+        template.$('.uploadMenu').toggle();
     }
 });

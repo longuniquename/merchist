@@ -2,6 +2,37 @@
     <section id="shopEdit">
         {{ #with shop }}
         <div class="imagesBlock">
+            <button class="uploadBtn">
+                <svg width="32px" height="32px" viewbox="0 0 32 32">
+                    <polyline points="13,14 10,14 10,24 22,24, 22,14, 19,14"></polyline>
+                    <line x1="16" y1="7" x2="16" y2="18"></line>
+                    <polyline points="12,11 16,7 20,11"></polyline>
+                </svg>
+            </button>
+            <nav class="uploadMenu">
+                <svg class="tip" height="8px" width="32px" viewbox="0 0 32 8">
+                    <polygon points="8,8 16,0 24,8" fill="red"></polygon>
+                </svg>
+                <ul class="menu">
+                    <li>
+                        <button class="uploadLogoBtn">
+                            <svg height="32px" width="32px" viewbox="0 0 32 32">
+                                <circle r="8" cx="16" cy="16"></circle>
+                            </svg>
+                            <input type="file" name="uploadLogoFile" />
+                        </button>
+                    </li>
+                    <li>
+                        <button class="uploadCoverBtn">
+                            <svg height="32px" width="32px" viewbox="0 0 32 32">
+                                <rect height="16" width="16" x="8" y="8"></rect>
+                            </svg>
+                            <input type="file" name="uploadCoverFile" />
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
             <img id="coverImage" />
             <img id="logoImage" />
         </div>
