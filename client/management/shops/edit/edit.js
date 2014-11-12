@@ -1,3 +1,19 @@
+Template.shopEdit.rendered = function(){
+
+    var resizeImagesBlock = function(){
+        var imagesBlock = this.$('.imagesBlock');
+        imagesBlock.css({
+            height: imagesBlock.width()
+        });
+    };
+
+    $(window).bind('resize', function(){
+        resizeImagesBlock();
+    });
+
+    resizeImagesBlock();
+};
+
 Template.shopEdit.events({
     'submit .shopEditForm': function (e) {
         e.preventDefault();
