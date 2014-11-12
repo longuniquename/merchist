@@ -1,20 +1,25 @@
 <template name="shopEdit">
     <section id="shopEdit">
         {{ #with shop }}
-        <form role="form" class="shopEditForm">
-            <div class="form-group">
+        <form class="shopEditForm">
+            <div>
+                <label for="shopLogo">Logo</label>
+                <img id="shopLogoPreview" />
+                <input type="file" name="logo" id="shopLogo" accept="image/*" />
+            </div>
+            <div>
                 <label for="shopTitle">title</label>
-                <input type="text" name="title" id="shopTitle" class="form-control" value="{{ title }}" />
+                <input type="text" name="title" id="shopTitle" value="{{ title }}" />
             </div>
-            <div class="form-group">
+            <div>
                 <label for="shopSubtitle">subtitle</label>
-                <input type="text" name="subtitle" id="shopSubtitle" class="form-control" value="{{ subtitle }}" />
+                <input type="text" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" />
             </div>
-            <div class="form-group">
+            <div>
                 <label for="shopDescription">description</label>
-                <textarea name="description" id="shopDescription" class="form-control">{{ description }}</textarea>
+                <textarea name="description" id="shopDescription">{{ description }}</textarea>
             </div>
-            <button type="submit" class="btn btn-default">Save</button>
+            <button type="submit">Save</button>
         </form>
         {{ /with }}
     </section>

@@ -23,5 +23,13 @@ Template.shopEdit.events({
         } else {
             Shops.update(this._id, {$set: data});
         }
+    },
+    'change #shopLogo': function (e) {
+        var logoFile = e.currentTarget.files[0],
+            logoReader = new FileReader();
+        logoReader.onload = function (e) {
+            $('#shopLogoPreview').attr('src', e.target.result);
+        };
+        logoReader.readAsDataURL(logoFile);
     }
 });

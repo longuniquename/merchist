@@ -1,0 +1,39 @@
+@white:           #FFF;
+@gray10:          darken(@white, 10%); //#E6E6E6
+@gray20:          darken(@white, 20%); //#CCCCCC
+@gray30:          darken(@white, 30%); //#B3B3B3
+@gray40:          darken(@white, 40%); //#999999
+@gray50:          darken(@white, 50%); //#808080
+@gray60:          darken(@white, 60%); //#666666
+@gray70:          darken(@white, 70%); //#4D4D4D
+@gray80:          darken(@white, 80%); //#333333
+@gray90:          darken(@white, 90%); //#191919
+@black:           #000;
+
+@gray-light:      #EEE;
+
+@color-main:      #3DA3A7;
+@color-good:      #DA4A3A;
+@color-bad:       #39B473;
+
+@body-background:         @gray-light;
+@font-family:             'Roboto', sans-serif;
+@text-color:              @gray60;
+
+@link-color:              @color-main;
+@link-hover-color:        darken(@color-main, 10%);
+
+@font-size-base:          14px;
+@line-height-computed:    20px;
+@line-height-base:        unit(@line-height-computed) / unit(@font-size-base);
+
+@font-size-h1:            floor((@font-size-base * 2.6));
+@font-size-h2:            floor((@font-size-base * 2.15));
+@font-size-h3:            ceil((@font-size-base * 1.7));
+@font-size-h4:            ceil((@font-size-base * 1.25));
+@font-size-h5:            @font-size-base;
+@font-size-h6:            ceil((@font-size-base * 0.85));
+
+@headings-font-weight:    300;
+@headings-line-height:    1.1;
+@headings-color:          @color-main;

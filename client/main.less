@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@import (reference) 'lib/variables.import.less';
+@import 'lib/headings.import.less';
+
+* {
+  font-family: @font-family;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: @body-background;
+  color: @text-color;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+}
+
+a {
+  color: @link-color;
+
+  &:hover,&:active {
+    color: @link-hover-color;
+  }
+}

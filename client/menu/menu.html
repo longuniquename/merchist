@@ -1,9 +1,15 @@
 <template name="menu">
-    <nav class="menu">
+    <nav id="menu">
         <ul class="nav nav-pills nav-stacked" role="tablist">
             <li>
                 <a href="{{pathFor route='marketplace'}}">Marketplace</a>
             </li>
         </ul>
+        <h3>Management</h3>
+        {{> myShopsMenu}}
+        <h3>Sign in</h3>
+        {{> login}}
+
+        <button class="closeBtn">Close</button>
     </nav>
 </template>
