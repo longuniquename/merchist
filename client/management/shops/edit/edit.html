@@ -19,7 +19,7 @@
                             <svg height="32px" width="32px" viewbox="0 0 32 32">
                                 <circle r="8" cx="16" cy="16"></circle>
                             </svg>
-                            <input type="file" name="uploadLogoFile" />
+                            <input type="file" name="logo" id="uploadLogoFile" accept="image/*" />
                         </button>
                     </li>
                     <li>
@@ -27,16 +27,18 @@
                             <svg height="32px" width="32px" viewbox="0 0 32 32">
                                 <rect height="16" width="16" x="8" y="8"></rect>
                             </svg>
-                            <input type="file" name="uploadCoverFile" />
+                            <input type="file" name="cover" id="uploadCoverFile" accept="image/*" />
                         </button>
                     </li>
                 </ul>
             </nav>
 
-            <img id="coverImage" />
-            <img id="logoImage" />
+            <img class="cover" src="{{ cover }}" />
+            <img class="logo" src="{{ logo }}" />
+
+            <canvas id="coverCanvas"></canvas>
+            <canvas id="logoCanvas"></canvas>
         </div>
-        <input type="file" name="logo" id="shopLogo" accept="image/*" />
         <form class="shopEditForm">
             <div>
                 <label for="shopTitle">title</label>

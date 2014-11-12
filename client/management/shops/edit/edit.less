@@ -121,22 +121,27 @@
       }
     }
 
-    #coverImage {
+    img.cover, img.logo, canvas#coverCanvas, canvas#logoCanvas {
       position: absolute;
       display: block;
+    }
+
+    img.cover, canvas#coverCanvas {
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
     }
-    
-    #logoImage {
-      position: absolute;
-      display: block;
+
+    img.logo, canvas#logoCanvas {
       top: 33%;
       left: 33%;
       height: 33%;
       width: 33%;
+    }
+
+    canvas#coverCanvas, canvas#logoCanvas {
+      display: none;
     }
 
   }

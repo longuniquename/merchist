@@ -12,3 +12,5 @@ accounts-password
 accounts-twitter
 iron:router
 accounts-ui
+mvrx:bluebird
+

@@ -1,78 +1,108 @@
-Template.shopEdit.rendered = function(){
+(function(){
 
-    var resizeImagesBlock = function(){
-        var imagesBlock = this.$('.imagesBlock');
-        imagesBlock.css({
-            height: imagesBlock.width()
+    function loadFile(file) {
+        return new Promise(function(resolve, reject) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                resolve(e.target.result);
+            };
+            reader.onerror = function(e) {
+                reject();
+            };
+            reader.readAsDataURL(file);
         });
+    }
+
+    function loadImage(src) {
+        return new Promise(function(resolve, reject) {
+            var image = new Image();
+            image.onload = function() {
+                resolve(image);
+            };
+            image.src = src;
+        });
+    }
+
+    Template.shopEdit.rendered = function(){
+        var resizeImagesBlock = function(){
+            var imagesBlock = this.$('.imagesBlock');
+            imagesBlock.css({
+                height: imagesBlock.width()
+            });
+        };
+
+        $(window).bind('resize', function(){
+            resizeImagesBlock();
+        });
+
+        resizeImagesBlock();
     };
 
-    $(window).bind('resize', function(){
-        resizeImagesBlock();
-    });
+    Template.shopEdit.events({
+        'submit .shopEditForm': function (e) {
+            e.preventDefault();
 
-    resizeImagesBlock();
-};
+            var data = {
+                title: $('input[name="title"]', e.currentTarget).val(),
+                subtitle: $('input[name="subtitle"]', e.currentTarget).val(),
+                description: $('textarea[name="description"]', e.currentTarget).val()
+            };
 
-Template.shopEdit.events({
-    'submit .shopEditForm': function (e) {
-        e.preventDefault();
-
-        var data = {
-            title: $('input[name="title"]', e.currentTarget).val(),
-            subtitle: $('input[name="subtitle"]', e.currentTarget).val(),
-            description: $('textarea[name="description"]', e.currentTarget).val()
-        };
-
-        if (!this._id) {
-            Router.go('shops.edit', {shopId: Shops.insert(data)});
-        } else {
-            Shops.update(this._id, {$set: data});
-        }
-    },
-    'change #shopLogo': function (e) {
-        var logoFile = e.currentTarget.files[0],
-            logoReader = new FileReader(),
-            logoImage = new Image();
-
-        logoReader.onload = function (e) {
-            logoImage.src = e.target.result;
-        };
-        logoImage.onload = function() {
-            var srcTop = 0,
-                srcLeft = 0,
-                srcHeight = logoImage.height,
-                srcWidth = logoImage.width,
-                srcSize;
-
-            if (srcHeight < srcWidth) {
-                srcLeft = Math.ceil((srcWidth - srcHeight) / 2);
-                srcSize = srcHeight;
-            } else if (srcHeight > srcWidth) {
-                srcTop = Math.ceil((srcHeight - srcWidth) / 2);
-                srcSize = srcWidth;
+            if (!this._id) {
+                Router.go('shops.edit', {shopId: Shops.insert(data)});
+            } else {
+                Shops.update(this._id, {$set: data});
             }
+        },
+        'change #uploadLogoFile': function (e, template) {
+            template.$('.uploadMenu').toggle();
+            template.data.logo = {};
 
-            var canvas = document.createElement('canvas');
-            canvas.setAttribute('height', srcSize + 'px');
-            canvas.setAttribute('width', srcSize + 'px');
-            var context = canvas.getContext('2d');
+            loadFile(e.currentTarget.files[0])
+                .then(function(dataUrl){
+                    return loadImage(dataUrl);
+                })
+                .then(function(image){
+                    var srcTop = 0,
+                        srcLeft = 0,
+                        srcHeight = image.height,
+                        srcWidth = image.width,
+                        srcSize,
+                        dstSize;
 
-            context.beginPath();
-            context.arc(srcSize/2,srcSize/2,srcSize/2, 0, 2 * Math.PI, false);
-            context.clip();
+                    if (srcHeight < srcWidth) {
+                        srcLeft = Math.ceil((srcWidth - srcHeight) / 2);
+                        srcSize = srcHeight;
+                    } else if (srcHeight > srcWidth) {
+                        srcTop = Math.ceil((srcHeight - srcWidth) / 2);
+                        srcSize = srcWidth;
+                    }
 
-            context.save();
-            context.translate(srcSize/2, srcSize/2);
-            context.rotate(0);
-            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, -srcSize/2, -srcSize/2, srcSize, srcSize);
-            context.restore();
+                    var canvas = document.getElementById('logoCanvas');
+                    var context = canvas.getContext('2d');
 
-            document.getElementById('logoImage').src = canvas.toDataURL();
-        };
-        logoReader.readAsDataURL(logoFile);
-    },
-    'click .uploadBtn': function(e, template){
-        template.$('.uploadMenu').toggle();
-    }
-});
+                    template.$('img.logo').hide();
+                    template.$('canvas#logoCanvas').show();
+
+                    dstSize = Math.min(template.$('#logoCanvas').height(), template.$('#logoCanvas').width()) * window.devicePixelRatio;
+                    canvas.setAttribute('height', dstSize + 'px');
+                    canvas.setAttribute('width', dstSize + 'px');
+
+                    context.beginPath();
+                    context.arc(dstSize/2, dstSize/2, dstSize/2, 0, 2 * Math.PI, false);
+                    context.clip();
+
+                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+                })
+                .catch(TypeError, function(error){
+                    console.error('TypeError', error);
+                })
+                .catch(function(error){
+                    console.error(error);
+                });
+        },
+        'click .uploadBtn': function(e, template){
+            template.$('.uploadMenu').toggle();
+        }
+    });
+})();
