@@ -13,14 +13,28 @@ Router.route('/marketplace', function () {
 
 Router.route('/management/shops/new', function () {
     this.layout('rootLayout');
-    this.render('shopEdit');
+    this.render('shopEdit', {data:{shop:{}}});
 }, {
     name: 'shops.create'
 });
 
-Router.route('/management/shops/:shopId', function () {
+Router.route('/management/shops/:_id', function () {
+    var shopId = this.params._id;
+
     this.layout('rootLayout');
-    this.render('shopEdit', {data: {shopId: this.params.shopId}});
+    this.wait(Meteor.subscribe('shop', shopId));
+
+    if (this.ready()) {
+        this.render('shopEdit', {
+            data: {
+                shop: function () {
+                    return Shops.findOne({_id: shopId});
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
 }, {
     name: 'shops.edit'
 });

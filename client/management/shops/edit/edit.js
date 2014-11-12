@@ -1,13 +1,3 @@
-Template.shopEdit.helpers({
-    shop: function() {
-        if (this.shopId) {
-            return Shops.findOne(this.shopId);
-        } else {
-            return {};
-        }
-    }
-});
-
 Template.shopEdit.events({
     'submit .shopEditForm': function (e) {
         e.preventDefault();
