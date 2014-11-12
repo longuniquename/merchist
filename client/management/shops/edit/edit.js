@@ -52,8 +52,15 @@ Template.shopEdit.events({
             canvas.setAttribute('width', srcSize + 'px');
             var context = canvas.getContext('2d');
 
-            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, 0, 0, srcSize, srcSize);
+            context.beginPath();
+            context.arc(srcSize/2,srcSize/2,srcSize/2, 0, 2 * Math.PI, false);
+            context.clip();
+
             context.save();
+            context.translate(srcSize/2, srcSize/2);
+            context.rotate(0);
+            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, -srcSize/2, -srcSize/2, srcSize, srcSize);
+            context.restore();
 
             document.getElementById('logoImage').src = canvas.toDataURL();
         };
