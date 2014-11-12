@@ -1,0 +1,39 @@
+@import (reference) '../lib/variables.import.less';
+
+#root {
+  header {
+    height: 48px;
+    width: 48px;
+    position: fixed;
+    display: block;
+    left: 0;
+    top: 0;
+
+    button.menuBtn {
+      background: none;
+      padding: 0;
+      margin: 0;
+      border: none;
+      white-space: nowrap;
+      cursor: pointer;
+      height: 32px;
+      width: 32px;
+      outline: none;
+
+      svg {
+        width: 32px;
+        height: 32px;
+
+        .background {
+          fill: fadeout(white, 75%);
+        }
+
+        .lines {
+          stroke: @color-main;
+          fill: none;
+          stroke-width: 2;
+        }
+      }
+    }
+  }
+}
