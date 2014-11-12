@@ -1,0 +1,82 @@
+@import (reference) '../lib/variables.import.less';
+
+section#loading {
+  .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 0;
+    width: 0;
+
+    svg.loader {
+      height: 20px;
+      width: 70px;
+      margin: -10px -35px;
+
+      circle {
+        fill: @color-main;
+        -webkit-transform-origin: center;
+        -moz-transform-origin: center;
+        -o-transform-origin: center;
+        transform-origin: center;
+        -webkit-animation: loading 1.2s infinite;
+        -moz-animation: loading 1.2s infinite;
+        -o-animation: loading 1.2s infinite;
+        animation: loading 1.2s infinite;
+
+        &:nth-child(1) {
+          -webkit-animation-delay: .3s;
+          -moz-animation-delay: .3s;
+          -o-animation-delay: .3s;
+          animation-delay: .3s;
+        }
+        &:nth-child(2) {
+          -webkit-animation-delay: .5s;
+          -moz-animation-delay: .5s;
+          -o-animation-delay: .5s;
+          animation-delay: .5s;
+        }
+        &:nth-child(3) {
+          -webkit-animation-delay: .7s;
+          -moz-animation-delay: .7s;
+          -o-animation-delay: .7s;
+          animation-delay: .7s;
+        }
+      }
+    }
+  }
+}
+
+
+@-webkit-keyframes loading {
+  0%, 100% {
+    -webkit-transform: scale(0.0);
+  }
+  50% {
+    -webkit-transform: scale(1.0);
+  }
+}
+@-moz-keyframes loading {
+  0%, 100% {
+    -moz-transform: scale(0.0);
+  }
+  50% {
+    -moz-transform: scale(1.0);
+  }
+}
+@-o-keyframes loading {
+  0%, 100% {
+    -o-transform: scale(0.0);
+  }
+  50% {
+    -o-transform: scale(1.0);
+  }
+}
+@keyframes loading {
+  0%, 100% {
+    transform: scale(0.0);
+  }
+  50% {
+    transform: scale(1.0);
+  }
+}
