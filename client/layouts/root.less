@@ -1,13 +1,14 @@
 @import (reference) '../lib/variables.import.less';
 
 #root {
-  header {
-    height: 48px;
-    width: 48px;
+  > header {
+    height: 32px;
+    width: 32px;
     position: fixed;
     display: block;
     left: 0;
     top: 0;
+    z-index: 10;
 
     button.menuBtn {
       background: none;
@@ -35,5 +36,15 @@
         }
       }
     }
+  }
+
+  > section {
+    position: fixed;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
   }
 }

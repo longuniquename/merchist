@@ -1,12 +1,12 @@
 <template name="shopEdit">
     <section id="shopEdit">
         {{ #with shop }}
+        <div class="imagesBlock">
+            <canvas id="coverCanvas"></canvas>
+            <canvas id="logoCanvas" width="150px" height="150px"></canvas>
+        </div>
+        <input type="file" name="logo" id="shopLogo" accept="image/*" />
         <form class="shopEditForm">
-            <div>
-                <label for="shopLogo">Logo</label>
-                <img id="shopLogoPreview" />
-                <input type="file" name="logo" id="shopLogo" accept="image/*" />
-            </div>
             <div>
                 <label for="shopTitle">title</label>
                 <input type="text" name="title" id="shopTitle" value="{{ title }}" />

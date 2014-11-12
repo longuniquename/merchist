@@ -25,10 +25,47 @@ Template.shopEdit.events({
         }
     },
     'change #shopLogo': function (e) {
+        var canvas = document.getElementById('logoCanvas'),
+            context = canvas.getContext('2d');
+
         var logoFile = e.currentTarget.files[0],
-            logoReader = new FileReader();
+            logoReader = new FileReader(),
+            logoImage = new Image();
+
         logoReader.onload = function (e) {
-            $('#shopLogoPreview').attr('src', e.target.result);
+            logoImage.src = e.target.result;
+        };
+        logoImage.onload = function() {
+            var srcTop = 0,
+                srcLeft = 0,
+                srcHeight = logoImage.height,
+                srcWidth = logoImage.width,
+                srcSize,
+                dstSize = Math.min(canvas.height, canvas.width);
+
+            console.log({
+                height: canvas.height,
+                width: canvas.width
+            });
+
+            if (srcHeight < srcWidth) {
+                srcLeft = Math.ceil((srcWidth - srcHeight) / 2);
+                srcSize = srcHeight;
+            } else if (srcHeight > srcWidth) {
+                srcTop = Math.ceil((srcHeight - srcWidth) / 2);
+                srcSize = srcWidth;
+            }
+
+            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+
+            console.log({
+                srcHeight: srcHeight,
+                srcWidth: srcWidth,
+                srcTop: srcTop,
+                srcLeft: srcLeft,
+                srcSize: srcSize,
+                dstSize: dstSize
+            });
         };
         logoReader.readAsDataURL(logoFile);
     }
