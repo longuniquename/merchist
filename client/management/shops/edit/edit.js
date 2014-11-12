@@ -25,9 +25,6 @@ Template.shopEdit.events({
         }
     },
     'change #shopLogo': function (e) {
-        var canvas = document.getElementById('logoCanvas'),
-            context = canvas.getContext('2d');
-
         var logoFile = e.currentTarget.files[0],
             logoReader = new FileReader(),
             logoImage = new Image();
@@ -40,13 +37,7 @@ Template.shopEdit.events({
                 srcLeft = 0,
                 srcHeight = logoImage.height,
                 srcWidth = logoImage.width,
-                srcSize,
-                dstSize = Math.min(canvas.height, canvas.width);
-
-            console.log({
-                height: canvas.height,
-                width: canvas.width
-            });
+                srcSize;
 
             if (srcHeight < srcWidth) {
                 srcLeft = Math.ceil((srcWidth - srcHeight) / 2);
@@ -56,16 +47,15 @@ Template.shopEdit.events({
                 srcSize = srcWidth;
             }
 
-            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+            var canvas = document.createElement('canvas');
+            canvas.setAttribute('height', srcSize + 'px');
+            canvas.setAttribute('width', srcSize + 'px');
+            var context = canvas.getContext('2d');
 
-            console.log({
-                srcHeight: srcHeight,
-                srcWidth: srcWidth,
-                srcTop: srcTop,
-                srcLeft: srcLeft,
-                srcSize: srcSize,
-                dstSize: dstSize
-            });
+            context.drawImage(logoImage, srcLeft, srcTop, srcSize, srcSize, 0, 0, srcSize, srcSize);
+            context.save();
+
+            document.getElementById('logoImage').src = canvas.toDataURL();
         };
         logoReader.readAsDataURL(logoFile);
     }
