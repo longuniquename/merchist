@@ -212,8 +212,20 @@
 
                             template.$('.logo').attr('src', canvas.toDataURL());
                             template.$('.imagesBlock').removeClass('editing');
+
+                            Meteor.call('saveImage', canvas.toDataURL(), function(error, path){
+                                if (template.data.shop()._id) {
+                                    Shops.update(template.data.shop()._id, {$set: {logo: path}});
+                                }
+                            });
                         });
 
+                    break;
+                case 'cover':
+                    loadImage(template.data.cover.file)
+                        .then(function (image) {
+
+                        });
                     break;
             }
         }

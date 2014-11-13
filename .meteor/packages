@@ -13,4 +13,7 @@ accounts-twitter
 iron:router
 accounts-ui
 mvrx:bluebird
+meteorhacks:npm
 
+
+npm-container
