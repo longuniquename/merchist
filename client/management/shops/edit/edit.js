@@ -81,14 +81,9 @@
                     var canvas = document.getElementById('canvas');
                     var context = canvas.getContext('2d');
 
-                    template.$('img.logo').hide();
-                    template.$('img.cover').hide();
-                    template.$('.uploadBtn').hide();
-                    template.$('.uploadMenu').hide();
-                    template.$('#canvas').show();
+                    template.$('.imagesBlock').addClass('editing');
 
                     dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * (window.devicePixelRatio || 1);
-                    console.log(dstSize);
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
@@ -97,7 +92,6 @@
                     context.clip();
 
                     context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
-                    console.log(srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
                 })
                 .catch(TypeError, function(error){
                     console.error('TypeError', error);
@@ -133,11 +127,7 @@
                     var canvas = document.getElementById('canvas');
                     var context = canvas.getContext('2d');
 
-                    template.$('img.logo').hide();
-                    template.$('img.cover').hide();
-                    template.$('.uploadBtn').hide();
-                    template.$('.uploadMenu').hide();
-                    template.$('canvas#canvas').show();
+                    template.$('.imagesBlock').addClass('editing');
 
                     dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * window.devicePixelRatio;
                     canvas.setAttribute('height', dstSize + 'px');

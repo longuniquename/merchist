@@ -2,75 +2,6 @@
 
 #shopEdit {
   .imagesBlock {
-    position: relative;
-    height: 414px;
-    width: 100%;
-    background: @color-main;
-
-    .uploadBtn {
-      z-index: 10;
-      position: absolute;
-      right: 0;
-    }
-
-    .uploadMenu {
-      display: none;
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      right: 0;
-      top: @header-buttons-size + 8px;
-      width: @header-buttons-size;
-      z-index: 10;
-
-      ul.menu {
-        display: block;
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-        position: absolute;
-        top: 0;
-
-        li {
-          display: block;
-          height: @header-buttons-size;
-          width: @header-buttons-size;
-          margin: 0;
-          padding: 0;
-
-          button {
-            display: block;
-            position: relative;
-            overflow: hidden;
-
-            input[type=file] {
-              position: absolute;
-              top: 0;
-              right: 0;
-              width: @header-buttons-size;
-              height: @header-buttons-size;
-              font-size: 100px;
-              text-align: right;
-              filter: alpha(opacity=0);
-              opacity: 0;
-              outline: none;
-              background: white;
-              cursor: inherit;
-              display: block;
-            }
-          }
-        }
-      }
-
-      svg.tip {
-        display: block;
-        position: absolute;
-        top: -8px;
-        polygon {
-          fill: fadeout(white, 50%);
-        }
-      }
-    }
 
     img.cover, img.logo, canvas#canvas {
       position: absolute;
@@ -85,7 +16,7 @@
     }
 
     canvas#canvas {
-      display: none;
+      display: block;
     }
 
   }
