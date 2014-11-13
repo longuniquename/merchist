@@ -2,12 +2,8 @@
     <section id="shopEdit">
         {{ #with shop }}
         <div class="imagesBlock">
-            <button class="uploadBtn">
-                <svg width="48px" height="48px" viewbox="0 0 48 48">
-                    <polyline points="18,20 14,20 14,36 34,36, 34,20, 30,20"></polyline>
-                    <line x1="24" y1="12" x2="24" y2="28"></line>
-                    <polyline points="18,16 24,10 30,16"></polyline>
-                </svg>
+            <button class="uploadBtn btn btn-icon">
+                {{> iconUpload }}
             </button>
             <nav class="uploadMenu">
                 <svg class="tip" height="8px" width="48px" viewbox="0 0 48 8">
@@ -15,29 +11,30 @@
                 </svg>
                 <ul class="menu">
                     <li>
-                        <button class="uploadLogoBtn">
-                            <svg height="48px" width="48px" viewbox="0 0 48 48">
-                                <circle r="12" cx="24" cy="24"></circle>
-                            </svg>
+                        <button class="uploadLogoBtn btn btn-icon">
+                            {{> iconCircle }}
                             <input type="file" name="logo" id="uploadLogoFile" accept="image/*" />
                         </button>
                     </li>
                     <li>
-                        <button class="uploadCoverBtn">
-                            <svg height="48px" width="48px" viewbox="0 0 48 48">
-                                <rect height="24" width="24" x="12" y="12"></rect>
-                            </svg>
+                        <button class="uploadCoverBtn btn btn-icon">
+                            {{> iconRect }}
                             <input type="file" name="cover" id="uploadCoverFile" accept="image/*" />
                         </button>
                     </li>
                 </ul>
             </nav>
+            <button class="cancelBtn btn btn-icon">
+                {{> iconCancel }}
+            </button>
+            <button class="saveBtn btn btn-icon">
+                {{> iconOk }}
+            </button>
 
             <img class="cover" src="{{ cover }}" />
             <img class="logo" src="{{ logo }}" />
 
-            <canvas id="coverCanvas"></canvas>
-            <canvas id="logoCanvas"></canvas>
+            <canvas id="canvas"></canvas>
         </div>
         <form class="shopEditForm">
             <div>

@@ -1,0 +1,20 @@
+@import (reference) 'variables.import.less';
+
+.btn {
+  &.btn-icon {
+    border: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    height: @header-buttons-size;
+    width: @header-buttons-size;
+    background: fadeout(white, 50%);
+    display: inline-block;
+    svg {
+      height: 100%;
+      width: 100%;
+      display: block;
+    }
+  }
+}

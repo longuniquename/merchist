@@ -5,32 +5,12 @@
     position: relative;
     height: 414px;
     width: 100%;
+    background: @color-main;
 
     .uploadBtn {
-      background: none;
-      padding: 0;
-      margin: 0;
-      border: none;
-      white-space: nowrap;
-      cursor: pointer;
-      height: @header-buttons-size;
-      width: @header-buttons-size;
-      outline: none;
       z-index: 10;
-      background: fadeout(white, 50%);
-
       position: absolute;
       right: 0;
-
-      svg {
-        height: 100%;
-        width: 100%;
-        line, polyline {
-          stroke: @color-main;
-          fill: none;
-          stroke-width: 2;
-        }
-      }
     }
 
     .uploadMenu {
@@ -60,48 +40,15 @@
 
           button {
             display: block;
-            height: @header-buttons-size;
-            width: @header-buttons-size;
-            background: none;
-            border: none;
-            margin: 0;
-            padding: 0;
-            cursor: pointer;
-            outline: none;
-            background: fadeout(white, 50%);
             position: relative;
             overflow: hidden;
-
-            &.uploadLogoBtn {
-              svg {
-                height: @header-buttons-size;
-                width: @header-buttons-size;
-                circle {
-                  fill: none;
-                  stroke-width: 2;
-                  stroke: @color-main;
-                }
-              }
-            }
-
-            &.uploadCoverBtn {
-              svg {
-                height: @header-buttons-size;
-                width: @header-buttons-size;
-                rect {
-                  fill: none;
-                  stroke-width: 2;
-                  stroke: @color-main;
-                }
-              }
-            }
 
             input[type=file] {
               position: absolute;
               top: 0;
               right: 0;
-              min-width: 100%;
-              min-height: 100%;
+              width: @header-buttons-size;
+              height: @header-buttons-size;
               font-size: 100px;
               text-align: right;
               filter: alpha(opacity=0);
@@ -125,26 +72,19 @@
       }
     }
 
-    img.cover, img.logo, canvas#coverCanvas, canvas#logoCanvas {
+    img.cover, img.logo, canvas#canvas {
       position: absolute;
       display: block;
     }
 
-    img.cover, canvas#coverCanvas {
+    img.cover, canvas#canvas {
       top: 0;
       left: 0;
       height: 100%;
       width: 100%;
     }
 
-    img.logo, canvas#logoCanvas {
-      top: 33%;
-      left: 33%;
-      height: 33%;
-      width: 33%;
-    }
-
-    canvas#coverCanvas, canvas#logoCanvas {
+    canvas#canvas {
       display: none;
     }
 

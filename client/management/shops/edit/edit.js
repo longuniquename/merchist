@@ -78,21 +78,26 @@
                         srcSize = srcWidth;
                     }
 
-                    var canvas = document.getElementById('logoCanvas');
+                    var canvas = document.getElementById('canvas');
                     var context = canvas.getContext('2d');
 
                     template.$('img.logo').hide();
-                    template.$('canvas#logoCanvas').show();
+                    template.$('img.cover').hide();
+                    template.$('.uploadBtn').hide();
+                    template.$('.uploadMenu').hide();
+                    template.$('#canvas').show();
 
-                    dstSize = Math.min(template.$('#logoCanvas').height(), template.$('#logoCanvas').width()) * window.devicePixelRatio;
+                    dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * (window.devicePixelRatio || 1);
+                    console.log(dstSize);
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
                     context.beginPath();
-                    context.arc(dstSize/2, dstSize/2, dstSize/2, 0, 2 * Math.PI, false);
+                    context.arc(dstSize/2, dstSize/2, dstSize/6, 0, 2 * Math.PI, false);
                     context.clip();
 
-                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
+                    console.log(srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
                 })
                 .catch(TypeError, function(error){
                     console.error('TypeError', error);
@@ -125,13 +130,16 @@
                         srcSize = srcWidth;
                     }
 
-                    var canvas = document.getElementById('coverCanvas');
+                    var canvas = document.getElementById('canvas');
                     var context = canvas.getContext('2d');
 
+                    template.$('img.logo').hide();
                     template.$('img.cover').hide();
-                    template.$('canvas#coverCanvas').show();
+                    template.$('.uploadBtn').hide();
+                    template.$('.uploadMenu').hide();
+                    template.$('canvas#canvas').show();
 
-                    dstSize = Math.min(template.$('#coverCanvas').height(), template.$('#coverCanvas').width()) * window.devicePixelRatio;
+                    dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * window.devicePixelRatio;
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
