@@ -41,6 +41,16 @@
 
         resizeImagesBlock();
     };
+    Template.shopEditImagesView.helpers({
+        logo: function () {
+            if (this.logoId) {
+                Meteor.subscribe("image", this.logoId);
+                return Images.findOne(this.logoId);
+            } else {
+                return false;
+            }
+        }
+    });
 
     Template.shopEdit.events({
         'submit .shopEditForm': function (e) {
@@ -53,7 +63,7 @@
             };
 
             if (!this._id) {
-                Router.go('shops.edit', {shopId: Shops.insert(data)});
+                Router.go('shops.edit', {_id: Shops.insert(data)});
             } else {
                 Shops.update(this._id, {$set: data});
             }
@@ -210,12 +220,14 @@
                             ctx.drawImage(temp, 0, 0);
                             ctx.restore();
 
-                            template.$('.logo').attr('src', canvas.toDataURL());
+                            //template.$('.logo').attr('src', canvas.toDataURL());
                             template.$('.imagesBlock').removeClass('editing');
 
-                            Meteor.call('saveImage', canvas.toDataURL(), function(error, path){
+                            Images.insert(canvas.toDataURL(), function (err, fileObj) {
                                 if (template.data.shop()._id) {
-                                    Shops.update(template.data.shop()._id, {$set: {logo: path}});
+                                    Shops.update(template.data.shop()._id, {$set: {logoId: fileObj._id}});
+                                } else {
+                                    Router.go('shops.edit', {_id: Shops.insert({logoId: fileObj._id})});
                                 }
                             });
                         });

@@ -13,7 +13,7 @@ Router.route('/marketplace', function () {
 
 Router.route('/management/shops/new', function () {
     this.layout('rootLayout');
-    this.render('shopEdit', {data:{shop:{}}});
+    this.render('shopEdit', {data:{shop:function () {return {};}}});
 }, {
     name: 'shops.create'
 });
