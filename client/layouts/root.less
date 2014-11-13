@@ -2,8 +2,8 @@
 
 #root {
   > header {
-    height: 32px;
-    width: 32px;
+    height: @header-buttons-size;
+    width: @header-buttons-size;
     position: fixed;
     display: block;
     left: 0;
@@ -17,14 +17,14 @@
       border: none;
       white-space: nowrap;
       cursor: pointer;
-      height: 32px;
-      width: 32px;
+      height: @header-buttons-size;
+      width: @header-buttons-size;
       outline: none;
 
       svg {
-        width: 32px;
-        height: 32px;
-        background: fadeout(white, 50%);
+        width: @header-buttons-size;
+        height: @header-buttons-size;
+        background: fadeout(white, 75%);
 
         line {
           stroke: @color-main;
