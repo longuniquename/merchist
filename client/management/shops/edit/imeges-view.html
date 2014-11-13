@@ -24,7 +24,11 @@
                 </ul>
             </nav>
         </nav>
+        {{ #if cover }}
         <img class="cover" src="{{ cover }}" />
+        {{ /if }}
+        {{ #if logo }}
         <img class="logo" src="{{ logo }}" />
+        {{ /if }}
     </div>
 </template>
