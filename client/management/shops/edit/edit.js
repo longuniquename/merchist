@@ -78,20 +78,35 @@
                         srcSize = srcWidth;
                     }
 
-                    var canvas = document.getElementById('canvas');
-                    var context = canvas.getContext('2d');
-
                     template.$('.imagesBlock').addClass('editing');
+
+                    var canvas = document.getElementById('canvas'),
+                        ctx = canvas.getContext('2d'),
+                        temp = document.createElement('canvas'),
+                        tx = temp.getContext('2d');
 
                     dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * (window.devicePixelRatio || 1);
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
-                    context.beginPath();
-                    context.arc(dstSize/2, dstSize/2, dstSize/6, 0, 2 * Math.PI, false);
-                    context.clip();
+                    temp.width = ctx.canvas.width;
+                    temp.height = ctx.canvas.height;
 
-                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
+                    tx.translate(-temp.width, 0);
+                    tx.shadowOffsetX = temp.width;
+                    tx.shadowOffsetY = 0;
+                    tx.shadowColor = '#000';
+                    tx.shadowBlur = (window.devicePixelRatio || 1);
+
+                    tx.arc(dstSize/2, dstSize/2, dstSize/6 - (window.devicePixelRatio || 1), 0, 2 * Math.PI, false);
+                    tx.closePath();
+                    tx.fill();
+
+                    ctx.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'destination-in';
+                    ctx.drawImage(temp, 0, 0);
+                    ctx.restore();
                 })
                 .catch(TypeError, function(error){
                     console.error('TypeError', error);
@@ -125,7 +140,7 @@
                     }
 
                     var canvas = document.getElementById('canvas');
-                    var context = canvas.getContext('2d');
+                    var ctx = canvas.getContext('2d');
 
                     template.$('.imagesBlock').addClass('editing');
 
@@ -133,7 +148,7 @@
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
-                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+                    ctx.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
                 })
                 .catch(TypeError, function(error){
                     console.error('TypeError', error);
