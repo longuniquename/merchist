@@ -1,12 +1,12 @@
-(function(){
+(function () {
 
     function loadFile(file) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 resolve(e.target.result);
             };
-            reader.onerror = function(e) {
+            reader.onerror = function (e) {
                 reject();
             };
             reader.readAsDataURL(file);
@@ -14,24 +14,28 @@
     }
 
     function loadImage(src) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             var image = new Image();
-            image.onload = function() {
+            image.onload = function () {
                 resolve(image);
             };
             image.src = src;
         });
     }
 
-    Template.shopEdit.rendered = function(){
-        var resizeImagesBlock = function(){
+    function drawLogo() {
+
+    }
+
+    Template.shopEdit.rendered = function () {
+        var resizeImagesBlock = function () {
             var imagesBlock = this.$('.imagesBlock');
             imagesBlock.css({
                 height: imagesBlock.width()
             });
         };
 
-        $(window).bind('resize', function(){
+        $(window).bind('resize', function () {
             resizeImagesBlock();
         });
 
@@ -55,14 +59,19 @@
             }
         },
         'change #uploadLogoFile': function (e, template) {
-            template.$('.uploadMenu').toggle();
+            template.$('.imagesBlock').addClass('editing');
+            template.$('.uploadMenu').hide();
             template.data.logo = {};
+            template.data.editedImage = 'logo';
 
             loadFile(e.currentTarget.files[0])
-                .then(function(dataUrl){
+                .then(function (dataUrl) {
+                    template.data.logo = {
+                        file: dataUrl
+                    };
                     return loadImage(dataUrl);
                 })
-                .then(function(image){
+                .then(function (image) {
                     var srcTop = 0,
                         srcLeft = 0,
                         srcHeight = image.height,
@@ -78,7 +87,9 @@
                         srcSize = srcWidth;
                     }
 
-                    template.$('.imagesBlock').addClass('editing');
+                    template.data.logo.size = srcSize;
+                    template.data.logo.top = srcTop;
+                    template.data.logo.left = srcLeft;
 
                     var canvas = document.getElementById('canvas'),
                         ctx = canvas.getContext('2d'),
@@ -98,32 +109,34 @@
                     tx.shadowColor = '#000';
                     tx.shadowBlur = (window.devicePixelRatio || 1);
 
-                    tx.arc(dstSize/2, dstSize/2, dstSize/6 - (window.devicePixelRatio || 1), 0, 2 * Math.PI, false);
+                    tx.arc(dstSize / 2, dstSize / 2, dstSize / 6 - (window.devicePixelRatio || 1), 0, 2 * Math.PI, false);
                     tx.closePath();
                     tx.fill();
 
-                    ctx.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize/3, dstSize/3, dstSize/3, dstSize/3);
+                    ctx.drawImage(image, srcLeft, srcTop, srcSize, srcSize, dstSize / 3, dstSize / 3, dstSize / 3, dstSize / 3);
                     ctx.save();
                     ctx.globalCompositeOperation = 'destination-in';
                     ctx.drawImage(temp, 0, 0);
                     ctx.restore();
                 })
-                .catch(TypeError, function(error){
+                .catch(TypeError, function (error) {
                     console.error('TypeError', error);
                 })
-                .catch(function(error){
+                .catch(function (error) {
                     console.error(error);
                 });
         },
         'change #uploadCoverFile': function (e, template) {
-            template.$('.uploadMenu').toggle();
+            template.$('.imagesBlock').addClass('editing');
+            template.$('.uploadMenu').hide();
             template.data.cover = {};
+            template.data.editedImage = 'cover';
 
             loadFile(e.currentTarget.files[0])
-                .then(function(dataUrl){
+                .then(function (dataUrl) {
                     return loadImage(dataUrl);
                 })
-                .then(function(image){
+                .then(function (image) {
                     var srcTop = 0,
                         srcLeft = 0,
                         srcHeight = image.height,
@@ -142,23 +155,67 @@
                     var canvas = document.getElementById('canvas');
                     var ctx = canvas.getContext('2d');
 
-                    template.$('.imagesBlock').addClass('editing');
-
                     dstSize = Math.min(template.$('#canvas').height(), template.$('#canvas').width()) * window.devicePixelRatio;
                     canvas.setAttribute('height', dstSize + 'px');
                     canvas.setAttribute('width', dstSize + 'px');
 
                     ctx.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
                 })
-                .catch(TypeError, function(error){
+                .catch(TypeError, function (error) {
                     console.error('TypeError', error);
                 })
-                .catch(function(error){
+                .catch(function (error) {
                     console.error(error);
                 });
         },
-        'click .uploadBtn': function(e, template){
+        'click .uploadBtn': function (e, template) {
             template.$('.uploadMenu').toggle();
+        },
+        'click .cancelBtn': function (e, template) {
+            e.preventDefault();
+            template.$('.imagesBlock').removeClass('editing');
+        },
+        'click .saveBtn': function (e, template) {
+            e.preventDefault();
+            switch (template.data.editedImage) {
+                case 'logo':
+                    loadImage(template.data.logo.file)
+                        .then(function (image) {
+
+                            var offsetTop = template.data.logo.top,
+                                offsetLeft = template.data.logo.left,
+                                size = template.data.logo.size;
+
+                            var canvas = document.createElement('canvas'),
+                                ctx = canvas.getContext('2d'),
+                                temp = document.createElement('canvas'),
+                                tx = temp.getContext('2d');
+
+                            temp.width = canvas.width = size;
+                            temp.height = canvas.height = size;
+
+                            tx.translate(-temp.width, 0);
+                            tx.shadowOffsetX = temp.width;
+                            tx.shadowOffsetY = 0;
+                            tx.shadowColor = '#000';
+                            tx.shadowBlur = 1;
+
+                            tx.arc(size / 2, size / 2, size / 2 - 1, 0, 2 * Math.PI, false);
+                            tx.closePath();
+                            tx.fill();
+
+                            ctx.drawImage(image, offsetLeft, offsetTop, size, size, 0, 0, size, size);
+                            ctx.save();
+                            ctx.globalCompositeOperation = 'destination-in';
+                            ctx.drawImage(temp, 0, 0);
+                            ctx.restore();
+
+                            template.$('.logo').attr('src', canvas.toDataURL());
+                            template.$('.imagesBlock').removeClass('editing');
+                        });
+
+                    break;
+            }
         }
     });
 })();
