@@ -101,6 +101,49 @@
                     console.error(error);
                 });
         },
+        'change #uploadCoverFile': function (e, template) {
+            template.$('.uploadMenu').toggle();
+            template.data.cover = {};
+
+            loadFile(e.currentTarget.files[0])
+                .then(function(dataUrl){
+                    return loadImage(dataUrl);
+                })
+                .then(function(image){
+                    var srcTop = 0,
+                        srcLeft = 0,
+                        srcHeight = image.height,
+                        srcWidth = image.width,
+                        srcSize,
+                        dstSize;
+
+                    if (srcHeight < srcWidth) {
+                        srcLeft = Math.ceil((srcWidth - srcHeight) / 2);
+                        srcSize = srcHeight;
+                    } else if (srcHeight > srcWidth) {
+                        srcTop = Math.ceil((srcHeight - srcWidth) / 2);
+                        srcSize = srcWidth;
+                    }
+
+                    var canvas = document.getElementById('coverCanvas');
+                    var context = canvas.getContext('2d');
+
+                    template.$('img.cover').hide();
+                    template.$('canvas#coverCanvas').show();
+
+                    dstSize = Math.min(template.$('#coverCanvas').height(), template.$('#coverCanvas').width()) * window.devicePixelRatio;
+                    canvas.setAttribute('height', dstSize + 'px');
+                    canvas.setAttribute('width', dstSize + 'px');
+
+                    context.drawImage(image, srcLeft, srcTop, srcSize, srcSize, 0, 0, dstSize, dstSize);
+                })
+                .catch(TypeError, function(error){
+                    console.error('TypeError', error);
+                })
+                .catch(function(error){
+                    console.error(error);
+                });
+        },
         'click .uploadBtn': function(e, template){
             template.$('.uploadMenu').toggle();
         }
