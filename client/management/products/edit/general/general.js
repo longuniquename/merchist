@@ -6,6 +6,12 @@
         },
         isOutOfStock: function(){
             return this.availability == 'outOfStock';
+        },
+        isNew: function(){
+            return this.condition == 'new';
+        },
+        isUsed: function(){
+            return this.condition == 'used';
         }
     });
 
@@ -35,7 +41,11 @@
         },
 
         'change [name="availability"]': function(e, template){
-            Products.update(this._id, {$set: {'availability': template.$(e.currentTarget).val()}});
+            Products.update(this._id, {$set: {availability: template.$(e.currentTarget).val()}});
+        },
+
+        'change [name="condition"]': function(e, template){
+            Products.update(this._id, {$set: {condition: template.$(e.currentTarget).val()}});
         }
     });
 
