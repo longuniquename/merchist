@@ -1,0 +1,29 @@
+<template name="managementProductsEditGeneral">
+    <div class="general">
+        <h3>General info</h3>
+        <div>
+            <label for="productTitle">Title:</label>
+            <input type="text" name="title" id="productTitle" value="{{ title }}" />
+        </div>
+        <div>
+            <label for="productSubtitle">Subtitle:</label>
+            <input type="text" name="subtitle" id="productSubtitle" value="{{ subtitle }}" />
+        </div>
+        <div>
+            <label for="productDescription">Description:</label>
+            <textarea name="description" id="productDescription">{{ description }}</textarea>
+        </div>
+        <div>
+            <label for="productPrice">Price:</label>
+            <input type="text" name="price" id="productPrice" value="{{ price }}" />
+        </div>
+        <div>
+            <label for="productShippingCost">Shipping cost:</label>
+            <input type="text" name="shippingCost" id="productShippingCost" value="{{ shipping.cost }}" />
+        </div>
+        <div>
+            <label for="productShippingWeight">Shipping weight:</label>
+            <input type="text" name="shippingWeight" id="productShippingWeight" value="{{ shipping.weight }}" />
+        </div>
+    </div>
+</template>
