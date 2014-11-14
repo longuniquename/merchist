@@ -23,10 +23,6 @@
         });
     }
 
-    function drawLogo() {
-
-    }
-
     Template.shopEdit.rendered = function () {
         var resizeImagesBlock = function () {
             var imagesBlock = this.$('.imagesBlock');
@@ -46,6 +42,14 @@
             if (this.logoId) {
                 Meteor.subscribe("image", this.logoId);
                 return Images.findOne(this.logoId);
+            } else {
+                return false;
+            }
+        },
+        cover: function () {
+            if (this.coverId) {
+                Meteor.subscribe("image", this.coverId);
+                return Images.findOne(this.coverId);
             } else {
                 return false;
             }
@@ -144,6 +148,9 @@
 
             loadFile(e.currentTarget.files[0])
                 .then(function (dataUrl) {
+                    template.data.cover = {
+                        file: dataUrl
+                    };
                     return loadImage(dataUrl);
                 })
                 .then(function (image) {
@@ -161,6 +168,10 @@
                         srcTop = Math.ceil((srcHeight - srcWidth) / 2);
                         srcSize = srcWidth;
                     }
+
+                    template.data.cover.size = srcSize;
+                    template.data.cover.top = srcTop;
+                    template.data.cover.left = srcLeft;
 
                     var canvas = document.getElementById('canvas');
                     var ctx = canvas.getContext('2d');
@@ -237,6 +248,26 @@
                     loadImage(template.data.cover.file)
                         .then(function (image) {
 
+                            var offsetTop = template.data.cover.top,
+                                offsetLeft = template.data.cover.left,
+                                size = template.data.cover.size;
+
+                            var canvas = document.createElement('canvas'),
+                                ctx = canvas.getContext('2d');
+
+                            canvas.width = size;
+                            canvas.height = size;
+
+                            ctx.drawImage(image, offsetLeft, offsetTop, size, size, 0, 0, size, size);
+                            template.$('.imagesBlock').removeClass('editing');
+
+                            Images.insert(canvas.toDataURL(), function (err, fileObj) {
+                                if (template.data.shop()._id) {
+                                    Shops.update(template.data.shop()._id, {$set: {coverId: fileObj._id}});
+                                } else {
+                                    Router.go('shops.edit', {_id: Shops.insert({coverId: fileObj._id})});
+                                }
+                            });
                         });
                     break;
             }
