@@ -35,7 +35,7 @@ Router.route('/management/shops/:_id', function () {
 Router.route('/management/products/:_id', function () {
     var productId = this.params._id;
 
-    this.layout('rootLayout');
+    this.layout('internalLayout');
     this.wait(Meteor.subscribe('product', productId));
 
     if (this.ready()) {

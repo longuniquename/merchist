@@ -1,5 +1,12 @@
 <template name="managementProductsEdit">
-    <div class="edit">
-        Product edit
+    <div class="management-products-edit">
+        <a href="{{pathFor route='shops.edit' data=shop }}" class="backBtn btn btn-icon">
+            {{> iconBack }}
+        </a>
+        {{ #with product }}
+
+        {{> managementProductsEditImages }}
+
+        {{ /with }}
     </div>
 </template>
