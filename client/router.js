@@ -38,3 +38,24 @@ Router.route('/management/shops/:_id', function () {
 }, {
     name: 'shops.edit'
 });
+
+Router.route('/management/products/:_id', function () {
+    var productId = this.params._id;
+
+    this.layout('rootLayout');
+    this.wait(Meteor.subscribe('product', productId));
+
+    if (this.ready()) {
+        this.render('managementProductsEdit', {
+            data: {
+                product: function () {
+                    return Products.findOne({_id: productId});
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
+}, {
+    name: 'products.edit'
+});
