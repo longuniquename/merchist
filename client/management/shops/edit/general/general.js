@@ -1,20 +1,20 @@
 (function(){
 
     Template.managementShopsEditGeneral.events({
-        'submit form': function(e, template){
-            e.preventDefault();
+        'change [name="title"]': function(e, template){
+            Shops.update(this._id, {$set: {title: template.$(e.currentTarget).val()}});
+        },
 
-            var data = {};
-            data['title'] = template.$('[name="title"]', e.currentTarget).val();
-            data['subtitle'] = template.$('[name="subtitle"]', e.currentTarget).val();
-            data['description'] = template.$('[name="description"]', e.currentTarget).val();
-            data['payments.tax'] = template.$('[name="tax"]', e.currentTarget).val();
+        'change [name="subtitle"]': function(e, template){
+            Shops.update(this._id, {$set: {subtitle: template.$(e.currentTarget).val()}});
+        },
 
-            if (!this._id) {
-                Router.go('shops.edit', {_id: Shops.insert(data)});
-            } else {
-                Shops.update(this._id, {$set: data});
-            }
+        'change [name="description"]': function(e, template){
+            Shops.update(this._id, {$set: {description: template.$(e.currentTarget).val()}});
+        },
+
+        'change [name="tax"]': function(e, template){
+            Shops.update(this._id, {$set: {'payments.tax': template.$(e.currentTarget).val()}});
         }
     });
 
