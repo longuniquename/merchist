@@ -1,0 +1,24 @@
+<template name="managementShopsEditGeneral">
+    <div class="general">
+        <form>
+            <h3>General info</h3>
+            <div>
+                <label for="shopTitle">Title:</label>
+                <input type="text" name="title" id="shopTitle" value="{{ title }}" />
+            </div>
+            <div>
+                <label for="shopSubtitle">Subtitle:</label>
+                <input type="text" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" />
+            </div>
+            <div>
+                <label for="shopDescription">Description:</label>
+                <textarea name="description" id="shopDescription">{{ description }}</textarea>
+            </div>
+            <div>
+                <label for="shopTax">Tax rate:</label>
+                <input type="text" name="tax" id="shopTax" value="{{ payments.tax }}" />
+            </div>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</template>
