@@ -25,5 +25,16 @@
             <label for="productShippingWeight">Shipping weight:</label>
             <input type="text" name="shippingWeight" id="productShippingWeight" value="{{ shipping.weight }}" />
         </div>
+        <div>
+            <label>Availability:</label>
+            <label>
+                <input type="radio" name="availability" value="inStock" checked="{{ isInStock }}" />
+                In stock
+            </label>
+            <label>
+                <input type="radio" name="availability" value="outOfStock" checked="{{ isOutOfStock }}" />
+                Out of stock
+            </label>
+        </div>
     </div>
 </template>

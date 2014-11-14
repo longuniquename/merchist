@@ -1,5 +1,14 @@
 (function(){
 
+    Template.managementProductsEditGeneral.helpers({
+        isInStock: function(){
+            return this.availability == 'inStock';
+        },
+        isOutOfStock: function(){
+            return this.availability == 'outOfStock';
+        }
+    });
+
     Template.managementProductsEditGeneral.events({
         'change [name="title"]': function(e, template){
             Products.update(this._id, {$set: {title: template.$(e.currentTarget).val()}});
@@ -23,6 +32,10 @@
 
         'change [name="shippingWeight"]': function(e, template){
             Products.update(this._id, {$set: {'shipping.weight': template.$(e.currentTarget).val()}});
+        },
+
+        'change [name="availability"]': function(e, template){
+            Products.update(this._id, {$set: {'availability': template.$(e.currentTarget).val()}});
         }
     });
 
