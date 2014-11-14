@@ -3,7 +3,13 @@
         <h3>Products</h3>
         <button class="createProductBtn">Add new</button>
         {{ #each products }}
-            product
+            <a href="{{pathFor route='products.edit' data=this }}">
+                {{#if title}}
+                {{title}}
+                {{else}}
+                <i>Draft product</i>
+                {{/if}}
+            </a>
         {{ /each }}
     </div>
 </template>

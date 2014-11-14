@@ -1,12 +1,16 @@
 <template name="myShopsMenu">
     <nav class="my-shops-menu">
+        <button class="createShopBtn">Add new shop</button>
         <ul>
-            <li>
-                <a href="/management/shops/new">Add shop</a>
-            </li>
             {{ #each shops }}
             <li>
-                <a href="/management/shops/{{this._id}}">{{ this.title }}</a>
+                <a href="{{pathFor route='shops.edit' data=this }}">
+                    {{#if title}}
+                        {{ title }}
+                    {{else}}
+                        <i>Draft shop</i>
+                    {{/if}}
+                </a>
             </li>
             {{ /each }}
         </ul>

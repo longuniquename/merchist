@@ -11,13 +11,6 @@ Router.route('/marketplace', function () {
     name: 'marketplace'
 });
 
-Router.route('/management/shops/new', function () {
-    this.layout('rootLayout');
-    this.render('shopEdit', {data:{shop:function () {return {};}}});
-}, {
-    name: 'shops.create'
-});
-
 Router.route('/management/shops/:_id', function () {
     var shopId = this.params._id;
 
@@ -25,9 +18,10 @@ Router.route('/management/shops/:_id', function () {
     this.wait(Meteor.subscribe('shop', shopId));
 
     if (this.ready()) {
-        this.render('shopEdit', {
+        this.render('managementShopEdit', {
             data: {
                 shop: function () {
+                    console.log(Shops.findOne({_id: shopId}));
                     return Shops.findOne({_id: shopId});
                 }
             }

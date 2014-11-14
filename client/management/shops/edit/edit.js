@@ -23,7 +23,7 @@
         });
     }
 
-    Template.shopEdit.rendered = function () {
+    Template.managementShopEdit.rendered = function () {
         var resizeImagesBlock = function () {
             var imagesBlock = this.$('.imagesBlock');
             imagesBlock.css({
@@ -56,7 +56,7 @@
         }
     });
 
-    Template.shopEdit.events({
+    Template.managementShopEdit.events({
         'submit .shopEditForm': function (e) {
             e.preventDefault();
 
