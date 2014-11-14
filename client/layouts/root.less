@@ -1,40 +1,6 @@
 @import (reference) '../lib/variables.import.less';
 
 #root {
-  > header {
-    height: @header-buttons-size;
-    width: @header-buttons-size;
-    position: fixed;
-    display: block;
-    left: 0;
-    top: 0;
-    z-index: 10;
-
-    button.menuBtn {
-      background: none;
-      padding: 0;
-      margin: 0;
-      border: none;
-      white-space: nowrap;
-      cursor: pointer;
-      height: @header-buttons-size;
-      width: @header-buttons-size;
-      outline: none;
-
-      svg {
-        width: @header-buttons-size;
-        height: @header-buttons-size;
-        background: fadeout(white, 50%);
-
-        line {
-          stroke: @color-main;
-          fill: none;
-          stroke-width: 2;
-        }
-      }
-    }
-  }
-
   > section {
     position: fixed;
     display: block;
