@@ -21,7 +21,6 @@ Router.route('/management/shops/:_id', function () {
         this.render('managementShopEdit', {
             data: {
                 shop: function () {
-                    console.log(Shops.findOne({_id: shopId}));
                     return Shops.findOne({_id: shopId});
                 }
             }
