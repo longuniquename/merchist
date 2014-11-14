@@ -63,7 +63,8 @@
             var data = {
                 title: $('input[name="title"]', e.currentTarget).val(),
                 subtitle: $('input[name="subtitle"]', e.currentTarget).val(),
-                description: $('textarea[name="description"]', e.currentTarget).val()
+                description: $('[name="description"]', e.currentTarget).val(),
+                tax: $('[name="tax"]', e.currentTarget).val()
             };
 
             if (!this._id) {

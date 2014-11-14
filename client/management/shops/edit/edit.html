@@ -5,21 +5,32 @@
             {{>shopEditImagesView}}
             {{>shopEditImagesEdit}}
         </div>
-        <form class="shopEditForm">
-            <div>
-                <label for="shopTitle">title</label>
-                <input type="text" name="title" id="shopTitle" value="{{ title }}" />
-            </div>
-            <div>
-                <label for="shopSubtitle">subtitle</label>
-                <input type="text" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" />
-            </div>
-            <div>
-                <label for="shopDescription">description</label>
-                <textarea name="description" id="shopDescription">{{ description }}</textarea>
-            </div>
-            <button type="submit">Save</button>
-        </form>
+        <div class="container">
+            <h2>Details</h2>
+            <form class="shopEditForm">
+                <h3>General info</h3>
+                <div>
+                    <label for="shopTitle">Title:</label>
+                    <input type="text" name="title" id="shopTitle" value="{{ title }}" />
+                </div>
+                <div>
+                    <label for="shopSubtitle">Subtitle:</label>
+                    <input type="text" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" />
+                </div>
+                <div>
+                    <label for="shopDescription">Description:</label>
+                    <textarea name="description" id="shopDescription">{{ description }}</textarea>
+                </div>
+                <div>
+                    <label for="shopTax">Tax rate:</label>
+                    <input type="text" name="tax" id="shopTax" value="{{ tax }}" />
+                </div>
+                <button type="submit">Save</button>
+            </form>
+            {{> managementShopsEditTracking }}
+            <h3>Payment info</h3>
+
+        </div>
         {{ /with }}
     </section>
 </template>
