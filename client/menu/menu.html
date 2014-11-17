@@ -5,9 +5,10 @@
                 <a href="{{pathFor route='marketplace'}}">Marketplace</a>
             </li>
         </ul>
+        {{ #if currentUser }}
         <h3>Management</h3>
         {{> myShopsMenu}}
-        <h3>Sign in</h3>
+        {{ /if }}
         {{> login}}
 
         <button class="closeBtn">Close</button>
