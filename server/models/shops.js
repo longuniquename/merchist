@@ -5,3 +5,7 @@ Meteor.publish('shops', function () {
 Meteor.publish('shop', function (shopId) {
     return Shops.find({ _id: shopId });
 });
+
+Meteor.publish('myShops', function () {
+    return Shops.find({"managers.userId": this.userId});
+});

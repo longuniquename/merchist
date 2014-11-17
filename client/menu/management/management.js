@@ -1,6 +1,7 @@
 Template.myShopsMenu.helpers({
     'shops': function () {
-        return Shops.find({}, {sort: {title: 1}});
+        Meteor.subscribe("myShops");
+        return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
     }
 });
 
