@@ -5,15 +5,24 @@
             {{>shopEditImagesView}}
             {{>shopEditImagesEdit}}
         </div>
-        {{> managementShopsEditGeneral }}
-        {{> managementShopsEditPayout }}
-        {{> managementShopsEditVisibility }}
+        <div class="container">
+            <h2>Details</h2>
+            {{> managementShopsEditGeneral }}
+            {{> managementShopsEditVisibility }}
+        </div>
+        <div class="container">
+            <h2>Payout settings</h2>
+            {{> managementShopsEditPayout }}
+        </div>
         {{> managementShopsEditProducts }}
         {{> managementShopsEditOrders }}
         {{> managementShopsEditPlatforms }}
         {{> managementShopsEditManagers }}
         {{> managementShopsEditReviews }}
-        {{> managementShopsEditTracking }}
+        <div class="container">
+            <h2>Additional</h2>
+            {{> managementShopsEditTracking }}
+        </div>
         {{ /with }}
     </section>
 </template>

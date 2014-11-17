@@ -1,15 +1,13 @@
 <template name="managementShopsEditTracking">
     <div class="tracking">
-        <div class="container">
-            <form class="form-horizontal" role="form">
-                <legend>Analytics</legend>
-                <div class="form-group">
-                    <label for="shopGoogleAnalyticsId" class="col-sm-2 control-label">Google Analytics ID:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="googleAnalyticsId" id="shopGoogleAnalyticsId" value="{{ tracking.googleAnalyticsId }}" />
-                    </div>
+        <form class="form-horizontal" role="form">
+            <legend>Analytics</legend>
+            <div class="form-group">
+                <label for="shopGoogleAnalyticsId" class="col-sm-2 control-label">Google Analytics ID:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="googleAnalyticsId" id="shopGoogleAnalyticsId" value="{{ tracking.googleAnalyticsId }}" />
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </template>
