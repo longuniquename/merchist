@@ -1,7 +1,7 @@
 <template name="myShopsMenu">
     <nav class="my-shops-menu">
-        <button class="createShopBtn">Add new shop</button>
-        <ul>
+        <button class="createShopBtn btn btn-default btn-block">Add new shop</button>
+        <ul class="nav nav-pills nav-stacked">
             {{ #each shops }}
             <li>
                 <a href="{{pathFor route='shops.edit' data=this }}">

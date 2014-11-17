@@ -1,15 +1,17 @@
 <template name="managementShopsEditProducts">
     <div class="products">
-        <legend>Products</legend>
-        <button class="createProductBtn">Add new</button>
-        {{ #each products }}
-            <a href="{{pathFor route='products.edit' data=this }}">
-                {{#if title}}
-                {{title}}
-                {{else}}
-                <i>Draft product</i>
-                {{/if}}
-            </a>
-        {{ /each }}
+        <div class="container">
+            <legend>Products</legend>
+            <button class="createProductBtn btn btn-default">Add new</button>
+            {{ #each products }}
+                <a href="{{pathFor route='products.edit' data=this }}">
+                    {{#if title}}
+                    {{title}}
+                    {{else}}
+                    <i>Draft product</i>
+                    {{/if}}
+                </a>
+            {{ /each }}
+        </div>
     </div>
 </template>
