@@ -7,8 +7,34 @@ nav#menu {
   top: 0;
   left: 0;
   width: 300px;
-  background: @gray10;
+  background: @brand-primary;
   z-index: 100;
   overflow-x: hidden;
   overflow-y: auto;
+
+  .nav {
+    > li {
+      > a {
+        color: white;
+        background-color: transparent;
+
+        &:hover,
+        &:focus {
+          color: @brand-primary;
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  > h3 {
+    color: white;
+    padding: 0 15px;
+  }
+
+  #login-buttons {
+    a {
+      color: white;
+    }
+  }
 }

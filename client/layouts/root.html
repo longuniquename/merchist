@@ -1,6 +1,9 @@
 <template name="rootLayout">
-    <div id="root">
+    <div id="rootLayout">
         {{> menu}}
+        <button class="menuBtn btn btn-icon">
+            {{> iconMenu}}
+        </button>
         {{> yield}}
     </div>
 </template>
