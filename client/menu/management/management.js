@@ -1,25 +1,33 @@
 Template.myShopsMenu.helpers({
     'shops': function () {
-        Meteor.subscribe("myShops");
-        return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
+        if (Meteor.user()) {
+            Meteor.subscribe("myShops");
+            return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
+        } else {
+            return false;
+        }
     }
 });
 
 Template.myShopsMenu.events({
     'click .createShopBtn': function (e, template) {
         e.preventDefault();
-        Router.go(
-            'shops.edit',
-            {
-                _id: Shops.insert({
-                    managers: [
-                        {
-                            userId: Meteor.userId(),
-                            role:   'owner'
-                        }
-                    ]
-                })
-            }
-        );
+        if (Meteor.user()) {
+            Router.go(
+                'shops.edit',
+                {
+                    _id: Shops.insert({
+                        managers: [
+                            {
+                                userId: Meteor.userId(),
+                                role:   'owner'
+                            }
+                        ]
+                    })
+                }
+            );
+        } else {
+
+        }
     }
 });
