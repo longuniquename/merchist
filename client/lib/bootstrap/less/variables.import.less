@@ -60,7 +60,7 @@
 @font-size-h6:            ceil((@font-size-base * 0.85)); // ~12px
 
 //** Unit-less `line-height` for use in components like buttons.
-@line-height-base:        18 / unit(@font-size-base); // 18/14
+@line-height-base:        20 / unit(@font-size-base); // 18/14
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
 @line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
 
@@ -206,8 +206,8 @@
 //** Small `.form-control` height
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
-@legend-color:                   @gray-dark;
-@legend-border-color:            #e5e5e5;
+@legend-color:                   @brand-primary;
+@legend-border-color:            @brand-primary;
 
 //** Background color for textual input addons
 @input-group-addon-bg:           @gray-lighter;
