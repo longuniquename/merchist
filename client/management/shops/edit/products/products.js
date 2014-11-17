@@ -1,5 +1,9 @@
 (function () {
 
+    Template.managementShopsEditProducts.rendered = function () {
+        this.$('[data-toggle="tooltip"]').tooltip();
+    };
+
     Template.managementShopsEditProducts.helpers({
         products: function () {
             Meteor.subscribe("shopProducts", this._id);

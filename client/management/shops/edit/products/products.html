@@ -1,12 +1,12 @@
 <template name="managementShopsEditProducts">
     <div class="products">
         <div class="container">
-            <legend>
+            <h2>
                 Products
-                <button class="createProductBtn pull-right">
+                <button class="createProductBtn pull-right" data-toggle="tooltip" data-placement="left" title="Add new product">
                     {{> iconAdd }}
                 </button>
-            </legend>
+            </h2>
             <div class="row">
             {{ #each products }}
                 <div class="col-xs-6 col-sm-4">
