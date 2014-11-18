@@ -5,27 +5,65 @@
             {{>shopEditImagesView}}
             {{>shopEditImagesEdit}}
         </div>
-        <div class="container">
-            <h2 class="page-header">Details</h2>
-            {{> managementShopsEditGeneral }}
-            {{> managementShopsEditVisibility }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Details</h2>
+                {{> managementShopsEditGeneral }}
+                {{> managementShopsEditVisibility }}
+            </div>
         </div>
-        <div class="container">
-            <h2 class="page-header">Payout settings</h2>
-            {{> managementShopsEditPayout }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Payout settings</h2>
+                {{> managementShopsEditPayout }}
+            </div>
         </div>
-        {{> managementShopsEditProducts }}
-        {{> managementShopsEditOrders }}
-        {{> managementShopsEditPlatforms }}
-        {{> managementShopsEditManagers }}
-        {{> managementShopsEditReviews }}
-        <div class="container">
-            <h2 class="page-header">Additional</h2>
-            {{> managementShopsEditTracking }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">
+                    Products
+                    <button class="createProductBtn pull-right" data-toggle="tooltip" data-placement="left" title="Add new product">
+                        {{> iconAdd }}
+                    </button>
+                </h2>
+                {{> managementShopsEditProducts }}
+            </div>
         </div>
-        <div class="container">
-            <h2 class="page-header text-danger">Remove</h2>
-            {{> managementShopsEditRemove }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Orders</h2>
+                {{> managementShopsEditOrders }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Destinations</h2>
+                {{> managementShopsEditDestinations }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Managers</h2>
+                {{> managementShopsEditManagers }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Reviews</h2>
+                {{> managementShopsEditReviews }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Additional</h2>
+                {{> managementShopsEditTracking }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header text-danger">Remove</h2>
+                {{> managementShopsEditRemove }}
+            </div>
         </div>
         {{ /with }}
     </section>
