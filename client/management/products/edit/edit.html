@@ -6,19 +6,30 @@
         {{ #with product }}
 
         {{> managementProductsEditImages }}
-        <div class="container">
-            <h2 class="page-header">Details</h2>
-            {{> managementProductsEditGeneral }}
-            {{> managementProductsEditVisibility }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Details</h2>
+                {{> managementProductsEditGeneral }}
+                {{> managementProductsEditVisibility }}
+            </div>
         </div>
-        <div class="container">
-            <h2 class="page-header">Inventory management</h2>
-            {{> managementProductsEditInventoryManagement }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Inventory management</h2>
+                {{> managementProductsEditInventoryManagement }}
+            </div>
         </div>
-            {{> managementProductsEditReviews }}
-        <div class="container">
-            <h2 class="page-header text-danger">Remove</h2>
-            {{> managementProductsEditRemove }}
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header">Reviews</h2>
+                {{> managementProductsEditReviews }}
+            </div>
+        </div>
+        <div class="block">
+            <div class="container">
+                <h2 class="page-header text-danger">Remove</h2>
+                {{> managementProductsEditRemove }}
+            </div>
         </div>
 
         {{ /with }}
