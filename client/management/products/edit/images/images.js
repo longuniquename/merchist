@@ -96,11 +96,33 @@
         'mousedown #canvas': function(e) {
             dragging = true;
             shift = {x: e.offsetX, y: e.offsetY};
+
+            $(document)
+                .attr('unselectable', 'on')
+                .css('user-select', 'none')
+                .css('-moz-user-select', 'none')
+                .css('-khtml-user-select', 'none')
+                .css('-webkit-user-select', 'none')
+                .on('selectstart', false)
+                .on('contextmenu', false)
+                .on('keydown', false)
+                .on('mousedown', false);
         },
-        'mouseup': function() {
+        'mouseup #canvas': function() {
             dragging = false;
+
+            $(document)
+                .attr('unselectable', '')
+                .css('user-select', '')
+                .css('-moz-user-select', '')
+                .css('-khtml-user-select', '')
+                .css('-webkit-user-select', '')
+                .off('selectstart', false)
+                .off('contextmenu', false)
+                .off('keydown', false)
+                .off('mousedown', false);
         },
-        'mousemove': function(e) {
+        'mousemove #canvas': function(e) {
             if (dragging) {
 
                 imageData.left += shift.x - e.offsetX;
