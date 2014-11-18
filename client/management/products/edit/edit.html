@@ -7,11 +7,15 @@
 
         {{> managementProductsEditImages }}
         <div class="container">
+            <h2 class="page-header">Details</h2>
             {{> managementProductsEditGeneral }}
             {{> managementProductsEditVisibility }}
-            {{> managementProductsEditInventoryManagement }}
-            {{> managementProductsEditReviews }}
         </div>
+        <div class="container">
+            <h2 class="page-header">Inventory management</h2>
+            {{> managementProductsEditInventoryManagement }}
+        </div>
+            {{> managementProductsEditReviews }}
 
         {{ /with }}
     </div>
