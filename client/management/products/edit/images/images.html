@@ -1,5 +1,13 @@
 <template name="managementProductsEditImages">
     <div class="images">
-
+        <nav class="context-buttons">
+            <button class="uploadBtn btn btn-icon">
+                {{> iconUpload }}
+                <input type="file" name="logo" id="uploadLogoFile" accept="image/*" />
+            </button>
+        </nav>
+        {{ #if image }}
+        <img src="{{ image.url }}" />
+        {{ /if }}
     </div>
 </template>

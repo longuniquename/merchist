@@ -11,9 +11,28 @@
     width: @header-buttons-size;
     background: fadeout(white, 50%);
     display: inline-block;
+    position: relative;
+    overflow: hidden;
+
     svg {
       height: 100%;
       width: 100%;
+      display: block;
+    }
+
+    input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: @header-buttons-size;
+      height: @header-buttons-size;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: pointer;
       display: block;
     }
   }
