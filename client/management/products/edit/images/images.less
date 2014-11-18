@@ -5,6 +5,8 @@
     background: @color-main;
     width: 100%;
     height: 200px;
+    position: relative;
+
     .context-buttons {
       position: absolute;
       z-index: 10;
@@ -14,6 +16,27 @@
     img {
       width: 100%;
       height: 100%;
+    }
+
+    .viewState, .editState {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    .viewState {
+      display: block;
+    }
+
+    .editState {
+      display: none;
+
+      canvas {
+        display: block;
+        height: 100%;
+        width: 100%;
+        cursor: move;
+      }
     }
   }
 }
