@@ -8,6 +8,11 @@
         products: function () {
             Meteor.subscribe("shopProducts", this._id);
             return Products.find({shopId: this._id});
+        },
+
+        image: function(){
+            Meteor.subscribe("image", this.imageId);
+            return Images.findOne(this.imageId);
         }
     });
 

@@ -11,7 +11,9 @@
             {{ #each products }}
                 <div class="col-xs-6 col-sm-4">
                     <a class="product-card" href="{{pathFor route='products.edit' data=this }}">
-                        <img src="">
+                        {{ #if image }}
+                        <img src="{{ image.url }}" />
+                        {{ /if }}
                         <div class="info">
                             <h3>
                                 {{ #if title }}
