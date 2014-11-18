@@ -4,7 +4,9 @@
             <nav class="context-buttons">
                 <button class="uploadBtn btn btn-icon">
                     {{> iconUpload }}
-                    <input type="file" name="logo" id="uploadLogoFile" accept="image/*" />
+                    <form>
+                        <input type="file" name="logo" id="uploadLogoFile" accept="image/*" />
+                    </form>
                 </button>
             </nav>
             {{ #if image }}

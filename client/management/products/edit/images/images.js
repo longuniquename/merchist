@@ -84,11 +84,15 @@
 
             imageData = {};
 
+            template.$('#uploadLogoFile').parent('form')[0].reset();
+
             template.$('.editState').hide();
             template.$('.viewState').show();
         },
         'click .cancelBtn': function(e, template){
             imageData = {};
+
+            template.$('#uploadLogoFile').parent('form')[0].reset();
 
             template.$('.editState').hide();
             template.$('.viewState').show();
