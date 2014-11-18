@@ -11,4 +11,6 @@ iron:router
 accounts-ui
 mvrx:bluebird
 cfs:standard-packages
+cfs:s3
 cfs:filesystem
+
