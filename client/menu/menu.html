@@ -9,7 +9,14 @@
         <h3>Management</h3>
         {{> myShopsMenu}}
         {{ /if }}
-        {{> login}}
+
+        {{> loginButtons}}
+
+        {{ #if currentUser }}
+        {{ else }}
+            {{> login}}
+        {{ /if }}
+
 
         <button class="closeBtn">Close</button>
     </nav>
