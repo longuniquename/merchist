@@ -6,15 +6,15 @@
             var email = template.$('[name="email"]').val();
             var password = template.$('[name="password"]').val();
 
-            Meteor.loginWithPassword(email, password, function(error){
-                console.log(arguments);
+            Meteor.loginWithPassword(email, password, function(err){
+                console.log(err);
             });
         },
         'click .loginFacebookBtn': function(e, template){
             e.preventDefault();
 
-            Meteor.loginWithFacebook({}, function(){
-
+            Meteor.loginWithFacebook({}, function(err){
+                console.log(err);
             });
         }
     });
