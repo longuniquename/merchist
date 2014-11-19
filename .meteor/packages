@@ -13,4 +13,6 @@ mvrx:bluebird
 cfs:standard-packages
 cfs:s3
 cfs:filesystem
+accounts-facebook
+service-configuration
 
