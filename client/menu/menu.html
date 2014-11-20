@@ -13,5 +13,14 @@
         {{> loginButtons}}
 
         <button class="closeBtn">Close</button>
+
+
+        {{ #if currentUser }}
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+                <a href="{{pathFor route='profile'}}">Profile</a>
+            </li>
+        </ul>
+        {{ /if }}
     </nav>
 </template>

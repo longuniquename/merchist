@@ -4,6 +4,13 @@ Router.route('/', function () {
     name: 'root'
 });
 
+Router.route('/profile', function () {
+    this.layout('rootLayout');
+    this.render('profile');
+}, {
+    name: 'profile'
+});
+
 Router.route('/marketplace', function () {
     this.layout('rootLayout');
     this.wait(Meteor.subscribe('products'));
