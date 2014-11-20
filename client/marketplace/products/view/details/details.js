@@ -8,10 +8,13 @@
 
     Template.marketplaceProductsViewDetails.events({
         'click .buyBtn': function(e, template){
+            var cartId = localStorage["cartId"];
 
-            Session.set('cart', (Session.get('cart') || 0) + 1);
+            var cartItem = CartItems.findOne({cartId: cartId, productId: this._id});
 
-            console.log(Session.get('cart'));
+            if (!cartItem) {
+                CartItems.insert({cartId: cartId, productId: this._id, quantity: 1});
+            }
         }
     });
 
