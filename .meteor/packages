@@ -14,5 +14,6 @@ cfs:s3
 cfs:filesystem
 accounts-facebook
 service-configuration
+email
 accounts-password
 
