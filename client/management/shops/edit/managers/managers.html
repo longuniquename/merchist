@@ -10,9 +10,10 @@
         </form>
 
         {{ #each this.managers }}
-        {{ #with manager}}
-            {{_id}}
-        {{ /with }}
+            {{ #with manager}}
+                {{_id}}
+            {{ /with }}
+            {{ role }}
         {{ /each }}
     </div>
 </template>
