@@ -1,0 +1,12 @@
+<template name="marketplaceShopsView">
+    <div class="marketplace-shops-view">
+        <a href="{{pathFor route='marketplace' }}" class="backBtn btn btn-icon">
+            {{> iconBack }}
+        </a>
+        {{ #with shop }}
+
+        {{ title }}
+
+        {{ /with }}
+    </div>
+</template>
