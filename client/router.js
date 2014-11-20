@@ -23,6 +23,27 @@ Router.route('/marketplace', function () {
     name: 'marketplace'
 });
 
+Router.route('/marketplace/products/:_id', function () {
+    var productId = this.params._id;
+
+    this.layout('internalLayout');
+    this.wait(Meteor.subscribe('product', productId));
+
+    if (this.ready()) {
+        this.render('marketplaceProductsView', {
+            data: {
+                product: function () {
+                    return Products.findOne({_id: productId});
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
+}, {
+    name: 'products.view'
+});
+
 Router.route('/management/shops/:_id', function () {
     var shopId = this.params._id;
 

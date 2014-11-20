@@ -5,7 +5,7 @@
             <div class="row">
             {{ #each products }}
                 <div class="col-xs-6 col-sm-4">
-                    <a class="product-card" href="{{pathFor route='products.edit' data=this }}">
+                    <a class="product-card" href="{{pathFor route='products.view' data=this }}">
                         {{ #if image }}
                         <img src="{{ image.url }}" />
                         {{ /if }}
