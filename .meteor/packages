@@ -6,7 +6,6 @@
 meteor-platform
 insecure
 less
-accounts-password
 iron:router
 accounts-ui
 mvrx:bluebird
@@ -15,4 +14,5 @@ cfs:s3
 cfs:filesystem
 accounts-facebook
 service-configuration
+accounts-password
 
