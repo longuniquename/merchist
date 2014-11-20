@@ -1,0 +1,50 @@
+<template name="marketplaceProductsViewOther">
+    <div class="other">
+        <div class="container">
+            {{ #with shop }}
+
+            {{ #if logo }}
+                <div class="logo">
+                    <img src="{{ logo.url }}" />
+                </div>
+            {{ /if }}
+
+            <h2>
+                {{title}}
+                <small>
+                    {{subtitle}}
+                </small>
+            </h2>
+
+            {{ #each products }}
+                <div class="col-xs-6 col-sm-4">
+                    <a class="product-card" href="{{pathFor route='products.view' data=this }}">
+                        {{ #if image }}
+                            <img src="{{ image.url }}" />
+                        {{ /if }}
+                        <div class="info">
+                            <h3>
+                                {{ #if title }}
+                                    {{title}}
+                                {{ else }}
+                                    <i>Draft product</i>
+                                {{ /if }}
+                            </h3>
+                            <span class="price">
+                                {{ #if price }}
+                                    {{price}}
+                                {{ else }}
+                                    <i>No price specified</i>
+                                {{ /if }}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            {{ /each }}
+
+            {{ /with }}
+
+
+        </div>
+    </div>
+</template>
