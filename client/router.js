@@ -6,7 +6,19 @@ Router.route('/', function () {
 
 Router.route('/marketplace', function () {
     this.layout('rootLayout');
-    this.render('marketplace');
+    this.wait(Meteor.subscribe('products'));
+
+    if (this.ready()) {
+        this.render('marketplace', {
+            data: {
+                products: function () {
+                    return Products.find();
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
 }, {
     name: 'marketplace'
 });
