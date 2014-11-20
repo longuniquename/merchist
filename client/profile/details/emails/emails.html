@@ -1,0 +1,19 @@
+<template name="profileDetailsEmails">
+    <div class="emails">
+        <legend>
+            Emails
+            <button class="addEmailBtn pull-right" data-toggle="tooltip" data-placement="left" title="Add new email">
+                {{> iconAdd }}
+            </button>
+        </legend>
+        {{ #each emails }}
+            {{address}}
+            {{ #if verified}}
+                <span class="label label-default">Verified</span>
+            {{ else }}
+                <button class="verifyBtn btn btn-primary btn-xs">Verify</button>
+            {{ /if }}
+            <button class="deleteBtn btn btn-danger btn-xs">Delete</button>
+        {{ /each }}
+    </div>
+</template>
