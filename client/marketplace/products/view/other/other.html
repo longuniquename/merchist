@@ -3,18 +3,19 @@
         <div class="container">
             {{ #with shop }}
 
-            {{ #if logo }}
-                <div class="logo">
-                    <img src="{{ logo.url }}" />
-                </div>
-            {{ /if }}
-
-            <h2>
-                {{title}}
-                <small>
-                    {{subtitle}}
-                </small>
-            </h2>
+            <a href="{{pathFor route='shops.view' data=this }}">
+                {{ #if logo }}
+                    <div class="logo">
+                        <img src="{{ logo.url }}" />
+                    </div>
+                {{ /if }}
+                <h2>
+                    {{title}}
+                    <small>
+                        {{subtitle}}
+                    </small>
+                </h2>
+            </a>
 
             <div class="row">
                 {{ #each products }}
