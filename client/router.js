@@ -12,7 +12,7 @@ Router.route('/marketplace', function () {
         this.render('marketplace', {
             data: {
                 products: function () {
-                    return Products.find();
+                    return Products.find({isPublic: true}, {sort: {title: 1}, limit: 20});
                 }
             }
         });
