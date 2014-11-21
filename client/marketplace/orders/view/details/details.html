@@ -1,8 +1,21 @@
 <template name="ordersViewDetails">
-    <div class="details">
+    <div class="details block">
         <div class="container">
-            <h2>Order details</h2>
-            {{ _id }}
+            <h2 class="page-header">Order details</h2>
+            {{ #with shop }}
+            {{ #if logo }}
+            <div class="logo">
+                <img src="{{ logo.url }}" />
+            </div>
+            {{ /if }}
+            {{ /with }}
+            <b>Order ID: {{ _id }}</b><br>
+            <i>
+                {{itemsCount}} items from
+                {{ #with shop }}
+                    <a href="{{pathFor route='shops.view' data=this }}">{{ title }}</a>
+                {{ /with }}
+            </i>
         </div>
     </div>
 </template>
