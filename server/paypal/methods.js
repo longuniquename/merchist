@@ -300,10 +300,9 @@
                         }
                     ]
                 },
-                //trackingId:                        order.id,
+                trackingId:                        order.id,
                 cancelUrl:                         Meteor.absoluteUrl('paypal/cancel'),
                 returnUrl:                         Meteor.absoluteUrl('paypal/return')
-
             };
 
             var headers = {
