@@ -1,14 +1,12 @@
 <template name="ordersList">
-    <div class="orders">
-        <div class="list">
-            {{ #each orders }}
-                <a href="{{pathFor route='orders.view' data=this }}">
-                    {{_id}}
-                    {{ #with shop }}
-                        {{ title}}
-                    {{ /with }}
-                </a>
-            {{ /each }}
-        </div>
+    <div class="orders-list">
+        {{ #each orders }}
+            <a href="{{pathFor route='orders.view' data=this }}">
+                {{_id}}
+                {{ #with shop }}
+                    {{ title}}
+                {{ /with }}
+            </a>
+        {{ /each }}
     </div>
 </template>

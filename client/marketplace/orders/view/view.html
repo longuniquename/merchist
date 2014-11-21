@@ -1,9 +1,11 @@
 <template name="ordersView">
-    <div class="orders">
-        <div class="view">
-            {{ #with order }}
-                {{_id}}
-            {{ /with }}
-        </div>
+    <div class="orders-view">
+        <a href="{{pathFor route='orders' }}" class="backBtn btn btn-icon">
+            {{> iconBack }}
+        </a>
+        {{ #with order }}
+            {{> ordersViewDetails }}
+            {{> ordersViewItems }}
+        {{ /with }}
     </div>
 </template>
