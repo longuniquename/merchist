@@ -49,7 +49,7 @@
             var $btn = $(e.currentTarget).button('generating').prop('disabled', true);
 
             Meteor.call('createOrderFromCart', cartId, function(err, order){
-                Router.go('marketplace.orders');
+                Router.go('orders');
             });
 
         }

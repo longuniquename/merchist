@@ -4,6 +4,14 @@
             <li>
                 <a href="{{pathFor route='marketplace'}}">Marketplace</a>
             </li>
+            {{ #if ordersCount }}
+            <li>
+                <a href="{{pathFor route='orders'}}">
+                    Orders
+                    <span class="badge">{{ ordersCount}}</span>
+                </a>
+            </li>
+            {{ /if }}
         </ul>
         {{ #if currentUser }}
         <h3>Management</h3>

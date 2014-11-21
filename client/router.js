@@ -72,8 +72,8 @@ Router.route('/marketplace/shops/:_id', function () {
     name: 'shops.view'
 });
 
-Router.route('/marketplace/orders', function () {
-    this.layout('internalLayout');
+Router.route('/orders', function () {
+    this.layout('rootLayout');
     var cartId = localStorage["cartId"];
 
     this.wait(Meteor.subscribe('myOrders', cartId));
@@ -95,7 +95,7 @@ Router.route('/marketplace/orders', function () {
         this.render('loading');
     }
 }, {
-    name: 'marketplace.orders'
+    name: 'orders'
 });
 
 
