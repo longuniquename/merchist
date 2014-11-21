@@ -224,10 +224,13 @@
                         tokenSecret: tokenSecret,
                         scope:       scope
                     }
+                },
+                $unset: {
+                    'payPal.accountRequests': ''
                 }
             });
 
-            console.log(Shops.findOne(shop._id));
+            console.log(Shops.findOne(shop._id).payPal);
 
             return shop._id;
         }
