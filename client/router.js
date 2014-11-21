@@ -72,6 +72,33 @@ Router.route('/marketplace/shops/:_id', function () {
     name: 'shops.view'
 });
 
+Router.route('/marketplace/orders', function () {
+    this.layout('internalLayout');
+    var cartId = localStorage["cartId"];
+
+    this.wait(Meteor.subscribe('myOrders', cartId));
+
+    if (this.ready()) {
+        this.render('marketplaceOrdersList', {
+            data: {
+                orders: function () {
+                    if (Meteor.userId()) {
+                        return Orders.find({userId: Meteor.userId()});
+                    } else {
+                        var cartId = localStorage["cartId"];
+                        return Orders.find({cartId: cartId});
+                    }
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
+}, {
+    name: 'marketplace.orders'
+});
+
+
 Router.route('/management/shops/:_id', function () {
     var shopId = this.params._id;
 

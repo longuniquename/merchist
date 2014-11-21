@@ -49,8 +49,7 @@
             var $btn = $(e.currentTarget).button('generating').prop('disabled', true);
 
             Meteor.call('createOrderFromCart', cartId, function(err, order){
-                console.log(order);
-                $btn.button('reset').prop('disabled', false);
+                Router.go('marketplace.orders');
             });
 
         }
