@@ -179,7 +179,7 @@
                         break;
                     case 'http://axschema.org/contact/email':
                         if (dataItem.personalDataValue)
-                            personalData['accountEmail'] = dataItem.personalDataValue;
+                            personalData['email'] = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/company/name':
                         if (dataItem.personalDataValue)
@@ -223,7 +223,7 @@
                     detailLevel:   'ReturnAll',
                     errorLanguage: 'en_US'
                 },
-                emailAddress:    personalData['accountEmail'],
+                emailAddress:    personalData['email'],
                 firstName:       personalData['firstName'],
                 lastName:        personalData['lastName'],
                 matchCriteria:   'NAME'

@@ -1,11 +1,26 @@
 <template name="managementShopsEditPayout">
     <div class="payout">
-        <legend>PayPal accounts</legend>
-        <p class="help-block">
-            We would need couple permissions to make it all work: refunds and your basic info.
-        </p>
-        <button class="attachPayPalAccountBtn btn btn-primary btn-block" data-generating-text="Generating request token..." data-redirecting-text="Redirecting to PayPal...">
-            Attach PayPal account
-        </button>
+        <legend>PayPal account</legend>
+        {{ #if payPal.account }}
+
+            {{ #with payPal.account }}
+                {{profile.email}}
+                {{id}}
+            {{ /with }}
+
+            <button class="attachPayPalAccountBtn btn btn-default btn-xs" data-generating-text="Generating request token..." data-redirecting-text="Redirecting to PayPal...">
+                Change PayPal account
+            </button>
+
+        {{ else }}
+
+            <p class="help-block">
+                We would need couple permissions to make it all work: refunds and your basic info.
+            </p>
+            <button class="attachPayPalAccountBtn btn btn-primary btn-block" data-generating-text="Generating request token..." data-redirecting-text="Redirecting to PayPal...">
+                Attach PayPal account
+            </button>
+
+        {{ /if }}
     </div>
 </template>

@@ -1,5 +1,9 @@
 (function () {
 
+    Template.managementShopsEditPayout.helpers({
+
+    });
+
     Template.managementShopsEditPayout.events({
         'click .attachPayPalAccountBtn': function(e, template){
             var $btn = $(e.currentTarget).button('generating').prop('disabled', true);
