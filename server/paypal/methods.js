@@ -28,8 +28,15 @@
             };
 
             var response = Meteor.wrapAsync(HTTP.post)(url, {data: data, headers: headers});
-
+            Shops.update(shopId, {$addToSet: {'payPal.accountRequests': response.data.token}});
             return 'https://sandbox.paypal.com/cgi-bin/webscr?cmd=_grant-permission&request_token=' + response.data.token;
+        },
+        'PayPal:verifyAccountRequest': function(params){
+            var shop = Shops.findOne({'payPal.accountRequests': params.request_token});
+
+
+
+            return shop._id;
         }
     });
 

@@ -113,3 +113,13 @@ Router.route('/management/products/:_id', function () {
 }, {
     name: 'products.edit'
 });
+
+Router.route('/paypal/return', function () {
+    this.render('loading');
+
+    Meteor.call('PayPal:verifyAccountRequest', this.params.query, function(err, shopId){
+        Router.go('shops.edit', {_id: shopId});
+    });
+}, {
+    name: 'paypal.return'
+});
