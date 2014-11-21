@@ -21,4 +21,20 @@
         }
     });
 
+    Template.ordersViewDetails.events({
+        'click .payWithPayPalBtn': function(e, template){
+            var $btn = $(e.currentTarget).button('generating').prop('disabled', true);
+
+            if(this.payPal && this.payPal.payKey) {
+                $btn.button('redirecting');
+                location.replace('https://sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=' + this.payPal.payKey);
+            } else {
+                Meteor.call('PayPal:getPayKey', this._id, function(err, payKey){
+                    $btn.button('redirecting');
+                    location.replace('https://sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=' + payKey);
+                });
+            }
+        }
+    });
+
 })();

@@ -262,6 +262,64 @@
             });
 
             return shop._id;
+        },
+        'PayPal:getPayKey':              function (orderId) {
+            var order = Orders.findOne(orderId);
+
+            var baseUrl = 'https://svcs.sandbox.paypal.com/',
+                url = baseUrl + 'AdaptivePayments/Pay';
+
+            var data = {
+                requestEnvelope:                   {
+                    detailLevel:   'ReturnAll',
+                    errorLanguage: 'en_US'
+                },
+                actionType:                        'PAY',
+                currencyCode:                      'USD',
+                feesPayer:                         'PRIMARYRECEIVER',
+                payKeyDuration:                    'PT15M',
+                reverseAllParallelPaymentsOnError: true,
+                ipnNotificationUrl:                Meteor.absoluteUrl('paypal/ipn'),
+                clientDetails:                     {
+                    applicationId: 'Merchist',
+                    partnerName:   'Mercher Inc.'
+                },
+                receiverList:                      {
+                    receiver: [
+                        {
+                            amount:      order.total,
+                            email:       'seller1.test@mercher.net',
+                            paymentType: 'GOODS',
+                            primary:     true
+                        },
+                        {
+                            amount:      Math.ceil(order.total * 2) / 100,
+                            email:       'dmitriy.s.les-facilitator@gmail.com',
+                            paymentType: 'SERVICE',
+                            primary:     false
+                        }
+                    ]
+                },
+                //trackingId:                        order.id,
+                cancelUrl:                         Meteor.absoluteUrl('paypal/cancel'),
+                returnUrl:                         Meteor.absoluteUrl('paypal/return')
+
+            };
+
+            var headers = {
+                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+                "X-PAYPAL-APPLICATION-ID":       'APP-80W284485P519543T',
+                "X-PAYPAL-SECURITY-USERID":      'dmitriy.s.les-facilitator_api1.gmail.com',
+                "X-PAYPAL-SECURITY-PASSWORD":    '1391764851',
+                "X-PAYPAL-SECURITY-SIGNATURE":   'AIkghGmb0DgD6MEPZCmNq.bKujMAA8NEIHryH-LQIfmx7UZ5q1LXAa7T'
+            };
+
+            var response = Meteor.wrapAsync(HTTP.post)(url, {data: data, headers: headers});
+
+            Orders.update(order._id, {$set: {'payPal.payKey': response.data.payKey}});
+
+            return response.data.payKey;
         }
     });
 
