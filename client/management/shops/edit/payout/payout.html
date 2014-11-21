@@ -4,8 +4,25 @@
         {{ #if payPal.account }}
 
             {{ #with payPal.account }}
-                {{profile.email}}
-                {{id}}
+                {{type}}
+
+                {{ #if verified }}
+                    <span class="label label-success">Verified</span>
+                {{ else }}
+                    <span class="label label-danger">Not verified</span>
+                {{ /if }}
+
+                <address>
+                    <strong>{{profile.firstName}} {{profile.lastName}}</strong><br>
+                </address>
+
+                <address>
+                    <strong>{{profile.businessName}}</strong><br>
+                    {{profile.street1}}, {{profile.street2}}<br>
+                    {{profile.city}}, {{profile.state}} {{profile.postalCode}}, {{profile.country}}<br>
+                    <abbr title="Phone">P:</abbr> {{profile.phone}}<br>
+                    <abbr title="Email">E:</abbr> <a href="mailto:{{profile.email}}">{{profile.email}}</a>
+                </address>
             {{ /with }}
 
             <button class="attachPayPalAccountBtn btn btn-default btn-xs" data-generating-text="Generating request token..." data-redirecting-text="Redirecting to PayPal...">
