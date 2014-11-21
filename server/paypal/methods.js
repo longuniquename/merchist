@@ -264,7 +264,8 @@
             return shop._id;
         },
         'PayPal:getPayKey':              function (orderId) {
-            var order = Orders.findOne(orderId);
+            var order = Orders.findOne(orderId),
+                shop = Shops.findOne(order.shopId);
 
             var baseUrl = 'https://svcs.sandbox.paypal.com/',
                 url = baseUrl + 'AdaptivePayments/Pay';
@@ -288,7 +289,7 @@
                     receiver: [
                         {
                             amount:      order.total,
-                            email:       'seller1.test@mercher.net',
+                            email:       shop.payPal.account.profile.email,
                             paymentType: 'GOODS',
                             primary:     true
                         },
@@ -300,9 +301,9 @@
                         }
                     ]
                 },
-                trackingId:                        order.id,
-                cancelUrl:                         Meteor.absoluteUrl('paypal/cancel'),
-                returnUrl:                         Meteor.absoluteUrl('paypal/return')
+                trackingId:                        order._id,
+                cancelUrl:                         Meteor.absoluteUrl('orders/' + order._id),
+                returnUrl:                         Meteor.absoluteUrl('orders/' + order._id)
             };
 
             var headers = {
