@@ -216,21 +216,50 @@
                 }
             });
 
+            url = baseUrl + 'AdaptiveAccounts/GetVerifiedStatus';
+
+            data = {
+                requestEnvelope: {
+                    detailLevel:   'ReturnAll',
+                    errorLanguage: 'en_US'
+                },
+                emailAddress:    personalData['accountEmail'],
+                firstName:       personalData['firstName'],
+                lastName:        personalData['lastName'],
+                matchCriteria:   'NAME'
+            };
+
+            headers = {
+                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+                "X-PAYPAL-APPLICATION-ID":       'APP-80W284485P519543T',
+                "X-PAYPAL-SECURITY-USERID":      'dmitriy.s.les-facilitator_api1.gmail.com',
+                "X-PAYPAL-SECURITY-PASSWORD":    '1391764851',
+                "X-PAYPAL-SECURITY-SIGNATURE":   'AIkghGmb0DgD6MEPZCmNq.bKujMAA8NEIHryH-LQIfmx7UZ5q1LXAa7T'
+            };
+
+            response = Meteor.wrapAsync(HTTP.post)(url, {data: data, headers: headers});
+
+            var verified = response.data.accountStatus === 'VERIFIED',
+                type = response.data.userInfo.accountType,
+                id = response.data.userInfo.accountId;
+
             Shops.update(shop._id, {
-                $set: {
+                $set:   {
                     'payPal.account': {
-                        profile:     personalData,
+                        id:          id,
+                        type:        type,
+                        verified:    verified,
                         token:       token,
                         tokenSecret: tokenSecret,
-                        scope:       scope
+                        scope:       scope,
+                        profile:     personalData
                     }
                 },
                 $unset: {
                     'payPal.accountRequests': ''
                 }
             });
-
-            console.log(Shops.findOne(shop._id).payPal);
 
             return shop._id;
         }
