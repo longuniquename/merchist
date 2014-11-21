@@ -6,29 +6,43 @@
                 <div class="item">
                     {{ #with product }}
                         {{ #if image }}
-                        <div class="image">
+                        <a href="{{pathFor route='products.view' data=this }}" class="image">
                             <img src="{{ image.url }}" />
-                        </div>
+                        </a>
                         {{ /if }}
-                        {{ title }}
-                        {{ subtitle }}
                     {{ /with }}
-                    {{ currency itemPrice }}
-                    {{ currency itemShipping }}
-                    {{ itemCount }}
+                    <div class="price">
+                        {{ currency price }}
+                    </div>
+                    <div class="count">
+                        × {{ itemCount }}
+                    </div>
+                    <div class="info">
+                        {{ #with product }}
+                            <a href="{{pathFor route='products.view' data=this }}" class="title">
+                                {{ title }}
+                                {{ #if subtitle }}
+                                    <span class="subtitle">
+                                    / {{ subtitle }}
+                                    </span>
+                                {{ /if }}
+                            </a>
+                        {{ /with }}
+                        Price: <span class="price">{{ currency itemPrice }}</span>
+                    </div>
                 </div>
             {{ /each }}
             <div class="total">
-                Subtotal: {{ currency subtotal }}
+                Subtotal: <span class="price">{{ currency subtotal }}</span>
             </div>
             <div class="total">
-                Shipping: {{ currency totalShipping }}
+                Total shipping: <span class="price">{{ currency totalShipping }}</span>
             </div>
             <div class="total">
-                Tax: {{ currency totalTax }}
+                Total tax: <span class="price">{{ currency totalTax }}</span>
             </div>
             <div class="total">
-                Total: {{ currency total }}
+                Total: <span class="price">{{ currency total }}</span>
             </div>
         </div>
     </div>

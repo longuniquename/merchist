@@ -4,9 +4,9 @@
             <h2 class="page-header">Order details</h2>
             {{ #with shop }}
             {{ #if logo }}
-            <div class="logo">
+            <a href="{{pathFor route='shops.view' data=this }}" class="logo">
                 <img src="{{ logo.url }}" />
-            </div>
+            </a>
             {{ /if }}
             {{ /with }}
             <b>Order ID: {{ _id }}</b><br>
