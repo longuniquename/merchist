@@ -1,11 +1,11 @@
 <template name="managementShopsEditPayout">
     <div class="payout">
-        <legend>
-            PayPal accounts
-            <button class="createProductBtn pull-right" data-toggle="tooltip" data-placement="left" title="Add new product">
-                {{> iconAdd }}
-            </button>
-        </legend>
-        PayPal accounts
+        <legend>PayPal accounts</legend>
+        <p class="help-block">
+            We would need couple permissions to make it all work: refunds and your basic info.
+        </p>
+        <button class="attachPayPalAccountBtn btn btn-primary btn-block" data-generating-text="Generating request token..." data-redirecting-text="Redirecting to PayPal...">
+            Attach PayPal account
+        </button>
     </div>
 </template>
