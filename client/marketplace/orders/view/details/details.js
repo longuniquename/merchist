@@ -13,7 +13,11 @@
             return Images.findOne(this.logoId);
         },
         'itemsCount': function(){
-            return this.items.length;
+            var itemsCount = 0;
+            _.each(this.items, function(orderItem){
+                itemsCount += orderItem.itemCount;
+            });
+            return itemsCount;
         }
     });
 
