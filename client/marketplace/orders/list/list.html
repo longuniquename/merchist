@@ -1,8 +1,13 @@
-<template name="marketplaceOrdersList">
+<template name="ordersList">
     <div class="orders">
         <div class="list">
             {{ #each orders }}
-                {{_id}}
+                <a href="{{pathFor route='orders.view' data=this }}">
+                    {{_id}}
+                    {{ #with shop }}
+                        {{ title}}
+                    {{ /with }}
+                </a>
             {{ /each }}
         </div>
     </div>

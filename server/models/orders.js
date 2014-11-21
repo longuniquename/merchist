@@ -5,3 +5,7 @@ Meteor.publish('myOrders', function (cartId) {
         return Orders.find({cartId: cartId});
     }
 });
+
+Meteor.publish('order', function (orderId) {
+    return Orders.find({ _id: orderId });
+});

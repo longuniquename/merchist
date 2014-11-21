@@ -79,7 +79,7 @@ Router.route('/orders', function () {
     this.wait(Meteor.subscribe('myOrders', cartId));
 
     if (this.ready()) {
-        this.render('marketplaceOrdersList', {
+        this.render('ordersList', {
             data: {
                 orders: function () {
                     if (Meteor.userId()) {
@@ -96,6 +96,27 @@ Router.route('/orders', function () {
     }
 }, {
     name: 'orders'
+});
+
+Router.route('/orders/:_id', function () {
+    var orderId = this.params._id;
+    this.layout('internalLayout');
+
+    this.wait(Meteor.subscribe('order', orderId));
+
+    if (this.ready()) {
+        this.render('ordersView', {
+            data: {
+                order: function () {
+                    return Orders.findOne({_id: orderId});
+                }
+            }
+        });
+    } else {
+        this.render('loading');
+    }
+}, {
+    name: 'orders.view'
 });
 
 
