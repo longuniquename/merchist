@@ -1,14 +1,16 @@
 <template name="managementProductsEditVisibility">
     <div class="visibility">
         <form class="form-horizontal" role="form">
-            <legend>Visibility</legend>
-            <p class="help-block">Information about visibility</p>
+            <legend>{{_ "management.product.edit.visibility.header"}}</legend>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="isPublic" checked="{{ isPublic }}" />
-                    Visible
+                    {{_ "management.product.edit.visibility.isPublic.label"}}
                 </label>
             </div>
+            <p class="help-block">
+                {{_ "management.product.edit.visibility.isPublic.help"}}
+            </p>
         </form>
     </div>
 </template>

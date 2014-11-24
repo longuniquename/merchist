@@ -106,10 +106,10 @@
     },
     "product": {
       "edit": {
-        "details": {
+        "details":             {
           "header": "Details"
         },
-        "general": {
+        "general":             {
           "header":       "General info",
           "title":        {
             "label":       "Title:",
@@ -162,13 +162,20 @@
             }
           }
         },
+        "visibility":          {
+          "header":   "Visibility",
+          "isPublic": {
+            "label": "Visible to customers",
+            "help":  "This option controls visibility of the product across all platforms."
+          }
+        },
         "inventoryManagement": {
           "header": "Inventory management"
         },
-        "reviews": {
+        "reviews":             {
           "header": "Reviews"
         },
-        "remove": {
+        "remove":              {
           "header": "Remove"
         }
       }
