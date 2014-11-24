@@ -1,40 +1,40 @@
 <template name="managementShopsEditGeneral">
     <div class="general">
         <form class="form-horizontal" role="form">
-            <legend>General info</legend>
+            <legend>{{_ "management.shop.edit.general.header"}}</legend>
             <div class="form-group">
-                <label for="shopTitle" class="col-sm-2 control-label">Title:</label>
+                <label for="shopTitle" class="col-sm-2 control-label">{{_ "management.shop.edit.general.title.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="shopTitle" value="{{ title }}" placeholder="Title" />
+                    <input type="text" class="form-control" name="title" id="shopTitle" value="{{ title }}" placeholder="{{_ "management.shop.edit.general.title.placeholder"}}" />
                     <p class="help-block">
-                        Title of the shop. Would be used on all platforms to identify your shop.
+                        {{_ "management.shop.edit.general.title.help"}}
                     </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="shopSubtitle" class="col-sm-2 control-label">Subtitle:</label>
+                <label for="shopSubtitle" class="col-sm-2 control-label">{{_ "management.shop.edit.general.subtitle.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" />
+                    <input type="text" class="form-control" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" placeholder="{{_ "management.shop.edit.general.subtitle.placeholder"}}" />
                     <p class="help-block">
-                        Subtitle, would be used in some places to give short additional information about what shop really does.
+                        {{_ "management.shop.edit.general.subtitle.help"}}
                     </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="shopDescription" class="col-sm-2 control-label">Description:</label>
+                <label for="shopDescription" class="col-sm-2 control-label">{{_ "management.shop.edit.general.description.label"}}</label>
                 <div class="col-sm-10">
-                    <textarea name="description" class="form-control" id="shopDescription">{{ description }}</textarea>
+                    <textarea name="description" class="form-control" id="shopDescription" placeholder="{{_ "management.shop.edit.general.description.placeholder"}}">{{ description }}</textarea>
                     <p class="help-block">
-                        Long description of the shop. Used only in shop's details page to give all information customer could be interested in.
+                        {{_ "management.shop.edit.general.description.help"}}
                     </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="shopTax" class="col-sm-2 control-label">Tax rate:</label>
+                <label for="shopTax" class="col-sm-2 control-label">{{_ "management.shop.edit.general.tax.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="tax" id="shopTax" value="{{ payments.tax }}" />
+                    <input type="text" class="form-control" name="tax" id="shopTax" value="{{ payments.tax }}" placeholder="{{_ "management.shop.edit.general.tax.placeholder"}}" />
                     <p class="help-block">
-                        This option is used to add taxes to orders. Use tax rate of your state.
+                        {{_ "management.shop.edit.general.tax.help"}}
                     </p>
                 </div>
             </div>

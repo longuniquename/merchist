@@ -1,0 +1,34 @@
+{
+  "management": {
+    "shop": {
+      "edit": {
+        "details": {
+          "header": "Details"
+        },
+        "general": {
+          "header": "General info",
+          "title": {
+            "label": "Title:",
+            "placeholder": "Title",
+            "help": "Title of the shop. Would be used on all platforms to identify your shop."
+          },
+          "subtitle": {
+            "label": "Subtitle:",
+            "placeholder": "Subtitle",
+            "help": "Subtitle, would be used in some places to give short additional information about what shop really does."
+          },
+          "description": {
+            "label": "Description:",
+            "placeholder": "Description",
+            "help": "Long description of the shop. Used only in shop's details page to give all information customer could be interested in."
+          },
+          "tax": {
+            "label": "Tax rate:",
+            "placeholder": "Tax rate",
+            "help": "This option is used to add taxes to orders. Use tax rate of your state."
+          }
+        }
+      }
+    }
+  }
+}

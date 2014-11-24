@@ -1,9 +1,27 @@
-Meteor.subscribe("shops");
+(function(){
 
-var cartId = localStorage["cartId"];
+    Meteor.subscribe("shops");
 
-if (!cartId) {
-    cartId = localStorage["cartId"] = Meteor.uuid();
-}
+    var cartId = localStorage["cartId"];
 
-Meteor.subscribe("myCart", cartId);
+    if (!cartId) {
+        cartId = localStorage["cartId"] = Meteor.uuid();
+    }
+
+    Meteor.subscribe("myCart", cartId);
+
+    var getUserLanguage = function () {
+        var userLanguage = _.find(navigator.languages, function(userLanguage){
+            return _.has(TAPi18n.getLanguages(), userLanguage);
+        });
+        if (!userLanguage) {
+            userLanguage = 'en';
+        }
+        return userLanguage;
+    };
+
+    Meteor.startup(function () {
+        TAPi18n.setLanguage(getUserLanguage());
+    });
+
+})();
