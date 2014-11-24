@@ -96,7 +96,11 @@
           }
         },
         "remove":     {
-          "header": "Remove"
+          "header":    "Remove",
+          "help":      "This option removes a shop",
+          "removeBtn": {
+            "label": "Remove"
+          }
         }
       }
     }
