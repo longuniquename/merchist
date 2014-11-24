@@ -75,7 +75,11 @@
           "header": "Platforms"
         },
         "managers":   {
-          "header": "Managers"
+          "header": "Managers",
+          "email": {
+            "placeholder": "Manager's email",
+            "help":     "Invite manager to your shop by sending an invitation letter. Just provide an email."
+          }
         },
         "reviews":    {
           "header": "Reviews"

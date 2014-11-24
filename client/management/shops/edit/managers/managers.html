@@ -1,19 +1,22 @@
 <template name="managementShopsEditManagers">
     <div class="managers">
-        <form>
-            <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Manager's email">
-                <p class="help-block">
-                    Invite manager to your shop by sending an invitation letter. Just provide an email.
-                </p>
-            </div>
-        </form>
+        <div class="container">
+            <h2 class="page-header">{{_ "management.shop.edit.managers.header"}}</h2>
+            <form>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="{{_ "management.shop.edit.managers.email.placeholder"}}">
+                    <p class="help-block">
+                        {{_ "management.shop.edit.managers.email.help"}}
+                    </p>
+                </div>
+            </form>
 
-        {{ #each this.managers }}
-            {{ #with manager}}
-                {{_id}}
-            {{ /with }}
-            {{ role }}
-        {{ /each }}
+            {{ #each this.managers }}
+                {{ #with manager}}
+                    {{_id}}
+                {{ /with }}
+                {{ role }}
+            {{ /each }}
+        </div>
     </div>
 </template>
