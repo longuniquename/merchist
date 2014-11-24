@@ -76,9 +76,9 @@
         },
         "managers":   {
           "header": "Managers",
-          "email": {
+          "email":  {
             "placeholder": "Manager's email",
-            "help":     "Invite manager to your shop by sending an invitation letter. Just provide an email."
+            "help":        "Invite manager to your shop by sending an invitation letter. Just provide an email."
           }
         },
         "reviews":    {
@@ -86,6 +86,14 @@
         },
         "etc":        {
           "header": "Additional"
+        },
+        "analytics":  {
+          "header":            "Analytics",
+          "googleAnalyticsId": {
+            "label":       "Google Analytics ID:",
+            "placeholder": "Google Analytics ID",
+            "help":        "It would help you with analytics"
+          }
         },
         "remove":     {
           "header": "Remove"
