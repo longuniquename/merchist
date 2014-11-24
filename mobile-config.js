@@ -9,10 +9,10 @@ App.info({
 });
 
 App.icons({
-    'android_ldpi':  'icons/android/ldpi.png',
-    'android_mdpi':  'icons/android/mdpi.png',
-    'android_hdpi':  'icons/android/hdpi.png',
-    'android_xhdpi': 'icons/android/xhdpi.png'
+    'android_ldpi':  'icons/android_ldpi.png',
+    'android_mdpi':  'icons/android_mdpi.png',
+    'android_hdpi':  'icons/android_hdpi.png',
+    'android_xhdpi': 'icons/android_xhdpi.png'
 });
 
 App.launchScreens({
