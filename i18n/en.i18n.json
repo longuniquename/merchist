@@ -38,6 +38,24 @@
         "payout":     {
           "header": "Payout settings"
         },
+        "paypal":     {
+          "header":   "PayPal account",
+          "help":     "We would need couple permissions to make it all work: refunds and your basic info.",
+          "verified": {
+            "yes": "Verified",
+            "no":  "Not verified"
+          },
+          "attach":   {
+            "label":       "Attach PayPal account",
+            "generating":  "Generating request token...",
+            "redirecting": "Redirecting to PayPal..."
+          },
+          "change":   {
+            "label":       "Change PayPal account",
+            "generating":  "Generating request token...",
+            "redirecting": "Redirecting to PayPal..."
+          }
+        },
         "orders":     {
           "header": "Orders"
         },
