@@ -2,31 +2,52 @@
   "management": {
     "shop": {
       "edit": {
-        "details": {
+        "details":   {
           "header": "Details"
         },
-        "general": {
-          "header": "General info",
-          "title": {
-            "label": "Title:",
+        "general":   {
+          "header":      "General info",
+          "title":       {
+            "label":       "Title:",
             "placeholder": "Title",
-            "help": "Title of the shop. Would be used on all platforms to identify your shop."
+            "help":        "Title of the shop. Would be used on all platforms to identify your shop."
           },
-          "subtitle": {
-            "label": "Subtitle:",
+          "subtitle":    {
+            "label":       "Subtitle:",
             "placeholder": "Subtitle",
-            "help": "Subtitle, would be used in some places to give short additional information about what shop really does."
+            "help":        "Subtitle, would be used in some places to give short additional information about what shop really does."
           },
           "description": {
-            "label": "Description:",
+            "label":       "Description:",
             "placeholder": "Description",
-            "help": "Long description of the shop. Used only in shop's details page to give all information customer could be interested in."
+            "help":        "Long description of the shop. Used only in shop's details page to give all information customer could be interested in."
           },
-          "tax": {
-            "label": "Tax rate:",
+          "tax":         {
+            "label":       "Tax rate:",
             "placeholder": "Tax rate",
-            "help": "This option is used to add taxes to orders. Use tax rate of your state."
+            "help":        "This option is used to add taxes to orders. Use tax rate of your state."
           }
+        },
+        "payout":    {
+          "header": "Payout settings"
+        },
+        "orders":    {
+          "header": "Orders"
+        },
+        "platforms": {
+          "header": "Platforms"
+        },
+        "managers":  {
+          "header": "Managers"
+        },
+        "reviews":  {
+          "header": "Reviews"
+        },
+        "etc":  {
+          "header": "Additional"
+        },
+        "remove":  {
+          "header": "Remove"
         }
       }
     }
