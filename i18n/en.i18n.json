@@ -176,7 +176,11 @@
           "header": "Reviews"
         },
         "remove":              {
-          "header": "Remove"
+          "header":    "Remove",
+          "help":      "This option removes a product",
+          "removeBtn": {
+            "label": "Remove"
+          }
         }
       }
     }
