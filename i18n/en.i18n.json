@@ -56,6 +56,18 @@
             "redirecting": "Redirecting to PayPal..."
           }
         },
+        "products":   {
+          "header": "Products",
+          "add":    {
+            "title": "Add new product"
+          },
+          "title":  {
+            "none": "Draft product"
+          },
+          "price":  {
+            "none": "No price specified"
+          }
+        },
         "orders":     {
           "header": "Orders"
         },

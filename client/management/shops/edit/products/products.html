@@ -2,8 +2,8 @@
     <div class="products">
         <div class="container">
             <h2 class="page-header">
-                Products
-                <button class="createProductBtn pull-right" data-toggle="tooltip" data-placement="left" title="Add new product">
+                {{_ "management.shop.edit.products.header"}}
+                <button class="createProductBtn pull-right" data-toggle="tooltip" data-placement="left" title="{{_ "management.shop.edit.products.add.title"}}">
                     {{> iconAdd }}
                 </button>
             </h2>
@@ -19,14 +19,14 @@
                                 {{ #if title }}
                                     {{title}}
                                 {{ else }}
-                                    <i>Draft product</i>
+                                    <i>{{_ "management.shop.edit.products.title.none"}}</i>
                                 {{ /if }}
                             </h3>
                             <span class="price">
                                 {{ #if price }}
                                     {{price}}
                                 {{ else }}
-                                    <i>No price specified</i>
+                                    <i>{{_ "management.shop.edit.products.price.none"}}</i>
                                 {{ /if }}
                             </span>
                         </div>
