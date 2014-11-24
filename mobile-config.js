@@ -16,14 +16,14 @@ App.icons({
 });
 
 App.launchScreens({
-    'android_ldpi_portrait':   'launch_screens/android_ldpi_portrait.9.png',
-    'android_ldpi_landscape':  'launch_screens/android_ldpi_landscape.9.png',
-    'android_mdpi_portrait':   'launch_screens/android_mdpi_portrait.9.png',
-    'android_mdpi_landscape':  'launch_screens/android_mdpi_landscape.9.png',
-    'android_hdpi_portrait':   'launch_screens/android_hdpi_portrait.9.png',
-    'android_hdpi_landscape':  'launch_screens/android_hdpi_landscape.9.png',
-    'android_xhdpi_portrait':  'launch_screens/android_xhdpi_portrait.9.png',
-    'android_xhdpi_landscape': 'launch_screens/android_xhdpi_landscape.9.png'
+    'android_ldpi_portrait':   'launch_screens/android_ldpi_portrait.png',
+    'android_ldpi_landscape':  'launch_screens/android_ldpi_landscape.png',
+    'android_mdpi_portrait':   'launch_screens/android_mdpi_portrait.png',
+    'android_mdpi_landscape':  'launch_screens/android_mdpi_landscape.png',
+    'android_hdpi_portrait':   'launch_screens/android_hdpi_portrait.png',
+    'android_hdpi_landscape':  'launch_screens/android_hdpi_landscape.png',
+    'android_xhdpi_portrait':  'launch_screens/android_xhdpi_portrait.png',
+    'android_xhdpi_landscape': 'launch_screens/android_xhdpi_landscape.png'
 });
 
 App.setPreference('Orientation', 'portrait');
