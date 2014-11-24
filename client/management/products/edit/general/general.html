@@ -1,66 +1,84 @@
 <template name="managementProductsEditGeneral">
     <div class="general">
         <form class="form-horizontal" role="form">
-            <legend>General info</legend>
+            <legend>{{_ "management.product.edit.general.header"}}</legend>
             <div class="form-group">
-                <label for="productTitle" class="col-sm-2 control-label">Title:</label>
+                <label for="productTitle" class="col-sm-2 control-label">{{_ "management.product.edit.general.title.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="productTitle" value="{{ title }}" />
+                    <input type="text" class="form-control" name="title" id="productTitle" value="{{ title }}" placeholder="{{_ "management.product.edit.general.title.placeholder"}}" />
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.title.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="productSubtitle" class="col-sm-2 control-label">Subtitle:</label>
+                <label for="productSubtitle" class="col-sm-2 control-label">{{_ "management.product.edit.general.subtitle.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="subtitle" id="productSubtitle" value="{{ subtitle }}" />
+                    <input type="text" class="form-control" name="subtitle" id="productSubtitle" value="{{ subtitle }}" placeholder="{{_ "management.product.edit.general.subtitle.placeholder"}}" />
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.subtitle.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="productDescription" class="col-sm-2 control-label">Description:</label>
+                <label for="productDescription" class="col-sm-2 control-label">{{_ "management.product.edit.general.description.label"}}</label>
                 <div class="col-sm-10">
-                    <textarea name="description" class="form-control" id="productDescription">{{ description }}</textarea>
+                    <textarea name="description" class="form-control" id="productDescription" placeholder="{{_ "management.product.edit.general.description.placeholder"}}">{{ description }}</textarea>
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.description.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="productPrice" class="col-sm-2 control-label">Price:</label>
+                <label for="productPrice" class="col-sm-2 control-label">{{_ "management.product.edit.general.price.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="price" id="productPrice" value="{{ price }}" />
+                    <input type="text" class="form-control" name="price" id="productPrice" value="{{ price }}" placeholder="{{_ "management.product.edit.general.price.placeholder"}}" />
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.price.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="productShippingCost" class="col-sm-2 control-label">Shipping cost:</label>
+                <label for="productShippingCost" class="col-sm-2 control-label">{{_ "management.product.edit.general.shipping.cost.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="shippingCost" id="productShippingCost" value="{{ shipping.cost }}" />
+                    <input type="text" class="form-control" name="shippingCost" id="productShippingCost" value="{{ shipping.cost }}" placeholder="{{_ "management.product.edit.general.shipping.cost.placeholder"}}" />
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.shipping.cost.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="productShippingWeight" class="col-sm-2 control-label">Shipping weight:</label>
+                <label for="productShippingWeight" class="col-sm-2 control-label">{{_ "management.product.edit.general.shipping.weight.label"}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="shippingWeight" id="productShippingWeight" value="{{ shipping.weight }}" />
+                    <input type="text" class="form-control" name="shippingWeight" id="productShippingWeight" value="{{ shipping.weight }}" placeholder="{{_ "management.product.edit.general.shipping.weight.placeholder"}}" />
+                    <p class="help-block">
+                        {{_ "management.product.edit.general.shipping.weight.help"}}
+                    </p>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Availability:</label>
+                <label class="col-sm-2 control-label">{{_ "management.product.edit.general.availability.label"}}</label>
                 <div class="col-sm-10">
                     <label class="radio-inline">
                         <input type="radio" name="availability" value="inStock" checked="{{ isInStock }}" />
-                        In stock
+                        {{_ "management.product.edit.general.availability.inStock.label"}}
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="availability" value="outOfStock" checked="{{ isOutOfStock }}" />
-                        Out of stock
+                        {{_ "management.product.edit.general.availability.outOfStock.label"}}
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Condition:</label>
+                <label class="col-sm-2 control-label">{{_ "management.product.edit.general.condition.label"}}</label>
                 <div class="col-sm-10">
                     <label class="radio-inline">
                         <input type="radio" name="condition" value="new" checked="{{ isNew }}" />
-                        New
+                        {{_ "management.product.edit.general.condition.new.label"}}
                     </label>
                     <label class="radio-inline">
                         <input type="radio" name="condition" value="used" checked="{{ isUsed }}" />
-                        Used
+                        {{_ "management.product.edit.general.condition.used.label"}}
                     </label>
                 </div>
             </div>

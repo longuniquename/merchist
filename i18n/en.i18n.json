@@ -1,6 +1,6 @@
 {
   "management": {
-    "shop": {
+    "shop":    {
       "edit": {
         "details":    {
           "header": "Details"
@@ -101,6 +101,75 @@
           "removeBtn": {
             "label": "Remove"
           }
+        }
+      }
+    },
+    "product": {
+      "edit": {
+        "details": {
+          "header": "Details"
+        },
+        "general": {
+          "header":       "General info",
+          "title":        {
+            "label":       "Title:",
+            "placeholder": "Title",
+            "help":        "Title"
+          },
+          "subtitle":     {
+            "label":       "Subtitle:",
+            "placeholder": "Subtitle",
+            "help":        "Subtitle"
+          },
+          "description":  {
+            "label":       "Description:",
+            "placeholder": "Description",
+            "help":        "Description"
+          },
+          "price":        {
+            "label":       "Price:",
+            "placeholder": "Price",
+            "help":        "Price"
+          },
+          "shipping":     {
+            "cost":   {
+              "label":       "Shipping cost:",
+              "placeholder": "Shipping cost",
+              "help":        "Shipping cost"
+            },
+            "weight": {
+              "label":       "Shipping weight:",
+              "placeholder": "Shipping weight",
+              "help":        "Shipping weight"
+            }
+          },
+          "availability": {
+            "label":      "Availability:",
+            "inStock":    {
+              "label": "In stock"
+            },
+            "outOfStock": {
+              "label": "Out of stock"
+            }
+          },
+          "condition":    {
+            "label": "Condition:",
+            "new":   {
+              "label": "New"
+            },
+            "used":  {
+              "label": "Used"
+            }
+          }
+        },
+        "inventoryManagement": {
+          "header": "Inventory management"
+        },
+        "reviews": {
+          "header": "Reviews"
+        },
+        "remove": {
+          "header": "Remove"
         }
       }
     }
