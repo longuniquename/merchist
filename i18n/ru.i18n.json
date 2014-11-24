@@ -1,0 +1,18 @@
+{
+  "management": {
+    "shop":    {
+      "edit": {
+        "details": {
+          "header": "Детали"
+        }
+      }
+    },
+    "product": {
+      "edit": {
+        "details": {
+          "header": "Детали"
+        }
+      }
+    }
+  }
+}
