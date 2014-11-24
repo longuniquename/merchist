@@ -2,10 +2,10 @@
   "management": {
     "shop": {
       "edit": {
-        "details":   {
+        "details":    {
           "header": "Details"
         },
-        "general":   {
+        "general":    {
           "header":      "General info",
           "title":       {
             "label":       "Title:",
@@ -28,25 +28,32 @@
             "help":        "This option is used to add taxes to orders. Use tax rate of your state."
           }
         },
-        "payout":    {
+        "visibility": {
+          "header":   "Visibility",
+          "isPublic": {
+            "label": "Visible to customers",
+            "help":  "This option controls visibility of the shop across all platforms. If you want to hide shop on specific platform, use appropriate option for exact platform."
+          }
+        },
+        "payout":     {
           "header": "Payout settings"
         },
-        "orders":    {
+        "orders":     {
           "header": "Orders"
         },
-        "platforms": {
+        "platforms":  {
           "header": "Platforms"
         },
-        "managers":  {
+        "managers":   {
           "header": "Managers"
         },
-        "reviews":  {
+        "reviews":    {
           "header": "Reviews"
         },
-        "etc":  {
+        "etc":        {
           "header": "Additional"
         },
-        "remove":  {
+        "remove":     {
           "header": "Remove"
         }
       }

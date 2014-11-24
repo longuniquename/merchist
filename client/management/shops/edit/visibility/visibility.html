@@ -1,16 +1,15 @@
 <template name="managementShopsEditVisibility">
     <div class="visibility">
         <form class="form-horizontal" role="form">
-            <legend>Visibility</legend>
+            <legend>{{_ "management.shop.edit.visibility.header"}}</legend>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="isPublic" checked="{{ isPublic }}" />
-                    Visible to customers
+                    {{_ "management.shop.edit.visibility.isPublic.label"}}
                 </label>
             </div>
             <p class="help-block">
-                This option controls visibility of the shop across all platforms.
-                If you want to hide shop on specific platform, use appropriate option for exact platform.
+                {{_ "management.shop.edit.visibility.isPublic.help"}}
             </p>
         </form>
     </div>
