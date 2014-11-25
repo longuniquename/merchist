@@ -1,6 +1,21 @@
 {
   "marketplace": {
-    "shops": {},
+    "shops": {
+      "view": {
+        "reviews": {
+          "header": "Reviews"
+        },
+        "products": {
+          "header": "Products",
+          "title": {
+            "none": "Draft product"
+          },
+          "price": {
+            "none": "No price specified"
+          }
+        }
+      }
+    },
     "products": {
       "view": {
         "details": {
