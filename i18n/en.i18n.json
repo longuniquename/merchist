@@ -1,103 +1,126 @@
 {
+  "marketplace": {
+    "shops": {},
+    "products": {
+      "view": {
+        "details": {
+          "buyBtn": {
+            "text": "Buy"
+          }
+        },
+        "reviews": {
+          "header": "Reviews"
+        },
+        "otherProducts": {
+          "title": {
+            "none": "Draft product"
+          },
+          "price": {
+            "none": "No price specified"
+          }
+        }
+      }
+    }
+  },
   "management": {
-    "shop":    {
+    "shop": {
       "edit": {
-        "details":    {
+        "details": {
           "header": "Details"
         },
-        "general":    {
-          "header":      "General info",
-          "title":       {
-            "label":       "Title:",
+        "general": {
+          "header": "General info",
+          "title": {
+            "label": "Title:",
             "placeholder": "Title",
-            "help":        "Title of the shop. Would be used on all platforms to identify your shop."
+            "help": "Title of the shop. Would be used on all platforms to identify your shop."
           },
-          "subtitle":    {
-            "label":       "Subtitle:",
+          "subtitle": {
+            "label": "Subtitle:",
             "placeholder": "Subtitle",
-            "help":        "Subtitle, would be used in some places to give short additional information about what shop really does."
+            "help": "Subtitle, would be used in some places to give short additional information about what shop really does."
           },
           "description": {
-            "label":       "Description:",
+            "label": "Description:",
             "placeholder": "Description",
-            "help":        "Long description of the shop. Used only in shop's details page to give all information customer could be interested in."
+            "help": "Long description of the shop. Used only in shop's details page to give all information customer could be interested in."
           },
-          "tax":         {
-            "label":       "Tax rate:",
+          "tax": {
+            "label": "Tax rate:",
             "placeholder": "Tax rate",
-            "help":        "This option is used to add taxes to orders. Use tax rate of your state."
+            "help": "This option is used to add taxes to orders. Use tax rate of your state."
           }
         },
         "visibility": {
-          "header":   "Visibility",
+          "header": "Visibility",
           "isPublic": {
             "label": "Visible to customers",
-            "help":  "This option controls visibility of the shop across all platforms. If you want to hide shop on specific platform, use appropriate option for exact platform."
+            "help": "This option controls visibility of the shop across all platforms. If you want to hide shop on specific platform, use appropriate option for exact platform."
           }
         },
-        "payout":     {
+        "payout": {
           "header": "Payout settings"
         },
-        "paypal":     {
-          "header":   "PayPal account",
-          "help":     "We would need couple permissions to make it all work: refunds and your basic info.",
+        "paypal": {
+          "header": "PayPal account",
+          "help": "We would need couple permissions to make it all work: refunds and your basic info.",
           "verified": {
             "yes": "Verified",
-            "no":  "Not verified"
+            "no": "Not verified"
           },
-          "attach":   {
-            "label":       "Attach PayPal account",
-            "generating":  "Generating request token...",
+          "attach": {
+            "label": "Attach PayPal account",
+            "generating": "Generating request token...",
             "redirecting": "Redirecting to PayPal..."
           },
-          "change":   {
-            "label":       "Change PayPal account",
-            "generating":  "Generating request token...",
+          "change": {
+            "label": "Change PayPal account",
+            "generating": "Generating request token...",
             "redirecting": "Redirecting to PayPal..."
           }
         },
-        "products":   {
+        "products": {
           "header": "Products",
-          "add":    {
+          "add": {
             "title": "Add new product"
           },
-          "title":  {
+          "title": {
             "none": "Draft product"
           },
-          "price":  {
+          "price": {
             "none": "No price specified"
           }
         },
-        "orders":     {
+        "orders": {
           "header": "Orders"
         },
-        "platforms":  {
+        "platforms": {
           "header": "Platforms"
         },
-        "managers":   {
+        "managers": {
           "header": "Managers",
-          "email":  {
+          "email": {
             "placeholder": "Manager's email",
-            "help":        "Invite manager to your shop by sending an invitation letter. Just provide an email."
+            "help": "Invite manager to your shop by sending an invitation letter. Just provide an email."
           }
         },
-        "reviews":    {
+        "reviews": {
           "header": "Reviews"
         },
-        "etc":        {
+        "etc": {
           "header": "Additional"
         },
-        "analytics":  {
-          "header":            "Analytics",
+        "analytics": {
+          "header": "Analytics",
           "googleAnalyticsId": {
-            "label":       "Google Analytics ID:",
+            "label": "Google Analytics ID:",
             "placeholder": "Google Analytics ID",
-            "help":        "It would help you with analytics"
+            "help": "It would help you with analytics"
           }
         },
-        "remove":     {
-          "header":    "Remove",
-          "help":      "This option removes a shop",
+        "remove": {
+          "header": "Remove",
+          "help": "This option removes a shop",
           "removeBtn": {
             "label": "Remove"
           }
@@ -106,78 +129,78 @@
     },
     "product": {
       "edit": {
-        "details":             {
+        "details": {
           "header": "Details"
         },
-        "general":             {
-          "header":       "General info",
-          "title":        {
-            "label":       "Title:",
+        "general": {
+          "header": "General info",
+          "title": {
+            "label": "Title:",
             "placeholder": "Title",
-            "help":        "Title"
+            "help": "Title"
           },
-          "subtitle":     {
-            "label":       "Subtitle:",
+          "subtitle": {
+            "label": "Subtitle:",
             "placeholder": "Subtitle",
-            "help":        "Subtitle"
+            "help": "Subtitle"
           },
-          "description":  {
-            "label":       "Description:",
+          "description": {
+            "label": "Description:",
             "placeholder": "Description",
-            "help":        "Description"
+            "help": "Description"
           },
-          "price":        {
-            "label":       "Price:",
+          "price": {
+            "label": "Price:",
             "placeholder": "Price",
-            "help":        "Price"
+            "help": "Price"
           },
-          "shipping":     {
-            "cost":   {
-              "label":       "Shipping cost:",
+          "shipping": {
+            "cost": {
+              "label": "Shipping cost:",
               "placeholder": "Shipping cost",
-              "help":        "Shipping cost"
+              "help": "Shipping cost"
             },
             "weight": {
-              "label":       "Shipping weight:",
+              "label": "Shipping weight:",
               "placeholder": "Shipping weight",
-              "help":        "Shipping weight"
+              "help": "Shipping weight"
             }
           },
           "availability": {
-            "label":      "Availability:",
-            "inStock":    {
+            "label": "Availability:",
+            "inStock": {
               "label": "In stock"
             },
             "outOfStock": {
               "label": "Out of stock"
             }
           },
-          "condition":    {
+          "condition": {
             "label": "Condition:",
-            "new":   {
+            "new": {
               "label": "New"
             },
-            "used":  {
+            "used": {
               "label": "Used"
             }
           }
         },
-        "visibility":          {
-          "header":   "Visibility",
+        "visibility": {
+          "header": "Visibility",
           "isPublic": {
             "label": "Visible to customers",
-            "help":  "This option controls visibility of the product across all platforms."
+            "help": "This option controls visibility of the product across all platforms."
           }
         },
         "inventoryManagement": {
           "header": "Inventory management"
         },
-        "reviews":             {
+        "reviews": {
           "header": "Reviews"
         },
-        "remove":              {
-          "header":    "Remove",
-          "help":      "This option removes a product",
+        "remove": {
+          "header": "Remove",
+          "help": "This option removes a product",
           "removeBtn": {
             "label": "Remove"
           }

@@ -29,14 +29,14 @@
                                     {{ #if title }}
                                         {{title}}
                                     {{ else }}
-                                        <i>Draft product</i>
+                                        <i>{{_ "marketplace.products.view.otherProducts.title.none"}}</i>
                                     {{ /if }}
                                 </h3>
                                 <span class="price">
                                     {{ #if price }}
                                         {{price}}
                                     {{ else }}
-                                        <i>No price specified</i>
+                                        <i>{{_ "marketplace.products.view.otherProducts.price.none"}}</i>
                                     {{ /if }}
                                 </span>
                             </div>
