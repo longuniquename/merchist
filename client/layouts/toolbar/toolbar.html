@@ -1,7 +1,13 @@
 <template name="mainToolbar">
     <div id="mainToolbar">
+        {{ #if back}}
+        <a class="backBtn btn btn-icon" href="{{back}}">
+            {{> iconBack}}
+        </a>
+        {{ else }}
         <button class="menuBtn btn btn-icon">
             {{> iconMenu}}
         </button>
+        {{ /if }}
     </div>
 </template>

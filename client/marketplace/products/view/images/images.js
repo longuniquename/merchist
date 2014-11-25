@@ -1,9 +1,11 @@
 (function(){
 
+    var initialColor;
+
     Template.marketplaceProductsViewImages.rendered = function () {
         var $mainToolbar = $('#mainToolbar');
 
-        var initialColor = $mainToolbar.css("background-color");
+        initialColor = $mainToolbar.css("background-color");
 
 
         var resizeImagesBlock = function () {
@@ -30,6 +32,11 @@
 
         resizeImagesBlock();
         fadeToolbar();
+    };
+
+    Template.marketplaceProductsViewImages.destroyed = function(){
+        var $mainToolbar = $('#mainToolbar');
+        $mainToolbar.css("background-color", initialColor);
     };
 
     Template.marketplaceProductsViewImages.helpers({
