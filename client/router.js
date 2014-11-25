@@ -12,7 +12,7 @@ Router.route('/profile', function () {
 });
 
 Router.route('/marketplace', function () {
-    this.layout('rootLayout');
+    this.layout('mainLayout');
     this.wait(Meteor.subscribe('products'));
 
     if (this.ready()) {
