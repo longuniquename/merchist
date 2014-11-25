@@ -12,6 +12,11 @@
         'logo': function(){
             Meteor.subscribe("image", this.logoId);
             return Images.findOne(this.logoId);
+        },
+        'ordersCount': function(){
+            var cartId = localStorage["cartId"];
+            Meteor.subscribe("myOrders", cartId);
+            return Orders.find().fetch().length;
         }
     });
 
