@@ -4,8 +4,22 @@ Router.route('/', function () {
     name: 'root'
 });
 
+Router.route('/terms', function () {
+    this.layout('mainLayout');
+    this.render('terms');
+}, {
+    name: 'terms'
+});
+
+Router.route('/policy', function () {
+    this.layout('mainLayout');
+    this.render('policy');
+}, {
+    name: 'policy'
+});
+
 Router.route('/profile', function () {
-    this.layout('rootLayout');
+    this.layout('mainLayout');
     this.render('profile');
 }, {
     name: 'profile'
@@ -73,7 +87,7 @@ Router.route('/marketplace/shops/:_id', function () {
 });
 
 Router.route('/orders', function () {
-    this.layout('rootLayout');
+    this.layout('mainLayout');
     var cartId = localStorage["cartId"];
 
     this.wait(Meteor.subscribe('myOrders', cartId));

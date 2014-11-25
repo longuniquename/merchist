@@ -24,7 +24,9 @@
         },
         "click .logoutBtn": function(e){
             e.preventDefault();
-            Meteor.logout();
+            Meteor.logout(function(){
+                Router.go('marketplace');
+            });
         },
         'click .createShopBtn': function (e) {
             e.preventDefault();
@@ -45,6 +47,12 @@
             } else {
 
             }
+        },
+        'click .nav a': function(e, template){
+            template.$('#mainMenu').removeClass('visible');
+        },
+        'click .profile .actions .btn': function(e, template){
+            template.$('#mainMenu').removeClass('visible');
         }
     });
 

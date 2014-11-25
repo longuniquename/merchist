@@ -1,0 +1,14 @@
+<template name="ordersList">
+    <div class="orders-list-view">
+        <div class="container">
+            {{ #each orders }}
+                <a href="{{pathFor route='orders.view' data=this }}">
+                    {{_id}}
+                    {{ #with shop }}
+                    {{ title}}
+                    {{ /with }}
+                </a>
+            {{ /each }}
+        </div>
+    </div>
+</template>
