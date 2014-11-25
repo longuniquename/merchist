@@ -11,69 +11,72 @@
                     Merchist
                 </h1>
             </div>
-            <div class="divider">
-                <h6>
-                    My Merchist
-                </h6>
-            </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li>
-                    <a href="{{pathFor route='marketplace'}}">
-                        Marketplace
-                    </a>
-                </li>
-                <li>
-                    <a href="{{pathFor route='orders'}}">
-                        Orders
-                    </a>
-                </li>
-            </ul>
-            <div class="divider">
-                <h6>
-                    Management
-                </h6>
-            </div>
-            <ul class="nav nav-pills nav-stacked">
-                {{ #each shops }}
-                <li>
-                    <a href="{{pathFor route='shops.edit' data=this }}" class="shop">
-                        <div class="logo">
-                            <img src="{{logo.url}}">
-                        </div>
-                        {{#if title}}
-                            {{ title }}
-                        {{else}}
-                            <i>Draft shop</i>
-                        {{/if}}
-                    </a>
-                </li>
-                {{ /each }}
-                <li>
-                    <a href="#" class="createShopBtn">
+            <div class="menus">
+                <div class="divider">
+                    <h6>
+                        My Merchist
+                    </h6>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{pathFor route='marketplace'}}">
+                            Marketplace
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{pathFor route='orders'}}">
+                            Orders
+                        </a>
+                    </li>
+                </ul>
+                <div class="divider">
+                    <h6>
+                        Management
+                    </h6>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    {{ #each shops }}
+                    <li>
+                        <a href="{{pathFor route='shops.edit' data=this }}" class="shop">
+                            <div class="logo">
+                                <img src="{{logo.url}}">
+                            </div>
+                            {{#if title}}
+                                {{ title }}
+                            {{else}}
+                                <i>Draft shop</i>
+                            {{/if}}
+                        </a>
+                    </li>
+                    {{ /each }}
+                    <li>
+                        <a href="#" class="createShopBtn">
 
-                        {{> iconAdd}}
-                        Add new shop
-                    </a>
-                </li>
-            </ul>
-            <div class="divider">
-                <h6>
-                    Info
-                </h6>
+                            {{> iconAdd}}
+                            Add new shop
+                        </a>
+                    </li>
+                </ul>
+                <div class="divider">
+                    <h6>
+                        Info
+                    </h6>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="">
+                            Privacy policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            Terms of service
+                        </a>
+                    </li>
+                </ul>
+                {{> loginButtons}}
             </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li>
-                    <a href="">
-                        Privacy policy
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        Terms of service
-                    </a>
-                </li>
-            </ul>
-            {{> loginButtons}}
+
             {{ #if currentUser }}
             <div class="profile">
                 {{ #with currentUser}}
@@ -81,7 +84,10 @@
                         <img src="{{avatar}}">
                     </div>
                     <div class="info">
-                        <div class="name">Norma Anderson</div>
+                        <div class="name">
+                            {{ profile.firstName }}
+                            {{ profile.lastName }}
+                        </div>
                         <div class="actions">
                             <a class="btn btn-default btn-xs" href="{{pathFor route='profile'}}">Profile</a>
                             <button class="btn btn-default btn-xs logoutBtn">
