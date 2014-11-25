@@ -1,9 +1,6 @@
 (function(){
 
     Template.ordersViewDetails.helpers({
-        'currency': function(price){
-            return '$' + Number(price).toFixed(2);
-        },
         'shop': function(){
             Meteor.subscribe('shop', this.shopId);
             return Shops.findOne(this.shopId);

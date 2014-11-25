@@ -24,4 +24,8 @@
         TAPi18n.setLanguage(getUserLanguage());
     });
 
+    Template.registerHelper('currency', function(price){
+        return '$' + Number(price).toFixed(2);
+    });
+
 })();

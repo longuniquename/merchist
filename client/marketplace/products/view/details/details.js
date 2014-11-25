@@ -1,11 +1,5 @@
 (function(){
 
-    Template.marketplaceProductsViewDetails.helpers({
-        'currency': function(price){
-            return '$' + Number(price).toFixed(2);
-        }
-    });
-
     Template.marketplaceProductsViewDetails.events({
         'click .buyBtn': function(e, template){
             var cartId = localStorage["cartId"];
