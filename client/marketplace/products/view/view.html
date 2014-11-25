@@ -5,7 +5,12 @@
         </a>
         {{ #with product }}
 
+        {{ #if image }}
+        {{ #with image }}
         {{> marketplaceProductsViewImages }}
+        {{ /with }}
+        {{ /if }}
+
         {{> marketplaceProductsViewDetails }}
         {{> marketplaceProductsViewReviews }}
         {{> marketplaceProductsViewOther }}
