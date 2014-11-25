@@ -4,9 +4,7 @@
 
     Template.marketplaceProductsViewImages.rendered = function () {
         var $mainToolbar = $('#mainToolbar');
-
         initialColor = $mainToolbar.css("background-color");
-
 
         var resizeImagesBlock = function () {
             var imagesBlock = this.$('.images');
@@ -35,8 +33,7 @@
     };
 
     Template.marketplaceProductsViewImages.destroyed = function(){
-        var $mainToolbar = $('#mainToolbar');
-        $mainToolbar.css("background-color", initialColor);
+        $('#mainToolbar').css("background-color", initialColor);
     };
 
     Template.marketplaceProductsViewImages.helpers({

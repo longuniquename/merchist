@@ -74,7 +74,13 @@ Router.route('/marketplace/products/:_id', function () {
 Router.route('/marketplace/shops/:_id', function () {
     var shopId = this.params._id;
 
-    this.layout('internalLayout');
+    this.layout('mainLayout', {
+        data: {
+            back: function(){
+                return Router.path('marketplace');
+            }
+        }
+    });
     this.wait(Meteor.subscribe('shop', shopId));
 
     if (this.ready()) {
