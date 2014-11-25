@@ -126,7 +126,14 @@ Router.route('/orders', function () {
 
 Router.route('/orders/:_id', function () {
     var orderId = this.params._id;
-    this.layout('internalLayout');
+
+    this.layout('mainLayout', {
+        data: {
+            back: function(){
+                return Router.path('orders');
+            }
+        }
+    });
 
     this.wait(Meteor.subscribe('order', orderId));
 
