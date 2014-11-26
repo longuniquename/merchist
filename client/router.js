@@ -156,7 +156,7 @@ Router.route('/orders/:_id', function () {
 Router.route('/management/shops/:_id', function () {
     var shopId = this.params._id;
 
-    this.layout('rootLayout');
+    this.layout('mainLayout');
     this.wait(Meteor.subscribe('shop', shopId));
 
     if (this.ready()) {
