@@ -28,4 +28,28 @@
         return '$' + Number(price).toFixed(2);
     });
 
+    Template.registerHelper('isConnected', function(){
+        return Meteor.status().connected;
+    });
+
+    Template.registerHelper('isDisconnected', function(){
+        return !Meteor.status().connected;
+    });
+
+    Template.registerHelper('isConnecting', function(){
+        return Meteor.status().status === 'connecting';
+    });
+
+    Template.registerHelper('isConnectionFailed', function(){
+        return Meteor.status().status === 'failed';
+    });
+
+    Template.registerHelper('isConnectionWaiting', function(){
+        return Meteor.status().status === 'waiting';
+    });
+
+    Template.registerHelper('isOffline', function(){
+        return Meteor.status().status === 'offline';
+    });
+
 })();

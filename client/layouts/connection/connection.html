@@ -1,0 +1,27 @@
+<template name="connectionInfo">
+    <div id="connectionInfo">
+        <div class="wrapper">
+            <div class="info">
+                {{ #if isConnecting }}
+                <p>Connecting to the server...</p>
+                {{ /if }}
+
+                {{ #if isOffline }}
+                <p>You are offline</p>
+                {{ /if }}
+
+                {{ #if isConnectionFailed }}
+                <p>Failed to connect to the server...</p>
+                {{ /if }}
+
+                {{ #if isConnectionWaiting }}
+                <p>
+                    You've been disconnected from the server.
+                    Trying to reconnect in {{secondsToConnection}} seconds.
+                </p>
+                <button class="btn btn-primary reconnectBtn">Reconnect</button>
+                {{ /if }}
+            </div>
+        </div>
+    </div>
+</template>
