@@ -5,7 +5,15 @@
             <span>{{ currency price }}</span>
             <span>{{ availability }}</span>
             <p>{{ description }}</p>
-            <button class="btn btn-default btn-block buyBtn">{{_ "marketplace.products.view.details.buyBtn.text"}}</button>
+            {{ #if inCart }}
+                <button class="btn btn-default btn-block showCartBtn">
+                    In cart
+                </button>
+            {{ else }}
+                <button class="btn btn-default btn-block buyBtn">
+                    {{_ "marketplace.products.view.details.buyBtn.text"}}
+                </button>
+            {{ /if }}
         </div>
     </div>
 </template>
