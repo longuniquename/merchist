@@ -33,6 +33,41 @@
                     }
                 }
             );
+        },
+        'click .googleBtn': function (e, template) {
+            e.preventDefault();
+            var $dlg = $(template.firstNode);
+
+            Meteor.loginWithGoogle(
+                {
+                    requestPermissions: ['email'],
+                    loginStyle:         'popup'
+                },
+                function (err) {
+                    if (!err) {
+                        $dlg.modal('hide');
+                    } else {
+                        console.log(err);
+                    }
+                }
+            );
+        },
+        'click .twitterBtn': function (e, template) {
+            e.preventDefault();
+            var $dlg = $(template.firstNode);
+
+            Meteor.loginWithTwitter(
+                {
+                    loginStyle:         'popup'
+                },
+                function (err) {
+                    if (!err) {
+                        $dlg.modal('hide');
+                    } else {
+                        console.log(err);
+                    }
+                }
+            );
         }
     });
 

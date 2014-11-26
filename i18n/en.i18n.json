@@ -288,7 +288,7 @@
         "text": "Profile"
       },
       "logoutBtn":  {
-        "text": "Log out"
+        "text": "Sign out"
       }
     },
     "auth":       {

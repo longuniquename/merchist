@@ -19,3 +19,6 @@ accounts-password
 http
 launch-screen
 tap:i18n
+accounts-google
+accounts-twitter
+
