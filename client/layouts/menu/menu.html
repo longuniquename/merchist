@@ -14,19 +14,19 @@
             <div class="menus">
                 <div class="divider">
                     <h6>
-                        My Merchist
+                        {{_ "menu.mainLinks.header"}}
                     </h6>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="{{pathFor route='marketplace'}}">
-                            Marketplace
+                            {{_ "menu.mainLinks.marketplace.text"}}
                         </a>
                     </li>
                     {{ #if ordersCount }}
                     <li>
                         <a href="{{pathFor route='orders'}}">
-                            Orders
+                            {{_ "menu.mainLinks.orders.text"}}
                             <span class="badge pull-right">{{ ordersCount}}</span>
                         </a>
                     </li>
@@ -34,7 +34,7 @@
                 </ul>
                 <div class="divider">
                     <h6>
-                        Management
+                        {{_ "menu.management.header"}}
                     </h6>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
@@ -47,7 +47,9 @@
                             {{#if title}}
                                 {{ title }}
                             {{else}}
-                                <i>Draft shop</i>
+                                <i>
+                                    {{_ "menu.management.shop.title.none"}}
+                                </i>
                             {{/if}}
                         </a>
                     </li>
@@ -55,24 +57,24 @@
                     <li>
                         <a href="#" class="createShopBtn">
                             {{> iconAdd}}
-                            Create my own shop
+                            {{_ "menu.management.createShopBtn.text"}}
                         </a>
                     </li>
                 </ul>
                 <div class="divider">
                     <h6>
-                        Info
+                        {{_ "menu.infoLinks.header"}}
                     </h6>
                 </div>
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="{{pathFor route='policy'}}">
-                            Privacy policy
+                            {{_ "menu.infoLinks.policy.text"}}
                         </a>
                     </li>
                     <li>
                         <a href="{{pathFor route='terms'}}">
-                            Terms of service
+                            {{_ "menu.infoLinks.terms.text"}}
                         </a>
                     </li>
                 </ul>
@@ -91,9 +93,11 @@
                             {{ profile.lastName }}
                         </div>
                         <div class="actions">
-                            <a class="btn btn-inverted btn-xs" href="{{pathFor route='profile'}}">Profile</a>
+                            <a class="btn btn-inverted btn-xs profileBtn" href="{{pathFor route='profile'}}">
+                                {{_ "menu.profile.profileBtn.text"}}
+                            </a>
                             <button class="btn btn-inverted btn-xs logoutBtn">
-                                Log out
+                                {{_ "menu.profile.logoutBtn.text"}}
                             </button>
                         </div>
                     </div>
@@ -102,7 +106,7 @@
             {{ else }}
             <div class="auth">
                 <button class="btn btn-default btn-lg btn-block">
-                    Sign in / Sign up
+                    {{_ "menu.auth.authBtn.text"}}
                 </button>
             </div>
             {{ /if }}
