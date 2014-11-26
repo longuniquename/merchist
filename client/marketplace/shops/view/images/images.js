@@ -1,39 +1,44 @@
 (function(){
 
-    var initialColor;
+    var initialColor = '#3DA3A7';
+
+    var fadeToolbar = function(){
+        var $images = $('.images'),
+            top = $(window).scrollTop(),
+            height = $images.height(),
+            $mainToolbar = $('#mainToolbar');
+
+        $mainToolbar.css({
+            "background-color": one.color(initialColor).alpha(top/(height-48)).cssa()
+        });
+
+        $('img', $images).css('top', Math.floor(top/2));
+    };
+
+    var resizeImagesBlock = function () {
+        var $images = $('.images');
+
+        $images.css({
+            height: $images.width()
+        });
+    };
 
     Template.marketplaceShopsViewImages.rendered = function () {
-        var $mainToolbar = $('#mainToolbar');
-        initialColor = $mainToolbar.css("background-color");
-
-        var resizeImagesBlock = function () {
-            var imagesBlock = this.$('.images');
-            imagesBlock.css({
-                height: imagesBlock.width()
-            });
-        };
-
-        var fadeToolbar = function(){
-            var imagesBlock = this.$('.images'),
-                top = $(window).scrollTop(),
-                height = imagesBlock.height();
-            $mainToolbar.css("background-color", one.color(initialColor).alpha(top/height).cssa());
-        };
-
-        $(window).bind('resize', function () {
-            resizeImagesBlock();
-        });
-
-        $(window).bind('scroll', function () {
-            fadeToolbar();
-        });
-
+        $(window).bind('resize', resizeImagesBlock);
+        $(window).bind('scroll', fadeToolbar);
         resizeImagesBlock();
         fadeToolbar();
     };
 
     Template.marketplaceShopsViewImages.destroyed = function(){
-        $('#mainToolbar').css("background-color", initialColor);
+        var $mainToolbar = $('#mainToolbar');
+
+        $(window).unbind('resize', resizeImagesBlock);
+        $(window).unbind('scroll', fadeToolbar);
+
+        $mainToolbar.css({
+            "background-color": initialColor
+        });
     };
 
     Template.marketplaceShopsViewImages.helpers({
