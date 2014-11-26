@@ -253,45 +253,45 @@
       "generating": "Generating order..."
     }
   },
-  "menu": {
-    "mainLinks": {
-      "header": "My Merchist",
+  "menu":           {
+    "mainLinks":  {
+      "header":      "My Merchist",
       "marketplace": {
         "text": "Marketplace"
       },
-      "orders": {
+      "orders":      {
         "text": "Orders"
       }
     },
     "management": {
-      "header": "Management",
+      "header":        "Management",
       "createShopBtn": {
         "text": "Create my own shop"
       },
-      "shop": {
+      "shop":          {
         "title": {
           "none": "Draft product"
         }
       }
     },
-    "infoLinks": {
+    "infoLinks":  {
       "header": "Info",
       "policy": {
         "text": "Privacy policy"
       },
-      "terms": {
+      "terms":  {
         "text": "Terms of service"
       }
     },
-    "profile": {
+    "profile":    {
       "profileBtn": {
         "text": "Profile"
       },
-      "logoutBtn": {
+      "logoutBtn":  {
         "text": "Log out"
       }
     },
-    "auth": {
+    "auth":       {
       "authBtn": {
         "text": "Sign in / Sign up"
       }
