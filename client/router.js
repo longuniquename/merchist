@@ -85,10 +85,18 @@ Router.route('/marketplace/products/:_id', function () {
     this.wait(Meteor.subscribe('product', productId));
 
     if (this.ready()) {
+
+        ga('send', {
+            hitType:  'pageview',
+            location: Router.url('products.view', {_id: productId}),
+            page:     Router.path('products.view', {_id: productId}),
+            title:    Products.findOne(productId).title
+        });
+
         this.render('marketplaceProductsView', {
             data: {
                 product: function () {
-                    return Products.findOne({_id: productId});
+                    return Products.findOne(productId);
                 }
             }
         });
@@ -112,10 +120,18 @@ Router.route('/marketplace/shops/:_id', function () {
     this.wait(Meteor.subscribe('shop', shopId));
 
     if (this.ready()) {
+
+        ga('send', {
+            hitType:  'pageview',
+            location: Router.url('shops.view', {_id: shopId}),
+            page:     Router.path('shops.view', {_id: shopId}),
+            title:    Shops.findOne(shopId).title
+        });
+
         this.render('marketplaceShopsView', {
             data: {
                 shop: function () {
-                    return Shops.findOne({_id: shopId});
+                    return Shops.findOne(shopId);
                 }
             }
         });
@@ -173,10 +189,18 @@ Router.route('/orders/:_id', function () {
     this.wait(Meteor.subscribe('order', orderId));
 
     if (this.ready()) {
+
+        ga('send', {
+            hitType:  'pageview',
+            location: Router.url('orders.view', {_id: orderId}),
+            page:     Router.path('orders.view', {_id: orderId}),
+            title:    Orders.findOne(orderId)._id
+        });
+
         this.render('ordersView', {
             data: {
                 order: function () {
-                    return Orders.findOne({_id: orderId});
+                    return Orders.findOne(orderId);
                 }
             }
         });
@@ -195,10 +219,18 @@ Router.route('/management/shops/:_id', function () {
     this.wait(Meteor.subscribe('shop', shopId));
 
     if (this.ready()) {
+
+        ga('send', {
+            hitType:  'pageview',
+            location: Router.url('shops.edit', {_id: shopId}),
+            page:     Router.path('shops.edit', {_id: shopId}),
+            title:    Shops.findOne(shopId).title
+        });
+
         this.render('managementShopEdit', {
             data: {
                 shop: function () {
-                    return Shops.findOne({_id: shopId});
+                    return Shops.findOne(shopId);
                 }
             }
         });
@@ -216,10 +248,18 @@ Router.route('/management/products/:_id', function () {
     this.wait(Meteor.subscribe('product', productId));
 
     if (this.ready()) {
+
+        ga('send', {
+            hitType:  'pageview',
+            location: Router.url('products.edit', {_id: productId}),
+            page:     Router.path('products.edit', {_id: productId}),
+            title:    Products.findOne(productId).title
+        });
+
         this.render('managementProductsEdit', {
             data: {
                 product: function () {
-                    return Products.findOne({_id: productId});
+                    return Products.findOne(productId);
                 }
             }
         });
