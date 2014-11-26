@@ -1,6 +1,8 @@
 @import (reference) 'variables.import.less';
 
 .btn {
+  text-transform: uppercase;
+
   &.btn-icon {
     border: none;
     padding: 0;
@@ -36,4 +38,9 @@
       display: block;
     }
   }
+}
+
+// Danger and error appear as red
+.btn-inverted {
+  .button-variant(@btn-inverted-color; @btn-inverted-bg; @btn-inverted-border);
 }
