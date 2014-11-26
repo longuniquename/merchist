@@ -7,6 +7,12 @@ Router.route('/', function () {
 Router.route('/terms', function () {
     this.layout('mainLayout');
     this.render('terms');
+
+    ga('send', {
+        hitType: 'pageview',
+        page:    '/terms',
+        title:   'Terms of service'
+    });
 }, {
     name: 'terms'
 });
@@ -14,6 +20,12 @@ Router.route('/terms', function () {
 Router.route('/policy', function () {
     this.layout('mainLayout');
     this.render('policy');
+
+    ga('send', {
+        hitType: 'pageview',
+        page:    '/policy',
+        title:   'Privacy policy'
+    });
 }, {
     name: 'policy'
 });
@@ -21,6 +33,12 @@ Router.route('/policy', function () {
 Router.route('/profile', function () {
     this.layout('mainLayout');
     this.render('profile');
+
+    ga('send', {
+        hitType: 'pageview',
+        page:    '/profile',
+        title:   'Profile'
+    });
 }, {
     name: 'profile'
 });
@@ -28,6 +46,12 @@ Router.route('/profile', function () {
 Router.route('/marketplace', function () {
     this.layout('mainLayout');
     this.wait(Meteor.subscribe('products'));
+
+    ga('send', {
+        hitType: 'pageview',
+        page:    '/marketplace',
+        title:   'Marketplace'
+    });
 
     if (this.ready()) {
         this.render('marketplace', {
@@ -49,7 +73,7 @@ Router.route('/marketplace/products/:_id', function () {
 
     this.layout('mainLayout', {
         data: {
-            back: function(){
+            back: function () {
                 return Router.path('marketplace');
             }
         }
@@ -76,7 +100,7 @@ Router.route('/marketplace/shops/:_id', function () {
 
     this.layout('mainLayout', {
         data: {
-            back: function(){
+            back: function () {
                 return Router.path('marketplace');
             }
         }
@@ -104,6 +128,12 @@ Router.route('/orders', function () {
 
     this.wait(Meteor.subscribe('myOrders', cartId));
 
+    ga('send', {
+        hitType: 'pageview',
+        page:    '/orders',
+        title:   'Orders'
+    });
+
     if (this.ready()) {
         this.render('ordersList', {
             data: {
@@ -129,7 +159,7 @@ Router.route('/orders/:_id', function () {
 
     this.layout('mainLayout', {
         data: {
-            back: function(){
+            back: function () {
                 return Router.path('orders');
             }
         }
@@ -198,7 +228,7 @@ Router.route('/management/products/:_id', function () {
 Router.route('/paypal/return', function () {
     this.render('loading');
 
-    Meteor.call('PayPal:verifyAccountRequest', this.params.query, function(err, shopId){
+    Meteor.call('PayPal:verifyAccountRequest', this.params.query, function (err, shopId) {
         Router.go('shops.edit', {_id: shopId});
     });
 }, {
