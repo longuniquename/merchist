@@ -1,7 +1,7 @@
-(function(){
+(function () {
 
     Template.mainMenu.helpers({
-        'shops': function () {
+        'shops':       function () {
             if (Meteor.user()) {
                 Meteor.subscribe("myShops");
                 return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
@@ -9,11 +9,11 @@
                 return false;
             }
         },
-        'logo': function(){
+        'logo':        function () {
             Meteor.subscribe("image", this.logoId);
             return Images.findOne(this.logoId);
         },
-        'ordersCount': function(){
+        'ordersCount': function () {
             var cartId = localStorage["cartId"];
             Meteor.subscribe("myOrders", cartId);
             return Orders.find().fetch().length;
@@ -21,19 +21,33 @@
     });
 
     Template.mainMenu.events({
-        "click .overlay": function(e, template){
+        "click .overlay":               function (e, template) {
             template.$('#mainMenu').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'menu',
+                'eventAction':   'close',
+                'eventLabel':    'Menu closed'
+            });
         },
-        "click .closeBtn": function(e, template){
+        "click .closeBtn":              function (e, template) {
             template.$('#mainMenu').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'menu',
+                'eventAction':   'close',
+                'eventLabel':    'Menu closed'
+            });
         },
-        "click .logoutBtn": function(e){
+        "click .logoutBtn":             function (e) {
             e.preventDefault();
-            Meteor.logout(function(){
+            Meteor.logout(function () {
                 Router.go('marketplace');
             });
         },
-        'click .createShopBtn': function (e) {
+        'click .createShopBtn':         function (e) {
             e.preventDefault();
             if (Meteor.user()) {
                 Router.go(
@@ -53,11 +67,25 @@
 
             }
         },
-        'click .nav a': function(e, template){
+        'click .nav a':                 function (e, template) {
             template.$('#mainMenu').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'menu',
+                'eventAction':   'close',
+                'eventLabel':    'Menu closed'
+            });
         },
-        'click .profile .actions .btn': function(e, template){
+        'click .profile .actions .btn': function (e, template) {
             template.$('#mainMenu').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'menu',
+                'eventAction':   'close',
+                'eventLabel':    'Menu closed'
+            });
         }
     });
 
