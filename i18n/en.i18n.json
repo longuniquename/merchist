@@ -222,5 +222,24 @@
         }
       }
     }
+  },
+  "connectionInfo": {
+    "connecting": {
+      "text": "Connecting to the server..."
+    },
+    "offline": {
+      "text": "You are offline"
+    },
+    "failed": {
+      "text": "Failed to connect to the server"
+    },
+    "waiting": {
+      "text": "You've been disconnected from the server.",
+      "reconnection": "Trying to reconnect in __count__ second.",
+      "reconnection_plural": "Trying to reconnect in __count__ seconds."
+    },
+    "reconnectBtn": {
+      "text": "Reconnect"
+    }
   }
 }

@@ -3,23 +3,23 @@
         <div class="wrapper">
             <div class="info">
                 {{ #if isConnecting }}
-                <p>Connecting to the server...</p>
+                <p>{{_ "connectionInfo.connecting.text"}}</p>
                 {{ /if }}
 
                 {{ #if isOffline }}
-                <p>You are offline</p>
+                <p>{{_ "connectionInfo.offline.text"}}</p>
                 {{ /if }}
 
                 {{ #if isConnectionFailed }}
-                <p>Failed to connect to the server...</p>
+                <p>{{_ "connectionInfo.failed.text"}}</p>
                 {{ /if }}
 
                 {{ #if isConnectionWaiting }}
                 <p>
-                    You've been disconnected from the server.
-                    Trying to reconnect in {{secondsToConnection}} seconds.
+                    {{_ "connectionInfo.waiting.text"}}
+                    {{_ "connectionInfo.waiting.reconnection" count=secondsToConnection}}
                 </p>
-                <button class="btn btn-primary reconnectBtn">Reconnect</button>
+                <button class="btn btn-inverted reconnectBtn">{{_ "connectionInfo.reconnectBtn.text"}}</button>
                 {{ /if }}
             </div>
         </div>
