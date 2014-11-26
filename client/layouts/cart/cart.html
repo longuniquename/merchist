@@ -6,7 +6,7 @@
                 <button class="closeBtn btn btn-icon">
                     {{> iconCancel}}
                 </button>
-                <h1>Cart</h1>
+                <h1>{{_ "cart.header"}}</h1>
             </div>
             <div class="items">
                 {{ #each cartItems }}
@@ -35,8 +35,8 @@
             </div>
             <div class="footer">
                 <div class="total">
-                    Subtotal: {{ currency total }}
-                    <button class="btn btn-primary btn-block purchaseBtn" data-generating-text="Generating order...">Purchase</button>
+                    {{_ "cart.subtotal"}} {{ currency total }}
+                    <button class="btn btn-primary btn-block purchaseBtn" data-generating-text="{{_ "cart.purchaseBtn.generating"}}">{{_ "cart.purchaseBtn.text"}}</button>
                 </div>
             </div>
         </div>
