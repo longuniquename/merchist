@@ -9,9 +9,10 @@ Router.route('/terms', function () {
     this.render('terms');
 
     ga('send', {
-        hitType: 'pageview',
-        page:    '/terms',
-        title:   'Terms of service'
+        hitType:  'pageview',
+        location: Router.url('terms'),
+        page:     Router.path('terms'),
+        title:    'Terms of service'
     });
 }, {
     name: 'terms'
@@ -22,9 +23,10 @@ Router.route('/policy', function () {
     this.render('policy');
 
     ga('send', {
-        hitType: 'pageview',
-        page:    '/policy',
-        title:   'Privacy policy'
+        hitType:  'pageview',
+        location: Router.url('policy'),
+        page:     Router.path('policy'),
+        title:    'Privacy policy'
     });
 }, {
     name: 'policy'
@@ -35,9 +37,10 @@ Router.route('/profile', function () {
     this.render('profile');
 
     ga('send', {
-        hitType: 'pageview',
-        page:    '/profile',
-        title:   'Profile'
+        hitType:  'pageview',
+        location: Router.url('profile'),
+        page:     Router.path('profile'),
+        title:    'Profile'
     });
 }, {
     name: 'profile'
@@ -48,9 +51,10 @@ Router.route('/marketplace', function () {
     this.wait(Meteor.subscribe('products'));
 
     ga('send', {
-        hitType: 'pageview',
-        page:    '/marketplace',
-        title:   'Marketplace'
+        hitType:  'pageview',
+        location: Router.url('marketplace'),
+        page:     Router.path('marketplace'),
+        title:    'Marketplace'
     });
 
     if (this.ready()) {
@@ -129,9 +133,10 @@ Router.route('/orders', function () {
     this.wait(Meteor.subscribe('myOrders', cartId));
 
     ga('send', {
-        hitType: 'pageview',
-        page:    '/orders',
-        title:   'Orders'
+        hitType:  'pageview',
+        location: Router.url('orders'),
+        page:     Router.path('orders'),
+        title:    'Orders'
     });
 
     if (this.ready()) {
