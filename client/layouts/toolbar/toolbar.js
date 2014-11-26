@@ -1,5 +1,12 @@
 (function(){
 
+    Template.mainToolbar.helpers({
+        'showCart':  function () {
+            var cartId = localStorage["cartId"];
+            return !!CartItems.find({cartId: cartId}).fetch().length;
+        }
+    });
+
     Template.mainToolbar.events({
         "click .menuBtn": function(e, template){
             e.preventDefault();
@@ -10,6 +17,17 @@
                 'eventCategory': 'menu',
                 'eventAction':   'open',
                 'eventLabel':    'Menu opened'
+            });
+        },
+        "click .cartBtn": function(e, template){
+            e.preventDefault();
+            $('#cart').addClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'cart',
+                'eventAction':   'open',
+                'eventLabel':    'Cart opened'
             });
         }
     });

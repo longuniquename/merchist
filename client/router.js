@@ -243,11 +243,18 @@ Router.route('/management/shops/:_id', function () {
 
 Router.route('/management/products/:_id', function () {
     var productId = this.params._id;
-
-    this.layout('internalLayout');
     this.wait(Meteor.subscribe('product', productId));
+    this.layout('mainLayout');
 
     if (this.ready()) {
+
+        this.layout('mainLayout', {
+            data: {
+                back: function () {
+                    return Router.path('shops.edit', {_id: Products.findOne(productId).shopId});
+                }
+            }
+        });
 
         ga('send', {
             hitType:  'pageview',

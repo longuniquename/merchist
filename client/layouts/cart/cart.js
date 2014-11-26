@@ -1,10 +1,6 @@
 (function () {
 
-    Template.internalLayout.helpers({
-        'showCart':  function () {
-            var cartId = localStorage["cartId"];
-            return !!CartItems.find({cartId: cartId}).fetch().length;
-        },
+    Template.cart.helpers({
         'cartItems': function () {
             var cartId = localStorage["cartId"];
             return CartItems.find({cartId: cartId});
@@ -30,7 +26,27 @@
         }
     });
 
-    Template.internalLayout.events({
+    Template.cart.events({
+        "click .overlay":           function (e, template) {
+            template.$('#cart').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'cart',
+                'eventAction':   'close',
+                'eventLabel':    'Cart closed'
+            });
+        },
+        "click .closeBtn":          function (e, template) {
+            template.$('#cart').removeClass('visible');
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'cart',
+                'eventAction':   'close',
+                'eventLabel':    'Cart closed'
+            });
+        },
         'change [name="quantity"]': function (e, template) {
             var quantity = parseInt($(e.currentTarget).val());
 
@@ -40,18 +56,37 @@
         },
         'click .removeBtn':         function (e, template) {
             CartItems.remove(this._id);
-        },
-        'click .cartBtn':           function (e, template) {
-            template.$('.cart').toggle();
+
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'button',
+                'eventAction':   'click',
+                'eventLabel':    'Remove button'
+            });
         },
         'click .purchaseBtn':       function (e, template) {
             var cartId = localStorage["cartId"];
             var $btn = $(e.currentTarget).button('generating').prop('disabled', true);
 
-            Meteor.call('createOrderFromCart', cartId, function(err, order){
-                Router.go('orders');
+            ga('send', {
+                'hitType':       'event',
+                'eventCategory': 'button',
+                'eventAction':   'click',
+                'eventLabel':    'Purchase button'
             });
 
+            Meteor.call('createOrderFromCart', cartId, function(err, order){
+                Router.go('orders');
+                $btn.button('reset').prop('disabled', false);
+
+                template.$('#cart').removeClass('visible');
+                ga('send', {
+                    'hitType':       'event',
+                    'eventCategory': 'cart',
+                    'eventAction':   'close',
+                    'eventLabel':    'Cart closed'
+                });
+            });
         }
     });
 

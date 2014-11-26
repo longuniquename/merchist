@@ -1,13 +1,19 @@
 <template name="mainToolbar">
     <div id="mainToolbar">
         {{ #if back}}
-        <a class="backBtn btn btn-icon" href="{{back}}">
+        <a class="backBtn btn btn-icon pull-left" href="{{back}}">
             {{> iconBack}}
         </a>
         {{ else }}
-        <button class="menuBtn btn btn-icon">
+        <button class="menuBtn btn btn-icon pull-left">
             {{> iconMenu}}
         </button>
+        {{ /if }}
+
+        {{ #if showCart }}
+            <button class="cartBtn btn btn-icon pull-right">
+                {{> iconCart}}
+            </button>
         {{ /if }}
     </div>
 </template>

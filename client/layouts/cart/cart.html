@@ -1,0 +1,44 @@
+<template name="cart">
+    <div id="cart">
+        <div class="overlay"></div>
+        <div class="cart">
+            <div class="header">
+                <button class="closeBtn btn btn-icon">
+                    {{> iconCancel}}
+                </button>
+                <h1>Cart</h1>
+            </div>
+            <div class="items">
+                {{ #each cartItems }}
+                <div class="item">
+                    {{ #with product }}
+                    <div class="image">
+                        <img src="{{image.url}}">
+                    </div>
+                    {{ /with }}
+                    <div class="remove pull-right">
+                        <button class="btn btn-danger btn-lg removeBtn">&times;</button>
+                    </div>
+                    <div class="quantity pull-right">
+                        <input type="text" class="form-control input-lg" name="quantity" value="{{quantity}}" />
+                    </div>
+                    {{ #with product }}
+                    <div class="title">
+                        {{ title }}
+                    </div>
+                    <div class="price">
+                        {{ currency price }}
+                    </div>
+                    {{ /with }}
+                </div>
+                {{ /each }}
+            </div>
+            <div class="footer">
+                <div class="total">
+                    Subtotal: {{ currency total }}
+                    <button class="btn btn-primary btn-block purchaseBtn" data-generating-text="Generating order...">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
