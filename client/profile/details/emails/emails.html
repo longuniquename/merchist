@@ -8,7 +8,7 @@
         </legend>
         {{ #each emails }}
             <div class="email">
-                {{address}}
+                <a href="mailto:{{address}}">{{address}}</a>
                 <div class="actions btn-group btn-group-xs pull-right" role="group">
                     {{ #if not verified}}
                         <button class="verifyBtn btn btn-primary">Verify</button>
