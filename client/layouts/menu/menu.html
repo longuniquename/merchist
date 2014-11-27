@@ -68,6 +68,20 @@
                         </a>
                     </li>
                 </ul>
+                {{ #if currentUser.profile.isAdmin }}
+                <div class="divider">
+                    <h6>
+                        Admin
+                    </h6>
+                </div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{pathFor route='admin.users'}}">
+                            Users
+                        </a>
+                    </li>
+                </ul>
+                {{ /if }}
                 <div class="divider">
                     <h6>
                         {{_ "menu.infoLinks.header"}}

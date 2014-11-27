@@ -286,3 +286,17 @@ Router.route('/paypal/return', function () {
 }, {
     name: 'paypal.return'
 });
+
+Router.route('/admin/users', function () {
+    this.layout('mainLayout');
+
+    this.render('adminUsers', {
+        data: {
+            users: function () {
+                return Meteor.users.find();
+            }
+        }
+    });
+}, {
+    name: 'admin.users'
+});
