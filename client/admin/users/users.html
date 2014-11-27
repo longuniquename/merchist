@@ -1,3 +1,41 @@
 <template name="adminUsers">
-    Admin users
+    <div class="admin-users-view">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            _id
+                        </th>
+                        <th>
+                            Emails
+                        </th>
+                        <th>
+                            Profile
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{ #each users }}
+                    <tr>
+                        <td>{{ _id }}</td>
+                        <td>
+                            {{ #each emails }}
+                                <div>
+                                    {{ address }}
+                                </div>
+                            {{ /each }}
+                        </td>
+                        <td>
+                            {{ #with profile }}
+                                {{ firstName }}
+                                {{ lastName }}
+                            {{ /with }}
+                        </td>
+                    </tr>
+                {{ /each }}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </template>

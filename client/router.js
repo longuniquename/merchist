@@ -289,14 +289,21 @@ Router.route('/paypal/return', function () {
 
 Router.route('/admin/users', function () {
     this.layout('mainLayout');
+    this.wait(Meteor.subscribe('allUsersData'));
 
-    this.render('adminUsers', {
-        data: {
-            users: function () {
-                return Meteor.users.find();
+    if (this.ready()) {
+        console.log(Meteor.users.find().fetch());
+
+        this.render('adminUsers', {
+            data: {
+                users: function () {
+                    return Meteor.users.find({}, {sort: {createdAt: -1}});
+                }
             }
-        }
-    });
+        });
+    } else {
+        this.render('loading');
+    }
 }, {
     name: 'admin.users'
 });
