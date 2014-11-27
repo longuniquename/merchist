@@ -14,7 +14,7 @@
                             Profile
                         </th>
                         <th>
-                            Services
+                            Auth services
                         </th>
                         <th>
                             &nbsp;
@@ -58,9 +58,14 @@
                                         <a href="https://twitter.com/{{ twitter.screenName }}" target="_blank">{{ twitter.screenName }}</a>
                                     </div>
                                 {{ /if }}
-                                {{ #if password }}
+                                {{ #if password.bcrypt }}
                                     <div>
-                                        Password
+                                        <span class="label label-success">Password is set</span>
+                                    </div>
+                                {{ /if }}
+                                {{ #if password.reset }}
+                                    <div>
+                                        <span class="label label-warning">Password reset</span>
                                     </div>
                                 {{ /if }}
                             {{ /with }}
