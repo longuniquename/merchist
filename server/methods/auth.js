@@ -58,6 +58,14 @@
             }
 
             return false;
+        },
+        userRemoveEmailAddress:     function (email) {
+            if (Meteor.users.findOne(this.userId)) {
+                Meteor.users.update(this.userId, {$pull: {emails: {address: email}}});
+                return true;
+            }
+
+            return false;
         }
     });
 
