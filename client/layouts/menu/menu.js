@@ -21,7 +21,7 @@
     });
 
     Template.mainMenu.events({
-        "click .overlay":               function (e, template) {
+        "click .overlay":       function (e, template) {
             template.$('#mainMenu').removeClass('visible');
 
             ga('send', {
@@ -31,7 +31,7 @@
                 'eventLabel':    'Menu closed'
             });
         },
-        "click .closeBtn":              function (e, template) {
+        "click .closeBtn":      function (e, template) {
             template.$('#mainMenu').removeClass('visible');
 
             ga('send', {
@@ -41,24 +41,47 @@
                 'eventLabel':    'Menu closed'
             });
         },
-        "click .logoutBtn":             function (e) {
+        "click .logoutBtn":     function (e) {
             e.preventDefault();
             Meteor.logout(function () {
                 Router.go('marketplace');
             });
         },
-        'click .createShopBtn':         function (e) {
+        'click .createShopBtn': function (e) {
             e.preventDefault();
 
-            var view = Blaze.render(Template.createShopDlg, document.getElementsByTagName("body")[0]),
-                $dlg = $(view.templateInstance().firstNode);
+            var openAuthDlg = function (closed) {
+                var view = Blaze.render(Template.authDlg, document.getElementsByTagName("body")[0]),
+                    $dlg = $(view.templateInstance().firstNode);
 
-            $dlg.modal('show');
-            $dlg.on('hidden.bs.modal', function (e) {
-                Blaze.remove(view);
-            });
+                $dlg.modal('show');
+                $dlg.on('hidden.bs.modal', function () {
+                    Blaze.remove(view);
+                    closed();
+                });
+            };
+
+            var openCreateShopDlg = function () {
+                var view = Blaze.render(Template.createShopDlg, document.getElementsByTagName("body")[0]),
+                    $dlg = $(view.templateInstance().firstNode);
+
+                $dlg.modal('show');
+                $dlg.on('hidden.bs.modal', function () {
+                    Blaze.remove(view);
+                });
+            };
+
+            if (Meteor.user()) {
+                openCreateShopDlg();
+            } else {
+                openAuthDlg(function () {
+                    if (Meteor.user()) {
+                        openCreateShopDlg();
+                    }
+                });
+            }
         },
-        'click .nav a':                 function (e, template) {
+        'click .nav a':         function (e, template) {
             template.$('#mainMenu').removeClass('visible');
 
             ga('send', {
@@ -68,7 +91,7 @@
                 'eventLabel':    'Menu closed'
             });
         },
-        'click .authBtn': function(e, template){
+        'click .authBtn':       function (e, template) {
             e.preventDefault();
 
             var view = Blaze.render(Template.authDlg, document.getElementsByTagName("body")[0]),
