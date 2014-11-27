@@ -8,7 +8,7 @@
         "products": {
           "header": "Products",
           "title":  {
-            "none": "Draft product"
+            "none": "Untitled product"
           },
           "price":  {
             "none": "No price specified"
@@ -28,7 +28,7 @@
         },
         "otherProducts": {
           "title": {
-            "none": "Draft product"
+            "none": "Untitled product"
           },
           "price": {
             "none": "No price specified"
@@ -103,7 +103,7 @@
             "title": "Add new product"
           },
           "title":  {
-            "none": "Draft product"
+            "none": "Untitled product"
           },
           "price":  {
             "none": "No price specified"
@@ -273,7 +273,7 @@
       },
       "shop":          {
         "title": {
-          "none": "Draft product"
+          "none": "Untitled shop"
         }
       }
     },

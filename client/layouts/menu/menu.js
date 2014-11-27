@@ -49,23 +49,14 @@
         },
         'click .createShopBtn':         function (e) {
             e.preventDefault();
-            if (Meteor.user()) {
-                Router.go(
-                    'shops.edit',
-                    {
-                        _id: Shops.insert({
-                            managers: [
-                                {
-                                    userId: Meteor.userId(),
-                                    role:   'owner'
-                                }
-                            ]
-                        })
-                    }
-                );
-            } else {
 
-            }
+            var view = Blaze.render(Template.createShopDlg, document.getElementsByTagName("body")[0]),
+                $dlg = $(view.templateInstance().firstNode);
+
+            $dlg.modal('show');
+            $dlg.on('hidden.bs.modal', function (e) {
+                Blaze.remove(view);
+            });
         },
         'click .nav a':                 function (e, template) {
             template.$('#mainMenu').removeClass('visible');
