@@ -34,7 +34,7 @@ Router.route('/policy', function () {
 
 Router.route('/profile', function () {
     this.layout('mainLayout');
-    this.render('profile');
+    this.wait(Meteor.subscribe('userData'));
 
     ga('send', {
         hitType:  'pageview',
@@ -42,6 +42,12 @@ Router.route('/profile', function () {
         page:     Router.path('profile'),
         title:    'Profile'
     });
+
+    if (this.ready()) {
+        this.render('profile');
+    } else {
+        this.render('loading');
+    }
 }, {
     name: 'profile'
 });
