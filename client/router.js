@@ -292,7 +292,7 @@ Router.route('/admin/users', function () {
     this.wait(Meteor.subscribe('allUsersData'));
 
     if (this.ready()) {
-        console.log(Meteor.users.find().fetch());
+        console.log(Meteor.users.find({}, {sort: {createdAt: -1}}).fetch());
 
         this.render('adminUsers', {
             data: {
