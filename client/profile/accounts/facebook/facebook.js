@@ -4,13 +4,16 @@
         'click .attachBtn': function(e, template){
             e.preventDefault();
 
-            Meteor.loginWithFacebook(
+            Facebook.requestCredential(
                 {
                     requestPermissions: ['email'],
                     loginStyle:         'popup'
                 },
-                function (err) {
-                    console.log(arguments);
+                function(token){
+                    var secret = OAuth._retrieveCredentialSecret(token);
+                    Meteor.call('userAddOauthCredentials', token, secret, Meteor.userId(), 'facebook', function(err, resp){
+                        console.log(arguments);
+                    })
                 }
             );
 

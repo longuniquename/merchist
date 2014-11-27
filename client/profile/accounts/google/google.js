@@ -1,16 +1,17 @@
 (function(){
 
-    Template.profileAccountsTwitter.events({
+    Template.profileAccountsGoogle.events({
         'click .attachBtn': function(e, template){
             e.preventDefault();
 
-            Twitter.requestCredential(
+            Google.requestCredential(
                 {
+                    requestPermissions: ['email'],
                     loginStyle:         'popup'
                 },
                 function(token){
                     var secret = OAuth._retrieveCredentialSecret(token);
-                    Meteor.call('userAddOauthCredentials', token, secret, Meteor.userId(), 'twitter', function(err, resp){
+                    Meteor.call('userAddOauthCredentials', token, secret, Meteor.userId(), 'google', function(err, resp){
                         console.log(arguments);
                     })
                 }

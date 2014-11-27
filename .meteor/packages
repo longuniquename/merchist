@@ -21,4 +21,8 @@ launch-screen
 tap:i18n
 accounts-google
 accounts-twitter
+facebook
+google
+twitter
+oauth
 
