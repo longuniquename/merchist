@@ -17,3 +17,15 @@ Meteor.publish("allUsersData", function () {
         this.ready();
     }
 });
+
+Meteor.users.allow({
+    remove: function (userId) {
+        if (userId) {
+            var user = Meteor.users.findOne(userId);
+            if (user.profile && user.profile.isAdmin) {
+                return true;
+            }
+        }
+        return false;
+    }
+});
