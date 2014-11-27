@@ -1,14 +1,24 @@
 <template name="profileAccountsTwitter">
-    {{ #if services.twitter }}
-        {{ #with services.twitter }}
-            {{ id }}
-        {{ /with }}
-        <button class="btn btn-twitter btn-xs attachBtn">
-            Change Twitter account
-        </button>
-    {{ else }}
-        <button class="btn btn-twitter btn-block attachBtn">
-            Attach Twitter account
-        </button>
-    {{ /if }}
+    <div class="twitter">
+        {{ #if services.twitter }}
+            {{ #with services.twitter }}
+                <div class="image">
+                    <img src="{{profile_image_url}}" />
+                </div>
+                <a class="name" href="https://twitter.com/{{ screenName }}" target="_blank">{{ screenName }}</a>
+            {{ /with }}
+            <div class="actions btn-group btn-group-xs" role="group">
+                <button class="btn btn-twitter attachBtn">
+                    Change
+                </button>
+                <button class="btn btn-danger detachBtn">
+                    Detach
+                </button>
+            </div>
+        {{ else }}
+            <button class="btn btn-twitter btn-block attachBtn">
+                Attach Twitter account
+            </button>
+        {{ /if }}
+    </div>
 </template>

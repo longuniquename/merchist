@@ -1,14 +1,24 @@
 <template name="profileAccountsGoogle">
-    {{ #if services.google }}
-        {{ #with services.google }}
-            {{ id }}
-        {{ /with }}
-        <button class="btn btn-google btn-xs attachBtn">
-            Change Google account
-        </button>
-    {{ else }}
-        <button class="btn btn-google btn-block attachBtn">
-            Attach Google account
-        </button>
-    {{ /if }}
+    <div class="google">
+        {{ #if services.google }}
+            {{ #with services.google }}
+                <div class="image">
+                    <img src="{{picture}}" />
+                </div>
+                <a class="name" href="https://plus.google.com/{{ id }}" target="_blank">{{ name }}</a>
+            {{ /with }}
+            <div class="actions btn-group btn-group-xs" role="group">
+                <button class="btn btn-google attachBtn">
+                    Change
+                </button>
+                <button class="btn btn-danger detachBtn">
+                    Detach
+                </button>
+            </div>
+        {{ else }}
+            <button class="btn btn-google btn-block attachBtn">
+                Attach Google account
+            </button>
+        {{ /if }}
+    </div>
 </template>

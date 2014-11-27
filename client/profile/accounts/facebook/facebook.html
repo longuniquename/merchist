@@ -1,14 +1,24 @@
 <template name="profileAccountsFacebook">
-    {{ #if services.facebook }}
-        {{ #with services.facebook }}
-            {{ id }}
-        {{ /with }}
-        <button class="btn btn-facebook btn-xs attachBtn">
-            Change Facebook account
-        </button>
-    {{ else }}
-        <button class="btn btn-facebook btn-block attachBtn">
-            Attach Facebook account
-        </button>
-    {{ /if }}
+    <div class="facebook">
+        {{ #if services.facebook }}
+            {{ #with services.facebook }}
+                <div class="image">
+                    <img src="http://graph.facebook.com/{{ id }}/picture?type=large" />
+                </div>
+                <a class="name" href="{{ link }}" target="_blank">{{ name }}</a>
+            {{ /with }}
+            <div class="actions btn-group btn-group-xs" role="group">
+                <button class="btn btn-facebook attachBtn">
+                    Change
+                </button>
+                <button class="btn btn-danger detachBtn">
+                    Detach
+                </button>
+            </div>
+        {{ else }}
+            <button class="btn btn-facebook btn-block attachBtn">
+                Attach Facebook account
+            </button>
+        {{ /if }}
+    </div>
 </template>
