@@ -1,5 +1,14 @@
 <template name="profileAccountsTwitter">
-    <button class="btn btn-twitter btn-block attachBtn">
-        Attach Twitter account
-    </button>
+    {{ #if services.twitter }}
+        {{ #with services.twitter }}
+            {{ id }}
+        {{ /with }}
+        <button class="btn btn-twitter btn-xs attachBtn">
+            Change Twitter account
+        </button>
+    {{ else }}
+        <button class="btn btn-twitter btn-block attachBtn">
+            Attach Twitter account
+        </button>
+    {{ /if }}
 </template>

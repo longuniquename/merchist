@@ -2,9 +2,11 @@
     <div class="accounts">
         <div class="container">
             <h2 class="page-header">Social accounts</h2>
+            {{ #with currentUser }}
             {{> profileAccountsFacebook}}
             {{> profileAccountsGoogle}}
             {{> profileAccountsTwitter}}
+            {{ /with }}
         </div>
     </div>
 </template>
