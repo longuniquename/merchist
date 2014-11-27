@@ -7,13 +7,15 @@
             </button>
         </legend>
         {{ #each emails }}
-            {{address}}
-            {{ #if verified}}
-                <span class="label label-success">Verified</span>
-            {{ else }}
-                <button class="verifyBtn btn btn-primary btn-xs">Verify</button>
-            {{ /if }}
-            <button class="deleteBtn btn btn-danger btn-xs">Detach</button>
+            <div class="email">
+                {{address}}
+                <div class="actions btn-group btn-group-xs pull-right" role="group">
+                    {{ #if not verified}}
+                        <button class="verifyBtn btn btn-primary">Verify</button>
+                    {{ /if }}
+                    <button class="deleteBtn btn btn-danger">Detach</button>
+                </div>
+            </div>
         {{ /each }}
     </div>
 </template>

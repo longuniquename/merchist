@@ -52,4 +52,8 @@
         return Meteor.status().status === 'offline';
     });
 
+    Template.registerHelper('not', function(value){
+        return !value;
+    });
+
 })();
