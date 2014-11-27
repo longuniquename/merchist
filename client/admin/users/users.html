@@ -13,6 +13,12 @@
                         <th>
                             Profile
                         </th>
+                        <th>
+                            Services
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +37,33 @@
                                 {{ firstName }}
                                 {{ lastName }}
                             {{ /with }}
+                        </td>
+                        <td>
+                            {{ #with services }}
+                                {{ #if facebook }}
+                                    <div>
+                                        <abbr title="Facebook">F:</abbr>
+                                        <a href="{{ facebook.link }}" target="_blank">{{ facebook.name }}</a>
+                                    </div>
+                                {{ /if }}
+                                {{ #if google }}
+                                    <div>
+                                        <abbr title="Google">G:</abbr>
+                                        <a href="https://plus.google.com/{{ google.id }}" target="_blank">{{ google.name }}</a>
+                                    </div>
+                                {{ /if }}
+                                {{ #if twitter }}
+                                    <div>
+                                        <abbr title="Twitter">T:</abbr>
+                                        <a href="https://twitter.com/{{ twitter.screenName }}" target="_blank">{{ twitter.screenName }}</a>
+                                    </div>
+                                {{ /if }}
+                            {{ /with }}
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-danger removeBtn">
+                                Remove
+                            </button>
                         </td>
                     </tr>
                 {{ /each }}
