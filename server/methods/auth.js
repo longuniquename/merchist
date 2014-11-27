@@ -1,7 +1,7 @@
 (function () {
 
     Meteor.methods({
-        userAddOauthCredentials: function (token, secret, userId, service) {
+        userAddOauthCredentials:    function (token, secret, userId, service) {
             var data;
             switch (service) {
                 case 'facebook':
@@ -37,6 +37,22 @@
                 updateSelector['services.' + service] = '';
 
                 Meteor.users.update(this.userId, {$unset: updateSelector});
+
+                return true;
+            }
+
+            return false;
+        },
+        userAddEmailAddress:        function (email) {
+            if (Meteor.users.findOne(this.userId)) {
+
+                if (Meteor.users.findOne({'emails.address': email})) {
+                    throw new Meteor.Error(500, "This email has already been assigned to another user.");
+                }
+
+                Meteor.users.update(this.userId, {$push: {emails: {address: email, verified: false}}});
+
+                Accounts.sendVerificationEmail(this.userId, email);
 
                 return true;
             }
