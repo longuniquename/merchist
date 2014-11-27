@@ -260,7 +260,10 @@
         "text": "Marketplace"
       },
       "orders":      {
-        "text": "Orders"
+        "text": "My orders"
+      },
+      "profile": {
+        "text": "My profile"
       }
     },
     "management": {
@@ -284,9 +287,6 @@
       }
     },
     "profile":    {
-      "profileBtn": {
-        "text": "Profile"
-      },
       "logoutBtn":  {
         "text": "Sign out"
       }

@@ -77,16 +77,6 @@
                 'eventLabel':    'Menu closed'
             });
         },
-        'click .profile .actions .btn': function (e, template) {
-            template.$('#mainMenu').removeClass('visible');
-
-            ga('send', {
-                'hitType':       'event',
-                'eventCategory': 'menu',
-                'eventAction':   'close',
-                'eventLabel':    'Menu closed'
-            });
-        },
         'click .authBtn': function(e, template){
             e.preventDefault();
 

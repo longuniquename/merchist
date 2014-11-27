@@ -31,6 +31,13 @@
                         </a>
                     </li>
                     {{ /if }}
+                    {{ #if currentUser }}
+                    <li>
+                        <a href="{{pathFor route='profile'}}">
+                            {{_ "menu.mainLinks.profile.text"}}
+                        </a>
+                    </li>
+                    {{ /if }}
                 </ul>
                 <div class="divider">
                     <h6>
@@ -78,7 +85,6 @@
                         </a>
                     </li>
                 </ul>
-                {{> loginButtons}}
             </div>
 
             {{ #if currentUser }}
@@ -93,9 +99,6 @@
                             {{ profile.lastName }}
                         </div>
                         <div class="actions">
-                            <a class="btn btn-inverted btn-xs profileBtn" href="{{pathFor route='profile'}}">
-                                {{_ "menu.profile.profileBtn.text"}}
-                            </a>
                             <button class="btn btn-inverted btn-xs logoutBtn">
                                 {{_ "menu.profile.logoutBtn.text"}}
                             </button>
