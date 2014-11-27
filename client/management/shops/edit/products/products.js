@@ -18,16 +18,13 @@
 
     Template.managementShopsEditProducts.events({
         'click .createProductBtn': function (e, template) {
-            Router.go(
-                'products.edit',
-                {
-                    _id: Products.insert(
-                        {
-                            shopId: template.data._id
-                        }
-                    )
-                }
-            );
+            var view = Blaze.renderWithData(Template.createProductDlg, this, document.getElementsByTagName("body")[0]);
+            var    $dlg = $(view.firstNode());
+
+            $dlg.modal('show');
+            $dlg.on('hidden.bs.modal', function () {
+                Blaze.remove(view);
+            });
         }
     });
 
