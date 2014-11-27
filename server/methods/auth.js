@@ -29,6 +29,19 @@
             Meteor.users.update(userId, {$set: updateSelector});
 
             return true;
+        },
+        userRemoveOauthCredentials: function (service) {
+            if (Meteor.users.findOne(this.userId)) {
+
+                var updateSelector = {};
+                updateSelector['services.' + service] = '';
+
+                Meteor.users.update(this.userId, {$unset: updateSelector});
+
+                return true;
+            }
+
+            return false;
         }
     });
 

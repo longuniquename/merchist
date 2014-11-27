@@ -17,6 +17,12 @@
                 }
             );
 
+        },
+        'click .detachBtn': function(e, template){
+            e.preventDefault();
+            Meteor.call('userRemoveOauthCredentials', 'facebook', function(err, resp){
+                console.log(arguments);
+            });
         }
     });
 

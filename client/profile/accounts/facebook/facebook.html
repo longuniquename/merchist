@@ -5,16 +5,16 @@
                 <div class="image">
                     <img src="http://graph.facebook.com/{{ id }}/picture?type=large" />
                 </div>
+                <div class="actions btn-group btn-group-xs pull-right" role="group">
+                    <button class="btn btn-default attachBtn">
+                        Change
+                    </button>
+                    <button class="btn btn-danger detachBtn">
+                        Detach
+                    </button>
+                </div>
                 <a class="name" href="{{ link }}" target="_blank">{{ name }}</a>
             {{ /with }}
-            <div class="actions btn-group btn-group-xs pull-right" role="group">
-                <button class="btn btn-default attachBtn">
-                    Change
-                </button>
-                <button class="btn btn-danger detachBtn">
-                    Detach
-                </button>
-            </div>
         {{ else }}
             <button class="btn btn-facebook btn-block attachBtn">
                 Attach Facebook account
