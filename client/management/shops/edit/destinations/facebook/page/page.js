@@ -15,7 +15,7 @@
     var checkManagePagesPermission = function () {
         return new Promise(function (resolve, reject) {
             FB.api('/me/permissions', function (response) {
-                var permission = _.find(response.data, function(permission){
+                var permission = _.find(response.data, function (permission) {
                     if (permission.permission === 'manage_pages') {
                         return true;
                     }
@@ -31,7 +31,9 @@
     var getPages = function () {
         return new Promise(function (resolve, reject) {
             FB.api('/me/accounts', {limit: 100}, function (response) {
-                resolve(response.data);
+                resolve(_.filter(response.data, function (page) {
+                    return !Shops.findOne({'platforms.facebookPages.id': page.id});
+                }));
             });
         });
     };
@@ -42,20 +44,22 @@
             var $btn = $(e.currentTarget).button('loading');
 
             getLoginStatus()
-                .catch(function(){
+                .catch(function () {
                     alert('not authorized');
                 })
                 .then(function () {
                     return checkManagePagesPermission();
                 })
-                .then(function(){
+                .then(function () {
                     return getPages();
                 })
-                .then(function(pages){
-                    console.log(pages);
+                .then(function (pages) {
                     $btn.button('reset');
 
-                    var view = Blaze.renderWithData(Template.attachFacebookPagesToShopDlg, {pages: pages, shop:template.data}, document.getElementsByTagName("body")[0]),
+                    var view = Blaze.renderWithData(Template.attachFacebookPagesToShopDlg, {
+                            pages: pages,
+                            shop:  template.data
+                        }, document.getElementsByTagName("body")[0]),
                         $dlg = $(view.firstNode());
 
                     $dlg.modal('show');
@@ -63,6 +67,9 @@
                         Blaze.remove(view);
                     });
                 });
+        },
+        'click .detachBtn': function (e, template) {
+            Shops.update(template.data._id, {$pull: {'platforms.facebookPages': {id: this.id}}});
         }
     });
 
