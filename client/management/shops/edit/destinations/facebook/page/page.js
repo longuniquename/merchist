@@ -2,39 +2,90 @@
 
     var getLoginStatus = function () {
         return new Promise(function (resolve, reject) {
-            FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
-                    resolve();
-                } else {
-                    reject();
-                }
-            });
+            if (Meteor.isCordova) {
+                facebookConnectPlugin.getLoginStatus(
+                    function (response) {
+                        if (response.status === 'connected') {
+                            resolve();
+                        } else {
+                            reject();
+                        }
+                    },
+                    function () {
+                        reject();
+                    }
+                );
+            } else {
+                FB.getLoginStatus(function (response) {
+                    if (response.status === 'connected') {
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                });
+            }
         });
     };
 
     var checkManagePagesPermission = function () {
         return new Promise(function (resolve, reject) {
-            FB.api('/me/permissions', function (response) {
-                var permission = _.find(response.data, function (permission) {
-                    if (permission.permission === 'manage_pages') {
-                        return true;
+            if (Meteor.isCordova) {
+                facebookConnectPlugin.api(
+                    '/me/permissions',
+                    [],
+                    function (response) {
+                        var permission = _.find(response.data, function (permission) {
+                            if (permission.permission === 'manage_pages') {
+                                return true;
+                            }
+                        });
+                        if (permission && permission.status === 'granted') {
+                            resolve();
+                        }
+                        reject();
+                    },
+                    function () {
+                        reject();
                     }
+                );
+            } else {
+                FB.api('/me/permissions', function (response) {
+                    var permission = _.find(response.data, function (permission) {
+                        if (permission.permission === 'manage_pages') {
+                            return true;
+                        }
+                    });
+                    if (permission && permission.status === 'granted') {
+                        resolve();
+                    }
+                    reject();
                 });
-                if (permission && permission.status === 'granted') {
-                    resolve();
-                }
-                reject();
-            });
+            }
         });
     };
 
     var getPages = function () {
         return new Promise(function (resolve, reject) {
-            FB.api('/me/accounts', {limit: 100}, function (response) {
-                resolve(_.filter(response.data, function (page) {
-                    return !Shops.findOne({'platforms.facebookPages.id': page.id});
-                }));
-            });
+            if (Meteor.isCordova) {
+                facebookConnectPlugin.api(
+                    '/me/accounts?limit=100',
+                    ['manage_pages'],
+                    function (response) {
+                        resolve(_.filter(response.data, function (page) {
+                            return !Shops.findOne({'platforms.facebookPages.id': page.id});
+                        }));
+                    },
+                    function () {
+                        reject();
+                    }
+                );
+            } else {
+                FB.api('/me/accounts', {limit: 100}, function (response) {
+                    resolve(_.filter(response.data, function (page) {
+                        return !Shops.findOne({'platforms.facebookPages.id': page.id});
+                    }));
+                });
+            }
         });
     };
 

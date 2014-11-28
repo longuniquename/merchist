@@ -1,11 +1,11 @@
 App.info({
     id:          'com.merchist.client',
-    version:     '0.0.5',
+    version:     '0.0.6',
     name:        'Merchist',
     description: 'Sell socially!',
-    author:      'Mercher Inc.',
-    email:       'contact@merchist.com',
-    website:     'http://merchist.com'
+    author:      'Mercher, Inc.',
+    email:       'contact@mercher.net',
+    website:     'http://merchist.meteor.com/'
 });
 
 App.icons({
@@ -28,3 +28,9 @@ App.launchScreens({
 
 App.setPreference('Orientation', 'portrait');
 App.setPreference('BackgroundColor', '0xFF3DA3A7');
+
+App.configurePlugin('com.phonegap.plugins.facebookconnect', {
+    APP_NAME: 'Merchist',
+    APP_ID:   '301234113401207',
+    API_KEY:  '992c0edf51ed0ba7b6b0b057c76e255b'
+});
