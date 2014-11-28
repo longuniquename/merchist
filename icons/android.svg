@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" class="icon-logo" width="48px" height="48px">
+
+    <g fill="#3DA3A7" stroke="#3DA3A7" stroke-width="4" transform="translate(4, 4) scale(1.25)">
+        <polygon points="0,6 16,14 32,6 32,16.0623059 16,24.0623059 0,16.0623059"></polygon>
+    </g>
+    <g fill="white" stroke="none" transform="translate(4, 4) scale(1.25)">
+        <polygon points="0,6 0,10.47213595 4,12.47213595 4,8 "></polygon>
+        <polygon points="5,8.5 5,12.97213595 9,14.97213595 9,10.5 "></polygon>
+        <polygon points="10.11803399,11.05901699 16,14 32,6 32,10.47213595 16,18.47213595 10.11803399,15.53115295 "></polygon>
+        <polygon points="0,11.59016994 0,16.0623059 4,18.0623059 4,13.59016994 "></polygon>
+        <polygon points="5,14.09016994 5,18.5623059 9,20.5623059 9,16.09016994 "></polygon>
+        <polygon points="10.11803399,16.64918694 16,19.59016994 32,11.59016994 32,16.0623059 16,24.0623059 10.11803399,21.12132289 "></polygon>
+    </g>
+</svg>
