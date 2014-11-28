@@ -57,12 +57,17 @@
         return !value;
     });
 
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId:   '301234113401207',
-            status:  true,
-            version: 'v2.2'
-        });
-    };
+    if (Meteor.isCordova) {
+        facebookConnectPlugin.browserInit('301234113401207', 'v2.2');
+    } else {
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId:   '301234113401207',
+                status:  true,
+                version: 'v2.2'
+            });
+        };
+    }
+
 
 })();
