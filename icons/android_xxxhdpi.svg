@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" class="icon-logo" width="128px" height="128px">
+    <g fill="#3DA3A7" stroke="none">
+        <polygon points="0,24 0,41.88854382 16,49.88854382 16,32 "></polygon>
+        <polygon points="20,34 20,51.88854382 36,59.88854382 36,42 "></polygon>
+        <polygon points="40.47213595,44.23606798 64,56 128,24 128,41.88854382 64,73.88854382 40.47213595,62.1246118 "></polygon>
+        <polygon points="0,46.36067977 0,64.24922359 16,72.24922359 16,54.36067977 "></polygon>
+        <polygon points="20,56.36067977 20,74.24922359 36,82.24922359 36,64.36067977 "></polygon>
+        <polygon points="40.47213595,66.59674775 64,78.36067977 128,46.36067977 128,64.24922359 64,96.24922359 40.47213595,84.48529157 "></polygon>
+    </g>
+</svg>
