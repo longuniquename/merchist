@@ -1,6 +1,6 @@
 App.info({
     id:          'com.merchist.client',
-    version:     '0.0.7',
+    version:     '0.0.8',
     name:        'Merchist',
     description: 'Sell socially!',
     author:      'Mercher, Inc.',
@@ -28,6 +28,8 @@ App.launchScreens({
 
 App.setPreference('Orientation', 'portrait');
 App.setPreference('BackgroundColor', '0xFF3DA3A7');
+
+App.setPreference('SplashScreen', 'screen_patch');
 
 App.configurePlugin('com.phonegap.plugins.facebookconnect', {
     APP_NAME: 'Merchist',
