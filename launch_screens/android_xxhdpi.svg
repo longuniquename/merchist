@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" class="icon-logo" width="960px" height="960px">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" class="icon-logo" width="480px" height="480px">
     <g fill="white" stroke="none">
-        <polygon points="0,180 0,314.1640786 120,374.1640786 120,240 "></polygon>
-        <polygon points="150,255 150,389.1640786 270,449.1640786 270,315 "></polygon>
-        <polygon points="303.5410197,331.7705098 480,420 960,180 960,314.1640786 480,554.1640786 303.5410197,465.9345885 "></polygon>
-        <polygon points="0,347.7050983 0,481.869177 120,541.869177 120,407.7050983 "></polygon>
-        <polygon points="150,422.7050983 150,556.869177 270,616.869177 270,482.7050983 "></polygon>
-        <polygon points="303.5410197,499.4756081 480,587.7050983 960,347.7050983 960,481.869177 480,721.869177 303.5410197,633.6396868 "></polygon>
+        <polygon points="0,90 0,157.0820393 60,187.0820393 60,120 "></polygon><polygon points="75,127.5 75,194.5820393 135,224.5820393 135,157.5 "></polygon><polygon points="151.7705098,165.8852549 240,210 480,90 480,157.0820393 240,277.0820393 151.7705098,232.9672942 "></polygon><polygon points="0,173.8525492 0,240.9345885 60,270.9345885 60,203.8525492 "></polygon><polygon points="75,211.3525492 75,278.4345885 135,308.4345885 135,241.3525492 "></polygon><polygon points="151.7705098,249.7378041 240,293.8525492 480,173.8525492 480,240.9345885 240,360.9345885 151.7705098,316.8198434 "></polygon>
     </g>
 </svg>
