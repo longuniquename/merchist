@@ -1,6 +1,6 @@
 App.info({
     id:          'com.merchist.client',
-    version:     '0.0.8',
+    version:     '0.0.9',
     name:        'Merchist',
     description: 'Sell socially!',
     author:      'Mercher, Inc.',
