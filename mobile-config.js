@@ -33,6 +33,5 @@ App.setPreference('SplashScreen', 'screen_patch');
 
 App.configurePlugin('com.phonegap.plugins.facebookconnect', {
     APP_NAME: 'Merchist',
-    APP_ID:   '301234113401207',
-    API_KEY:  '992c0edf51ed0ba7b6b0b057c76e255b'
+    APP_ID:   '301234113401207'
 });
