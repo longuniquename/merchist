@@ -20,38 +20,21 @@
             e.preventDefault();
             var $dlg = $(template.firstNode);
 
-            if (Meteor.isCordova) {
-                facebookConnectPlugin.login(
-                    ['public_profile', 'email'],
-                    function(response){
-                        alert(JSON.stringify(response));
-                        facebookConnectPlugin.getAccessToken(function(token) {
-                            alert("Token: " + token);
-                        }, function(err) {
-                            alert("Could not get access token: " + err);
-                        });
-                    },
-                    function(err){
-                        alert(JSON.stringify(err));
+            Meteor.loginWithFacebook(
+                {
+                    requestPermissions: ['email'],
+                    loginStyle:         'popup'
+                },
+                function (err) {
+                    if (!err) {
+                        $dlg.modal('hide');
+                    } else {
+                        console.log(err);
                     }
-                );
-            } else {
-                Meteor.loginWithFacebook(
-                    {
-                        requestPermissions: ['email'],
-                        loginStyle:         'popup'
-                    },
-                    function (err) {
-                        if (!err) {
-                            $dlg.modal('hide');
-                        } else {
-                            console.log(err);
-                        }
-                    }
-                );
-            }
+                }
+            );
         },
-        'click .googleBtn': function (e, template) {
+        'click .googleBtn':   function (e, template) {
             e.preventDefault();
             var $dlg = $(template.firstNode);
 
@@ -69,13 +52,13 @@
                 }
             );
         },
-        'click .twitterBtn': function (e, template) {
+        'click .twitterBtn':  function (e, template) {
             e.preventDefault();
             var $dlg = $(template.firstNode);
 
             Meteor.loginWithTwitter(
                 {
-                    loginStyle:         'popup'
+                    loginStyle: 'popup'
                 },
                 function (err) {
                     if (!err) {

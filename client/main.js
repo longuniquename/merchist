@@ -57,9 +57,7 @@
         return !value;
     });
 
-    if (Meteor.isCordova) {
-        facebookConnectPlugin.browserInit('301234113401207', 'v2.2');
-    } else {
+    if (!Meteor.isCordova) {
         window.fbAsyncInit = function () {
             FB.init({
                 appId:   '301234113401207',
