@@ -85,6 +85,16 @@ Router.route('/marketplace/products/:_id', function () {
         data: {
             back: function () {
                 return Router.path('marketplace');
+            },
+            title: function(){
+                var product = Products.findOne(productId);
+                if (product) {
+                    var title = product.title;
+                    if (product.subtitle) {
+                        title += ' / ' + product.subtitle;
+                    }
+                    return title;
+                }
             }
         }
     });

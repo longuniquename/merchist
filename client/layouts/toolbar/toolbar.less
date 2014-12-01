@@ -29,7 +29,20 @@
     }
   }
 
+  .title {
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: @font-size-large;
+    text-transform: uppercase;
+    transition: color .25s;
+  }
+
   &.transparent {
     background: fade(@brand-primary, 0);
+    .title {
+      color: fadeout(white, 100%);
+    }
   }
 }
