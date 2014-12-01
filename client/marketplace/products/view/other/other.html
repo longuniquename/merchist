@@ -1,53 +1,47 @@
 <template name="marketplaceProductsViewOther">
     <div class="other">
-        <div class="container">
-            {{ #with shop }}
+        {{ #with shop }}
 
-            <a href="{{pathFor route='shops.view' data=this }}">
-                {{ #if logo }}
-                    <div class="logo">
-                        <img src="{{ abs logo.url }}" />
-                    </div>
-                {{ /if }}
-                <h2>
-                    {{title}}
-                    <small>
-                        {{subtitle}}
-                    </small>
-                </h2>
-            </a>
+        <a href="{{pathFor route='shops.view' data=this }}" class="shop">
+            {{ #if logo }}
+                <div class="logo">
+                    <img src="{{ abs logo.url }}" />
+                </div>
+            {{ /if }}
+            <h2 class="title">{{title}}</h2>
+            {{ #if subtitle }}
+                <span class="subtitle">{{subtitle}}</span>
+            {{ /if }}
+        </a>
 
-            <div class="row">
-                {{ #each products }}
-                    <div class="col-xs-6 col-sm-4">
-                        <a class="product-card" href="{{pathFor route='products.view' data=this }}">
-                            {{ #if image }}
-                                <img src="{{ abs image.url }}" />
-                            {{ /if }}
-                            <div class="info">
-                                <h3>
-                                    {{ #if title }}
-                                        {{title}}
-                                    {{ else }}
-                                        <i>{{_ "marketplace.products.view.otherProducts.title.none"}}</i>
-                                    {{ /if }}
-                                </h3>
-                                <span class="price">
-                                    {{ #if price }}
-                                        {{currency price}}
-                                    {{ else }}
-                                        <i>{{_ "marketplace.products.view.otherProducts.price.none"}}</i>
-                                    {{ /if }}
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                {{ /each }}
-            </div>
-
-            {{ /with }}
-
-
+        <div class="row">
+            {{ #each products }}
+                <div class="col-xs-6 col-sm-4">
+                    <a class="product-card" href="{{pathFor route='products.view' data=this }}">
+                        {{ #if image }}
+                            <img src="{{ abs image.url }}" />
+                        {{ /if }}
+                        <div class="info">
+                            <h3>
+                                {{ #if title }}
+                                    {{title}}
+                                {{ else }}
+                                    <i>{{_ "marketplace.products.view.otherProducts.title.none"}}</i>
+                                {{ /if }}
+                            </h3>
+                            <span class="price">
+                                {{ #if price }}
+                                    {{currency price}}
+                                {{ else }}
+                                    <i>{{_ "marketplace.products.view.otherProducts.price.none"}}</i>
+                                {{ /if }}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            {{ /each }}
         </div>
+
+        {{ /with }}
     </div>
 </template>
