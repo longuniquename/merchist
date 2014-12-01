@@ -8,22 +8,19 @@
             height = $images.height(),
             $mainToolbar = $('#mainToolbar');
 
-        $mainToolbar.css({
-            "background-color": one.color(initialColor).alpha(Math.min(Math.max(Math.floor(top/(height-48) * 20) / 20, 0), 1)).cssa()
-        });
+        if (top < height-48) {
+            $mainToolbar.addClass('transparent');
+        } else {
+            $mainToolbar.removeClass('transparent');
+        }
     };
 
     var resizeImagesBlock = function () {
-        var $images = $('.images'),
-            $info = $('.info');
+        var $images = $('.images');
 
         $images.css({
             height: $images.width()
         });
-
-        $info.css({
-            top: $images.width()
-        })
     };
 
     Template.marketplaceProductsViewImages.rendered = function () {

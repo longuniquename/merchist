@@ -8,6 +8,7 @@
   top: 0;
   width: 100%;
   z-index: 100;
+  transition: background-color .25s;
 
   .menuBtn, .backBtn, .cartBtn {
     background: transparent;
@@ -26,5 +27,9 @@
         stroke: white;
       }
     }
+  }
+
+  &.transparent {
+    background: fade(@brand-primary, 0);
   }
 }
