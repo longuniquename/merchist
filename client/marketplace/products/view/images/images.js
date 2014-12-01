@@ -31,14 +31,10 @@
     };
 
     Template.marketplaceProductsViewImages.destroyed = function(){
-        var $mainToolbar = $('#mainToolbar');
+        $('#mainToolbar').removeClass('transparent');
 
         $(window).unbind('resize', resizeImagesBlock);
         $(window).unbind('scroll', fadeToolbar);
-
-        $mainToolbar.css({
-            "background-color": initialColor
-        });
     };
 
     Template.marketplaceProductsViewImages.helpers({
