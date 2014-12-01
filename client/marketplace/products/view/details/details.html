@@ -1,19 +1,30 @@
 <template name="marketplaceProductsViewDetails">
     <div class="details">
-        <div class="container">
-            <h1>{{ title }}</h1>
-            <span>{{ currency price }}</span>
-            <span>{{ availability }}</span>
-            <p>{{ description }}</p>
-            {{ #if inCart }}
-                <button class="btn btn-inverted btn-block showCartBtn">
-                    In cart
-                </button>
-            {{ else }}
-                <button class="btn btn-inverted btn-block buyBtn">
-                    {{_ "marketplace.products.view.details.buyBtn.text"}}
-                </button>
+        <h1 class="title">
+            {{ title }}
+            {{ #if subtitle }}
+                <span class="subtitle">
+                / {{ subtitle }}
+                </span>
             {{ /if }}
+        </h1>
+        <div class="price-info">
+            <span class="price pull-left">{{ currency price }}</span>
+            <span class="availability pull-right">{{ availability }}</span>
         </div>
+        <div class="description">
+            {{ #each paragraphs description }}
+                <p>{{this}}</p>
+            {{ /each }}
+        </div>
+        {{ #if inCart }}
+            <button class="btn btn-white btn-block btn-lg showCartBtn">
+                In cart
+            </button>
+        {{ else }}
+            <button class="btn btn-white btn-block btn-lg buyBtn">
+                {{_ "marketplace.products.view.details.buyBtn.text"}}
+            </button>
+        {{ /if }}
     </div>
 </template>
