@@ -1,7 +1,5 @@
 (function(){
 
-    var initialColor = '#3DA3A7';
-
     var fadeToolbar = function(){
         var $images = $('.images'),
             top = $(window).scrollTop(),
