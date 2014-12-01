@@ -14,11 +14,16 @@
     };
 
     var resizeImagesBlock = function () {
-        var $images = $('.images');
+        var $images = $('.images'),
+            $info = $('.info');
 
         $images.css({
             height: $images.width()
         });
+
+        $info.css({
+            top: $images.width()
+        })
     };
 
     Template.marketplaceProductsViewImages.rendered = function () {

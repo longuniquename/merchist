@@ -267,7 +267,7 @@
       }
     },
     "management": {
-      "header":        "Management",
+      "header":        "My shops",
       "createShopBtn": {
         "text": "Create my own shop"
       },
