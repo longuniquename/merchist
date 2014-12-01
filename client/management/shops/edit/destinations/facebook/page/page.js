@@ -25,7 +25,6 @@
                 facebookConnectPlugin.login(
                     ['public_profile', 'email'],
                     function (response) {
-                        alert(JSON.stringify(response));
                         resolve(response);
                     },
                     function (err) {
@@ -62,17 +61,14 @@
         });
     };
 
-    var getPages = function (loginStatus) {
-        alert(JSON.stringify(loginStatus));
+    var getPages = function () {
         return new Promise(function (resolve, reject) {
             if (Meteor.isCordova) {
                 try {
-                    alert('starting request');
                     facebookConnectPlugin.api(
-                        loginStatus.authResponse.userId+'/accounts',
+                        'me/accounts?limit=100',
                         ['manage_pages'],
                         function (response) {
-                            alert(JSON.stringify(response));
                             resolve(_.filter(response.data, function (page) {
                                 return !Shops.findOne({'platforms.facebookPages.id': page.id});
                             }));
@@ -135,6 +131,7 @@
                     });
                 })
                 .catch(function (e) {
+                    $btn.button('reset');
                     alert(JSON.stringify(e));
                 });
         },
