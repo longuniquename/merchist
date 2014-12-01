@@ -9,10 +9,8 @@
             $mainToolbar = $('#mainToolbar');
 
         $mainToolbar.css({
-            "background-color": one.color(initialColor).alpha(top/(height-48)).cssa()
+            "background-color": one.color(initialColor).alpha(Math.min(Math.max(Math.floor(top/(height-48) * 20) / 20, 0), 1)).cssa()
         });
-
-        $('img', $images).css('top', Math.floor(top/2));
     };
 
     var resizeImagesBlock = function () {

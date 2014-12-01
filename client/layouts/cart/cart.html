@@ -13,7 +13,7 @@
                 <div class="item">
                     {{ #with product }}
                     <div class="image">
-                        <img src="{{image.url}}">
+                        <img src="{{ abs image.url }}">
                     </div>
                     {{ /with }}
                     <div class="remove pull-right">

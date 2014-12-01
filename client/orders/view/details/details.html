@@ -5,7 +5,7 @@
             {{ #with shop }}
             {{ #if logo }}
             <a href="{{pathFor route='shops.view' data=this }}" class="logo">
-                <img src="{{ logo.url }}" />
+                <img src="{{ abs logo.url }}" />
             </a>
             {{ /if }}
             {{ /with }}

@@ -26,10 +26,10 @@
             </nav>
         </nav>
         {{ #if cover }}
-        <img class="cover" src="{{ cover.url }}" />
+        <img class="cover" src="{{ abs cover.url }}" />
         {{ /if }}
         {{ #if logo }}
-        <img class="logo" src="{{ logo.url }}" />
+        <img class="logo" src="{{ abs logo.url }}" />
         {{ /if }}
     </div>
 </template>

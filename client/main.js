@@ -57,6 +57,13 @@
         return !value;
     });
 
+    Template.registerHelper('abs', function (path) {
+        if (path) {
+            return Meteor.absoluteUrl(path.replace(/^\/+/, ''));
+        }
+        return path;
+    });
+
     if (!Meteor.isCordova) {
         window.fbAsyncInit = function () {
             FB.init({
