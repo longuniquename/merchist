@@ -7,7 +7,11 @@
     });
 
     Router.route('/terms', function () {
-        this.layout('mainLayout');
+        this.layout('mainLayout', {
+            data: {
+                title: 'Terms of service'
+            }
+        });
         this.render('terms');
 
         ga('send', {
@@ -21,7 +25,11 @@
     });
 
     Router.route('/policy', function () {
-        this.layout('mainLayout');
+        this.layout('mainLayout', {
+            data: {
+                title: 'Privacy policy'
+            }
+        });
         this.render('policy');
 
         ga('send', {
@@ -35,7 +43,11 @@
     });
 
     Router.route('/profile', function () {
-        this.layout('mainLayout');
+        this.layout('mainLayout', {
+            data: {
+                title: 'Profile'
+            }
+        });
         this.wait(Meteor.subscribe('userData'));
 
         ga('send', {
@@ -55,7 +67,11 @@
     });
 
     Router.route('/marketplace', function () {
-        this.layout('mainLayout');
+        this.layout('mainLayout', {
+            data: {
+                title: 'Marketplace'
+            }
+        });
         this.wait(Meteor.subscribe('products'));
 
         ga('send', {
@@ -161,7 +177,11 @@
     });
 
     Router.route('/orders', function () {
-        this.layout('mainLayout');
+        this.layout('mainLayout', {
+            data: {
+                title: 'Orders'
+            }
+        });
         var cartId = localStorage["cartId"];
 
         this.wait(Meteor.subscribe('myOrders', cartId));
@@ -200,7 +220,8 @@
             data: {
                 back: function () {
                     return Router.path('orders');
-                }
+                },
+                title: 'Orders'
             }
         });
 
