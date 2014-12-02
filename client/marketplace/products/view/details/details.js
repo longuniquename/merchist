@@ -1,19 +1,33 @@
 (function () {
 
+    var metaKey;
+
+    Template.marketplaceProductsViewDetails.rendered = function () {
+        metaKey = Blaze.Meta.registerMeta({
+            'og:type':  'product',
+            'og:url':   Router.url('products.view', this.data),
+            'og:title': this.data.title
+        });
+    };
+
+    Template.marketplaceProductsViewDetails.destroyed = function () {
+        Blaze.Meta.unregisterMeta(metaKey);
+    };
+
     Template.marketplaceProductsViewDetails.helpers({
-        'inCart': function () {
+        'inCart':     function () {
             var cartId = localStorage["cartId"];
             return !!CartItems.findOne({cartId: cartId, productId: this._id});
         },
-        'paragraphs': function(text){
-            return _.filter(text.split("\n"), function(paragraph){
+        'paragraphs': function (text) {
+            return _.filter(text.split("\n"), function (paragraph) {
                 return !!paragraph.length;
             });
         }
     });
 
     Template.marketplaceProductsViewDetails.events({
-        'click .buyBtn': function (e, template) {
+        'click .buyBtn':      function (e, template) {
             var cartId = localStorage["cartId"];
 
             var cartItem = CartItems.findOne({cartId: cartId, productId: this._id});

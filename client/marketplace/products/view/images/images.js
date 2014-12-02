@@ -1,12 +1,14 @@
-(function(){
+(function () {
 
-    var fadeToolbar = function(){
+    var metaKey;
+
+    var fadeToolbar = function () {
         var $images = $('.images'),
             top = $(window).scrollTop(),
             height = $images.height(),
             $mainToolbar = $('#mainToolbar');
 
-        if (top < height-48) {
+        if (top < height - 48) {
             $mainToolbar.addClass('transparent');
         } else {
             $mainToolbar.removeClass('transparent');
@@ -26,17 +28,23 @@
         $(window).bind('scroll', fadeToolbar);
         resizeImagesBlock();
         fadeToolbar();
+
+        metaKey = Blaze.Meta.registerMeta({
+            'og:image': Meteor.absoluteUrl(this.data.url().replace(/^\/+/, ''))
+        });
     };
 
-    Template.marketplaceProductsViewImages.destroyed = function(){
+    Template.marketplaceProductsViewImages.destroyed = function () {
         $('#mainToolbar').removeClass('transparent');
 
         $(window).unbind('resize', resizeImagesBlock);
         $(window).unbind('scroll', fadeToolbar);
+
+        Blaze.Meta.unregisterMeta(metaKey);
     };
 
     Template.marketplaceProductsViewImages.helpers({
-        'image': function(){
+        'image': function () {
             Meteor.subscribe("image", this.imageId);
             return Images.findOne(this.imageId);
         }
