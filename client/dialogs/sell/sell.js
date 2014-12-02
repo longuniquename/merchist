@@ -38,7 +38,12 @@
                 shopId = Shops.insert(newShop);
             }
 
-            var productId = Products.insert({title: title, price: price, shopId: shopId});
+            var productId = Products.insert({
+                title: title,
+                price: price,
+                shopId: shopId,
+                isPublic: true
+            });
             Router.go('products.view', {_id: productId});
             $dlg.modal('hide');
         },
