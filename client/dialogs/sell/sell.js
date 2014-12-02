@@ -5,49 +5,60 @@
     };
 
     Template.sellDlg.helpers({
-        shops:    function () {
+        shops:       function () {
+            Session.set('currentShop', Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}}).fetch()[0]);
             return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
         },
-        hasShops: function () {
+        hasShops:    function () {
             return Shops.find({"managers.userId": Meteor.userId()}).fetch().length;
+        },
+        currentShop: function () {
+            return Session.get('currentShop');
         }
     });
 
     Template.sellDlg.events({
-        'submit form':        function (e, template) {
+        'click .setCurrentShopBtn': function (e, template) {
+            e.preventDefault();
+            Session.set('currentShop', this);
+        },
+        'submit form':              function (e, template) {
             e.preventDefault();
             var $dlg = $(template.firstNode);
 
             var title = template.$('[name="title"]').val(),
-                price = template.$('[name="price"]').val(),
-                shopId = template.$('[name="shopId"]').val();
+                price = template.$('[name="price"]').val();
 
-            if (!shopId) {
+            var shop = Session.get('currentShop');
+
+            if (!shop) {
                 var newShop = {
-                    title: 'My awesome new shop',
+                    title:    'My awesome new shop',
                     managers: [
                         {
                             userId: Meteor.userId(),
-                            role: 'owner'
+                            role:   'owner'
                         }
                     ]
                 };
                 if (Meteor.user().profile && Meteor.user().profile.firstName) {
                     newShop.title = Meteor.user().profile.firstName + '\'s shop';
                 }
-                shopId = Shops.insert(newShop);
+                shop = Shops.findOne(Shops.insert(newShop));
             }
 
+            console.log(shop);
+
             var productId = Products.insert({
-                title: title,
-                price: price,
-                shopId: shopId,
+                title:    title,
+                price:    price,
+                shopId:   shop._id,
                 isPublic: true
             });
             Router.go('products.view', {_id: productId});
             $dlg.modal('hide');
         },
-        'click .facebookBtn': function (e, template) {
+        'click .facebookBtn':       function (e, template) {
             e.preventDefault();
 
             Meteor.loginWithFacebook(
@@ -57,7 +68,7 @@
                 }
             );
         },
-        'click .googleBtn':   function (e, template) {
+        'click .googleBtn':         function (e, template) {
             e.preventDefault();
 
             Meteor.loginWithGoogle(
@@ -67,7 +78,7 @@
                 }
             );
         },
-        'click .twitterBtn':  function (e, template) {
+        'click .twitterBtn':        function (e, template) {
             e.preventDefault();
 
             Meteor.loginWithTwitter(

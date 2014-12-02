@@ -3,29 +3,36 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    {{ #if hasShops }}
+                    <div class="dropdown pull-right">
+                        <span class="text">through</span>
+                        <button class="btn btn-inverted dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            {{ #if currentShop.title }}
+                                {{currentShop.title}}
+                            {{ else }}
+                                <i>Untitled shop</i>
+                            {{ /if }}
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            {{ #each shops }}
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" class="setCurrentShopBtn">
+                                        {{ #if title }}
+                                            {{title}}
+                                        {{ else }}
+                                            <i>Untitled shop</i>
+                                        {{ /if }}
+                                    </a>
+                                </li>
+                            {{ /each }}
+                        </ul>
+                    </div>
+                    {{ /if }}
                     <h4 class="modal-title">Sell</h4>
                 </div>
                 {{ #if currentUser }}
                     <form>
                         <div class="modal-body">
-                            <div class="form-group">
-                                {{ #if hasShops }}
-                                <select class="form-control" name="shopId">
-                                    {{ #each shops }}
-                                        <option value="{{_id}}">
-                                            {{ #if title }}
-                                            {{title}}
-                                            {{ else }}
-                                            <i>Untitled shop</i>
-                                            {{ /if }}
-                                        </option>
-                                    {{ /each }}
-                                </select>
-                                <p class="help-block">
-                                    Select the shop
-                                </p>
-                                {{ /if }}
-                            </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="title" id="titleInput" placeholder="Title" required />
                                 <p class="help-block">

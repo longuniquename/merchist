@@ -23,9 +23,11 @@
             return !!CartItems.findOne({cartId: cartId, productId: this._id});
         },
         'paragraphs': function (text) {
-            return _.filter(text.split("\n"), function (paragraph) {
-                return !!paragraph.length;
-            });
+            if (text) {
+                return _.filter(text.split("\n"), function (paragraph) {
+                    return !!paragraph.length;
+                });
+            }
         }
     });
 
