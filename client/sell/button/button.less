@@ -3,10 +3,10 @@
 #sellButton {
   position: fixed;
   z-index: 100;
-  bottom: 30px;
-  right: 30px;
-  height: 48px;
-  width: 48px;
+  bottom: @grid-gutter-width;
+  right: @grid-gutter-width;
+  height: 64px;
+  width: 64px;
   border-radius: 100%;
   box-shadow: 0 1px 4px fadeout(black, 50%);
   border: 1px solid @brand-primary;
@@ -23,5 +23,6 @@
     outline: none;
     padding: 0;
     color: white;
+    font-size: @font-size-large;
   }
 }
