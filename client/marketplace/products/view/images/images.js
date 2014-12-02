@@ -30,7 +30,7 @@
         fadeToolbar();
 
         metaKey = Blaze.Meta.registerMeta({
-            'og:image': Meteor.absoluteUrl(decodeURIComponent(this.data.url()).replace(/^\/+/, ''))
+            'og:image:url': Meteor.absoluteUrl(this.data.url({download: true, auth: false, filename: 'image'}).replace(/^\/+/, ''))
         });
     };
 

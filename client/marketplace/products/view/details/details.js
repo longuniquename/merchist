@@ -4,10 +4,12 @@
 
     Template.marketplaceProductsViewDetails.rendered = function () {
         metaKey = Blaze.Meta.registerMeta({
-            'og:type':        'product',
-            'og:url':         Router.url('products.view', this.data),
-            'og:title':       this.data.title,
-            'og:description': this.data.description
+            'og:type':                'product',
+            'og:url':                 Router.url('products.view', this.data),
+            'og:title':               this.data.title,
+            'og:description':         this.data.description,
+            'product:price:amount':   this.data.price,
+            'product:price:currency': 'USD'
         });
     };
 
