@@ -5,6 +5,11 @@
                 <button class="btn btn-icon uploadBtn">
                     {{>iconUpload}}
                 </button>
+                {{ #if showPhotoButton }}
+                    <button class="btn btn-icon cameraBtn">
+                        {{>iconAdd}}
+                    </button>
+                {{ /if }}
             </div>
         </div>
 

@@ -74,7 +74,11 @@
         $imageEditor.addClass('initial');
     };
 
-    Template.imageEditor.helpers({});
+    Template.imageEditor.helpers({
+        showPhotoButton: function(){
+            return !Meteor.isCordova
+        }
+    });
 
     Template.imageEditor.events({
         'click .uploadBtn':                     function (e, template) {
@@ -111,6 +115,29 @@
                 template.setNewImage(e.target.result);
             };
             reader.readAsDataURL(e.currentTarget.files[0]);
+        },
+        'click .cameraBtn': function (e, template) {
+            e.preventDefault();
+            if (Meteor.isCordova) {
+                navigator.camera.getPicture(
+                    function(imageData){
+                        template.setNewImage("data:image/jpeg;base64," + imageData);
+                    },
+                    function(message){
+                        alert('Failed because: ' + message);
+                    },
+                    {
+                        quality:            100,
+                        sourceType:         Camera.PictureSourceType.CAMERA,
+                        destinationType:    Camera.DestinationType.DATA_URL,
+                        encodingType:       Camera.EncodingType.JPEG,
+                        cameraDirection:    Camera.Direction.BACK,
+                        mediaType:          Camera.MediaType.PICTURE,
+                        saveToPhotoAlbum:   false,
+                        correctOrientation: true
+                    }
+                );
+            }
         }
     });
 

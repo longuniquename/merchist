@@ -31,8 +31,9 @@
                     <h4 class="modal-title">Sell</h4>
                 </div>
                 {{ #if currentUser }}
-                    <form>
-                        <div class="modal-body">
+                    <div class="modal-body">
+                        {{>imageEditor}}
+                        <form id="sellForm">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="title" id="titleInput" placeholder="Title" required />
                                 <p class="help-block">
@@ -45,12 +46,12 @@
                                     Set the price for your product
                                 </p>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Publish</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" form="sellForm">Publish</button>
+                    </div>
                 {{ else }}
                     <div class="modal-body">
                         You have to sign in to sell with Merchist!
