@@ -18,6 +18,18 @@
             </div>
         </div>
 
+        <div class="edit-buttons">
+            <div class="buttons-holder">
+                <div class="buttons">
+                    <div class="btn-group">
+                        <button class="btn btn-icon saveBtn">
+                            {{>iconOk}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="loader-holder">
             <svg class="loader" height="20px" width="70px" viewBox="0 0 70 20">
                 <circle r="4" cy="10" cx="10" ></circle>
@@ -28,6 +40,6 @@
 
         <canvas></canvas>
 
-        <img src="" />
+        <img src="{{image.url}}" />
     </div>
 </template>

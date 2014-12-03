@@ -4,6 +4,7 @@
   border: 1px solid @brand-primary;
   padding: 1px;
   width: 100%;
+  position: relative;
 
   img, canvas {
     display: none;
@@ -11,10 +12,14 @@
     width: 100%;
   }
 
-  .upload-buttons {
+  .upload-buttons, .edit-buttons {
     height: 100%;
     width: 100%;
     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
 
     .buttons-holder {
       position: relative;
@@ -103,6 +108,9 @@
   }
 
   &.editing {
+    .edit-buttons {
+      display: block;
+    }
     canvas {
       display: block;
     }

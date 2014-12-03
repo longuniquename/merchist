@@ -1,5 +1,8 @@
 (function () {
 
+    var imageId,
+        imageIdDep = new Tracker.Dependency;
+
     Template.imageEditor.created = function () {
 
         this.setNewImage = function (dataURL) {
@@ -56,7 +59,44 @@
                     dstSize
                 );
             }
+        };
 
+        this.saveImage = function () {
+            var template = this,
+                $imageEditor = $(this.firstNode);
+
+            var canvas = document.createElement('canvas'),
+                ctx = canvas.getContext('2d');
+
+            canvas.width = template.imageData.size;
+            canvas.height = template.imageData.size;
+
+            ctx.drawImage(
+                template.imageData.image,
+                template.imageData.left,
+                template.imageData.top,
+                template.imageData.size,
+                template.imageData.size,
+                0,
+                0,
+                template.imageData.size,
+                template.imageData.size
+            );
+
+            Images.insert(canvas.toDataURL('image/png'), function (err, fileObj) {
+                if (!err) {
+
+                    $imageEditor.removeClass('initial loading editing');
+                    $imageEditor.addClass('preview');
+
+                    if (!template.data) {
+                        template.data = {}
+                    }
+
+                    imageId = fileObj._id;
+                    imageIdDep.changed();
+                }
+            });
         }
     };
 
@@ -77,6 +117,13 @@
     Template.imageEditor.helpers({
         showCameraButton: function(){
             return Meteor.isCordova
+        },
+        image: function(){
+            imageIdDep.depend();
+            if (imageId) {
+                Meteor.subscribe("image", imageId);
+                return Images.findOne(imageId);
+            }
         }
     });
 
@@ -138,6 +185,10 @@
                     }
                 );
             }
+        },
+        'click .saveBtn': function (e, template) {
+            e.preventDefault();
+            template.saveImage();
         }
     });
 
