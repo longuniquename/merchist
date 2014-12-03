@@ -65,6 +65,9 @@
             var template = this,
                 $imageEditor = $(this.firstNode);
 
+            $imageEditor.removeClass('initial editing preview');
+            $imageEditor.addClass('loading');
+
             var canvas = document.createElement('canvas'),
                 ctx = canvas.getContext('2d');
 
@@ -85,16 +88,15 @@
 
             Images.insert(canvas.toDataURL('image/png'), function (err, fileObj) {
                 if (!err) {
-
-                    $imageEditor.removeClass('initial loading editing');
-                    $imageEditor.addClass('preview');
-
                     if (!template.data) {
                         template.data = {}
                     }
 
                     imageId = fileObj._id;
                     imageIdDep.changed();
+
+                    $imageEditor.removeClass('initial loading editing');
+                    $imageEditor.addClass('preview');
                 }
             });
         }
