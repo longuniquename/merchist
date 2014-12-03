@@ -82,14 +82,14 @@ Shops = new Mongo.Collection('shops');
                     if (this.isInsert) {
                         return [{
                             date:   new Date,
-                            doc:    updatedFields,
+                            fields:    updatedFields,
                             userId: Meteor.userId()
                         }];
                     } else {
                         return {
                             $push: {
                                 date:   new Date,
-                                doc:    updatedFields,
+                                fields:    updatedFields,
                                 userId: Meteor.userId()
                             }
                         };
@@ -100,22 +100,22 @@ Shops = new Mongo.Collection('shops');
         'history.$.date':            {
             type: Date
         },
-        'history.$.doc':             {
+        'history.$.fields':             {
             type: Object
         },
-        'history.$.doc.title':       {
+        'history.$.fields.title':       {
             type:     String,
             optional: true
         },
-        'history.$.doc.subtitle':    {
+        'history.$.fields.subtitle':    {
             type:     String,
             optional: true
         },
-        'history.$.doc.description': {
+        'history.$.fields.description': {
             type:     String,
             optional: true
         },
-        'history.$.doc.tax':         {
+        'history.$.fields.tax':         {
             type:     Number,
             optional: true
         },
