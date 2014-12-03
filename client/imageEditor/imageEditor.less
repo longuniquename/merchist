@@ -1,0 +1,112 @@
+@import (reference) '../lib/variables.import.less';
+
+.image-editor {
+  border: 1px solid @brand-primary;
+  padding: 1px;
+  width: 100%;
+
+  img, canvas {
+    display: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .buttons-holder {
+    position: relative;
+    display: none;
+    top: 50%;
+    height: 0;
+
+    .buttons {
+      height: 48px;
+      top: -24px;
+      position: relative;
+      text-align: center;
+
+      .uploadBtn {
+
+      }
+    }
+  }
+
+  .loader-holder {
+    position: relative;
+    display: none;
+    top: 50%;
+    height: 0;
+
+    .loader {
+      height: 20px;
+      width: 70px;
+      top: -10px;
+      position: relative;
+      margin: 0 auto;
+      display: block;
+
+      circle {
+        fill: @color-main;
+        -webkit-transform-origin: center;
+        -moz-transform-origin: center;
+        -o-transform-origin: center;
+        transform-origin: center;
+        -webkit-animation: loading 1.2s infinite;
+        -moz-animation: loading 1.2s infinite;
+        -o-animation: loading 1.2s infinite;
+        animation: loading 1.2s infinite;
+
+        &:nth-child(1) {
+          -webkit-animation-delay: .3s;
+          -moz-animation-delay: .3s;
+          -o-animation-delay: .3s;
+          animation-delay: .3s;
+        }
+        &:nth-child(2) {
+          -webkit-animation-delay: .5s;
+          -moz-animation-delay: .5s;
+          -o-animation-delay: .5s;
+          animation-delay: .5s;
+        }
+        &:nth-child(3) {
+          -webkit-animation-delay: .7s;
+          -moz-animation-delay: .7s;
+          -o-animation-delay: .7s;
+          animation-delay: .7s;
+        }
+      }
+    }
+  }
+
+  &.circle {
+    border-radius: 100%;
+    img, canvas {
+      border-radius: 100%;
+    }
+  }
+
+  &.initial {
+    .buttons-holder {
+      display: block;
+    }
+  }
+
+  &.loading {
+    .loader-holder {
+      display: block;
+    }
+  }
+
+  &.editing {
+    canvas {
+      display: block;
+    }
+  }
+
+  &.preview {
+    img {
+      display: block;
+    }
+    .buttons-holder {
+      display: block;
+    }
+  }
+}
