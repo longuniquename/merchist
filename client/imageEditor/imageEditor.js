@@ -76,7 +76,7 @@
 
     Template.imageEditor.helpers({
         showPhotoButton: function(){
-            return !Meteor.isCordova
+            return Meteor.isCordova
         }
     });
 
