@@ -1,15 +1,20 @@
 <template name="imageEditor">
     <div class="image-editor">
-        <div class="buttons-holder">
-            <div class="buttons">
-                <button class="btn btn-icon uploadBtn">
-                    {{>iconUpload}}
-                </button>
-                {{ #if showPhotoButton }}
-                    <button class="btn btn-icon cameraBtn">
-                        {{>iconAdd}}
-                    </button>
-                {{ /if }}
+
+        <div class="upload-buttons">
+            <div class="buttons-holder">
+                <div class="buttons">
+                    <div class="btn-group">
+                        {{ #if showCameraButton }}
+                            <button class="btn btn-icon cameraBtn">
+                                {{>iconCamera}}
+                            </button>
+                        {{ /if }}
+                        <button class="btn btn-icon uploadBtn">
+                            {{>iconUpload}}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 

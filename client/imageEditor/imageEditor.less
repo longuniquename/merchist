@@ -11,20 +11,21 @@
     width: 100%;
   }
 
-  .buttons-holder {
-    position: relative;
+  .upload-buttons {
+    height: 100%;
+    width: 100%;
     display: none;
-    top: 50%;
-    height: 0;
 
-    .buttons {
-      height: 48px;
-      top: -24px;
+    .buttons-holder {
       position: relative;
-      text-align: center;
+      top: 50%;
+      height: 0;
 
-      .uploadBtn {
-
+      .buttons {
+        height: 48px;
+        top: -24px;
+        position: relative;
+        text-align: center;
       }
     }
   }
@@ -84,8 +85,14 @@
   }
 
   &.initial {
-    .buttons-holder {
+    .upload-buttons {
       display: block;
+
+      .buttons {
+        .btn {
+          background: transparent;
+        }
+      }
     }
   }
 
@@ -105,7 +112,7 @@
     img {
       display: block;
     }
-    .buttons-holder {
+    .upload-buttons {
       display: block;
     }
   }

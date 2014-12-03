@@ -75,7 +75,7 @@
     };
 
     Template.imageEditor.helpers({
-        showPhotoButton: function(){
+        showCameraButton: function(){
             return Meteor.isCordova
         }
     });
