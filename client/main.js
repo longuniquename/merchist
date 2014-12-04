@@ -72,10 +72,6 @@
                 version: 'v2.2'
             });
         };
-
-        window.plugins.webintent.onNewIntent(function(url) {
-            alert(url);
-        });
     }
 
     Blaze.Meta = new function () {
@@ -107,5 +103,11 @@
             delete meta[key];
         };
     };
+
+    if (Meteor.isCordova) {
+        window.plugins.webintent.onNewIntent(function(url) {
+            alert(url);
+        });
+    }
 
 })();
