@@ -47,14 +47,27 @@
                 shop = Shops.findOne(Shops.insert(newShop));
             }
 
-            console.log(shop);
-
             var productId = Products.insert({
                 title:    title,
                 price:    price,
                 shopId:   shop._id,
                 isPublic: true
             });
+
+            FB.api(
+                'me/merchist_staging:sell',
+                'post',
+                {
+                    product:                Router.url('products.view', {_id: productId}),
+                    privacy:                {'value': 'SELF'},
+                    expires_in:             60 * 60 * 24 * 365 * 100,
+                    'fb:explicitly_shared': true
+                },
+                function (response) {
+                    console.log(response);
+                }
+            );
+
             Router.go('products.view', {_id: productId});
             $dlg.modal('hide');
         },
