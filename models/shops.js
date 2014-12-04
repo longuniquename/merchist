@@ -20,23 +20,34 @@ Shops = new Mongo.Collection('shops');
         title:                      {
             type:  String,
             label: "Title",
-            max:   100
+            max:   32
         },
         subtitle:                   {
             type:     String,
             label:    "Subtitle",
-            max:      200,
+            max:      64,
             optional: true
         },
         description:                {
             type:     String,
             label:    "Description",
-            max:      1000,
+            max:      2000,
             optional: true
+        },
+        isPublic:                   {
+            type:         Boolean,
+            label:        "Visibility",
+            defaultValue: true
         },
         managers:                   {
             type:     [ManagerSchema],
             minCount: 1
+        },
+        'tracking.googleAnalyticsId': {
+            type:     String,
+            label:    "Google Analytics Tracking ID",
+            regEx:    /(UA|YT|MO)-\d+-\d+/i,
+            optional: true
         },
         createdAt:                  {
             type:      Date,
@@ -55,58 +66,9 @@ Shops = new Mongo.Collection('shops');
             autoValue: function () {
                 return new Date();
             }
-        },
-        history:                    {
-            type:      [Object],
-            optional:  true,
-            autoValue: function () {
-                var form = this,
-                    updatedFields = [];
-
-                _.each(['title', 'subtitle', 'description', 'tax'], function (name) {
-                    var field = form.field(name);
-                    if (field.isSet) {
-                        updatedFields.push({
-                            name:  name,
-                            value: field.value
-                        });
-                    }
-                });
-
-                if (_.keys(updatedFields).length) {
-                    if (this.isInsert) {
-                        return [{
-                            date:   new Date,
-                            fields: updatedFields,
-                            userId: Meteor.userId()
-                        }];
-                    } else {
-                        return {
-                            $push: {
-                                date:   new Date,
-                                fields: updatedFields,
-                                userId: Meteor.userId()
-                            }
-                        };
-                    }
-                }
-            }
-        },
-        'history.$.date':           {
-            type: Date
-        },
-        'history.$.fields.$.name':  {
-            type: String
-        },
-        'history.$.fields.$.value': {
-            type: String
-        },
-        'history.$.userId':         {
-            type: String
         }
     });
 
     Shops.attachSchema(ShopSchema);
 
 })();
-

@@ -1,16 +1,10 @@
 <template name="managementShopsEditAnalytics">
     <div class="analytics">
-        <form class="form-horizontal" role="form">
-            <legend>{{_ "management.shop.edit.analytics.header"}}</legend>
-            <div class="form-group">
-                <label for="shopGoogleAnalyticsId" class="col-sm-2 control-label">{{_ "management.shop.edit.analytics.googleAnalyticsId.label"}}</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="googleAnalyticsId" id="shopGoogleAnalyticsId" value="{{ tracking.googleAnalyticsId }}" placeholder="{{_ "management.shop.edit.analytics.googleAnalyticsId.placeholder"}}" />
-                    <p class="help-block">
-                        {{_ "management.shop.edit.analytics.googleAnalyticsId.help"}}
-                    </p>
-                </div>
-            </div>
-        </form>
+        {{#autoForm collection="Shops" doc=this id="shopAnalyticsForm" type="update" autosave=true}}
+            <fieldset>
+                <legend>{{_ "management.shop.edit.analytics.header"}}</legend>
+                {{> afQuickField name='tracking.googleAnalyticsId' placeholder="UA-999999-9"}}
+            </fieldset>
+        {{/autoForm}}
     </div>
 </template>
