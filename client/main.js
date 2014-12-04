@@ -104,9 +104,17 @@
         };
     };
 
-    if (Meteor.isCordova) {
+    if (Meteor.isCordova && window.plugins && window.plugins.webintent) {
         window.plugins.webintent.onNewIntent(function(url) {
             alert(url);
+
+            window.plugins.webintent.hasExtra(WebIntent.EXTRA_STREAM,
+                function(has) {
+                    alert(JSON.stringify(has));
+                }, function(err) {
+                    alert(JSON.stringify(err));
+                }
+            );
         });
     }
 

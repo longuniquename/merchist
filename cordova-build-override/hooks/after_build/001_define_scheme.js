@@ -3,16 +3,16 @@
 var rootdir = process.argv[2],
     fs      = require('fs'),
     path    = require('path'),
-    xml2js = require('xml2js'),
-    _ = require('underscore');
+    xml2js  = require('xml2js'),
+    _       = require('underscore');
 
 var manifestPath = path.join(rootdir, '/platforms/android/AndroidManifest.xml');
 
-var parser = new xml2js.Parser(),
+var parser  = new xml2js.Parser(),
     builder = new xml2js.Builder();
 
 var schemeIntentFilter = {
-    action: [
+    action:   [
         {
             '$': {
                 'android:name': "android.intent.action.VIEW"
@@ -31,27 +31,69 @@ var schemeIntentFilter = {
             }
         }
     ],
-    data: [
+    data:     [
         {
             '$': {
                 'android:scheme': 'merchist'
+            }
+        },
+        {
+            '$': {
+                'android:scheme': 'http',
+                'android:host':   'merchist.meteor.com'
+            }
+        },
+        {
+            '$': {
+                'android:scheme': 'https',
+                'android:host':   'merchist.meteor.com'
             }
         }
     ]
 };
 
-fs.readFile(manifestPath, function(err, data) {
+var sendImagesIntentFilter = {
+    action:   [
+        {
+            '$': {
+                'android:name': "android.intent.action.SEND"
+            }
+        },
+        {
+            '$': {
+                'android:name': "android.intent.action.SEND_MULTIPLE"
+            }
+        }
+    ],
+    category: [
+        {
+            '$': {
+                'android:name': "android.intent.category.DEFAULT"
+            }
+        }
+    ],
+    data:     [
+        {
+            '$': {
+                'android:mimeType': 'image/*'
+            }
+        }
+    ]
+};
+
+fs.readFile(manifestPath, function (err, data) {
     parser.parseString(data, function (err, result) {
         var activities = result.manifest.application[0].activity;
-        var mainActivity = _.find(activities, function(activity){
+        var mainActivity = _.find(activities, function (activity) {
             return activity['$']['android:name'] === 'Merchist';
         });
         mainActivity['intent-filter'].push(schemeIntentFilter);
+        mainActivity['intent-filter'].push(sendImagesIntentFilter);
 
         var data = builder.buildObject(result);
 
-        fs.writeFile(manifestPath, data, function(err) {
-            if(err) {
+        fs.writeFile(manifestPath, data, function (err) {
+            if (err) {
                 console.log(err);
             } else {
                 console.log('Done');
