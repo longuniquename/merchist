@@ -1,43 +1,12 @@
 <template name="managementShopsEditGeneral">
     <div class="general">
-        <form class="form-horizontal" role="form">
-            <legend>{{_ "management.shop.edit.general.header"}}</legend>
-            <div class="form-group">
-                <label for="shopTitle" class="col-sm-2 control-label">{{_ "management.shop.edit.general.title.label"}}</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="shopTitle" value="{{ title }}" placeholder="{{_ "management.shop.edit.general.title.placeholder"}}" />
-                    <p class="help-block">
-                        {{_ "management.shop.edit.general.title.help"}}
-                    </p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="shopSubtitle" class="col-sm-2 control-label">{{_ "management.shop.edit.general.subtitle.label"}}</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="subtitle" id="shopSubtitle" value="{{ subtitle }}" placeholder="{{_ "management.shop.edit.general.subtitle.placeholder"}}" />
-                    <p class="help-block">
-                        {{_ "management.shop.edit.general.subtitle.help"}}
-                    </p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="shopDescription" class="col-sm-2 control-label">{{_ "management.shop.edit.general.description.label"}}</label>
-                <div class="col-sm-10">
-                    <textarea name="description" class="form-control" id="shopDescription" placeholder="{{_ "management.shop.edit.general.description.placeholder"}}">{{ description }}</textarea>
-                    <p class="help-block">
-                        {{_ "management.shop.edit.general.description.help"}}
-                    </p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="shopTax" class="col-sm-2 control-label">{{_ "management.shop.edit.general.tax.label"}}</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="tax" id="shopTax" value="{{ payments.tax }}" placeholder="{{_ "management.shop.edit.general.tax.placeholder"}}" />
-                    <p class="help-block">
-                        {{_ "management.shop.edit.general.tax.help"}}
-                    </p>
-                </div>
-            </div>
-        </form>
+        {{#autoForm collection="Shops" doc=this id="shopGeneralForm" type="update" autosave=true}}
+            <fieldset>
+                <legend>{{_ "management.shop.edit.general.header"}}</legend>
+                {{> afQuickField name='title' placeholder="Title"}}
+                {{> afQuickField name='subtitle'}}
+                {{> afQuickField name='description' rows=4}}
+            </fieldset>
+        {{/autoForm}}
     </div>
 </template>
