@@ -165,53 +165,54 @@
 
             response = Meteor.wrapAsync(HTTP.post)(url, {data: data, headers: headers});
 
-            var personalData = {};
+            var profile = {},
+                contact = {address: {}};
             Object.keys(response.data.response.personalData).map(function (i) {
                 var dataItem = response.data.response.personalData[i];
                 switch (dataItem.personalDataKey) {
                     case 'http://axschema.org/namePerson/first':
                         if (dataItem.personalDataValue)
-                            personalData['firstName'] = dataItem.personalDataValue;
+                            profile.firstName = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/namePerson/last':
                         if (dataItem.personalDataValue)
-                            personalData['lastName'] = dataItem.personalDataValue;
+                            profile.lastName = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/email':
                         if (dataItem.personalDataValue)
-                            personalData['email'] = dataItem.personalDataValue;
+                            contact.email = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/company/name':
                         if (dataItem.personalDataValue)
-                            personalData['businessName'] = dataItem.personalDataValue;
+                            profile.company = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/country/home':
                         if (dataItem.personalDataValue)
-                            personalData['country'] = dataItem.personalDataValue;
+                            contact.address.country = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/postalCode/home':
                         if (dataItem.personalDataValue)
-                            personalData['postalCode'] = dataItem.personalDataValue;
+                            contact.address.postalCode = dataItem.personalDataValue;
                         break;
                     case 'http://schema.openid.net/contact/street1':
                         if (dataItem.personalDataValue)
-                            personalData['street1'] = dataItem.personalDataValue;
+                            contact.address.street1 = dataItem.personalDataValue;
                         break;
                     case 'http://schema.openid.net/contact/street2':
                         if (dataItem.personalDataValue)
-                            personalData['street2'] = dataItem.personalDataValue;
+                            contact.address.street2 = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/city/home':
                         if (dataItem.personalDataValue)
-                            personalData['city'] = dataItem.personalDataValue;
+                            contact.address.city = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/state/home':
                         if (dataItem.personalDataValue)
-                            personalData['state'] = dataItem.personalDataValue;
+                            contact.address.state = dataItem.personalDataValue;
                         break;
                     case 'http://axschema.org/contact/phone/default':
                         if (dataItem.personalDataValue)
-                            personalData['phone'] = dataItem.personalDataValue;
+                            contact.phone = dataItem.personalDataValue;
                         break;
                 }
             });
@@ -223,9 +224,9 @@
                     detailLevel:   'ReturnAll',
                     errorLanguage: 'en_US'
                 },
-                emailAddress:    personalData['email'],
-                firstName:       personalData['firstName'],
-                lastName:        personalData['lastName'],
+                emailAddress:    contact.email,
+                firstName:       profile.firstName,
+                lastName:        profile.lastName,
                 matchCriteria:   'NAME'
             };
 
@@ -246,14 +247,15 @@
 
             Shops.update(shop._id, {
                 $set:   {
-                    'payPal.account': {
+                    'payments.PayPal.account': {
                         id:          id,
-                        type:        type,
-                        verified:    verified,
                         token:       token,
                         tokenSecret: tokenSecret,
+                        type:        type,
+                        verified:    verified,
                         scope:       scope,
-                        profile:     personalData
+                        profile:     profile,
+                        contact:     contact
                     }
                 },
                 $unset: {
