@@ -91,11 +91,11 @@
             };
 
             var response = Meteor.wrapAsync(HTTP.post)(url, {data: data, headers: headers});
-            Shops.update(shopId, {$addToSet: {'payPal.accountRequests': response.data.token}});
+            Shops.update(shopId, {$addToSet: {'payments.PayPal.accountRequests': response.data.token}});
             return 'https://sandbox.paypal.com/cgi-bin/webscr?cmd=_grant-permission&request_token=' + response.data.token;
         },
         'PayPal:verifyAccountRequest':   function (params) {
-            var shop = Shops.findOne({'payPal.accountRequests': params.request_token});
+            var shop = Shops.findOne({'payments.PayPal.accountRequests': params.request_token});
 
             var baseUrl = 'https://svcs.sandbox.paypal.com/',
                 url = baseUrl + 'Permissions/GetAccessToken';
@@ -259,7 +259,7 @@
                     }
                 },
                 $unset: {
-                    'payPal.accountRequests': ''
+                    'payments.PayPal.accountRequests': ''
                 }
             });
 
@@ -291,7 +291,7 @@
                     receiver: [
                         {
                             amount:      order.total,
-                            email:       shop.payPal.account.profile.email,
+                            email:       shop.payments.PayPal.account.contact.email,
                             paymentType: 'GOODS',
                             primary:     true
                         },

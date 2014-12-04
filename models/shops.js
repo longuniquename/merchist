@@ -129,6 +129,10 @@ Shops = new Mongo.Collection('shops');
             label:    "PayPal Account",
             optional: true
         },
+        'payments.PayPal.accountRequests':            {
+            type:     [String],
+            optional: true
+        },
         'tracking.googleAnalyticsId': {
             type:     String,
             label:    "Google Analytics Tracking ID",
