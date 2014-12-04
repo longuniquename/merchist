@@ -1,27 +1,27 @@
 <template name="managementShopsEditPayPal">
     <div class="paypal">
         <legend>{{_ "management.shop.edit.paypal.header"}}</legend>
-        {{ #if payPal.account }}
+        {{ #if payments.PayPal.account }}
 
-            {{ #with payPal.account }}
-                {{type}}
+            {{ #with payments.PayPal.account }}
+                {{type}}<br>
 
                 {{ #if verified }}
                     <span class="label label-success">{{_ "management.shop.edit.paypal.verified.yes"}}</span>
                 {{ else }}
                     <span class="label label-danger">{{_ "management.shop.edit.paypal.verified.no"}}</span>
                 {{ /if }}
+                <br>
+
+                <strong>{{profile.company}}</strong><br>
+                {{profile.firstName}} {{profile.lastName}}
 
                 <address>
-                    <strong>{{profile.firstName}} {{profile.lastName}}</strong><br>
-                </address>
-
-                <address>
-                    <strong>{{profile.businessName}}</strong><br>
-                    {{profile.street1}}, {{profile.street2}}<br>
-                    {{profile.city}}, {{profile.state}} {{profile.postalCode}}, {{profile.country}}<br>
-                    <abbr title="Phone">P:</abbr> {{profile.phone}}<br>
-                    <abbr title="Email">E:</abbr> <a href="mailto:{{profile.email}}">{{profile.email}}</a>
+                    <h5>Address:</h5>
+                    {{contact.address.street1}}, {{contact.address.street2}}<br>
+                    {{contact.address.city}}, {{contact.address.state}} {{contact.address.postalCode}}, {{contact.address.country}}<br>
+                    <abbr title="Phone">P:</abbr> {{contact.phone}}<br>
+                    <abbr title="Email">E:</abbr> <a href="mailto:{{contact.email}}">{{contact.email}}</a>
                 </address>
             {{ /with }}
 
