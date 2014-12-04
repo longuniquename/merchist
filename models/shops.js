@@ -17,36 +17,28 @@ Shops = new Mongo.Collection('shops');
     });
 
     var ShopSchema = new SimpleSchema({
-        title:                          {
+        title:                      {
             type:  String,
             label: "Title",
             max:   100
         },
-        subtitle:                       {
+        subtitle:                   {
             type:     String,
             label:    "Subtitle",
             max:      200,
             optional: true
         },
-        description:                    {
+        description:                {
             type:     String,
             label:    "Description",
             max:      1000,
             optional: true
         },
-        tax:                            {
-            type:     Number,
-            label:    "Tax rate",
-            min:      0,
-            max:      100,
-            decimal:  true,
-            optional: true
-        },
-        managers:                       {
+        managers:                   {
             type:     [ManagerSchema],
             minCount: 1
         },
-        createdAt:                      {
+        createdAt:                  {
             type:      Date,
             autoValue: function () {
                 if (this.isInsert) {
@@ -58,23 +50,26 @@ Shops = new Mongo.Collection('shops');
                 }
             }
         },
-        updatedAt:                      {
+        updatedAt:                  {
             type:      Date,
             autoValue: function () {
                 return new Date();
             }
         },
-        history:                        {
+        history:                    {
             type:      [Object],
             optional:  true,
             autoValue: function () {
                 var form = this,
-                    updatedFields = {};
+                    updatedFields = [];
 
                 _.each(['title', 'subtitle', 'description', 'tax'], function (name) {
                     var field = form.field(name);
                     if (field.isSet) {
-                        updatedFields[name] = field.value;
+                        updatedFields.push({
+                            name:  name,
+                            value: field.value
+                        });
                     }
                 });
 
@@ -97,29 +92,16 @@ Shops = new Mongo.Collection('shops');
                 }
             }
         },
-        'history.$.date':               {
+        'history.$.date':           {
             type: Date
         },
-        'history.$.fields':             {
-            type: Object
+        'history.$.fields.$.name':  {
+            type: String
         },
-        'history.$.fields.title':       {
-            type:     String,
-            optional: true
+        'history.$.fields.$.value': {
+            type: String
         },
-        'history.$.fields.subtitle':    {
-            type:     String,
-            optional: true
-        },
-        'history.$.fields.description': {
-            type:     String,
-            optional: true
-        },
-        'history.$.fields.tax':         {
-            type:     Number,
-            optional: true
-        },
-        'history.$.userId':             {
+        'history.$.userId':         {
             type: String
         }
     });

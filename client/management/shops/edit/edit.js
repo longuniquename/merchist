@@ -36,8 +36,6 @@
         });
 
         resizeImagesBlock();
-
-        //console.log(this.data.shop());
     };
     Template.shopEditImagesView.helpers({
         logo: function () {
