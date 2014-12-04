@@ -148,6 +148,16 @@
             data: {
                 back: function () {
                     return Router.path('marketplace');
+                },
+                title: function(){
+                    var shop = Shops.findOne(shopId);
+                    if (shop) {
+                        var title = shop.title;
+                        if (shop.subtitle) {
+                            title += ' / ' + shop.subtitle;
+                        }
+                        return title;
+                    }
                 }
             }
         });

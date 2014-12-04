@@ -2,17 +2,17 @@
 
     var initialColor = '#3DA3A7';
 
-    var fadeToolbar = function(){
+    var fadeToolbar = function () {
         var $images = $('.images'),
             top = $(window).scrollTop(),
             height = $images.height(),
             $mainToolbar = $('#mainToolbar');
 
-        $mainToolbar.css({
-            "background-color": one.color(initialColor).alpha(top/(height-48)).cssa()
-        });
-
-        $('img', $images).css('top', Math.floor(top/2));
+        if (top < height - 48) {
+            $mainToolbar.addClass('transparent');
+        } else {
+            $mainToolbar.removeClass('transparent');
+        }
     };
 
     var resizeImagesBlock = function () {
@@ -31,14 +31,10 @@
     };
 
     Template.marketplaceShopsViewImages.destroyed = function(){
-        var $mainToolbar = $('#mainToolbar');
+        $('#mainToolbar').removeClass('transparent');
 
         $(window).unbind('resize', resizeImagesBlock);
         $(window).unbind('scroll', fadeToolbar);
-
-        $mainToolbar.css({
-            "background-color": initialColor
-        });
     };
 
     Template.marketplaceShopsViewImages.helpers({
