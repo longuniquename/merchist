@@ -22,7 +22,7 @@
 
             Meteor.loginWithFacebook(
                 {
-                    requestPermissions: ['email'],
+                    requestPermissions: ['public_profile', 'email', 'user_friends'],
                     loginStyle:         'popup'
                 },
                 function (err) {
