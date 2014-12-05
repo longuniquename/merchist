@@ -4,6 +4,7 @@
 
     Template.marketplaceProductsViewDetails.rendered = function () {
         metaKey = Blaze.Meta.registerMeta({
+            'fb:app_id':              '301234113401207',
             'og:type':                'product',
             'og:url':                 Router.url('products.view', this.data),
             'og:title':               this.data.title,
@@ -12,7 +13,6 @@
             'product:price:currency': 'USD',
             'al:android:url':         'merchist://' + Router.path('products.view', this.data).replace(/^\/+/, ''),
             'al:android:package':     'com.merchist.client',
-            //'al:android:class':       'Merchist',
             'al:android:app_name':    'Merchist'
         });
     };

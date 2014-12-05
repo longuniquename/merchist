@@ -24,6 +24,30 @@ var schemeIntentFilter = {
             '$': {
                 'android:name': "android.intent.category.DEFAULT"
             }
+        }
+    ],
+    data:     [
+        {
+            '$': {
+                'android:scheme': 'merchist'
+            }
+        }
+    ]
+};
+
+var browsableIntentFilter = {
+    action:   [
+        {
+            '$': {
+                'android:name': "android.intent.action.VIEW"
+            }
+        }
+    ],
+    category: [
+        {
+            '$': {
+                'android:name': "android.intent.category.DEFAULT"
+            }
         },
         {
             '$': {
@@ -34,18 +58,7 @@ var schemeIntentFilter = {
     data:     [
         {
             '$': {
-                'android:scheme': 'merchist'
-            }
-        },
-        {
-            '$': {
                 'android:scheme': 'http',
-                'android:host':   'merchist.meteor.com'
-            }
-        },
-        {
-            '$': {
-                'android:scheme': 'https',
                 'android:host':   'merchist.meteor.com'
             }
         }
@@ -88,6 +101,7 @@ fs.readFile(manifestPath, function (err, data) {
             return activity['$']['android:name'] === 'Merchist';
         });
         mainActivity['intent-filter'].push(schemeIntentFilter);
+        mainActivity['intent-filter'].push(browsableIntentFilter);
         mainActivity['intent-filter'].push(sendImagesIntentFilter);
 
         var data = builder.buildObject(result);
