@@ -3,5 +3,4 @@ com.phonegap.plugins.facebookconnect@0.9.0
 org.apache.cordova.device@0.2.12
 org.apache.cordova.camera@0.3.2
 org.apache.cordova.globalization@0.3.1
-com.borismus.webintent.WebIntent@https://github.com/Tunts/WebIntent/tarball/1b379bf499751d12bdec356df3b28fa3b495d7cc
 
