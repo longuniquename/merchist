@@ -104,18 +104,13 @@
         };
     };
 
-    if (Meteor.isCordova && window.plugins && window.plugins.webintent) {
-        window.plugins.webintent.onNewIntent(function(url) {
-            alert(url);
-
-            window.plugins.webintent.hasExtra(WebIntent.EXTRA_STREAM,
-                function(has) {
-                    alert(JSON.stringify(has));
-                }, function(err) {
-                    alert(JSON.stringify(err));
-                }
-            );
-        });
-    }
-
 })();
+
+function handleOpenURL(url) {
+    alert("received url: " + url);
+    var parser = document.createElement('a');
+    parser.href = url;
+    url = '/' + parser.pathname.replace(/^\/+/, '') + parser.search + parser.hash;
+    alert("redirecting to: " + url);
+    Router.go(url);
+}
