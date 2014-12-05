@@ -1,6 +1,6 @@
 App.info({
     id:          'com.merchist.client',
-    version:     '0.1.1',
+    version:     '0.1.2',
     name:        'Merchist',
     description: 'Sell socially!',
     author:      'Mercher, Inc.',
@@ -34,4 +34,8 @@ App.setPreference('SplashScreen', 'screen_patch');
 App.configurePlugin('com.phonegap.plugins.facebookconnect', {
     APP_NAME: 'Merchist',
     APP_ID:   '301234113401207'
+});
+
+App.configurePlugin('nl.x-services.plugins.launchmyapp', {
+    URL_SCHEME: 'merchist'
 });

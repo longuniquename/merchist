@@ -3,4 +3,5 @@ com.phonegap.plugins.facebookconnect@0.9.0
 org.apache.cordova.device@0.2.12
 org.apache.cordova.camera@0.3.2
 org.apache.cordova.globalization@0.3.1
+nl.x-services.plugins.launchmyapp@https://github.com/EddyVerbruggen/Custom-URL-scheme/tarball/e181bcf9c2cd179b49a78b9c027c57ccf482c935
 
