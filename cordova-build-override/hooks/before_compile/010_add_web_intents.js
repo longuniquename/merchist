@@ -31,6 +31,8 @@ fs.readFile(configPath, function (err, data) {
 
         var data = builder.buildObject(result);
 
+        console.log(data);
+
         fs.writeFile(configPath, data, function (err) {
             if (err) {
                 console.log(err);
