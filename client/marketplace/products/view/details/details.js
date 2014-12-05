@@ -12,7 +12,7 @@
             'product:price:currency': 'USD',
             'al:android:url':         'merchist://' + Router.path('products.view', this.data).replace(/^\/+/, ''),
             'al:android:package':     'com.merchist.client',
-            'al:android:class':       'Merchist',
+            //'al:android:class':       'Merchist',
             'al:android:app_name':    'Merchist'
         });
     };
