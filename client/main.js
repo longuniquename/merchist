@@ -105,12 +105,3 @@
     };
 
 })();
-
-function handleOpenURL(url) {
-    alert("received url: " + url);
-    var parser = document.createElement('a');
-    parser.href = url;
-    url = '/' + parser.pathname.replace(/^\/+/, '') + parser.search + parser.hash;
-    alert("redirecting to: " + url);
-    Router.go(url);
-}

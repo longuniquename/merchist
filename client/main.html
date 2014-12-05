@@ -13,6 +13,18 @@
         ga('create', 'UA-57139532-2', 'auto');
         ga('require', 'ecommerce');
     </script>
+    <script>
+        function handleOpenURL(url) {
+            setTimeout(function() {
+//                alert("received url: " + url);
+                var parser = document.createElement('a');
+                parser.href = url;
+                url = '/' + parser.pathname.replace(/^\/+/, '') + parser.search + parser.hash;
+//                alert("redirecting to: " + url);
+                Router.go(url);
+            }, 0);
+        }
+    </script>
     <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-152x152-precomposed.png">
     <!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
     <link rel="icon" href="/favicon-16.png" sizes="16x16">
