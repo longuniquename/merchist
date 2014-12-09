@@ -12,7 +12,12 @@ App.icons({
     'android_ldpi':  'icons/android_ldpi.png',
     'android_mdpi':  'icons/android_mdpi.png',
     'android_hdpi':  'icons/android_hdpi.png',
-    'android_xhdpi': 'icons/android_xhdpi.png'
+    'android_xhdpi': 'icons/android_xhdpi.png',
+    'iphone':        'icons/iphone.png',
+    'iphone_2x':     'icons/iphone@2x.png',
+    'iphone_3x':     'icons/iphone@3x.png',
+    'ipad':          'icons/ipad.png',
+    'ipad_2x':       'icons/ipad@2x.png'
 });
 
 App.launchScreens({
