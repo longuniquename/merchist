@@ -1,0 +1,126 @@
+@import "variables.import.less";
+@import "mixins.import.less";
+@import "icons-material-design.import.less";
+@import "shadows.import.less";
+
+body {
+  background-color: #EEEEEE;
+  &.inverse {
+    background: #333333;
+    &, .form-control {
+      color: @darkbg-text;
+    }
+  }
+}
+
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+  font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+h5, h6{
+  font-weight: 400;
+}
+
+a, a:hover, a:focus {
+  color: @primary;
+}
+
+// Well and Jumbotrons
+@import "welljumbo.import.less";
+
+// Buttons
+@import "buttons.import.less";
+
+// Checkboxes
+@import "checkboxes.import.less";
+
+// Toggle buttons
+@import "togglebutton.import.less";
+
+// Radios
+@import "radios.import.less";
+
+// Text inputs
+@import "inputs.import.less";
+
+legend {
+  border-bottom: 0;
+}
+
+// Lists
+@import "lists.import.less";
+
+// Navbar
+@import "navbar.import.less";
+
+.dropdown-menu {
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  .divider {
+    background-color: rgba(229, 229, 229, 0.12);
+  }
+  li {
+    overflow: hidden;
+    position: relative;
+    a:hover {
+      background-color: transparent;
+      color: @primary;
+    }
+  }
+  .variations(~" li a:hover", color, @primary);
+}
+
+// Alerts
+@import "alerts.import.less";
+
+// Progress bar
+@import "progress.import.less";
+
+// Typography
+.text-warning {
+  color: @btn-warning;
+}
+.text-primary {
+  color: @btn-primary;
+}
+.text-danger {
+  color: @btn-danger;
+}
+.text-success {
+  color: @btn-success;
+}
+.text-info {
+  color: @btn-info;
+}
+
+@import "tabs.import.less";
+
+@import "popups.import.less";
+
+@import "icons.import.less";
+
+@import "cards.import.less";
+
+@import "dialogs.import.less";
+
+@import "labels.import.less";
+
+@import "panels.import.less";
+
+// Prevent highlight on mobile
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: 0;
+  }
+}
+
+
+// External plugins
+@import "plugin-snackbarjs.import.less";
+@import "plugin-nouislider.import.less";
+@import "plugin-selectize.import.less";
+@import "plugin-dropdownjs.import.less";
