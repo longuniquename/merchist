@@ -1,5 +1,11 @@
 <template name="sellButton">
     <div id="sellButton">
-        <button class="btn">Sell</button>
+        <button class="btn btn-fab btn-raised btn-primary">
+            {{ #if isCordova }}
+                <i class="mdi-image-camera"></i>
+            {{ else }}
+                <i class="mdi-file-file-upload"></i>
+            {{ /if }}
+        </button>
     </div>
 </template>
