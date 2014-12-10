@@ -25,7 +25,11 @@
     }
 }
 
-.navbar .navbar-text {
-margin-top: 14px;
-margin-bottom: 14px;
+.btn.navbar-main-btn + .navbar-brand {
+    @media (min-width: @grid-float-breakpoint) {
+        .navbar > .container &,
+        .navbar > .container-fluid & {
+          margin-left: 0;
+        }
+    }
 }
