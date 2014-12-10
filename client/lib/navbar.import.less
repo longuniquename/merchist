@@ -1,0 +1,31 @@
+@import (reference) 'variables.import.less';
+
+.navbar {
+    .btn {
+        &.navbar-main-btn {
+            height: @navbar-height;
+            width: @navbar-height;
+            padding: @navbar-height / 4;
+            margin: 0;
+            font-size: @navbar-height / 2;
+            line-height: 1;
+            color: white;
+            border-radius: 0;
+            float: left;
+            &.btn-flat {
+                &:hover {
+                    background: transparent;
+                }
+            }
+
+            + .navbar-brand {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+.navbar .navbar-text {
+margin-top: 14px;
+margin-bottom: 14px;
+}

@@ -1,23 +1,27 @@
 <template name="mainToolbar">
-    <div id="mainToolbar">
-        {{ #if back}}
-        <a class="backBtn btn btn-icon pull-left" href="{{back}}">
-            {{> iconBack}}
-        </a>
-        {{ else }}
-        <button class="menuBtn btn btn-icon pull-left">
-            {{> iconMenu}}
-        </button>
-        {{ /if }}
+    <nav id="mainToolbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                {{ #if back}}
+                <a class="btn btn-flat navbar-btn pull-left navbar-main-btn backBtn" href="{{back}}">
+                    <i class="mdi-navigation-arrow-back"></i>
+                </a>
+                {{ else }}
+                <button type="button" class="btn btn-flat navbar-btn pull-left navbar-main-btn menuBtn">
+                    <i class="mdi-navigation-menu"></i>
+                </button>
+                {{ /if }}
 
-        {{ #if showCart }}
-            <button class="cartBtn btn btn-icon pull-right">
-                {{> iconCart}}
-            </button>
-        {{ /if }}
+                {{ #if showCart }}
+                    <button class="cartBtn btn btn-icon pull-right">
+                        {{> iconCart}}
+                    </button>
+                {{ /if }}
 
-        {{ #if title }}
-        <div class="title">{{ title }}</div>
-        {{ /if }}
-    </div>
+                {{ #if title }}
+                <span class="navbar-brand">{{ title }}</span>
+                {{ /if }}
+            </div>
+        </div>
+    </nav>
 </template>
