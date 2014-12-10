@@ -1,5 +1,60 @@
 @import (reference) '../lib/variables.import.less';
 
 .marketplace {
-  margin-top: 48px + @grid-gutter-width / 2;
+    position: fixed;
+    top: 48px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .box {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+
+        .item {
+            padding: @grid-gutter-width / 2;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 200px + @grid-gutter-width;
+
+            .product-card {
+                width: 200px;
+                height: 400px;
+                background-color: #ffffff;
+
+                .image, .info {
+                    height: 200px;
+                    width: 200px;
+                    overflow: hidden;
+                    float: left;
+                }
+
+                .image {
+                    img {
+                        display: block;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+            }
+        }
+
+        @media (orientation: landscape) {
+            flex-direction: column;
+
+            .item {
+                .product-card {
+                    width: 400px;
+                    height: 200px;
+                }
+            }
+        }
+    }
 }

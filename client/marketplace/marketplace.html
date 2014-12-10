@@ -1,13 +1,18 @@
 <template name="marketplace">
     <div class="marketplace">
-        <div class="container">
-            <div class="row">
+        <div class="box">
             {{ #each products }}
-                <div class="col-xs-6 col-sm-4">
-                    <a class="product-card" href="{{pathFor route='products.view' data=this }}">
-                        {{ #if image }}
-                        <img src="{{ abs image.url }}" />
-                        {{ /if }}
+                <div class="item">
+                    <div class="product-card shadow-z-1">
+                        <div class="image">
+                            <a href="{{pathFor route='products.view' data=this }}">
+                                {{ #if image }}
+                                    <img src="{{ abs image.url }}" />
+                                {{ else }}
+                                    <img src="http://merchist.meteor.com/cfs/files/images/4K8QqX3EBEZFK6d35?token=eyJhdXRoVG9rZW4iOiJXcGZKcXJ3UlpITUoycnJ1aC1FMGswYkwzTVNSSkdrWms2Z3RMTmUwN2ZIIn0%3D">
+                                {{ /if }}
+                            </a>
+                        </div>
                         <div class="info">
                             <h3>
                                 {{ #if title }}
@@ -16,18 +21,15 @@
                                     <i>Draft product</i>
                                 {{ /if }}
                             </h3>
-                            <span class="price">
-                                {{ #if price }}
+                            {{ #if price }}
+                                <span class="price">
                                     {{currency price}}
-                                {{ else }}
-                                    <i>No price specified</i>
-                                {{ /if }}
-                            </span>
+                                </span>
+                            {{ /if }}
                         </div>
-                    </a>
+                    </div>
                 </div>
             {{ /each }}
-            </div>
         </div>
     </div>
     {{> sellButton}}
