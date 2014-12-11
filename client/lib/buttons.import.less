@@ -9,8 +9,8 @@
     margin: 0;
     white-space: nowrap;
     cursor: pointer;
-    height: @header-buttons-size;
-    width: @header-buttons-size;
+    height: @navbar-height;
+    width: @navbar-height;
     background: fadeout(white, 50%);
     display: inline-block;
     position: relative;
@@ -26,8 +26,8 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: @header-buttons-size;
-      height: @header-buttons-size;
+      width: @navbar-height;
+      height: @navbar-height;
       font-size: 100px;
       text-align: right;
       filter: alpha(opacity=0);
@@ -57,5 +57,5 @@
 }
 
 .btn-white {
-  .button-variant(@primary; white; white);
+  .button-variant(@brand-primary; white; white);
 }
