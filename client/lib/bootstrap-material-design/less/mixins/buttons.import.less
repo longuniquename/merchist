@@ -1,0 +1,52 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+.button-variant(@color; @background; @border) {
+  .button-material-variant(@background);
+}
+
+.button-material-variant(@color) {
+  background-color: @color;
+
+  &.btn-flat {
+    background-color: transparent;
+    color: fade(@color, 84%);
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active,
+    .open > .dropdown-toggle& {
+      background-color: fadeout(white, 50%);
+      color: @color;
+    }
+  }
+}
+
+.button-material-variant(@color) when (luma(@color) >= 60%) {
+  color: fadeout(black, 16%);
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: black;
+  }
+}
+
+.button-material-variant(@color) when (luma(@color) < 60%) {
+  color: fadeout(white, 16%);
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: white;
+  }
+}

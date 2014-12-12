@@ -1,32 +1,40 @@
 // material icons path
-@material-font-path: "/fonts";
+@material-font-path: "../fonts";
 
 // Material colors palette
-@red: #F44336;
-@pink: #E91E63;
-@purple: #9C27B0;
-@deeppurple: #673AB7;
-@indigo: #3F51B5;
-@blue: #4285f4;
-@lightblue: #03A9F4;
-@cyan: #00BCD4;
-@teal: #009688;
-@lightgreen: #8BC34A;
-@lime: #CDDC39;
+@red:         #F44336;
+@pink:        #E91E63;
+@purple:      #9C27B0;
+@deeppurple:  #673AB7;
+@indigo:      #3F51B5;
+@blue:        #4285f4;
+@lightblue:   #03A9F4;
+@cyan:        #00BCD4;
+@teal:        #009688;
+@lightgreen:  #8BC34A;
+@lime:        #CDDC39;
 @lightyellow: #FFEB3B;
-@orange: #FF9800;
-@deeporange: #FF5722;
-@grey: #9E9E9E;
-@bluegrey: #607D8B;
-@brown: #795548;
-@lightgrey: #ECECEC;
+@orange:      #FF9800;
+@deeporange:  #FF5722;
+@grey:        #9E9E9E;
+@bluegrey:    #607D8B;
+@brown:       #795548;
+@lightgrey:   #ECECEC;
 
 // Bootstrap shades
 @brand-primary: #009587;
 @brand-success: #0F9D58;
-@brand-info: @lightblue;
+@brand-info:    @lightblue;
 @brand-warning: @deeporange;
-@brand-danger: @red;
+@brand-danger:  @red;
+
+@body-bg:             #EEE;
+@link-hover-color:    @link-color;
+@body-font-weight:    300;
+
+@font-family-sans-serif:  "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@headings-font-weight:    300;
 
 // Typography elements for Material
 @darkbg-text: rgba(255,255,255,0.84);
@@ -36,22 +44,22 @@
 
 // Bootstrap variables
 @btn-default: transparent;
-@btn-default-text: @lightbg-text;
+@btn-default-text: black;
 
 @btn-primary: @brand-primary;
-@btn-primary-text: @darkbg-text;
+@btn-primary-text: white;
 
 @btn-success: @brand-success;
-@btn-success-text: @darkbg-text;
+@btn-success-text: white;
 
 @btn-info: @brand-info;
-@btn-info-text: @darkbg-text;
+@btn-info-text: white;
 
 @btn-warning: @brand-warning;
-@btn-warning-text: @darkbg-text;
+@btn-warning-text: white;
 
 @btn-danger: @brand-danger;
-@btn-danger-text: @darkbg-text;
+@btn-danger-text: white;
 
 @input-unchecked: rgba(137, 137, 137, 0.3);
 @input-checked: rgba(15, 157, 88, 0.3);
@@ -106,3 +114,56 @@
 
 @text-disabled: #a8a8a8;
 @background-disabled: #eaeaea;
+
+@popover-bg: #323232;
+
+
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+@state-success-text:             @brand-success;
+@state-info-text:                @brand-info;
+@state-warning-text:             @brand-warning;
+@state-danger-text:              @brand-danger;
+
+
+
+@dropdown-divider-bg:            rgba(229, 229, 229, 0.12);
+
+
+
+@padding-base-vertical:     6px;
+@padding-base-horizontal:   32px;
+
+@padding-large-vertical:    13px;
+@padding-large-horizontal:  48px;
+
+@padding-small-vertical:    3px;
+@padding-small-horizontal:  24px;
+
+@padding-xs-vertical:       0px;
+@padding-xs-horizontal:     18px;
+
+@line-height-large:         1.25;
+@line-height-small:         1.5;
+
+@border-radius-base:        2px;
+@border-radius-large:       4px;
+@border-radius-small:       1px;
+
+
+
+//== Alerts
+//
+//## Define alert colors, border radius, and padding.
+
+@alert-padding:               15px;
+@alert-border-radius:         @border-radius-small;
+@alert-link-font-weight:      bold;
+
+@alert-success-bg:            @brand-success;
+@alert-info-bg:               @brand-info;
+@alert-warning-bg:            @brand-warning;
+@alert-danger-bg:             @brand-danger;

@@ -1,0 +1,28 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+
+// Prevent highlight on mobile
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: 0;
+  }
+}
+
+// Body reset
+
+body {
+  &.inverse {
+    background: #333333;
+    &, .form-control {
+      color: @darkbg-text;
+    }
+  }
+}
+
+body {
+  font-weight: @body-font-weight;
+}

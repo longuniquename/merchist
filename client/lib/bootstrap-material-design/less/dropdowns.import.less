@@ -1,0 +1,20 @@
+//
+// Dropdown menus
+// --------------------------------------------------
+
+
+// The dropdown menu (ul)
+
+.dropdown-menu {
+  border: 0;
+  .box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.26));
+
+  > li {
+    overflow: hidden;
+    position: relative;
+    > a:hover {
+      background-color: transparent;
+    }
+  }
+  .variations(~" li a:hover", color, @brand-primary);
+}

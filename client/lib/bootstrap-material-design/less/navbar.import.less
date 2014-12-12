@@ -4,6 +4,9 @@
     border-radius: 0;
 
     .navbar-brand {
+        position: relative;
+        height: 60px;
+        line-height: 30px;
         color: @navbar-brand-color;
         &:hover,
         &:focus {
@@ -207,6 +210,11 @@
     }
 
     @media (max-width: 1199px) {
+
+        .navbar-brand {
+            height: 50px;
+            padding: 10px 15px;
+        }
         .navbar-form {
             margin-top: 10px;
         }
