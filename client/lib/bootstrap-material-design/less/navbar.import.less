@@ -107,6 +107,12 @@
       &:last-child {
         .btn:last-child {
           .border-right-radius(@navbar-border-radius);
+
+          .navbar-static-top&,
+          .navbar-fixed-top&,
+          .navbar-fixed-bottom& {
+            .border-right-radius(0);
+          }
         }
       }
     }

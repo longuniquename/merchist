@@ -69,7 +69,7 @@
     Router.route('/marketplace', function () {
         this.layout('mainLayout', {
             data: {
-                title: 'Marketplace'
+                title: 'Merchist'
             }
         });
         this.wait(Meteor.subscribe('products'));

@@ -1,20 +1,23 @@
 <template name="mainToolbar">
-    <nav id="mainToolbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav id="mainToolbar" class="navbar navbar-primary navbar-fixed-top" role="navigation">
         <div class="container-fluid">
+            <div class="navbar-toolbar" role="toolbar">
+                <div class="btn-group">
+                    {{ #if showCart }}
+                        <button type="button" class="cartBtn btn btn-default navbar-btn">
+                            <i class="mdi-action-shopping-cart"></i>
+                        </button>
+                    {{ /if }}
+                </div>
+            </div>
             <div class="navbar-header">
                 {{ #if back}}
-                <a class="btn btn-flat navbar-btn pull-left navbar-main-btn backBtn" href="{{back}}">
-                    <i class="mdi-navigation-arrow-back"></i>
-                </a>
+                    <a class="btn btn-default navbar-btn backBtn" href="{{back}}">
+                        <i class="mdi-navigation-arrow-back"></i>
+                    </a>
                 {{ else }}
-                <button type="button" class="btn btn-flat navbar-btn pull-left navbar-main-btn menuBtn">
-                    <i class="mdi-navigation-menu"></i>
-                </button>
-                {{ /if }}
-
-                {{ #if showCart }}
-                    <button class="cartBtn btn btn-icon pull-right">
-                        {{> iconCart}}
+                    <button type="button" class="btn btn-default navbar-btn menuBtn">
+                        <i class="mdi-navigation-menu"></i>
                     </button>
                 {{ /if }}
 
