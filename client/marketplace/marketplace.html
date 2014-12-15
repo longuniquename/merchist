@@ -3,29 +3,76 @@
         <div class="box">
             {{ #each products }}
                 <div class="item">
-                    <div class="product-card shadow-z-1">
-                        <div class="image">
-                            <a href="{{pathFor route='products.view' data=this }}">
-                                {{ #if image }}
-                                    <img src="{{ abs image.url }}" />
-                                {{ else }}
-                                    <img src="http://merchist.meteor.com/cfs/files/images/4K8QqX3EBEZFK6d35?token=eyJhdXRoVG9rZW4iOiJXcGZKcXJ3UlpITUoycnJ1aC1FMGswYkwzTVNSSkdrWms2Z3RMTmUwN2ZIIn0%3D">
-                                {{ /if }}
-                            </a>
+                      <div class="seller">
+                        <div class="container-fluid">
+                          <div class="avatar">
+                            <img src="http://graph.facebook.com/v2.2/123456/picture?height=1000&type=normal&width=1000">
+                          </div>
+                          <div class="actions">
+                          <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default">
+                              <i class="mdi-communication-call"></i>
+                            </button>
+                            <button type="button" class="btn btn-default">
+                              <i class="mdi-communication-email"></i>
+                            </button>
+                          </div>
+                          </div>
+                          <div class="name">
+                            Seller
+                          </div>
                         </div>
-                        <div class="info">
-                            <h3>
-                                {{ #if title }}
-                                    {{title}}
-                                {{ else }}
-                                    <i>Draft product</i>
-                                {{ /if }}
-                            </h3>
-                            {{ #if price }}
-                                <span class="price">
-                                    {{currency price}}
-                                </span>
-                            {{ /if }}
+                      </div>
+                      <div class="image">
+                          <a href="{{pathFor route='products.view' data=this }}">
+                              {{ #if image }}
+                                  <img src="{{ abs image.url }}" />
+                              {{ else }}
+                                  <img src="http://merchist.meteor.com/cfs/files/images/4K8QqX3EBEZFK6d35?token=eyJhdXRoVG9rZW4iOiJXcGZKcXJ3UlpITUoycnJ1aC1FMGswYkwzTVNSSkdrWms2Z3RMTmUwN2ZIIn0%3D">
+                              {{ /if }}
+                          </a>
+                      </div>
+                      <div class="action">
+                        <button type="button" class="btn btn-fab btn-raised btn-default">
+                          <i class="mdi-action-add-shopping-cart"></i>
+                        </button>
+                      </div>
+                      <div class="info">
+                        <div class="container-fluid">
+                          <h3>
+                              {{ #if title }}
+                                  {{title}}
+                              {{ else }}
+                                  <i>Draft product</i>
+                              {{ /if }}
+                              {{ #if subtitle }}
+                                  <small>{{subtitle}}</small>
+                              {{ /if }}
+                          </h3>
+                          {{ #if price }}
+                              <span class="price">
+                                  {{currency price}}
+                              </span>
+                          {{ /if }}
+                        </div>
+                      </div>
+                    <div class="actions">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default">
+                              <i class="mdi-action-favorite"></i> 123
+                            </button>
+                          </div>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default">
+                              <i class="mdi-communication-comment"></i> 23
+                            </button>
+                          </div>
+                          <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default">
+                              <i class="mdi-social-share"></i>
+                            </button>
+                          </div>
                         </div>
                     </div>
                 </div>
