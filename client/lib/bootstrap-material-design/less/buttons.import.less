@@ -2,29 +2,27 @@
 // Buttons
 // --------------------------------------------------
 
-
 // Base styles
 // --------------------------------------------------
 
 .btn {
-    position: relative;
-    border: none;
-    text-transform: uppercase;
-    .shadow-z(0);
+  position: relative;
+  border: none;
+  text-transform: uppercase;
+  .shadow-z(0);
 
-    &:hover,
-    &:focus,
-    &.focus,
-    &:active,
-    &.active {
-        .shadow-z(2);
-    }
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active {
+    .shadow-z(2);
+  }
 
-    transition:
-      background-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-      color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color @transition-duration-base @transition-timing-function-base,
+  color @transition-duration-base @transition-timing-function-base;
 
-    outline: none !important;
+  outline: none !important;
 }
 
 .btn-flat {
@@ -157,59 +155,61 @@
 }
 
 .open > .dropdown-toggle.btn {
-    .variations(~"", background-color, @btn-default);
+  .variations(~"", background-color, @btn-default);
 }
-.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+
+.btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
   margin-left: 0;
 }
+
 .btn-group, .btn-group-vertical {
-    position: relative;
-    border-radius: 2px;
-    margin: 10px 1px;
-    .shadow-z(0);
+  position: relative;
+  border-radius: 2px;
+  margin: 10px 1px;
+  .shadow-z(0);
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active {
+    .shadow-z(2);
+
+    .dropdown-menu {
+      .shadow-z(2);
+    }
+  }
+
+  &.open .dropdown-toggle {
+    box-shadow: none;
+  }
+
+  &.btn-group-raised {
+    .shadow-z(2);
+
+    .dropdown-menu {
+      .shadow-z(2);
+    }
 
     &:hover,
     &:focus,
     &.focus,
     &:active,
     &.active {
-      .shadow-z(2);
+      .shadow-z(4);
 
       .dropdown-menu {
-        .shadow-z(2);
-      }
-    }
-
-    &.open .dropdown-toggle {
-        box-shadow: none;
-    }
-
-    &.btn-group-raised {
-      .shadow-z(2);
-
-      .dropdown-menu {
-        .shadow-z(2);
-      }
-
-      &:hover,
-      &:focus,
-      &.focus,
-      &:active,
-      &.active {
         .shadow-z(4);
-
-        .dropdown-menu {
-          .shadow-z(4);
-        }
       }
     }
+  }
 
-    .btn {
-      &, &:active, &-group {
-        box-shadow: none !important;
-        margin: 0;
-      }
+  .btn {
+    &, &:active, &-group {
+      box-shadow: none !important;
+      margin: 0;
     }
+  }
 }
 
 .btn-group {
@@ -231,5 +231,5 @@
 }
 
 .btn-group-flat {
-    box-shadow: none !important;
+  box-shadow: none !important;
 }

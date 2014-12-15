@@ -1,9 +1,7 @@
 <template name="mainMenu">
-    <div id="mainMenu">
-        <div class="overlay"></div>
-        <div class="menu">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+    <div id="mainMenu" class="modal fade">
+        <div class="modal-menu">
+            <div class="modal-content">
                 {{ #if currentUser }}
                     <div class="profile">
                         {{ #with currentUser}}
@@ -30,8 +28,6 @@
                         </button>
                     </div>
                 {{ /if }}
-            </div>
-            <div class="panel-body">
                 <div class="menus">
                     <div class="divider">
                         <h6>
@@ -122,7 +118,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </template>

@@ -22,7 +22,7 @@
     }
 
     .navbar-toggle-icon {
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform @transition-duration-base @transition-timing-function-base;
       transform: rotate(0deg);
       transform-origin: center center 0;
     }
@@ -69,6 +69,7 @@
       .btn.navbar-btn {
         .navbar .navbar-header .btn.navbar-btn();
       }
+
       .navbar-form {
         .btn.navbar-btn {
           margin-top: -12px;
@@ -118,7 +119,6 @@
     }
   }
 
-
   > .container,
   > .container-fluid {
     @media (max-width: @grid-float-breakpoint-max) {
@@ -126,6 +126,7 @@
         margin-left: -(@grid-gutter-width / 2);
         margin-right: 0;
       }
+
       .navbar-toolbar {
         margin-right: -(@grid-gutter-width / 2);
         margin-left: 0;
@@ -135,9 +136,11 @@
       .navbar-brand {
         margin-left: 0;
       }
+
       .navbar-header {
         margin-left: -(@grid-gutter-width / 2);
       }
+
       .navbar-toolbar {
         margin-right: -(@grid-gutter-width / 2);
       }

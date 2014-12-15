@@ -1,0 +1,39 @@
+@import (reference) '../lib/variables.import.less';
+@import (reference) '../lib/mixins.import.less';
+
+.modal {
+
+  &.fade .modal-menu {
+    .translate(-300px, 0);
+    .transition-transform(~"@{transition-duration-base} @{transition-timing-function-base}");
+    &.modal-menu-right {
+      .translate(300px, 0);
+    }
+  }
+  &.in .modal-menu {
+    &, &.modal-menu-right {
+      .translate(0, 0);
+    }
+  }
+
+  .modal-menu {
+    position: relative;
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .shadow-z(5);
+
+    &.modal-menu-right {
+      float: right;
+    }
+
+    .modal-content {
+      min-height: 100%;
+      width: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      .shadow-z(0);
+    }
+  }
+}

@@ -15,9 +15,11 @@ fieldset[disabled] .form-control, .form-control-wrapper .form-control, .form-con
     }
   }
 }
+
 select.form-control {
   height: 23px;
 }
+
 select[multiple].form-control {
   &, &:focus, &.focus {
     height: 85px;
@@ -53,7 +55,7 @@ select[multiple].form-control {
     background-color: @input-default;
   }
   .form-control:focus:invalid ~ .material-input, .form-control.focus:invalid ~ .material-input {
-    &:before, &:after  {
+    &:before, &:after {
       background-color: @input-danger;
     }
   }
@@ -71,7 +73,7 @@ select[multiple].form-control {
     transform: scaleX(0);
     transition: transform 0s;
   }
-  .form-control:focus  ~ .material-input:before, .form-control.focus  ~ .material-input:before {
+  .form-control:focus ~ .material-input:before, .form-control.focus ~ .material-input:before {
     transform: scaleX(1);
     transition: transform 0.2s ease-out;
   }
@@ -90,7 +92,9 @@ select[multiple].form-control {
   .input-lg ~ .material-input:after {
     height: 26px;
   }
-  textarea { resize: none; }
+  textarea {
+    resize: none;
+  }
   textarea ~ .form-control-highlight {
     margin-top: -11px;
   }
@@ -187,7 +191,6 @@ select.form-control {
     border-color: #757575;
   }
 }
-
 
 @keyframes input-highlight {
   0% {
