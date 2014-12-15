@@ -2,85 +2,90 @@
 @import (reference) '../lib/mixins.import.less';
 
 .marketplace {
-    position: fixed;
-    top: 48px;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: fixed;
+  top: 48px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    .box {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        height: 100%;
-        width: 100%;
-        overflow: auto;
+  .box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 
-        @media (orientation: landscape) {
-            flex-direction: row;
+    .item {
+      flex-grow: 1;
+      flex-shrink: 0;
+      margin: 15px;
+      background: white;
+      .shadow-z(1);
+      border-radius: 2px;
+
+      .image {
+        img {
+          display: block;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      .action {
+        margin: -26px auto 5px;
+        width: 58px;
+      }
+
+      .seller {
+        .clearfix();
+        margin: 15px 0;
+
+        .avatar {
+          height: 40px;
+          width: 40px;
+          border-radius: 100%;
+          .shadow-z(0);
+          overflow: hidden;
+          float: left;
+          margin-right: 5px;
+
+          img {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
         }
 
-        .item {
-            flex-grow: 1;
-            flex-shrink: 0;
-            margin: 15px;
-            background: white;
-            .shadow-z(1);
-            border-radius: 2px;
-
-            .image {
-                img {
-                    display: block;
-                    height: 100%;
-                    width: 100%;
-                }
+        .actions {
+          .btn-group {
+            margin: 0;
+            .btn {
+              width: 18px;
+              padding: 0;
             }
-
-          .action {
-            margin: -26px auto 5px;
-            width: 58px;
-          }
-
-          .seller {
-            .clearfix();
-            margin: 15px 0;
-
-            .avatar {
-              height: 40px;
-              width: 40px;
-              border-radius: 100%;
-              .shadow-z(0);
-              overflow: hidden;
-              float: left;
-              margin-right: 5px;
-
-              img {
-                  display: block;
-                  height: 100%;
-                  width: 100%;
-              }
-            }
-
-            .actions {
-             .btn-group {
-              margin: 0;
-               .btn {
-                width: 18px;
-                padding: 0;
-               }
-             }
-            }
-          }
-
-          .info {
-            text-align: center;
-          }
-
-          > .actions {
-           .btn-group {
-            margin: 15px 0 0 0;
-           }
           }
         }
+      }
+
+      .info {
+        text-align: center;
+      }
+
+      > .actions {
+        .btn-group {
+          margin: 15px 0 0 0;
+        }
+      }
     }
+
+    @media (orientation: landscape) {
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .item {
+        max-width: 300px;
+      }
+    }
+  }
 }
