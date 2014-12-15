@@ -21,7 +21,7 @@
         },
         "click .cartBtn": function(e, template){
             e.preventDefault();
-            $('#cart').modal('toggle');
+            $('#cart .cart-view').modal('toggle');
 
             ga('send', {
                 'hitType':       'event',

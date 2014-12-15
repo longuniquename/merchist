@@ -1,12 +1,14 @@
 @import (reference) '../lib/variables.import.less';
 @import (reference) '../lib/mixins.import.less';
 
-.marketplace {
-  position: fixed;
-  top: 48px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.marketplace-view {
+  width: 100%;
+  height: auto;
+
+  @media (orientation: landscape) {
+    height: 100%;
+    width: auto;
+  }
 
   .box {
     display: flex;

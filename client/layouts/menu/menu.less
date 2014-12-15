@@ -2,4 +2,47 @@
 @import (reference) '../../lib/mixins.import.less';
 
 #mainMenu {
+  .header {
+    background: @brand-primary;
+    padding: @grid-gutter-width / 2;
+    color: white;
+
+    .profile {
+      .clearfix();
+
+      .avatar {
+        height: 64px;
+        width: 64px;
+        float: left;
+        border-radius: 100%;
+        overflow: hidden;
+        margin-right: @grid-gutter-width / 2;
+
+        img {
+          height: 100%;
+          width: 100%;
+        }
+
+        .no-avatar {
+          height: 100%;
+          width: 100%;
+          display: block;
+          line-height: 64px;
+          text-align: center;
+          font-size: 64px;
+          color: white;
+          background: darken(@brand-primary, 5%);
+        }
+      }
+    }
+  }
+
+  .content {
+    padding: @grid-gutter-width / 2;
+
+    .nav.nav-pills.nav-stacked, hr {
+      margin-left: -(@grid-gutter-width / 2);
+      margin-right: -(@grid-gutter-width / 2);
+    }
+  }
 }

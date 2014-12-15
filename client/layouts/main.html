@@ -1,11 +1,19 @@
 <template name="mainLayout">
-    <div id="mainLayout">
+    <section class="main-layout">
         {{ #if isDisconnected }}
             {{> connectionInfo}}
         {{ /if }}
-        {{> mainMenu}}
-        {{> mainToolbar}}
-        {{> yield}}
-        {{> cart}}
-    </div>
+        <header id="toolbar">
+            {{> mainToolbar}}
+        </header>
+        <aside id="menu">
+            {{> mainMenu}}
+        </aside>
+        <section id="content">
+            {{> yield}}
+        </section>
+        <aside id="cart">
+            {{> cart}}
+        </aside>
+    </section>
 </template>

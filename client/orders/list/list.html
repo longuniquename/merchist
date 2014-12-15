@@ -1,6 +1,6 @@
 <template name="ordersList">
     <div class="orders-list-view">
-        <div class="container">
+        <div class="container-fluid">
             {{ #each orders }}
                 <a href="{{pathFor route='orders.view' data=this }}">
                     {{_id}}
