@@ -3,13 +3,13 @@
         <div class="box">
             {{ #each products }}
                 <div class="item">
-                    <div class="seller">
-                        <div class="container-fluid">
+                    <div class="item-header">
+                        <div class="seller">
                             <div class="avatar">
                                 <img src="http://graph.facebook.com/v2.2/123456/picture?height=1000&type=normal&width=1000">
                             </div>
                             <div class="actions">
-                                <div class="btn-group btn-group-xs pull-right" role="group" aria-label="...">
+                                <div class="btn-group pull-right" role="group" aria-label="...">
                                     <button type="button" class="btn btn-default">
                                         <i class="mdi-communication-call"></i>
                                     </button>
@@ -21,7 +21,8 @@
                             <div class="name">Seller</div>
                         </div>
                     </div>
-                        <div class="image">
+                    <div class="item-body">
+                        <div class="item-images">
                             <a href="{{pathFor route='products.view' data=this }}">
                                 {{ #if image }}
                                     <img src="{{ abs image.url }}" />
@@ -30,46 +31,45 @@
                                 {{ /if }}
                             </a>
                         </div>
-                        <div class="action">
+                        <div class="item-action">
                             <button type="button" class="btn btn-fab btn-raised btn-default">
                                 <i class="mdi-action-add-shopping-cart"></i>
                             </button>
                         </div>
-                        <div class="info">
-                            <div class="container-fluid">
-                                <h3>
-                                    {{ #if title }}
-                                        {{title}}
-                                    {{ else }}
-                                        <i>Draft product</i>
-                                    {{ /if }}
-                                </h3>
-                                {{ #if subtitle }}
-                                    <h4>{{subtitle}}</h4>
+                        <div class="item-info">
+                            <h3 class="item-title">
+                                {{ #if title }}
+                                    {{title}}
+                                {{ else }}
+                                    <i>Draft product</i>
                                 {{ /if }}
-                                {{ #if price }}
-                                    <span class="price">
-                                        {{currency price}}
-                                    </span>
-                                {{ /if }}
-                            </div>
-                        </div>
-                    <div class="actions">
-                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default">
-                                    <i class="mdi-action-favorite"></i> 123
-                                </button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default">
-                                    <i class="mdi-action-question-answer"></i>
-                                </button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default">
-                                    <i class="mdi-social-share"></i>
-                                </button>
+                            </h3>
+                            {{ #if subtitle }}
+                                <h4 class="item-subtitle">{{subtitle}}</h4>
+                            {{ /if }}
+                            {{ #if price }}
+                                <span class="item-price">
+                                    {{currency price}}
+                                </span>
+                            {{ /if }}
+                            <div class="item-actions">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-action-favorite"></i> 123
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-action-question-answer"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-social-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
