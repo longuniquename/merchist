@@ -19,6 +19,13 @@
                                 </div>
                             </div>
                             <div class="name">Seller</div>
+                            <div class="status">
+                                {{ #if isOnline }}
+                                    <span class="text-success">Online</span>
+                                {{ else }}
+                                    <span class="text-muted">Offline</span>
+                                {{ /if }}
+                            </div>
                         </div>
                     </div>
                     <div class="item-body">

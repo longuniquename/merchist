@@ -65,6 +65,17 @@
         return path;
     });
 
+    Template.registerHelper('isOnline', function () {
+        if (!this._id) {
+            return false;
+        }
+        var presence = Presences.findOne({userId: this._id});
+        if (!presence) {
+            return false;
+        }
+        return presence.state === 'online';
+    });
+
     if (!Meteor.isCordova) {
         window.fbAsyncInit = function () {
             FB.init({
