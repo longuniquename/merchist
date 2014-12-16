@@ -101,6 +101,7 @@ srp@1.0.1
 tap:http-methods@0.0.23
 tap:i18n@1.2.1
 templating@1.0.9
+tmeasday:presence@1.0.3
 tracker@1.0.3
 twitter@1.1.2
 ui@1.0.4

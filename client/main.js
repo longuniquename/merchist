@@ -2,6 +2,7 @@
 
     Meteor.subscribe("userData");
     Meteor.subscribe("myShops");
+    Meteor.subscribe('userPresence');
 
     var cartId = localStorage["cartId"];
 
