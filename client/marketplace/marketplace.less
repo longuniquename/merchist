@@ -66,12 +66,14 @@
       }
 
       .item-body {
-        background: white;
+        background: @brand-primary;
         .shadow-z(1);
         border-radius: @border-radius-base;
         overflow: hidden;
+        color: white;
 
         .item-images {
+          min-height: 70px;
           img {
             display: block;
             height: 100%;
@@ -80,8 +82,8 @@
         }
 
         .item-action {
-          margin: -26px auto 5px;
-          width: 58px;
+          margin: -28px auto 6px;
+          width: 56px;
         }
 
         .item-info {
@@ -109,6 +111,9 @@
     @media (orientation: landscape) {
       flex-direction: column;
       flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      align-content: flex-start;
 
       .item {
         flex-grow: 0;
