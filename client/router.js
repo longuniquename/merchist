@@ -270,6 +270,19 @@
         name: 'orders.view'
     });
 
+    Router.route('/sell', function () {
+        this.layout('mainLayout', {
+            data: {
+                back: function () {
+                    return Router.path('marketplace');
+                },
+                title: 'Sell'
+            }
+        });
+        this.render('sellView');
+    }, {
+        name: 'sell'
+    });
 
     Router.route('/management/shops/:_id', function () {
         var shopId = this.params._id;
