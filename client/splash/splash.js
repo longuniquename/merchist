@@ -13,11 +13,11 @@
                     loginStyle:         'popup'
                 },
                 function (err) {
-                    template.$('.auth').removeClass('hidden');
-                    template.$('.loading').addClass('hidden');
-
                     if (!err) {
                         Router.go('marketplace');
+                    } else {
+                        template.$('.auth').removeClass('hidden');
+                        template.$('.loading').addClass('hidden');
                     }
                 }
             );
