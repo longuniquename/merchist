@@ -6,6 +6,16 @@
         name: 'root'
     });
 
+    Router.route('/splash', function () {
+        if (Meteor.isCordova) {
+            this.render('splash');
+        } else {
+            this.redirect('/marketplace');
+        }
+    }, {
+        name: 'splash'
+    });
+
     Router.route('/terms', function () {
         this.layout('mainLayout', {
             data: {
@@ -356,5 +366,15 @@
     }, {
         name: 'admin.users'
     });
+
+    if (Meteor.isCordova) {
+        Router.onBeforeAction(function () {
+            if (!Meteor.userId()) {
+                this.render('splash');
+            } else {
+                this.next();
+            }
+        });
+    }
 
 })();
