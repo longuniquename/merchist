@@ -61,4 +61,22 @@
         }
     });
 
+    AutoForm.addInputType('mcImages', {
+        template: 'mcInputImages',
+        valueIn: function(value){
+            if (!value) {
+                value = [];
+            }
+            return value;
+        },
+        valueOut: function (field) {
+            var imageIds = [],
+                $imageIds = $('input[name="images[]"]', this);
+            $imageIds.each(function(){
+                imageIds.push($(this).val());
+            });
+            return imageIds;
+        }
+    });
+
 })();
