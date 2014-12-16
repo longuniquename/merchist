@@ -28,55 +28,11 @@ Products = new Mongo.Collection('products');
             decimal:  true,
             optional: true
         },
-        available:                 {
-            type:         Number,
-            label:        "Available in stock",
-            defaultValue: 1
-        },
-        'shipping.cost':           {
-            type:     Number,
-            label:    "Shipping",
-            min:      0.01,
-            max:      10000,
-            decimal:  true,
-            optional: true
-        },
         images:                    {
             type:     [String],
             label:    "Images",
-            maxCount: 10,
-            optional: true
-        },
-        'attributes.ageGroup':     {
-            type:          String,
-            allowedValues: [
-                'kids',
-                'adult'
-            ],
-            optional:      true
-        },
-        'attributes.condition':    {
-            type:          String,
-            allowedValues: [
-                'new',
-                'refurbished',
-                'used'
-            ],
-            optional:      true
-        },
-        'attributes.targetGender': {
-            type:          String,
-            allowedValues: [
-                'female',
-                'male',
-                'unisex'
-            ],
-            optional:      true
-        },
-        shopId:                    {
-            type:     String,
-            label:    "Shop",
-            optional: true
+            minCount: 1,
+            maxCount: 10
         },
         userId:                    {
             type:     String,
@@ -107,5 +63,7 @@ Products = new Mongo.Collection('products');
             }
         }
     });
+
+    Products.attachSchema(ProductSchema);
 
 })();

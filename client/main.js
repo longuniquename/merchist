@@ -2,6 +2,7 @@
 
     Meteor.subscribe("userData");
     Meteor.subscribe("myShops");
+    Meteor.subscribe("myImages");
     Meteor.subscribe('userPresence');
 
     var cartId = localStorage["cartId"];
@@ -125,5 +126,23 @@
             }
         });
     }
+
+    AutoForm.addInputType('mcImages', {
+        template: 'mcInputImages',
+        valueIn: function(value){
+            if (!value) {
+                value = [];
+            }
+            return value;
+        },
+        valueOut: function (field) {
+            var imageIds = [],
+                $imageIds = $('input[name="images[]"]', this);
+            $imageIds.each(function(){
+                imageIds.push($(this).val());
+            });
+            return imageIds;
+        }
+    });
 
 })();

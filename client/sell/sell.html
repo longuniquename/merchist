@@ -1,5 +1,16 @@
 <template name="sellView">
     <div class="sell-view">
-
+        <div class="container">
+            <h1 class="page-header">Sell new product</h1>
+            {{#autoForm collection="Products" id="sellForm" type="insert"}}
+                <fieldset>
+                    {{> afQuickField name='images' type="mcImages"}}
+                    {{> afQuickField name='title'}}
+                    {{> afQuickField name='description' rows=6}}
+                    {{> afQuickField name='price'}}
+                </fieldset>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            {{/autoForm}}
+        </div>
     </div>
 </template>

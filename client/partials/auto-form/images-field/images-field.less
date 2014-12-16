@@ -1,0 +1,31 @@
+@import (reference) '../../../lib/variables.import.less';
+@import (reference) '../../../lib/mixins.import.less';
+
+.mc-input-images {
+  .clearfix();
+
+  .add-image {
+    float: left;
+    height: 100px;
+    width: 100px;
+    background: white;
+    border-radius: @border-radius-base;
+    .shadow-z(1);
+  }
+
+  .image {
+    height: 100px;
+    width: 100px;
+    background: white;
+    border-radius: @border-radius-base;
+    overflow: hidden;
+    float: left;
+    .shadow-z(1);
+    margin: 0 10px 10px 0;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
