@@ -72,6 +72,8 @@
                 version: 'v2.2'
             });
         };
+    } else {
+        facebookConnectPlugin.browserInit('301234113401207');
     }
 
     Blaze.Meta = new function () {
@@ -105,7 +107,7 @@
     };
 
     if (Meteor.isCordova) {
-        Tracker.autorun(function(){
+        Tracker.autorun(function () {
             if (!Meteor.user()) {
                 Router.go('splash');
             }
