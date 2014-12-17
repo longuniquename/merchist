@@ -36,8 +36,7 @@ Products = new Mongo.Collection('products');
         },
         userId:                    {
             type:     String,
-            label:    "Seller",
-            optional: true
+            label:    "Seller"
         },
         isPublic:                  {
             type:         Boolean,
