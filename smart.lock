@@ -1,0 +1,18 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "cfs:access-point": {
+        "git": "https://github.com/mercher-inc/Meteor-cfs-access-point.git",
+        "branch": "master"
+      }
+    },
+    "packages": {
+      "cfs:access-point": {
+        "git": "https://github.com/mercher-inc/Meteor-cfs-access-point.git",
+        "branch": "master",
+        "commit": "642ad104e42aef5a02241c3a14e3ac95a5d9817e"
+      }
+    }
+  }
+}
