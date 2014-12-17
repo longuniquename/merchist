@@ -1,7 +1,9 @@
 @import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
 
 #mainToolbar {
   transition: background-color .25s;
+  .shadow-z(1);
 
   &.transparent {
     background: fade(@brand-primary, 0);
