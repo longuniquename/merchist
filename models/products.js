@@ -28,7 +28,7 @@ Products = new Mongo.Collection('products');
             decimal:  true,
             optional: true
         },
-        images:                    {
+        imageIds:                    {
             type:     [String],
             label:    "Images",
             minCount: 1,

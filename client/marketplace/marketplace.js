@@ -1,9 +1,9 @@
 (function () {
 
     Template.marketplace.helpers({
-        image: function(){
-            Meteor.subscribe("image", this.imageId);
-            return Images.findOne(this.imageId);
+        images: function(){
+            Meteor.subscribe("productImages", this._id);
+            return Images.find({_id: {$in: this.imageIds}});
         }
     });
 

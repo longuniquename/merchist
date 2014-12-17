@@ -4,7 +4,7 @@
             <h1 class="page-header">Sell new product</h1>
             {{#autoForm collection="Products" id="sellForm" type="insert"}}
                 <fieldset>
-                    {{> afQuickField name='images' type="mcImages"}}
+                    {{> afQuickField name='imageIds' type="mcImages"}}
                     {{> afQuickField name='title'}}
                     {{> afQuickField name='description' rows=6}}
                     {{> afQuickField name='price'}}

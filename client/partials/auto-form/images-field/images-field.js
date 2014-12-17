@@ -115,9 +115,10 @@
             }
             return value;
         },
-        valueOut: function (field) {
+        valueOut: function () {
+            var schemaKey = this.attr('data-schema-key');
             var imageIds = [],
-                $imageIds = $('input[name="images[]"]', this);
+                $imageIds = $('input[name="'+schemaKey+'[]"]', this);
             $imageIds.each(function () {
                 imageIds.push($(this).val());
             });
