@@ -104,6 +104,50 @@
                         });
                     });
             });
+        },
+        'click .cameraBtn': function (e, template) {
+            e.preventDefault();
+            if (Meteor.isCordova) {
+                navigator.camera.getPicture(
+                    function(imageData){
+                        var dataUrl = "data:image/jpeg;base64," + imageData;
+
+                        var newFile = new FS.File(dataUrl);
+                        newFile.userId = Meteor.userId();
+                        newFile.metadata = {
+                            shape:  'square'
+                        };
+
+                        getImageCropData(dataUrl)
+                            .then(function(cropData){
+                                newFile.metadata.crop = cropData;
+                                return newFile;
+                            })
+                            .then(function(newFile){
+                                Images.insert(newFile, function (err, fileObj) {
+                                    if (!err) {
+                                        template.data.imageIds.push(fileObj._id);
+                                        template.data.imageIdsDep.changed();
+                                    }
+                                });
+                            });
+                    },
+                    function(message){
+                        alert('Failed because: ' + message);
+                    },
+                    {
+                        quality:            90,
+                        sourceType:         Camera.PictureSourceType.CAMERA,
+                        destinationType:    Camera.DestinationType.DATA_URL,
+                        encodingType:       Camera.EncodingType.JPEG,
+                        cameraDirection:    Camera.Direction.BACK,
+                        mediaType:          Camera.MediaType.PICTURE,
+                        saveToPhotoAlbum:   false,
+                        correctOrientation: true
+                    }
+
+                );
+            }
         }
     });
 
