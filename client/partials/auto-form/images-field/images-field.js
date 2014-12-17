@@ -1,6 +1,39 @@
 (function () {
 
-    Template.mcInputImages.created = function(){
+    var getDataUrl = function(blob){
+        var reader = new FileReader();
+        return new Promise(function(resolve, reject){
+            reader.onload = function (e) {
+                resolve(e.target.result);
+            };
+            reader.readAsDataURL(blob);
+        });
+    };
+
+    var getImageCropData = function(dataUrl){
+        var image = new Image(),
+            cropData = {};
+        return new Promise(function(resolve, reject){
+            image.onload = function () {
+                cropData.top = 0;
+                cropData.left = 0;
+                cropData.size = 0;
+
+                if (image.height < image.width) {
+                    cropData.left = Math.ceil((image.width - image.height) / 2);
+                    cropData.size = image.height;
+                } else if (image.height > image.width) {
+                    cropData.top = Math.ceil((image.height - image.width) / 2);
+                    cropData.size = image.width;
+                }
+
+                resolve(cropData);
+            };
+            image.src = dataUrl;
+        });
+    };
+
+    Template.mcInputImages.created = function () {
         this.data.imageIds = [];
         this.data.imageIdsDep = new Tracker.Dependency;
     };
@@ -19,7 +52,7 @@
             if (!$fileInput.length) {
                 $fileInput = $('<input />');
                 $fileInput.attr({
-                    type: 'file',
+                    type:   'file',
                     accept: 'image/*'
                 });
                 $fileInput.prop({
@@ -47,23 +80,36 @@
             var $fileInput = template.$('.uploadBtn input[type="file"]');
             $fileInput.remove();
 
-            FS.Utility.eachFile(e, function(file) {
+            FS.Utility.eachFile(e, function (file) {
                 var newFile = new FS.File(file);
                 newFile.userId = Meteor.userId();
-                Images.insert(newFile, function (err, fileObj) {
-                    if (!err) {
-                        template.data.imageIds.push(fileObj._id);
-                        template.data.imageIdsDep.changed();
-                        console.log(fileObj);
-                    }
-                });
+                newFile.metadata = {
+                    shape:  'square'
+                };
+
+                getDataUrl(newFile.data.blob)
+                    .then(function(dataUrl){
+                        return getImageCropData(dataUrl);
+                    })
+                    .then(function(cropData){
+                        newFile.metadata.crop = cropData;
+                        return newFile;
+                    })
+                    .then(function(newFile){
+                        Images.insert(newFile, function (err, fileObj) {
+                            if (!err) {
+                                template.data.imageIds.push(fileObj._id);
+                                template.data.imageIdsDep.changed();
+                            }
+                        });
+                    });
             });
         }
     });
 
     AutoForm.addInputType('mcImages', {
         template: 'mcInputImages',
-        valueIn: function(value){
+        valueIn:  function (value) {
             if (!value) {
                 value = [];
             }
@@ -72,7 +118,7 @@
         valueOut: function (field) {
             var imageIds = [],
                 $imageIds = $('input[name="images[]"]', this);
-            $imageIds.each(function(){
+            $imageIds.each(function () {
                 imageIds.push($(this).val());
             });
             return imageIds;
