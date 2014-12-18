@@ -5,13 +5,22 @@
       "cfs:access-point": {
         "git": "https://github.com/mercher-inc/Meteor-cfs-access-point.git",
         "branch": "master"
+      },
+      "cfs:http-methods": {
+        "git": "https://github.com/mercher-inc/Meteor-http-methods.git",
+        "branch": "master"
       }
     },
     "packages": {
       "cfs:access-point": {
         "git": "https://github.com/mercher-inc/Meteor-cfs-access-point.git",
         "branch": "master",
-        "commit": "fa2dd3ffc7bda054543cd82db2166d2ac33d18f3"
+        "commit": "8b1edc00f364e6a919bce0b1d9fea09eb791dc95"
+      },
+      "cfs:http-methods": {
+        "git": "https://github.com/mercher-inc/Meteor-http-methods.git",
+        "branch": "master",
+        "commit": "de89ed10d1f1a9bd1038372fb7e4efdaba9b3b81"
       }
     }
   }

@@ -2,6 +2,9 @@
   "packages": {
     "cfs:access-point": {
       "git": "https://github.com/mercher-inc/Meteor-cfs-access-point.git"
+    },
+    "cfs:http-methods": {
+      "git": "https://github.com/mercher-inc/Meteor-http-methods.git"
     }
   }
 }

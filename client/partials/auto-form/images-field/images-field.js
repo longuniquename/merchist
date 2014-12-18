@@ -1,8 +1,8 @@
 (function () {
 
-    var getDataUrl = function(blob){
+    var getDataUrl = function (blob) {
         var reader = new FileReader();
-        return new Promise(function(resolve, reject){
+        return new Promise(function (resolve, reject) {
             reader.onload = function (e) {
                 resolve(e.target.result);
             };
@@ -10,10 +10,12 @@
         });
     };
 
-    var getImageCropData = function(dataUrl){
+    var cropImage = function (dataUrl) {
         var image = new Image(),
+            canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
             cropData = {};
-        return new Promise(function(resolve, reject){
+        return new Promise(function (resolve, reject) {
             image.onload = function () {
                 cropData.top = 0;
                 cropData.left = 0;
@@ -27,7 +29,22 @@
                     cropData.size = image.width;
                 }
 
-                resolve(cropData);
+                canvas.width = cropData.size;
+                canvas.height = cropData.size;
+
+                ctx.drawImage(
+                    image,
+                    cropData.left,
+                    cropData.top,
+                    cropData.size,
+                    cropData.size,
+                    0,
+                    0,
+                    cropData.size,
+                    cropData.size
+                );
+
+                resolve(canvas.toDataURL('image/png'));
             };
             image.src = dataUrl;
         });
@@ -80,63 +97,79 @@
             var $fileInput = template.$('.uploadBtn input[type="file"]');
             $fileInput.remove();
 
-            FS.Utility.eachFile(e, function (file) {
-                var newFile = new FS.File(file);
-                newFile.userId = Meteor.userId();
-                newFile.metadata = {
-                    shape:  'square'
-                };
+            //alert(e.currentTarget.files.length);
 
-                getDataUrl(newFile.data.blob)
-                    .then(function(dataUrl){
-                        return getImageCropData(dataUrl);
+            _.each(e.currentTarget.files, function(file){
+
+                var fileName = file.name;
+                //alert(fileName);
+
+                getDataUrl(file)
+                    .then(function (dataUrl) {
+                        //alert(dataUrl.slice(0, 100));
+                        return cropImage(dataUrl);
                     })
-                    .then(function(cropData){
-                        newFile.metadata.crop = cropData;
-                        return newFile;
-                    })
-                    .then(function(newFile){
+                    .then(function (dataUrl) {
+                        //alert(dataUrl.slice(0, 100));
+
+                        var newFile = new FS.File(dataUrl);
+                        newFile.userId = Meteor.userId();
+                        newFile.name(fileName);
+                        newFile.extension('png');
+
                         Images.insert(newFile, function (err, fileObj) {
                             if (!err) {
+                                window.testImage = fileObj;
+                                console.log(fileObj);
+                                alert(fileObj._id);
+                                alert(fileObj.name());
+
                                 template.data.imageIds.push(fileObj._id);
                                 template.data.imageIdsDep.changed();
+                            } else {
+                                alert(err);
                             }
                         });
                     });
             });
         },
-        'click .cameraBtn': function (e, template) {
+        'click .cameraBtn':                     function (e, template) {
             e.preventDefault();
             if (Meteor.isCordova) {
                 navigator.camera.getPicture(
-                    function(imageData){
+                    function (imageData) {
+
                         var dataUrl = "data:image/jpeg;base64," + imageData;
+                        //alert(dataUrl.slice(0, 100));
 
-                        var newFile = new FS.File(dataUrl);
-                        newFile.userId = Meteor.userId();
-                        newFile.metadata = {
-                            shape:  'square'
-                        };
+                        cropImage(dataUrl)
+                            .then(function (dataUrl) {
+                                //alert(dataUrl.slice(0, 100));
 
-                        getImageCropData(dataUrl)
-                            .then(function(cropData){
-                                newFile.metadata.crop = cropData;
-                                return newFile;
-                            })
-                            .then(function(newFile){
+                                var newFile = new FS.File(dataUrl);
+                                newFile.userId = Meteor.userId();
+                                newFile.name('cam.png');
+
                                 Images.insert(newFile, function (err, fileObj) {
                                     if (!err) {
+                                        window.testImage = fileObj;
+                                        console.log(fileObj);
+                                        alert(fileObj._id);
+                                        alert(fileObj.name());
+
                                         template.data.imageIds.push(fileObj._id);
                                         template.data.imageIdsDep.changed();
+                                    } else {
+                                        alert(err);
                                     }
                                 });
                             });
                     },
-                    function(message){
+                    function (message) {
                         alert('Failed because: ' + message);
                     },
                     {
-                        quality:            90,
+                        quality:            100,
                         sourceType:         Camera.PictureSourceType.CAMERA,
                         destinationType:    Camera.DestinationType.DATA_URL,
                         encodingType:       Camera.EncodingType.JPEG,
@@ -145,7 +178,6 @@
                         saveToPhotoAlbum:   false,
                         correctOrientation: true
                     }
-
                 );
             }
         }
@@ -162,7 +194,7 @@
         valueOut: function () {
             var schemaKey = this.attr('data-schema-key');
             var imageIds = [],
-                $imageIds = $('input[name="'+schemaKey+'[]"]', this);
+                $imageIds = $('input[name="' + schemaKey + '[]"]', this);
             $imageIds.each(function () {
                 imageIds.push($(this).val());
             });
