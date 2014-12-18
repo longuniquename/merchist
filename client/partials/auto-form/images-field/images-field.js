@@ -97,21 +97,15 @@
             var $fileInput = template.$('.uploadBtn input[type="file"]');
             $fileInput.remove();
 
-            //alert(e.currentTarget.files.length);
-
             _.each(e.currentTarget.files, function(file){
 
                 var fileName = file.name;
-                //alert(fileName);
 
                 getDataUrl(file)
                     .then(function (dataUrl) {
-                        //alert(dataUrl.slice(0, 100));
                         return cropImage(dataUrl);
                     })
                     .then(function (dataUrl) {
-                        //alert(dataUrl.slice(0, 100));
-
                         var newFile = new FS.File(dataUrl);
                         newFile.userId = Meteor.userId();
                         newFile.name(fileName);
@@ -121,8 +115,6 @@
                             if (!err) {
                                 window.testImage = fileObj;
                                 console.log(fileObj);
-                                alert(fileObj._id);
-                                alert(fileObj.name());
 
                                 template.data.imageIds.push(fileObj._id);
                                 template.data.imageIdsDep.changed();
@@ -140,11 +132,9 @@
                     function (imageData) {
 
                         var dataUrl = "data:image/jpeg;base64," + imageData;
-                        //alert(dataUrl.slice(0, 100));
 
                         cropImage(dataUrl)
                             .then(function (dataUrl) {
-                                //alert(dataUrl.slice(0, 100));
 
                                 var newFile = new FS.File(dataUrl);
                                 newFile.userId = Meteor.userId();
@@ -154,8 +144,6 @@
                                     if (!err) {
                                         window.testImage = fileObj;
                                         console.log(fileObj);
-                                        alert(fileObj._id);
-                                        alert(fileObj.name());
 
                                         template.data.imageIds.push(fileObj._id);
                                         template.data.imageIdsDep.changed();
