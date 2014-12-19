@@ -1,7 +1,5 @@
 (function () {
 
-    var metaKey;
-
     var fadeToolbar = function () {
         var $images = $('.images'),
             top = $(window).scrollTop(),
@@ -28,10 +26,6 @@
         $(window).bind('scroll', fadeToolbar);
         resizeImagesBlock();
         fadeToolbar();
-
-        metaKey = Blaze.Meta.registerMeta({
-            'og:image:url': Meteor.absoluteUrl(this.data.url({download: true, auth: false, filename: 'image'}).replace(/^\/+/, ''))
-        });
     };
 
     Template.marketplaceProductsViewImages.destroyed = function () {
@@ -44,9 +38,8 @@
     };
 
     Template.marketplaceProductsViewImages.helpers({
-        'image': function () {
-            Meteor.subscribe("image", this.imageId);
-            return Images.findOne(this.imageId);
+        images: function () {
+            return Images.find({_id: {$in: this.imageIds}});
         }
     });
 

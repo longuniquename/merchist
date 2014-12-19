@@ -3,47 +3,50 @@ Products = new Mongo.Collection('products');
 (function () {
 
     var ProductSchema = new SimpleSchema({
-        title:                     {
+        title:              {
             type:  String,
             label: "Title",
             max:   32
         },
-        subtitle:                  {
+        subtitle:           {
             type:     String,
             label:    "Subtitle",
             max:      64,
             optional: true
         },
-        description:               {
+        description:        {
             type:     String,
             label:    "Description",
             max:      2000,
             optional: true
         },
-        price:                     {
-            type:     Number,
-            label:    "Price",
-            min:      0.01,
-            max:      10000,
-            decimal:  true,
-            optional: true
+        price:              {
+            type:    Number,
+            label:   "Price",
+            min:     0.01,
+            max:     10000,
+            decimal: true
         },
-        imageIds:                    {
+        imageIds:           {
             type:     [String],
             label:    "Images",
             minCount: 1,
             maxCount: 10
         },
-        userId:                    {
-            type:     String,
-            label:    "Seller"
+        userId:             {
+            type:  String,
+            label: "Seller"
         },
-        isPublic:                  {
+        'facebook.actions': {
+            type:  [String],
+            label: "Facebook stories"
+        },
+        isPublic:           {
             type:         Boolean,
             label:        "Visibility",
             defaultValue: true
         },
-        createdAt:                 {
+        createdAt:          {
             type:      Date,
             autoValue: function () {
                 if (this.isInsert) {
@@ -55,7 +58,7 @@ Products = new Mongo.Collection('products');
                 }
             }
         },
-        updatedAt:                 {
+        updatedAt:          {
             type:      Date,
             autoValue: function () {
                 return new Date();
