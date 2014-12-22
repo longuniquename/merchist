@@ -12,7 +12,7 @@ jarsigner -digestalg SHA1 unaligned.apk Merchist
 ~/.meteor/android_bundle/android-sdk/build-tools/20.0.0/zipalign 4 unaligned.apk production.apk
 ```
 
-Deploy to AWS
+Deploy to AWS Elastic Beanstalk
 =============
 ```bash
 cd ~/work/mercher-inc/merchist
