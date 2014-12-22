@@ -20,6 +20,7 @@ rm -rf ../.dist
 meteor build ../.dist --server http://staging-merchist.elasticbeanstalk.com/ --architecture os.linux.x86_64
 cd ../.dist
 tar -zxvf merchist.tar.gz
+rm merchist.tar.gz
 cd bundle/
 node -e "require('fs').writeFileSync('./package.json',JSON.stringify({dependencies:JSON.parse(require('fs').readFileSync('./programs/server/package.json')).dependencies,scripts:{start:'node main.js'}}, null, \"\\t\"));"
 mkdir .elasticbeanstalk
