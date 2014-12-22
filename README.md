@@ -29,5 +29,3 @@ eb init Merchist --region us-west-2
 eb create staging -c staging-merchist -d
 eb deploy
 ```
-
-test hook
