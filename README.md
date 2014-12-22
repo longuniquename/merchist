@@ -24,4 +24,5 @@ cd bundle/
 node -e "require('fs').writeFileSync('./package.json',JSON.stringify({dependencies:JSON.parse(require('fs').readFileSync('./programs/server/package.json')).dependencies,scripts:{start:'node main.js'}}, null, \"\\t\"));"
 eb init Merchist --region us-west-2
 eb create staging -c staging-merchist -d
+eb deploy
 ```
