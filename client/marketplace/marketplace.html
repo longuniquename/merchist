@@ -1,34 +1,88 @@
 <template name="marketplace">
-    <div class="marketplace">
-        <div class="container">
-            <div class="row">
+    <div class="marketplace-view">
+        <div class="box">
             {{ #each products }}
-                <div class="col-xs-6 col-sm-4">
-                    <a class="product-card" href="{{pathFor route='products.view' data=this }}">
-                        {{ #if image }}
-                        <img src="{{ abs image.url }}" />
-                        {{ /if }}
-                        <div class="info">
-                            <h3>
+                <div class="item">
+                    <div class="item-header">
+                        <div class="seller">
+                            <div class="avatar">
+                                <img src="http://graph.facebook.com/v2.2/123456/picture?height=1000&type=normal&width=1000">
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group pull-right" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default">
+                                        <i class="mdi-communication-call"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        <i class="mdi-communication-email"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="name">Seller</div>
+                            <div class="status">
+                                {{ #if isOnline }}
+                                    <span class="text-success">Online</span>
+                                {{ else }}
+                                    <span class="text-muted">Offline</span>
+                                {{ /if }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <div class="item-images">
+                            <a href="{{pathFor route='products.view' data=this }}">
+                                {{ #if images }}
+                                    {{ #each images }}
+                                    <img src="{{ url }}" />
+                                    {{ /each }}
+                                {{ /if }}
+                            </a>
+                        </div>
+                        <div class="item-action">
+                            <button type="button" class="btn btn-fab btn-raised btn-primary">
+                                <i class="mdi-action-shopping-basket"></i>
+                            </button>
+                        </div>
+                        <div class="item-info">
+                            <h3 class="item-title">
                                 {{ #if title }}
                                     {{title}}
                                 {{ else }}
                                     <i>Draft product</i>
                                 {{ /if }}
                             </h3>
-                            <span class="price">
-                                {{ #if price }}
+                            {{ #if subtitle }}
+                                <h4 class="item-subtitle">{{subtitle}}</h4>
+                            {{ /if }}
+                            {{ #if price }}
+                                <span class="item-price">
                                     {{currency price}}
-                                {{ else }}
-                                    <i>No price specified</i>
-                                {{ /if }}
-                            </span>
+                                </span>
+                            {{ /if }}
+                            <div class="item-actions">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-action-favorite-outline"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-action-add-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="mdi-social-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             {{ /each }}
-            </div>
         </div>
     </div>
-    {{> sellButton}}
+    {{> sellButtonPartial}}
 </template>

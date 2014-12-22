@@ -10,7 +10,7 @@
     .images-edit,
     .images-view {
       overflow: hidden;
-      background: @color-main;
+      background: @brand-primary;
       position: absolute;
       top: 0;
       left: 0;
@@ -63,8 +63,8 @@
         padding: 0;
         position: absolute;
         right: 0;
-        top: @header-buttons-size + 8px;
-        width: @header-buttons-size;
+        top: @navbar-height + 8px;
+        width: @navbar-height;
         z-index: 10;
 
         ul.menu {
@@ -77,8 +77,8 @@
 
           li {
             display: block;
-            height: @header-buttons-size;
-            width: @header-buttons-size;
+            height: @navbar-height;
+            width: @navbar-height;
             margin: 0;
             padding: 0;
 
@@ -91,8 +91,8 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                width: @header-buttons-size;
-                height: @header-buttons-size;
+                width: @navbar-height;
+                height: @navbar-height;
                 font-size: 100px;
                 text-align: right;
                 filter: alpha(opacity=0);

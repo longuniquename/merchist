@@ -1,43 +1,9 @@
 @import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
 
 #mainToolbar {
-  background: @brand-primary;
-  height: 48px;
-  line-height: 48px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
   transition: background-color .25s;
-
-  .menuBtn, .backBtn, .cartBtn {
-    background: transparent;
-    display: block;
-    margin: 0;
-    padding: 0;
-
-    .icon-menu {
-      line {
-        stroke: white;
-      }
-    }
-
-    .icon-back {
-      polyline {
-        stroke: white;
-      }
-    }
-  }
-
-  .title {
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: @font-size-large;
-    text-transform: uppercase;
-    transition: color .25s;
-  }
+  .shadow-z(1);
 
   &.transparent {
     background: fade(@brand-primary, 0);

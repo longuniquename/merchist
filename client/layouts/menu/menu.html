@@ -1,132 +1,88 @@
 <template name="mainMenu">
-    <div id="mainMenu">
-        <div class="overlay"></div>
-        <div class="menu">
-            <div class="header">
-                <button class="closeBtn btn btn-icon">
-                    {{> iconCancel}}
-                </button>
-                {{> iconLogo}}
-                <h1 class="brand">
-                    Merchist
-                </h1>
-            </div>
-            <div class="menus">
-                <div class="divider">
-                    <h6>
-                        {{_ "menu.mainLinks.header"}}
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="{{pathFor route='marketplace'}}">
-                            {{_ "menu.mainLinks.marketplace.text"}}
-                        </a>
-                    </li>
-                    {{ #if ordersCount }}
-                    <li>
-                        <a href="{{pathFor route='orders'}}">
-                            {{_ "menu.mainLinks.orders.text"}}
-                            <span class="badge pull-right">{{ ordersCount}}</span>
-                        </a>
-                    </li>
-                    {{ /if }}
+    <div id="mainMenu" class="modal fade">
+        <div class="modal-menu">
+            <div class="modal-content">
+                <div class="header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     {{ #if currentUser }}
-                    <li>
-                        <a href="{{pathFor route='profile'}}">
-                            {{_ "menu.mainLinks.profile.text"}}
-                        </a>
-                    </li>
-                    {{ /if }}
-                </ul>
-                <div class="divider">
-                    <h6>
-                        {{_ "menu.management.header"}}
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked">
-                    {{ #each shops }}
-                    <li>
-                        <a href="{{pathFor route='shops.edit' data=this }}" class="shop">
-                            <div class="logo">
-                                <img src="{{ abs logo.url }}">
+                        <div class="profile">
+                            {{ #with currentUser}}
+                            <div class="avatar">
+                                <!--<img src="{{avatar}}">-->
+                                <i class="mdi-social-person no-avatar"></i>
                             </div>
-                            {{#if title}}
-                                {{ title }}
-                            {{else}}
-                                <i>
-                                    {{_ "menu.management.shop.title.none"}}
-                                </i>
-                            {{/if}}
-                        </a>
-                    </li>
-                    {{ /each }}
-                    <li>
-                        <a href="#" class="createShopBtn">
-                            {{> iconAdd}}
-                            {{_ "menu.management.createShopBtn.text"}}
-                        </a>
-                    </li>
-                </ul>
-                {{ #if currentUser.profile.isAdmin }}
-                <div class="divider">
-                    <h6>
-                        Admin
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="{{pathFor route='admin.users'}}">
-                            Users
-                        </a>
-                    </li>
-                </ul>
-                {{ /if }}
-                <div class="divider">
-                    <h6>
-                        {{_ "menu.infoLinks.header"}}
-                    </h6>
-                </div>
-                <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="{{pathFor route='policy'}}">
-                            {{_ "menu.infoLinks.policy.text"}}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{pathFor route='terms'}}">
-                            {{_ "menu.infoLinks.terms.text"}}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            {{ #if currentUser }}
-            <div class="profile">
-                {{ #with currentUser}}
-                    <div class="avatar">
-                        <img src="{{avatar}}">
-                    </div>
-                    <div class="info">
-                        <div class="name">
-                            {{ profile.firstName }}
-                            {{ profile.lastName }}
+                            <div class="info">
+                                <div class="name">
+                                    {{ profile.firstName }}
+                                    {{ profile.lastName }}
+                                </div>
+                                <div class="actions">
+                                    <button type="button" class="btn btn-default btn-xs logoutBtn">
+                                        {{_ "menu.profile.logoutBtn.text"}}
+                                    </button>
+                                </div>
+                            </div>
+                            {{ /with }}
                         </div>
-                        <div class="actions">
-                            <button class="btn btn-inverted btn-xs logoutBtn">
-                                {{_ "menu.profile.logoutBtn.text"}}
+                    {{ else }}
+                        <div class="auth">
+                            <button class="btn btn-inverted btn-lg btn-block authBtn">
+                                {{_ "menu.auth.authBtn.text"}}
                             </button>
                         </div>
-                    </div>
-                {{ /with }}
+                    {{ /if }}
+                </div>
+                <div class="content">
+                    <h4>
+                        My Merchist
+                    </h4>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="{{pathFor route='marketplace'}}">
+                                <i class="mdi-action-home"></i> {{_ "menu.mainLinks.marketplace.text"}}
+                            </a>
+                        </li>
+                        {{ #if ordersCount }}
+                        <li>
+                            <a href="{{pathFor route='orders'}}">
+                                <i class="mdi-action-receipt"></i> {{_ "menu.mainLinks.orders.text"}}
+                                <span class="badge pull-right">{{ ordersCount}}</span>
+                            </a>
+                        </li>
+                        {{ /if }}
+                        {{ #if currentUser }}
+                        <li>
+                            <a href="{{pathFor route='profile'}}">
+                                <i class="mdi-social-person"></i> {{_ "menu.mainLinks.profile.text"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor route='profile'}}">
+                                <i class="mdi-action-store"></i> My products
+                            </a>
+                        </li>
+                        {{ /if }}
+                    </ul>
+                    <hr>
+
+                    <h4>
+                        About Merchist
+                    </h4>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="{{pathFor route='policy'}}">
+                                {{_ "menu.infoLinks.policy.text"}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor route='terms'}}">
+                                {{_ "menu.infoLinks.terms.text"}}
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
             </div>
-            {{ else }}
-            <div class="auth">
-                <button class="btn btn-inverted btn-lg btn-block authBtn">
-                    {{_ "menu.auth.authBtn.text"}}
-                </button>
-            </div>
-            {{ /if }}
         </div>
     </div>
 </template>

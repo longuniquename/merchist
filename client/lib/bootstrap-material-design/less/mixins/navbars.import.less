@@ -1,0 +1,193 @@
+// Navbar variants
+//
+
+.navbar-material-variant(@background) when (luma(@background) >= 60%) {
+  .navbar-material-variant(@background, black);
+}
+
+.navbar-material-variant(@background) when (luma(@background) < 60%) {
+  .navbar-material-variant(@background, white);
+}
+
+.navbar-material-variant(@background, @color) {
+  background-color: @background;
+
+  .navbar-brand {
+    color: fade(@color, 84%);
+    &:hover,
+    &:focus {
+      color: @color;
+      background-color: fade(@color, 5%);
+    }
+  }
+
+  .navbar-text {
+    color: @color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: fade(@color, 84%);
+
+      &:hover,
+      &:focus {
+        color: @color;
+        background-color: fade(@color, 5%);
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @color;
+        background-color: fade(@color, 5%);
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @color;
+        background-color: fade(@color, 5%);
+      }
+    }
+  }
+
+  // Darken the responsive nav toggle
+  .navbar-toggle {
+    color: fade(@color, 84%);
+    .icon-bar {
+      background-color: fade(@color, 84%);
+    }
+    &:hover,
+    &:focus {
+      color: @color;
+      .icon-bar {
+        background-color: @color;
+      }
+    }
+  }
+
+  .navbar-collapse {
+    border-color: fade(@color, 5%);
+  }
+
+  // Dropdowns
+  .navbar-nav {
+    > .open {
+      > a {
+        &,
+        &:hover,
+        &:focus {
+          background-color: fade(@color, 5%);
+          color: @color;
+        }
+      }
+      .dropdown-menu {
+        background-color: @background;
+
+        > .dropdown-header {
+          border-color: fade(@color, 5%);
+        }
+
+        .divider {
+          background-color: fade(@color, 5%);
+        }
+
+        > li > a {
+          color: fade(@color, 84%);
+          &:hover,
+          &:focus {
+            color: @color;
+            background-color: fade(@color, 5%);
+          }
+        }
+
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @color;
+            background-color: fade(@color, 20%);
+          }
+        }
+
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: fade(@color, 50%);
+            background-color: fade(@color, 5%);
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-link {
+    color: fade(@color, 84%);
+    &:hover {
+      color: @color;
+    }
+  }
+
+  .btn-link {
+    color: fade(@color, 84%);
+    &:hover,
+    &:focus {
+      color: @color;
+    }
+    &[disabled],
+    fieldset[disabled] & {
+      &:hover,
+      &:focus {
+        color: fade(@color, 50%);
+      }
+    }
+  }
+
+  .navbar-header {
+    .btn.navbar-btn.btn-default {
+      .button-variant(@color, @background, @background);
+    }
+  }
+
+  .navbar-toolbar {
+    .btn.navbar-btn.btn-default {
+      .navbar-header .btn.navbar-btn.btn-default();
+    }
+  }
+
+  .navbar-collapse {
+    @media (min-width: @grid-float-breakpoint) {
+      .btn.navbar-btn.btn-default {
+        .navbar-header .btn.navbar-btn.btn-default();
+      }
+    }
+  }
+
+  .navbar-form {
+    .form-control-wrapper .form-control, .form-control {
+      border-color: @color;
+      color: @color;
+    }
+
+    .form-control-wrapper {
+      .material-input:before, input:focus ~ .material-input:after {
+        background-color: @color;
+      }
+    }
+    ::-webkit-input-placeholder {
+      color: @color;
+    }
+    :-moz-placeholder {
+      color: @color;
+    }
+    ::-moz-placeholder {
+      color: @color;
+    }
+    :-ms-input-placeholder {
+      color: @color;
+    }
+  }
+}

@@ -1,0 +1,160 @@
+.togglebutton {
+  vertical-align: middle;
+  &, * {
+    user-select: none;
+  }
+  label {
+    font-weight: 400;
+    cursor: pointer;
+    // Hide original checkbox
+    input[type=checkbox]:first-child {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    // Switch bg on
+    input[type=checkbox]:first-child:checked + .toggle {
+      background-color: fadeout(white, 50%);
+      // Handle on
+      &:after {
+        background-color: white;
+      }
+    }
+    // Switch bg off and disabled
+    .toggle,
+    input[type=checkbox][disabled]:first-child + .toggle {
+      content: "";
+      display: inline-block;
+      width: 30px;
+      height: 15px;
+      background-color: rgba(80, 80, 80, 0.7);
+      border-radius: 15px;
+      margin-right: 10px;
+      transition: background 0.3s ease;
+      vertical-align: middle;
+    }
+    // Handle off
+    .toggle:after {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: #F1F1F1;
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+      left: -5px;
+      top: -2px;
+      transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
+    }
+    // Handle disabled
+    input[type=checkbox][disabled]:first-child + .toggle:after,
+    input[type=checkbox][disabled]:checked:first-child + .toggle:after {
+      background-color: #BDBDBD;
+    }
+    // Ripple on
+    input[type=checkbox]:first-child:checked ~ .toggle:active:after {
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px fadeout(white, 90%);
+    }
+    // Ripple off and disabled
+    input[type=checkbox]:first-child ~ .toggle:active:after,
+    input[type=checkbox][disabled]:first-child ~ .toggle:active:after {
+      box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    input[type=checkbox]:first-child:checked + .toggle:after {
+      left: 15px;
+    }
+  }
+}
+
+.togglebutton-primary {
+  .togglebutton-material-variant(@brand-primary);
+}
+
+.togglebutton-success {
+  .togglebutton-material-variant(@brand-success);
+}
+
+.togglebutton-info {
+  .togglebutton-material-variant(@brand-info);
+}
+
+.togglebutton-warning {
+  .togglebutton-material-variant(@brand-warning);
+}
+
+.togglebutton-danger {
+  .togglebutton-material-variant(@brand-danger);
+}
+
+.togglebutton-material-red {
+  .togglebutton-material-variant(@red);
+}
+
+.togglebutton-material-pink {
+  .togglebutton-material-variant(@pink);
+}
+
+.togglebutton-material-purple {
+  .togglebutton-material-variant(@purple);
+}
+
+.togglebutton-material-deeppurple {
+  .togglebutton-material-variant(@deeppurple);
+}
+
+.togglebutton-material-indigo {
+  .togglebutton-material-variant(@indigo);
+}
+
+.togglebutton-material-blue {
+  .togglebutton-material-variant(@blue);
+}
+
+.togglebutton-material-lightblue {
+  .togglebutton-material-variant(@lightblue);
+}
+
+.togglebutton-material-cyan {
+  .togglebutton-material-variant(@cyan);
+}
+
+.togglebutton-material-teal {
+  .togglebutton-material-variant(@teal);
+}
+
+.togglebutton-material-lightgreen {
+  .togglebutton-material-variant(@lightgreen);
+}
+
+.togglebutton-material-lime {
+  .togglebutton-material-variant(@lime);
+}
+
+.togglebutton-material-lightyellow {
+  .togglebutton-material-variant(@lightyellow);
+}
+
+.togglebutton-material-orange {
+  .togglebutton-material-variant(@orange);
+}
+
+.togglebutton-material-deeporange {
+  .togglebutton-material-variant(@deeporange);
+}
+
+.togglebutton-material-grey {
+  .togglebutton-material-variant(@grey);
+}
+
+.togglebutton-material-bluegrey {
+  .togglebutton-material-variant(@bluegrey);
+}
+
+.togglebutton-material-brown {
+  .togglebutton-material-variant(@brown);
+}
+
+.togglebutton-material-lightgrey {
+  .togglebutton-material-variant(@lightgrey);
+}

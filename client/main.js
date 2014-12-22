@@ -2,6 +2,8 @@
 
     Meteor.subscribe("userData");
     Meteor.subscribe("myShops");
+    Meteor.subscribe("myImages");
+    Meteor.subscribe('userPresence');
 
     var cartId = localStorage["cartId"];
 
@@ -64,6 +66,17 @@
         return path;
     });
 
+    Template.registerHelper('isOnline', function () {
+        if (!this._id) {
+            return false;
+        }
+        var presence = Presences.findOne({userId: this._id});
+        if (!presence) {
+            return false;
+        }
+        return presence.state === 'online';
+    });
+
     if (!Meteor.isCordova) {
         window.fbAsyncInit = function () {
             FB.init({
@@ -72,6 +85,8 @@
                 version: 'v2.2'
             });
         };
+    } else {
+        facebookConnectPlugin.browserInit('301234113401207');
     }
 
     Blaze.Meta = new function () {
@@ -103,5 +118,13 @@
             delete meta[key];
         };
     };
+
+    if (Meteor.isCordova) {
+        Tracker.autorun(function () {
+            if (!Meteor.user()) {
+                Router.go('splash');
+            }
+        });
+    }
 
 })();

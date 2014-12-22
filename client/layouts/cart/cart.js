@@ -38,7 +38,7 @@
             });
         },
         "click .closeBtn":          function (e, template) {
-            template.$('#cart').removeClass('visible');
+            $('#cart .cart-view').modal('hide');
 
             ga('send', {
                 'hitType':       'event',

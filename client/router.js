@@ -1,9 +1,19 @@
-(function(){
+(function () {
 
     Router.route('/', function () {
         this.redirect('/marketplace');
     }, {
         name: 'root'
+    });
+
+    Router.route('/splash', function () {
+        if (Meteor.isCordova) {
+            this.render('splash');
+        } else {
+            this.redirect('/marketplace');
+        }
+    }, {
+        name: 'splash'
     });
 
     Router.route('/terms', function () {
@@ -85,7 +95,7 @@
             this.render('marketplace', {
                 data: {
                     products: function () {
-                        return Products.find({isPublic: true}, {sort: {title: 1}, limit: 20});
+                        return Products.find({isPublic: true}, {sort: {title: 1}, limit: 100});
                     }
                 }
             });
@@ -101,10 +111,10 @@
 
         this.layout('mainLayout', {
             data: {
-                back: function () {
+                back:  function () {
                     return Router.path('marketplace');
                 },
-                title: function(){
+                title: function () {
                     var product = Products.findOne(productId);
                     if (product) {
                         var title = product.title;
@@ -117,6 +127,7 @@
             }
         });
         this.wait(Meteor.subscribe('product', productId));
+        this.wait(Meteor.subscribe("productImages", productId));
 
         if (this.ready()) {
 
@@ -146,10 +157,10 @@
 
         this.layout('mainLayout', {
             data: {
-                back: function () {
+                back:  function () {
                     return Router.path('marketplace');
                 },
-                title: function(){
+                title: function () {
                     var shop = Shops.findOne(shopId);
                     if (shop) {
                         var title = shop.title;
@@ -228,7 +239,7 @@
 
         this.layout('mainLayout', {
             data: {
-                back: function () {
+                back:  function () {
                     return Router.path('orders');
                 },
                 title: 'Orders'
@@ -260,6 +271,19 @@
         name: 'orders.view'
     });
 
+    Router.route('/sell', function () {
+        this.layout('mainLayout', {
+            data: {
+                back:  function () {
+                    return Router.path('marketplace');
+                },
+                title: 'Sell'
+            }
+        });
+        this.render('sellView');
+    }, {
+        name: 'sell'
+    });
 
     Router.route('/management/shops/:_id', function () {
         var shopId = this.params._id;
@@ -356,5 +380,15 @@
     }, {
         name: 'admin.users'
     });
+
+    if (Meteor.isCordova) {
+        Router.onBeforeAction(function () {
+            if (!Meteor.userId()) {
+                this.render('splash');
+            } else {
+                this.next();
+            }
+        });
+    }
 
 })();

@@ -10,7 +10,7 @@
     Template.mainToolbar.events({
         "click .menuBtn": function(e, template){
             e.preventDefault();
-            $('#mainMenu').addClass('visible');
+            $('#mainMenu').modal('toggle');
 
             ga('send', {
                 'hitType':       'event',
@@ -21,7 +21,7 @@
         },
         "click .cartBtn": function(e, template){
             e.preventDefault();
-            $('#cart').addClass('visible');
+            $('#cart .cart-view').modal('toggle');
 
             ga('send', {
                 'hitType':       'event',

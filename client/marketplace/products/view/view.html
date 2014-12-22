@@ -2,16 +2,13 @@
     <div class="marketplace-products-view">
         {{ #with product }}
 
-        {{ #if image }}
-        {{ #with image }}
-        {{> marketplaceProductsViewImages }}
-        {{ /with }}
-        {{ /if }}
+            {{ #if imageIds }}
+            {{> marketplaceProductsViewImages }}
+            {{ /if }}
 
-        {{> marketplaceProductsViewDetails }}
-        {{> marketplaceProductsViewOther }}
+            {{> marketplaceProductsViewDetails }}
+            {{> marketplaceProductsViewOther }}
 
         {{ /with }}
     </div>
-    {{> sellButton}}
 </template>

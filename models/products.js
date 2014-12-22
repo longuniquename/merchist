@@ -3,92 +3,50 @@ Products = new Mongo.Collection('products');
 (function () {
 
     var ProductSchema = new SimpleSchema({
-        title:                     {
+        title:              {
             type:  String,
             label: "Title",
             max:   32
         },
-        subtitle:                  {
+        subtitle:           {
             type:     String,
             label:    "Subtitle",
             max:      64,
             optional: true
         },
-        description:               {
+        description:        {
             type:     String,
             label:    "Description",
             max:      2000,
             optional: true
         },
-        price:                     {
-            type:     Number,
-            label:    "Price",
-            min:      0.01,
-            max:      10000,
-            decimal:  true,
-            optional: true
+        price:              {
+            type:    Number,
+            label:   "Price",
+            min:     0.01,
+            max:     10000,
+            decimal: true
         },
-        available:                 {
-            type:         Number,
-            label:        "Available in stock",
-            defaultValue: 1
-        },
-        'shipping.cost':           {
-            type:     Number,
-            label:    "Shipping",
-            min:      0.01,
-            max:      10000,
-            decimal:  true,
-            optional: true
-        },
-        images:                    {
+        imageIds:           {
             type:     [String],
             label:    "Images",
-            maxCount: 10,
-            optional: true
+            minCount: 1,
+            maxCount: 10
         },
-        'attributes.ageGroup':     {
-            type:          String,
-            allowedValues: [
-                'kids',
-                'adult'
-            ],
-            optional:      true
+        userId:             {
+            type:  String,
+            label: "Seller"
         },
-        'attributes.condition':    {
-            type:          String,
-            allowedValues: [
-                'new',
-                'refurbished',
-                'used'
-            ],
-            optional:      true
+        'facebook.actions': {
+            type:  [String],
+            label: "Facebook stories"
         },
-        'attributes.targetGender': {
-            type:          String,
-            allowedValues: [
-                'female',
-                'male',
-                'unisex'
-            ],
-            optional:      true
-        },
-        shopId:                    {
-            type:     String,
-            label:    "Shop",
-            optional: true
-        },
-        userId:                    {
-            type:     String,
-            label:    "Seller",
-            optional: true
-        },
-        isPublic:                  {
+        isPublic:           {
             type:         Boolean,
             label:        "Visibility",
             defaultValue: true
         },
-        createdAt:                 {
+        createdAt:          {
             type:      Date,
             autoValue: function () {
                 if (this.isInsert) {
@@ -100,12 +58,14 @@ Products = new Mongo.Collection('products');
                 }
             }
         },
-        updatedAt:                 {
+        updatedAt:          {
             type:      Date,
             autoValue: function () {
                 return new Date();
             }
         }
     });
+
+    Products.attachSchema(ProductSchema);
 
 })();
