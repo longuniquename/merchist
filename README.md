@@ -22,6 +22,7 @@ cd ../.dist
 tar -zxvf merchist.tar.gz
 cd bundle/
 node -e "require('fs').writeFileSync('./package.json',JSON.stringify({dependencies:JSON.parse(require('fs').readFileSync('./programs/server/package.json')).dependencies,scripts:{start:'node main.js'}}, null, \"\\t\"));"
+mkdir .elasticbeanstalk
 eb init Merchist --region us-west-2
 eb create staging -c staging-merchist -d
 eb deploy
