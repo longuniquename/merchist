@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c60dcfce-71e8-45a2-9887-6dcd7f9fe24d" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Build_Template</name>
+  <settings>
+    <options>
+      <option name="artifactRules" value=".dist/bundle =&gt; bundle.zip&#xA;.dist/android/unaligned.apk" />
+      <option name="buildNumberPattern" value="v0.1.6+%build.counter%" />
+      <option name="maximumNumberOfBuilds" value="1" />
+    </options>
+    <parameters />
+    <build-runners>
+      <runner id="RUNNER_5" name="Cleanup" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[rm -rf .dist
+rm -rf ../.dist]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_12" name="mrt install" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="mrt install" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_1" name="Meteor build" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="meteor build ../.dist --server %ROOT_URL% --architecture os.linux.x86_64" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_10" name="Move .dist" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="mv ../.dist .dist" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_2" name="Unzip bundle" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[tar -zxvf %teamcity.build.default.checkoutDir%.tar.gz
+rm %teamcity.build.default.checkoutDir%.tar.gz]]></param>
+          <param name="teamcity.build.workingDir" value=".dist" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_3" name="Create package.json" type="jonnyzzz.node">
+        <parameters>
+          <param name="node_execution_mode" value="script" />
+          <param name="node_script_text"><![CDATA[var fs = require('fs');
+
+var oldData = JSON.parse(fs.readFileSync('./programs/server/package.json')),
+    newData = {
+        dependencies: oldData.dependencies,
+        scripts:      {
+            start: 'node main.js'
+        }
+    };
+
+fs.writeFileSync('./package.json', JSON.stringify(newData, null, "\t"));]]></param>
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_4" name="Set ENV variables" type="jonnyzzz.node">
+        <parameters>
+          <param name="node_execution_mode" value="script" />
+          <param name="node_script_text"><![CDATA[var fs = require('fs'),
+    config = {
+        "option_settings": [
+            {
+                "option_name": "AWS_SECRET_KEY",
+                "value":       "%AWS_SECRET_KEY%"
+            },
+            {
+                "option_name": "AWS_ACCESS_KEY_ID",
+                "value":       "%AWS_ACCESS_KEY_ID%"
+            },
+            {
+                "option_name": "FACEBOOK_APP_ID",
+                "value":       "%FACEBOOK_APP_ID%"
+            },
+            {
+                "option_name": "FACEBOOK_APP_SECRET",
+                "value":       "%FACEBOOK_APP_SECRET%"
+            },
+            {
+                "option_name": "FACEBOOK_APP_NAMESPACE",
+                "value":       "%FACEBOOK_APP_NAMESPACE%"
+            },
+            {
+                "option_name": "MONGO_URL",
+                "value":       "%MONGO_URL%"
+            },
+            {
+                "option_name": "ROOT_URL",
+                "value":       "%ROOT_URL%"
+            },
+            {
+                "namespace":   "aws:elasticbeanstalk:container:nodejs",
+                "option_name": "ProxyServer",
+                "value":       "nginx"
+            },
+            {
+                "namespace":   "aws:elasticbeanstalk:container:nodejs",
+                "option_name": "GzipCompression",
+                "value":       "true"
+            },
+            {
+                "namespace":   "aws:elasticbeanstalk:container:nodejs:staticfiles",
+                "option_name": "/public",
+                "value":       "/public"
+            }
+        ],
+        "packages":        {
+            "yum": {
+                "ImageMagick-devel": [],
+                "ImageMagick":       []
+            }
+        }
+    };
+
+fs.mkdirSync('.ebextensions');
+fs.writeFileSync('.ebextensions/app.config', JSON.stringify(config, null, "\t"));]]></param>
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_9" name="Web sockets fix" type="jonnyzzz.node">
+        <parameters>
+          <param name="node_execution_mode" value="script" />
+          <param name="node_script_text"><![CDATA[var fs = require('fs'),
+    config = {
+        "container_commands": {
+            "01_nginx_static": {
+                "command": "sed -i '/\\s*proxy_set_header\\s*Connection/c \\\n        proxy_set_header Upgrade $http_upgrade;\\\n        proxy_set_header Connection \"upgrade\";\\\n  ' /tmp/deployment/config/#etc#nginx#conf.d#00_elastic_beanstalk_proxy.conf\n"
+            }
+        }
+    };
+
+if (!fs.existsSync('.ebextensions')) {
+    fs.mkdirSync('.ebextensions');
+}
+fs.writeFileSync('.ebextensions/ws.config', JSON.stringify(config, null, "\t"));]]></param>
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_6" name="Configure EB" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[mkdir .elasticbeanstalk
+printf "branch-defaults:\n  default:\n    environment: master" >> .elasticbeanstalk/config.yml
+eb init %APPLICATION_NAME% --region us-west-2]]></param>
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_8" name="Set EB environment" type="jonnyzzz.node">
+        <parameters>
+          <param name="node_execution_mode" value="script" />
+          <param name="node_script_text"><![CDATA[var exec = require('child_process').exec,
+    envName = '%ENVIRONMENT_NAME%';
+
+exec('eb list', function(error, stdout, stderr) {
+    if (error !== null) {
+        throw new Error(error);
+    }
+    
+    var existingEnvs = stdout.split("\n");
+    
+    for (var i = 0; i < existingEnvs.length; i++) {
+        var current = false;
+        
+        if (existingEnvs[i]) {
+            var env = existingEnvs[i],
+                envData;
+            envData = env.split(' ');
+            
+            if (envData.length === 2 && envData[0] === '*') {
+                env = envData[1];
+                current = true;
+            } else if (envData.length !== 1) {
+                throw new Error('Unknown environment string: ' + env);
+            }
+            
+            if (env === envName) {
+                if (current) {
+                    console.log('Environment ' + envName + ' already exists and set as current.');
+                    return;
+                } else {
+                    console.log('Environment ' + envName + ' already exists. Setting as current.');
+                    exec('eb use ' + envName, function(error) {
+                        if (error !== null) {
+                            throw new Error(error);
+                        }
+                    });
+                    return;
+                }
+            }
+        }
+    }
+
+    console.log('Environment ' + envName + ' does not exists.');
+    exec('eb create ' + envName + ' -d --single -c %CNAME_PREFIX% -t webserver -i t1.micro -r us-west-2', function(error) {
+        if (error !== null) {
+            throw new Error(error);
+        }
+    });
+});]]></param>
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_7" name="EB deploy" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="eb deploy -l %system.build.number%" />
+          <param name="teamcity.build.workingDir" value=".dist/bundle" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="Merchist_Merchist" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:refs/heads/*" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="+:**" />
+        </parameters>
+      </build-trigger>
+      <build-trigger id="TRIGGER_1" type="schedulingTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="cronExpression_dm" value="*" />
+          <param name="cronExpression_dw" value="?" />
+          <param name="cronExpression_hour" value="*" />
+          <param name="cronExpression_min" value="0" />
+          <param name="cronExpression_month" value="*" />
+          <param name="cronExpression_sec" value="0" />
+          <param name="cronExpression_year" value="*" />
+          <param name="dayOfWeek" value="Sunday" />
+          <param name="enforceCleanCheckout" value="true" />
+          <param name="hour" value="0" />
+          <param name="minute" value="0" />
+          <param name="schedulingPolicy" value="daily" />
+          <param name="timezone" value="SERVER" />
+          <param name="triggerBuildWithPendingChangesOnly" value="true" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_1" type="VcsLabeling">
+        <parameters>
+          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="labelingPattern" value="%system.build.number%" />
+          <param name="successfulOnly" value="true" />
+          <param name="vcsRootId" value="Merchist_Merchist" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup>
+      <policy type="builds" cleanup-level="ARTIFACTS">
+        <parameters>
+          <param name="keepBuilds.count" value="10" />
+        </parameters>
+      </policy>
+    </cleanup>
+  </settings>
+</template>
+
