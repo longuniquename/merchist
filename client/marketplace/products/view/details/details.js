@@ -3,8 +3,10 @@
     var metaKey;
 
     Template.marketplaceProductsViewDetails.rendered = function () {
+        var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
+
         metaKey = Blaze.Meta.registerMeta({
-            'fb:app_id':              '301234113401207',
+            'fb:app_id':              facebookConfig.appId,
             'og:type':                'product',
             'og:url':                 Router.url('products.view', this.data),
             'og:title':               this.data.title,
