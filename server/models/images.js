@@ -11,11 +11,7 @@ var thumbsStore = new FS.Store.S3("thumbs", {
     secretAccessKey: "49SGIJbDcH3oOfZ2SrTzOcxrfubZUBUHl6IwZbym",
     bucket:          "merchist-staging",
     beforeWrite:     function (fileObj) {
-        return {
-            name:      'thumb.png',
-            extension: 'png',
-            type:      'image/png'
-        };
+        fileObj.name('thumb.png', {store: "thumbs", save: false});
     },
     transformWrite:  function (fileObj, readStream, writeStream) {
         gm(readStream).resize(200).stream('PNG').pipe(writeStream);
