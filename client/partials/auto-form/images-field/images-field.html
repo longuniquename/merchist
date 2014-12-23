@@ -2,8 +2,18 @@
     <div class="mc-input-images" {{ atts }}>
         {{ #each images }}
             <div class="image">
-                <img src="{{ url store='xs' }}">
-                <input type="hidden" value="{{ _id }}" name="{{ ../atts.name }}[]" />
+                {{ #if isReady 's' }}
+                    <img src="{{ this.url store='s' }}">
+                {{ else }}
+                    <div class="loading">
+                        <svg class="loader" height="20px" width="70px" viewBox="0 0 70 20">
+                            <circle r="4" cy="10" cx="10" ></circle>
+                            <circle r="4" cy="10" cx="35" ></circle>
+                            <circle r="4" cy="10" cx="60" ></circle>
+                        </svg>
+                    </div>
+                {{ /if }}
+                <input type="hidden" value="{{ this._id }}" name="{{ ../atts.name }}[]" />
             </div>
         {{ /each }}
 

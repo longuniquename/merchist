@@ -59,6 +59,9 @@
         images: function () {
             Template.instance().data.imageIdsDep.depend();
             return Images.find({_id: {$in: Template.instance().data.imageIds}});
+        },
+        isReady: function(store){
+            return this.isUploaded() && this.hasStored(store);
         }
     });
 
