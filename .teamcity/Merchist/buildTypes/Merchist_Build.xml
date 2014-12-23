@@ -115,7 +115,13 @@ fs.writeFileSync('./package.json', JSON.stringify(newData, null, "\t"));]]></par
                 "option_name": "/public",
                 "value":       "/public"
             }
-        ]
+        ],
+        "packages":        {
+            "yum": {
+                "ImageMagick-devel": [],
+                "ImageMagick":       []
+            }
+        }
     };
 
 fs.mkdirSync('.ebextensions');
