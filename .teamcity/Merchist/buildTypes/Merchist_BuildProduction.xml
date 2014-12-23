@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="139cd688-c4eb-4ecd-a2fa-63d9d5922efd" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Build Production</name>
+  <description />
+  <settings ref="Merchist_BuildTemplate">
+    <parameters>
+      <param name="CNAME_PREFIX" value="merchist" />
+      <param name="ENVIRONMENT_NAME" value="production" />
+      <param name="FACEBOOK_APP_ID" value="301233526734599" />
+      <param name="FACEBOOK_APP_NAMESPACE" value="merchist" />
+      <param name="FACEBOOK_APP_SECRET" value="8fef7d09d4b765b41138cdb1ec58181c" />
+      <param name="MONGO_URL" value="mongodb://merchist:EJKnUf7RYvtV6tsw@lighthouse.5.mongolayer.com:10006,lighthouse.2.mongolayer.com:10135/production" />
+      <param name="ROOT_URL" value="http://merchist.com/" />
+    </parameters>
+    <build-runners order="RUNNER_5, RUNNER_12, RUNNER_1, RUNNER_10, RUNNER_2, RUNNER_3, RUNNER_4, RUNNER_9, RUNNER_6, RUNNER_8, RUNNER_7" />
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <cleanup />
+  </settings>
+</build-type>
+
