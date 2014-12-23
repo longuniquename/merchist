@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
 
     var createAdmin = function(email){
         var user = Meteor.users.findOne({'emails.address': email});
@@ -24,7 +24,7 @@
         createAdmin('sam.pogosov@mercher.net');
     });
 
-})();
+})();*/
 
 var app = WebApp.connectHandlers;
 
