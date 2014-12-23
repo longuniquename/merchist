@@ -117,7 +117,6 @@
                         Images.insert(newFile, function (err, fileObj) {
                             if (!err) {
                                 window.testImage = fileObj;
-                                console.log(fileObj);
 
                                 template.data.imageIds.push(fileObj._id);
                                 template.data.imageIdsDep.changed();
@@ -146,7 +145,6 @@
                                 Images.insert(newFile, function (err, fileObj) {
                                     if (!err) {
                                         window.testImage = fileObj;
-                                        console.log(fileObj);
 
                                         template.data.imageIds.push(fileObj._id);
                                         template.data.imageIdsDep.changed();
