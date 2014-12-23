@@ -5,8 +5,19 @@ var imageStore = new FS.Store.S3("images", {
     bucket:          "merchist-staging"
 });
 
+var thumbsStore = new FS.Store.S3("thumbs", {
+    region:          "us-west-2",
+    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
+    secretAccessKey: "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",
+    bucket:          "merchist-staging",
+    transformWrite: function(fileObj, readStream, writeStream) {
+        // Transform the image into a 10x10px thumbnail
+        gm(readStream, fileObj.name()).resize('200', '200').stream().pipe(writeStream);
+    }
+});
+
 Images = new FS.Collection("images", {
-    stores: [imageStore],
+    stores: [imageStore, thumbsStore],
     filter: {
         maxSize: 1024 * 1024 * 10,
         allow:   {
