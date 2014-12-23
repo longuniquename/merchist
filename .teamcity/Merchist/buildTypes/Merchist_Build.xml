@@ -251,6 +251,16 @@ exec('eb list', function(error, stdout, stderr) {
         </parameters>
       </build-trigger>
     </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_1" type="VcsLabeling">
+        <parameters>
+          <param name="branchFilter" value="+:&lt;default&gt;" />
+          <param name="labelingPattern" value="%system.build.number%" />
+          <param name="successfulOnly" value="true" />
+          <param name="vcsRootId" value="Merchist_Merchist" />
+        </parameters>
+      </extension>
+    </build-extensions>
     <cleanup>
       <policy type="builds" cleanup-level="ARTIFACTS">
         <parameters>
