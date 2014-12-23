@@ -30,4 +30,5 @@ aldeed:autoform
 aldeed:collection2
 tmeasday:presence
 cfs:gridfs
+cfs:graphicsmagick
 
