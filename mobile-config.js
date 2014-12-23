@@ -4,7 +4,7 @@ App.info({
     name:        'Merchist',
     description: 'Sell socially!',
     author:      'Mercher, Inc.',
-    email:       'contact@mercher.net',
+    email:       'contact@merchist.com',
     website:     'http://merchist.com/'
 });
 
