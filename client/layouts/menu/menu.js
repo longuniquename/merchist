@@ -17,6 +17,10 @@
             var cartId = localStorage["cartId"];
             Meteor.subscribe("myOrders", cartId);
             return Orders.find().fetch().length;
+        },
+        'avatar': function(){
+            Meteor.subscribe("image", this.profile.avatarId);
+            return Images.findOne(this.profile.avatarId);
         }
     });
 

@@ -8,8 +8,11 @@
                         <div class="profile">
                             {{ #with currentUser}}
                             <div class="avatar">
-                                <!--<img src="{{avatar}}">-->
+                                {{ #if avatar }}
+                                <img src="{{avatar.url store="xs"}}">
+                                {{ else }}
                                 <i class="mdi-social-person no-avatar"></i>
+                                {{ /if }}
                             </div>
                             <div class="info">
                                 <div class="name">
