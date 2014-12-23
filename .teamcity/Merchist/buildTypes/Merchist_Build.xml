@@ -227,8 +227,8 @@ exec('eb list', function(error, stdout, stderr) {
       <build-trigger id="vcsTrigger" type="vcsTrigger">
         <parameters>
           <param name="branchFilter" value="+:refs/heads/*" />
-          <param name="perCheckinTriggering" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />
+          <param name="triggerRules" value="+:**" />
         </parameters>
       </build-trigger>
       <build-trigger id="TRIGGER_1" type="schedulingTrigger">
