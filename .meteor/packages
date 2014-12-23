@@ -29,5 +29,5 @@ spiderable
 aldeed:autoform
 aldeed:collection2
 tmeasday:presence
-cfs:filesystem
+cfs:gridfs
 
