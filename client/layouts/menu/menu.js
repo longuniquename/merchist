@@ -101,6 +101,21 @@
             $dlg.on('hidden.bs.modal', function (e) {
                 Blaze.remove(view);
             })
+        },
+        'click .facebookBtn': function (e, template) {
+            e.preventDefault();
+
+            Meteor.loginWithFacebook(
+                {
+                    requestPermissions: ['public_profile', 'email', 'user_friends'],
+                    loginStyle:         'popup'
+                },
+                function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                }
+            );
         }
     });
 

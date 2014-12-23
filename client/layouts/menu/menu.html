@@ -17,7 +17,7 @@
                                     {{ profile.lastName }}
                                 </div>
                                 <div class="actions">
-                                    <button type="button" class="btn btn-default btn-xs logoutBtn">
+                                    <button type="button" class="btn btn-default btn-sm logoutBtn">
                                         {{_ "menu.profile.logoutBtn.text"}}
                                     </button>
                                 </div>
@@ -26,8 +26,9 @@
                         </div>
                     {{ else }}
                         <div class="auth">
-                            <button class="btn btn-inverted btn-lg btn-block authBtn">
-                                {{_ "menu.auth.authBtn.text"}}
+                            <h3>Join your friends on Merchist!</h3>
+                            <button class="btn btn-facebook btn-block facebookBtn">
+                                Sign in with Facebook
                             </button>
                         </div>
                     {{ /if }}

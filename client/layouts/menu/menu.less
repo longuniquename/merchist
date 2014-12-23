@@ -7,6 +7,13 @@
     padding: @grid-gutter-width / 2;
     color: white;
 
+    .auth {
+      h3 {
+        margin-top: 0;
+        margin-bottom: @grid-gutter-width;
+      }
+    }
+
     .profile {
       .clearfix();
 
@@ -34,6 +41,19 @@
           background: darken(@brand-primary, 5%);
         }
       }
+
+      .name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: @font-size-large;
+        margin-bottom: @grid-gutter-width / 4;
+      }
+    }
+
+    .close {
+      color: white;
+      text-shadow: 0 1px 0 darken(@brand-primary, 25%);
     }
   }
 
