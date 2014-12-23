@@ -5,6 +5,7 @@
   <settings>
     <options>
       <option name="artifactRules" value=".dist/bundle =&gt; bundle.zip&#xA;.dist/android/unaligned.apk" />
+      <option name="buildNumberPattern" value="0.1.6+%build.counter%" />
       <option name="maximumNumberOfBuilds" value="1" />
     </options>
     <parameters />
