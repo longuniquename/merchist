@@ -5,7 +5,7 @@ App.info({
     description: 'Sell socially!',
     author:      'Mercher, Inc.',
     email:       'contact@mercher.net',
-    website:     'http://merchist.meteor.com/'
+    website:     'http://merchist.com/'
 });
 
 App.icons({
