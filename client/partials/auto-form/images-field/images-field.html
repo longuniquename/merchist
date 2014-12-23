@@ -2,7 +2,7 @@
     <div class="mc-input-images" {{ atts }}>
         {{ #each images }}
             <div class="image">
-                <img src="{{ url }}">
+                <img src="{{ url store='xs' }}">
                 <input type="hidden" value="{{ _id }}" name="{{ ../atts.name }}[]" />
             </div>
         {{ /each }}
