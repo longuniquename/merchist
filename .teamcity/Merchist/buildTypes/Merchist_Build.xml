@@ -212,7 +212,7 @@ exec('eb list', function(error, stdout, stderr) {
       </runner>
       <runner id="RUNNER_7" name="EB deploy" type="simpleRunner">
         <parameters>
-          <param name="script.content" value="eb deploy -l build-%system.build.number%" />
+          <param name="script.content" value="eb deploy -l %system.build.number%" />
           <param name="teamcity.build.workingDir" value=".dist/bundle" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
