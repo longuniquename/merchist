@@ -11,8 +11,7 @@ var thumbsStore = new FS.Store.S3("thumbs", {
     secretAccessKey: "49SGIJbDcH3oOfZ2SrTzOcxrfubZUBUHl6IwZbym",
     bucket:          "merchist-staging",
     transformWrite: function(fileObj, readStream, writeStream) {
-        // Transform the image into a 10x10px thumbnail
-        gm(readStream, fileObj.name()).resize('200', '200').stream().pipe(writeStream);
+        gm(readStream, fileObj.name()).resize(200).stream().pipe(writeStream);
     }
 });
 
