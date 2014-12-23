@@ -9,7 +9,7 @@ var thumbsStore = new FS.Store.S3("thumbs", {
     region:          "us-west-2",
     accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
     secretAccessKey: "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",
-    bucket:          "merchist-staging",
+    bucket:          "merchist-staging.thumbs",
     transformWrite: function(fileObj, readStream, writeStream) {
         gm(readStream, fileObj.name()).resize(200).stream().pipe(writeStream);
     }
