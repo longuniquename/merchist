@@ -30,4 +30,9 @@ eb create staging -c staging-merchist -d
 eb deploy
 ```
 
+Building mobile apps
+====================
+```bash
+meteor build --server http://merchist.com/ --directory ~/work/mercher-inc/release
+```
 
