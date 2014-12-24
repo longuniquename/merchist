@@ -34,5 +34,7 @@ Building mobile apps
 ====================
 ```bash
 meteor build --server http://merchist.com/ --directory ~/work/mercher-inc/release
+jarsigner -sigalg SHA1withRSA -digestalg SHA1 ~/work/mercher-inc/release/android/unaligned.apk Merchist
+~/.meteor/android_bundle/android-sdk/build-tools/21.0.0/zipalign -v 4 ~/work/mercher-inc/release/android/unaligned.apk ~/work/mercher-inc/release/android/production.apk
 ```
 
