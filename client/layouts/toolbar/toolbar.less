@@ -2,13 +2,10 @@
 @import (reference) '../../lib/mixins.import.less';
 
 #mainToolbar {
-  transition: background-color .25s;
-  .shadow-z(1);
+  transition: box-shadow @transition-duration-base @transition-timing-function-base;
+  .shadow-z(0);
 
-  &.transparent {
-    background: fade(@brand-primary, 0);
-    .title {
-      color: fadeout(white, 100%);
-    }
+  &.navbar-raised {
+    .shadow-z(1);
   }
 }

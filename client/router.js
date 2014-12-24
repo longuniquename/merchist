@@ -17,11 +17,7 @@
     });
 
     Router.route('/terms', function () {
-        this.layout('mainLayout', {
-            data: {
-                title: 'Terms of service'
-            }
-        });
+        this.layout('mainLayout');
         this.render('terms');
 
         ga('send', {
@@ -35,11 +31,7 @@
     });
 
     Router.route('/policy', function () {
-        this.layout('mainLayout', {
-            data: {
-                title: 'Privacy policy'
-            }
-        });
+        this.layout('mainLayout');
         this.render('policy');
 
         ga('send', {
@@ -53,11 +45,7 @@
     });
 
     Router.route('/profile', function () {
-        this.layout('mainLayout', {
-            data: {
-                title: 'Profile'
-            }
-        });
+        this.layout('mainLayout');
         this.wait(Meteor.subscribe('userData'));
 
         ga('send', {
@@ -77,11 +65,7 @@
     });
 
     Router.route('/marketplace', function () {
-        this.layout('mainLayout', {
-            data: {
-                title: 'Marketplace'
-            }
-        });
+        this.layout('mainLayout');
         this.wait(Meteor.subscribe('products'));
 
         ga('send', {
@@ -113,16 +97,6 @@
             data: {
                 back:  function () {
                     return Router.path('marketplace');
-                },
-                title: function () {
-                    var product = Products.findOne(productId);
-                    if (product) {
-                        var title = product.title;
-                        if (product.subtitle) {
-                            title += ' / ' + product.subtitle;
-                        }
-                        return title;
-                    }
                 }
             }
         });
@@ -159,16 +133,6 @@
             data: {
                 back:  function () {
                     return Router.path('marketplace');
-                },
-                title: function () {
-                    var shop = Shops.findOne(shopId);
-                    if (shop) {
-                        var title = shop.title;
-                        if (shop.subtitle) {
-                            title += ' / ' + shop.subtitle;
-                        }
-                        return title;
-                    }
                 }
             }
         });
@@ -198,11 +162,7 @@
     });
 
     Router.route('/orders', function () {
-        this.layout('mainLayout', {
-            data: {
-                title: 'Orders'
-            }
-        });
+        this.layout('mainLayout');
         var cartId = localStorage["cartId"];
 
         this.wait(Meteor.subscribe('myOrders', cartId));
@@ -241,8 +201,7 @@
             data: {
                 back:  function () {
                     return Router.path('orders');
-                },
-                title: 'Orders'
+                }
             }
         });
 
@@ -276,8 +235,7 @@
             data: {
                 back:  function () {
                     return Router.path('marketplace');
-                },
-                title: 'Sell'
+                }
             }
         });
         this.render('sellView');

@@ -62,6 +62,9 @@
         },
         isReady: function(store){
             return this.isUploaded() && this.hasStored(store);
+        },
+        showCameraButton: function(){
+            return Meteor.isCordova
         }
     });
 

@@ -16,11 +16,10 @@
   .image {
     height: 100px;
     width: 100px;
-    background: white;
+    background: @brand-primary;
     border-radius: @border-radius-base;
     overflow: hidden;
     float: left;
-    .shadow-z(1);
     margin: 0 10px 10px 0;
 
     img {
@@ -36,7 +35,7 @@
         margin: 40px 15px;
 
         circle {
-          fill: @brand-primary;
+          fill: white;
           -webkit-transform-origin: center;
           -moz-transform-origin: center;
           -o-transform-origin: center;
@@ -67,5 +66,15 @@
         }
       }
     }
+  }
+
+  .uploadBtn, .cameraBtn {
+    height: 100px;
+    width: 100px;
+    font-size: 32px;
+    line-height: 32px;
+    margin: 0 10px 10px 0;
+    display: block;
+    float: left;
   }
 }

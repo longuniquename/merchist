@@ -1,5 +1,15 @@
 (function(){
 
+    Template.mainToolbar.rendered = function(){
+        $(document).bind('scroll', function(e){
+            if ($(document).scrollTop()) {
+                $('#mainToolbar').addClass('navbar-raised');
+            } else {
+                $('#mainToolbar').removeClass('navbar-raised');
+            }
+        });
+    };
+
     Template.mainToolbar.helpers({
         'showCart':  function () {
             var cartId = localStorage["cartId"];

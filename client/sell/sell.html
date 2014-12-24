@@ -1,10 +1,15 @@
 <template name="sellView">
     <div class="sell-view">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Sell</h1>
+            </div>
+        </div>
         <div class="container">
             <div class="well">
                 {{#autoForm collection="Products" id="sellForm" type="insert"}}
                     <fieldset>
-                        <legend>Sell product</legend>
+                        <legend>New product</legend>
                         {{> afQuickField name='imageIds' type="mcImages"}}
                         {{> afQuickField name='title'}}
                         {{> afQuickField name='description' rows=6}}
@@ -19,7 +24,7 @@
                     </div>
                 </div>
                 <hr>
-                <button type="submit" form="sellForm" class="btn btn-primary btn-lg btn-block">Submit</button>
+                <button type="submit" form="sellForm" class="btn btn-primary btn-block">Submit</button>
             </div>
         </div>
     </div>

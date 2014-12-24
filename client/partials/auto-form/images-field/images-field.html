@@ -17,12 +17,14 @@
             </div>
         {{ /each }}
 
-        <button type="button" class="btn btn-default btn-lg uploadBtn">
+        <button type="button" class="btn btn-primary uploadBtn">
             <i class="mdi-file-file-upload"></i>
         </button>
 
-        <button type="button" class="btn btn-default btn-lg cameraBtn">
-            <i class="mdi-image-camera"></i>
-        </button>
+        {{ #if showCameraButton }}
+            <button type="button" class="btn btn-primary cameraBtn">
+                <i class="mdi-image-camera"></i>
+            </button>
+        {{ /if }}
     </div>
 </template>
