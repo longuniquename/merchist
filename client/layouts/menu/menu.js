@@ -25,26 +25,6 @@
     });
 
     Template.mainMenu.events({
-        "click .overlay":       function (e, template) {
-            template.$('#mainMenu').removeClass('visible');
-
-            ga('send', {
-                'hitType':       'event',
-                'eventCategory': 'menu',
-                'eventAction':   'close',
-                'eventLabel':    'Menu closed'
-            });
-        },
-        "click .closeBtn":      function (e, template) {
-            template.$('#mainMenu').removeClass('visible');
-
-            ga('send', {
-                'hitType':       'event',
-                'eventCategory': 'menu',
-                'eventAction':   'close',
-                'eventLabel':    'Menu closed'
-            });
-        },
         "click .logoutBtn":     function (e) {
             e.preventDefault();
             Meteor.logout(function () {
@@ -86,14 +66,7 @@
             }
         },
         'click .nav a':         function (e, template) {
-            template.$('#mainMenu').removeClass('visible');
-
-            ga('send', {
-                'hitType':       'event',
-                'eventCategory': 'menu',
-                'eventAction':   'close',
-                'eventLabel':    'Menu closed'
-            });
+            $(template.firstNode).modal('hide');
         },
         'click .authBtn':       function (e, template) {
             e.preventDefault();
