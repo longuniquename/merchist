@@ -1,5 +1,5 @@
 org.apache.cordova.inappbrowser@0.5.1
-com.phonegap.plugins.facebookconnect@0.9.0
+com.phonegap.plugins.facebookconnect@https://github.com/Wizcorp/phonegap-facebook-plugin/tarball/5287cbf9a7a275dcb76477789c3b52b0a5ce0d42
 org.apache.cordova.device@0.2.12
 org.apache.cordova.camera@0.3.2
 org.apache.cordova.globalization@0.3.1
