@@ -5,20 +5,32 @@
                 <div class="item">
                     <div class="item-header">
                         <div class="seller">
+                            {{ #with seller }}
                             <div class="avatar">
-                                <img src="http://graph.facebook.com/v2.2/123456/picture?height=1000&type=normal&width=1000">
+                                {{ #if avatar }}
+                                    <img src="{{avatar.url store="xs"}}">
+                                {{ else }}
+                                    <i class="mdi-social-person no-avatar"></i>
+                                {{ /if }}
                             </div>
                             <div class="actions">
                                 <div class="btn-group pull-right" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default">
-                                        <i class="mdi-communication-call"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-default">
-                                        <i class="mdi-communication-email"></i>
-                                    </button>
+                                    {{ #if profile.phone }}
+                                        <button type="button" class="btn btn-default showPhoneBtn">
+                                            <i class="mdi-communication-call"></i>
+                                        </button>
+                                    {{ /if }}
+                                    {{ #if profile.email }}
+                                        <button type="button" class="btn btn-default showEmailBtn">
+                                            <i class="mdi-communication-email"></i>
+                                        </button>
+                                    {{ /if }}
                                 </div>
                             </div>
-                            <div class="name">Seller</div>
+                            <div class="name">
+                                {{ profile.firstName }}
+                                {{ profile.lastName }}
+                            </div>
                             <div class="status">
                                 {{ #if isOnline }}
                                     <span class="text-success">Online</span>
@@ -26,6 +38,7 @@
                                     <span class="text-muted">Offline</span>
                                 {{ /if }}
                             </div>
+                            {{ /with }}
                         </div>
                     </div>
                     <div class="item-body">

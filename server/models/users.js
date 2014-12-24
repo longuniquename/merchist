@@ -18,6 +18,10 @@ Meteor.publish("allUsersData", function () {
     }
 });
 
+Meteor.publish("user", function (userId) {
+    return Meteor.users.find({_id: userId});
+});
+
 Meteor.users.allow({
     remove: function (userId) {
         if (userId) {
