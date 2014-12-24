@@ -1,19 +1,23 @@
 <template name="profileDetailsBasicInfo">
     <div class="basic-info">
-        <form class="form-horizontal">
-            <legend>Basic info</legend>
-            <div class="form-group">
-                <label for="firstName" class="col-sm-2 control-label">First name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="firstName" id="firstName" value="{{ profile.firstName }}" placeholder="First name" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastName" class="col-sm-2 control-label">Last name:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="lastName" id="lastName" value="{{ profile.lastName }}" placeholder="Last name" />
-                </div>
-            </div>
-        </form>
+        <div class="well">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Basic info</legend>
+                    <div class="form-group">
+                        <label for="firstName" class="col-sm-2 control-label">First name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="firstName" id="firstName" value="{{ profile.firstName }}" placeholder="First name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="col-sm-2 control-label">Last name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="lastName" id="lastName" value="{{ profile.lastName }}" placeholder="Last name" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 </template>

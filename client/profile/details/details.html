@@ -1,11 +1,8 @@
 <template name="profileDetails">
     <div class="details">
-        <div class="container">
-            <h2 class="page-header">Details</h2>
-            {{ #with currentUser }}
+        {{ #with currentUser }}
             {{> profileDetailsBasicInfo}}
-            {{> profileDetailsEmails}}
-            {{ /with }}
-        </div>
+            {{> profileDetailsSellerInfo}}
+        {{ /with }}
     </div>
 </template>
