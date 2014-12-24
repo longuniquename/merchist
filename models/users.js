@@ -11,13 +11,13 @@ Schema.UserProfileSchema = new SimpleSchema({
     firstName: {
         type:     String,
         label:    "First name",
-        max:      24,
+        max:      32,
         optional: true
     },
     lastName:  {
         type:     String,
         label:    "Last name",
-        max:      24,
+        max:      32,
         optional: true
     },
     email: {

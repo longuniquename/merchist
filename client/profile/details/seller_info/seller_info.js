@@ -1,11 +1,31 @@
 (function(){
 
-    Template.profileDetailsSellerInfo.events({
-        'change [name="email"]': function(e, template){
-            Meteor.users.update(this._id, {$set: {'profile.email': template.$(e.currentTarget).val()}});
-        },
-        'change [name="phone"]': function(e, template){
-            Meteor.users.update(this._id, {$set: {'profile.phone': template.$(e.currentTarget).val()}});
+    Template.profileDetailsSellerInfo.helpers({
+        schema: function(){
+            return new SimpleSchema({
+                'profile.email': {
+                    type:     String,
+                    label:    "Contact email",
+                    regEx:    SimpleSchema.RegEx.Email,
+                    optional: true
+                },
+                'profile.phone': {
+                    type:     String,
+                    label:    "Contact phone",
+                    max:      24,
+                    optional: true
+                }
+            });
+        }
+    });
+
+    AutoForm.hooks({
+        sellerInfoForm: {
+            onSubmit: function(insertDoc, updateDoc, currentDoc) {
+                this.event.preventDefault();
+                Meteor.users.update(Meteor.userId(), updateDoc);
+                this.done();
+            }
         }
     });
 
