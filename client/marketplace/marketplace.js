@@ -38,7 +38,6 @@
         },
         'click .shareBtn': function(e){
             e.preventDefault();
-            console.log(this);
 
             if (!Meteor.isCordova) {
                 FB.ui({
