@@ -90,7 +90,7 @@
         name: 'marketplace'
     });
 
-    Router.route('/marketplace/products/:_id', function () {
+    Router.route('/products/:_id', function () {
         var productId = this.params._id;
 
         this.layout('mainLayout', {
@@ -124,41 +124,6 @@
         }
     }, {
         name: 'products.view'
-    });
-
-    Router.route('/marketplace/shops/:_id', function () {
-        var shopId = this.params._id;
-
-        this.layout('mainLayout', {
-            data: {
-                back:  function () {
-                    return Router.path('marketplace');
-                }
-            }
-        });
-        this.wait(Meteor.subscribe('shop', shopId));
-
-        if (this.ready()) {
-
-            ga('send', {
-                hitType:  'pageview',
-                location: Router.url('shops.view', {_id: shopId}),
-                page:     Router.path('shops.view', {_id: shopId}),
-                title:    Shops.findOne(shopId).title
-            });
-
-            this.render('marketplaceShopsView', {
-                data: {
-                    shop: function () {
-                        return Shops.findOne(shopId);
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'shops.view'
     });
 
     Router.route('/orders', function () {
@@ -243,35 +208,6 @@
         name: 'sell'
     });
 
-    Router.route('/management/shops/:_id', function () {
-        var shopId = this.params._id;
-
-        this.layout('mainLayout');
-        this.wait(Meteor.subscribe('shop', shopId));
-
-        if (this.ready()) {
-
-            ga('send', {
-                hitType:  'pageview',
-                location: Router.url('shops.edit', {_id: shopId}),
-                page:     Router.path('shops.edit', {_id: shopId}),
-                title:    Shops.findOne(shopId).title
-            });
-
-            this.render('managementShopEdit', {
-                data: {
-                    shop: function () {
-                        return Shops.findOne(shopId);
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'shops.edit'
-    });
-
     Router.route('/management/products/:_id', function () {
         var productId = this.params._id;
         this.wait(Meteor.subscribe('product', productId));
@@ -316,27 +252,6 @@
         });
     }, {
         name: 'paypal.return'
-    });
-
-    Router.route('/admin/users', function () {
-        this.layout('mainLayout');
-        this.wait(Meteor.subscribe('allUsersData'));
-
-        if (this.ready()) {
-            console.log(Meteor.users.find({}, {sort: {createdAt: -1}}).fetch());
-
-            this.render('adminUsers', {
-                data: {
-                    users: function () {
-                        return Meteor.users.find({}, {sort: {createdAt: -1}});
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'admin.users'
     });
 
     if (Meteor.isCordova) {
