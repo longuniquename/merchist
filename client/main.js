@@ -77,22 +77,23 @@
         return presence.state === 'online';
     });
 
-    var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
-
-    if (facebookConfig && facebookConfig.appId) {
-
-        if (!Meteor.isCordova) {
-            FB.init({
-                appId:   facebookConfig.appId,
-                status:  true,
-                version: 'v2.2'
-            });
-            console.info('FB.init');
-        } else {
-            facebookConnectPlugin.browserInit(facebookConfig.appId);
+    Meteor.subscribe('serviceConfiguration', 'facebook', {
+        onReady: function(){
+            var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
+            if (facebookConfig && facebookConfig.appId) {
+                if (!Meteor.isCordova) {
+                    FB.init({
+                        appId:   facebookConfig.appId,
+                        status:  true,
+                        version: 'v2.2'
+                    });
+                    console.info('FB.init');
+                } else {
+                    facebookConnectPlugin.browserInit(facebookConfig.appId);
+                }
+            }
         }
-
-    }
+    });
 
     Blaze.Meta = new function () {
 
