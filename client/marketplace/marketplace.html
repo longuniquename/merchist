@@ -44,11 +44,9 @@
                     <div class="item-body">
                         <div class="item-images">
                             <a href="{{pathFor route='products.view' data=this }}">
-                                {{ #if images }}
-                                    {{ #each images }}
-                                        <img src="{{ url store='m' }}" />
-                                    {{ /each }}
-                                {{ /if }}
+                                {{ #with image }}
+                                    <img src="{{ url store='m' }}" />
+                                {{ /with }}
                             </a>
                         </div>
                         <div class="item-action">

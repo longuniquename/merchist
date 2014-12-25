@@ -5,7 +5,7 @@
   width: 100%;
   height: auto;
 
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     height: 100%;
     width: auto;
   }
@@ -18,7 +18,7 @@
     width: 100%;
     overflow: auto;
 
-    .item {
+    > .item {
       flex-grow: 1;
       flex-shrink: 0;
       padding: @grid-gutter-width / 2;
@@ -118,7 +118,7 @@
       }
     }
 
-    @media (orientation: landscape) {
+    @media (min-width: 700px) {
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: flex-start;

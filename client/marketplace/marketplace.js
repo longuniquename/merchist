@@ -5,6 +5,12 @@
             Meteor.subscribe("productImages", this._id);
             return Images.find({_id: {$in: this.imageIds}});
         },
+        image:   function () {
+            if (this.imageIds && this.imageIds.length) {
+                Meteor.subscribe("image", this.imageIds[0]);
+                return Images.findOne(this.imageIds[0]);
+            }
+        },
         seller:   function () {
             Meteor.subscribe("user", this.userId);
             return Meteor.users.findOne(this.userId);
