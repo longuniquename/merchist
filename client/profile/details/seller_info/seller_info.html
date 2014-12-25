@@ -1,13 +1,12 @@
 <template name="profileDetailsSellerInfo">
     <div class="seller-info">
         <div class="well">
-            {{#autoForm schema=schema doc=currentUser id="sellerInfoForm" validation="keyup"}}
+            {{#autoForm collection=collection doc=currentUser id="sellerInfoForm" type="update" autosave=true removeEmptyStrings=false}}
                 <fieldset>
                     <legend>Seller info</legend>
                     {{> afQuickField name='profile.email' type='email'}}
                     {{> afQuickField name='profile.phone' type='tel'}}
                 </fieldset>
-                <button type="submit" class="btn btn-default btn-block">Save</button>
             {{/autoForm}}
         </div>
     </div>
