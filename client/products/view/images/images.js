@@ -33,8 +33,6 @@
 
         $(window).unbind('resize', resizeImagesBlock);
         $(window).unbind('scroll', fadeToolbar);
-
-        Blaze.Meta.unregisterMeta(metaKey);
     };
 
     Template.marketplaceProductsViewImages.helpers({

@@ -1,28 +1,5 @@
 (function () {
 
-    var metaKey;
-
-    Template.marketplaceProductsViewDetails.rendered = function () {
-        var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
-
-        metaKey = Blaze.Meta.registerMeta({
-            'fb:app_id':              facebookConfig.appId,
-            'og:type':                'product',
-            'og:url':                 Router.url('products.view', this.data),
-            'og:title':               this.data.title,
-            'og:description':         this.data.description,
-            'product:price:amount':   this.data.price,
-            'product:price:currency': 'USD',
-            'al:android:url':         'merchist://' + Router.path('products.view', this.data).replace(/^\/+/, ''),
-            'al:android:package':     'com.merchist.client',
-            'al:android:app_name':    'Merchist'
-        });
-    };
-
-    Template.marketplaceProductsViewDetails.destroyed = function () {
-        Blaze.Meta.unregisterMeta(metaKey);
-    };
-
     Template.marketplaceProductsViewDetails.helpers({
         'inCart':     function () {
             var cartId = localStorage["cartId"];

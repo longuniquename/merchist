@@ -78,7 +78,7 @@
     });
 
     Meteor.subscribe('serviceConfiguration', 'facebook', {
-        onReady: function(){
+        onReady: function () {
             var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
             if (facebookConfig && facebookConfig.appId) {
                 if (!Meteor.isCordova) {
@@ -94,36 +94,6 @@
             }
         }
     });
-
-    Blaze.Meta = new function () {
-
-        var meta = {};
-
-        this.registerMeta = function (data) {
-            var key = Meteor.uuid();
-
-            var elements = [];
-            _.each(data, function (content, property) {
-                var $meta = $('<meta/>');
-                $meta.attr('property', property);
-                $meta.attr('content', content);
-                $meta.appendTo($('head'));
-                elements.push($meta);
-            });
-
-            meta[key] = elements;
-            return key;
-        };
-
-        this.unregisterMeta = function (key) {
-            if (_.has(meta, key)) {
-                _.each(meta[key], function ($meta) {
-                    $meta.remove();
-                })
-            }
-            delete meta[key];
-        };
-    };
 
     if (Meteor.isCordova) {
         Tracker.autorun(function () {
