@@ -82,15 +82,12 @@
     if (facebookConfig && facebookConfig.appId) {
 
         if (!Meteor.isCordova) {
-
-            window.fbAsyncInit = function () {
-                FB.init({
-                    appId:   facebookConfig.appId,
-                    status:  true,
-                    version: 'v2.2'
-                });
-            };
-
+            FB.init({
+                appId:   facebookConfig.appId,
+                status:  true,
+                version: 'v2.2'
+            });
+            console.info('FB.init');
         } else {
             facebookConnectPlugin.browserInit(facebookConfig.appId);
         }
