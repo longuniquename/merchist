@@ -10,7 +10,8 @@ iron:router
 accounts-ui
 mvrx:bluebird
 cfs:standard-packages
-cfs:s3
+cfs:filesystem
+cfs:graphicsmagick
 accounts-facebook
 service-configuration
 email
@@ -30,5 +31,3 @@ aldeed:autoform
 aldeed:collection2
 tmeasday:presence
 cfs:gridfs
-cfs:graphicsmagick
-

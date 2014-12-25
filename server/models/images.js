@@ -1,8 +1,7 @@
-var oStore = new FS.Store.S3("o", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var path = Npm.require('path');
+
+var oStore = new FS.Store.FileSystem("o", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "o", save: false});
         fileObj.name('o.png', {store: "o", save: false});
@@ -12,11 +11,8 @@ var oStore = new FS.Store.S3("o", {
     }
 });
 
-var xsStore = new FS.Store.S3("xs", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var xsStore = new FS.Store.FileSystem("xs", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "xs", save: false});
         fileObj.name('xs.png', {store: "xs", save: false});
@@ -26,11 +22,8 @@ var xsStore = new FS.Store.S3("xs", {
     }
 });
 
-var sStore = new FS.Store.S3("s", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var sStore = new FS.Store.FileSystem("s", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "s", save: false});
         fileObj.name('s.png', {store: "s", save: false});
@@ -40,11 +33,8 @@ var sStore = new FS.Store.S3("s", {
     }
 });
 
-var mStore = new FS.Store.S3("m", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var mStore = new FS.Store.FileSystem("m", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "m", save: false});
         fileObj.name('m.png', {store: "m", save: false});
@@ -54,11 +44,8 @@ var mStore = new FS.Store.S3("m", {
     }
 });
 
-var lStore = new FS.Store.S3("l", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var lStore = new FS.Store.FileSystem("l", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "l", save: false});
         fileObj.name('l.png', {store: "l", save: false});
@@ -68,11 +55,8 @@ var lStore = new FS.Store.S3("l", {
     }
 });
 
-var xlStore = new FS.Store.S3("xl", {
-    region:          "us-west-2",
-    accessKeyId:     "AKIAIXL525LMGYUSWYFQ",
-    secretAccessKey: "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",
-    bucket:          "merchist-staging",
+var xlStore = new FS.Store.FileSystem("xl", {
+    path: path.join(process.env.CLOUD_DIR, 'images'),
     beforeWrite:     function (fileObj) {
         fileObj.type('image/png', {store: "xl", save: false});
         fileObj.name('xl.png', {store: "xl", save: false});
