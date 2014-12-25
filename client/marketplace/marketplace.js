@@ -1,5 +1,11 @@
 (function () {
 
+    Template.marketplace.rendered = function() {
+        try {
+            FB.XFBML.parse();
+        }catch(e) {}
+    };
+
     Template.marketplace.helpers({
         images:   function () {
             Meteor.subscribe("productImages", this._id);
@@ -29,6 +35,22 @@
         'click .showEmailBtn': function (e) {
             e.preventDefault();
             window.open('mailto:' + this.profile.email, '_system');
+        },
+        'click .shareBtn': function(e){
+            e.preventDefault();
+            console.log(this);
+
+            if (!Meteor.isCordova) {
+                FB.ui({
+                    method: 'share',
+                    href: Router.url('products.view', this)
+                }, function(response){});
+            } else {
+                facebookConnectPlugin.showDialog({
+                    method: 'share',
+                    href: Router.url('products.view', this)
+                }, function(response){}, function(response){});
+            }
         }
     });
 
