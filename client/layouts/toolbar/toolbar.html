@@ -24,6 +24,10 @@
                 {{ #if title }}
                 <span class="navbar-brand">{{ title }}</span>
                 {{ /if }}
+
+                <a href="{{pathFor route="marketplace" }}" class="btn btn-default navbar-btn logo">
+                    {{>iconLogo}}
+                </a>
             </div>
         </div>
     </nav>
