@@ -118,7 +118,7 @@
       }
     }
 
-    @media (min-width: 700px) {
+    @media (min-width: (600px + @grid-gutter-width)) {
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: flex-start;
@@ -130,7 +130,7 @@
 
         .item-body {
           .clearfix();
-          width: 636px;
+          width: 600px;
 
           .item-images {
             float: left;
@@ -143,7 +143,9 @@
 
           .item-action {
             float: left;
-            margin: 122px 4px 122px -26px;
+            margin: 122px -28px 122px -28px;
+            z-index: 10;
+            position: relative;
           }
 
           .item-info {
