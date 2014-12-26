@@ -1,0 +1,35 @@
+@import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
+
+.product-card-partial {
+  background: white;
+  .shadow-z(1);
+  border-radius: @border-radius-base;
+  overflow: hidden;
+
+  > .image {
+    height: 300px;
+    width: 300px;
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  > .action {
+    margin: -28px auto 8px;
+    width: 56px;
+  }
+  > .info {
+    text-align: center;
+    padding: @grid-gutter-width / 2;
+
+    > .actions {
+
+      .btn-group {
+        margin: @grid-gutter-width / 2 0 0 0;
+      }
+    }
+  }
+}

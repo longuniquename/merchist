@@ -1,0 +1,14 @@
+<template name="productsListPartial">
+    <div class="products-list-partial">
+        <div class="box">
+            {{ #each products }}
+                <div class="item">
+                    {{ #with seller }}
+                        {{> productSellerPartial }}
+                    {{ /with }}
+                    {{> productCardPartial }}
+                </div>
+            {{ /each }}
+        </div>
+    </div>
+</template>

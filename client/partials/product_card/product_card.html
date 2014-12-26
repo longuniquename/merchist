@@ -1,0 +1,49 @@
+<template name="productCardPartial">
+    <div class="product-card-partial">
+        <div class="image">
+            <a href="{{pathFor route='products.view' data=this }}">
+                {{ #with image }}
+                    <img src="{{ url store='o' }}" />
+                {{ /with }}
+            </a>
+        </div>
+        <div class="action">
+            {{ #if isMy }}
+                <a href="{{pathFor route='products.edit' data=this }}" class="btn btn-fab btn-raised btn-material-deeporange editBtn">
+                    <i class="mdi-content-create"></i>
+                </a>
+            {{ else }}
+                <button type="button" class="btn btn-fab btn-raised btn-primary buyBtn">
+                    <i class="mdi-action-shopping-basket"></i>
+                </button>
+            {{ /if }}
+        </div>
+        <div class="info">
+            <h3 class="title">
+                {{title}}
+            </h3>
+            <span class="price">
+                {{currency price}}
+            </span>
+            <div class="actions">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <!--<div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">
+                            <i class="mdi-action-favorite-outline"></i>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">
+                            <i class="mdi-action-add-shopping-cart"></i>
+                        </button>
+                    </div>-->
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default shareBtn">
+                            <i class="mdi-social-share"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

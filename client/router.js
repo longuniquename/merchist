@@ -101,6 +101,25 @@
         name: 'marketplace'
     });
 
+    Router.route('/products/my', function () {
+        this.layout('mainLayout');
+        this.wait(Meteor.subscribe('myProducts'));
+
+        if (this.ready()) {
+            this.render('myProductsView', {
+                data: {
+                    products: function () {
+                        return Products.find({userId: Meteor.userId()});
+                    }
+                }
+            });
+        } else {
+            this.render('loading');
+        }
+    }, {
+        name: 'products.my'
+    });
+
     Router.route('/products/:_id', function () {
         var productId = this.params._id;
 
