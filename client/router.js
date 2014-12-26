@@ -121,6 +121,7 @@
                 facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'}),
                 ogData = [
                     {property: 'fb:app_id', content: facebookConfig.appId},
+                    {property: 'og:site_name', content: 'Merchist'},
                     {property: 'og:type', content: 'product'},
                     {property: 'og:url', content: Router.url('products.view', product)},
                     {property: 'og:title', content: product.title},
@@ -138,8 +139,11 @@
                 var parser = document.createElement('a');
                 parser.href = image.url({storage: 'm', download: true});
                 ogData.push({
-                    property: 'og:image', content: 'http://' + parser.host + parser.pathname + parser.search
+                    property: 'og:image:url', content: 'http://' + parser.host + parser.pathname + parser.search
                 });
+                ogData.push({property: 'og:image:type', content: 'image/png'});
+                ogData.push({property: 'og:image:width', content: '400'});
+                ogData.push({property: 'og:image:height', content: '400'});
             });
 
             setOgMeta(ogData);
