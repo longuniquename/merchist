@@ -1,99 +1,11 @@
 <template name="marketplace">
     <div class="marketplace-view">
-        <div class="box">
-            {{ #each products }}
-                <div class="item">
-                    <div class="item-header">
-                        <div class="seller">
-                            {{ #with seller }}
-                            <div class="avatar">
-                                {{ #if avatar }}
-                                    <img src="{{avatar.url store="xs"}}">
-                                {{ else }}
-                                    <i class="mdi-social-person no-avatar"></i>
-                                {{ /if }}
-                            </div>
-                            <div class="actions">
-                                <div class="btn-group pull-right" role="group" aria-label="...">
-                                    {{ #if profile.phone }}
-                                        <button type="button" class="btn btn-default showPhoneBtn">
-                                            <i class="mdi-communication-call"></i>
-                                        </button>
-                                    {{ /if }}
-                                    {{ #if profile.email }}
-                                        <button type="button" class="btn btn-default showEmailBtn">
-                                            <i class="mdi-communication-email"></i>
-                                        </button>
-                                    {{ /if }}
-                                </div>
-                            </div>
-                            <div class="name">
-                                {{ profile.firstName }}
-                                {{ profile.lastName }}
-                            </div>
-                            <div class="status">
-                                {{ #if isOnline }}
-                                    <span class="text-success">Online</span>
-                                {{ else }}
-                                    <span class="text-muted">Offline</span>
-                                {{ /if }}
-                            </div>
-                            {{ /with }}
-                        </div>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-images">
-                            <a href="{{pathFor route='products.view' data=this }}">
-                                {{ #with image }}
-                                    <img src="{{ url store='o' }}" />
-                                {{ /with }}
-                            </a>
-                        </div>
-                        <div class="item-action">
-                            <button type="button" class="btn btn-fab btn-raised btn-primary">
-                                <i class="mdi-action-shopping-basket"></i>
-                            </button>
-                        </div>
-                        <div class="item-info">
-                            <h3 class="item-title">
-                                {{ #if title }}
-                                    {{title}}
-                                {{ else }}
-                                    <i>Draft product</i>
-                                {{ /if }}
-                            </h3>
-                            {{ #if subtitle }}
-                                <h4 class="item-subtitle">{{subtitle}}</h4>
-                            {{ /if }}
-                            {{ #if price }}
-                                <span class="item-price">
-                                    {{currency price}}
-                                </span>
-                            {{ /if }}
-                            <div class="item-actions">
-                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                    <!--<div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default">
-                                            <i class="mdi-action-favorite-outline"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default">
-                                            <i class="mdi-action-add-shopping-cart"></i>
-                                        </button>
-                                    </div>-->
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-default shareBtn">
-                                            <i class="mdi-social-share"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {{ /each }}
+        <div class="jumbotron">
+            <div class="container-fluid">
+                <h1>Marketplace</h1>
+            </div>
+            {{> sellButtonPartial}}
         </div>
+        {{> productsListPartial}}
     </div>
-    {{> sellButtonPartial}}
 </template>

@@ -55,13 +55,13 @@
                         {{ /if }}
                         {{ #if currentUser }}
                         <li>
-                            <a href="{{pathFor route='profile'}}">
-                                <i class="mdi-social-person"></i> {{_ "menu.mainLinks.profile.text"}}
+                            <a href="{{pathFor route='products.my'}}">
+                                <i class="mdi-action-store"></i> My products
                             </a>
                         </li>
                         <li>
-                            <a href="{{pathFor route='products.my'}}">
-                                <i class="mdi-action-store"></i> My products
+                            <a href="{{pathFor route='profile'}}">
+                                <i class="mdi-social-person"></i> {{_ "menu.mainLinks.profile.text"}}
                             </a>
                         </li>
                         {{ /if }}
