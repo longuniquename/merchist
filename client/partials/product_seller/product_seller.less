@@ -1,0 +1,34 @@
+@import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
+
+.product-seller-partial {
+  .clearfix();
+  margin-bottom: @grid-gutter-width / 2;
+
+  .avatar {
+    height: @line-height-computed * 2;
+    width: @line-height-computed * 2;
+    border-radius: 100%;
+    .shadow-z(0);
+    overflow: hidden;
+    float: left;
+    margin-right: @grid-gutter-width / 4;
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    .no-avatar {
+      height: 100%;
+      width: 100%;
+      display: block;
+      line-height: @line-height-computed * 2;
+      font-size: @line-height-computed * 2;
+      text-align: center;
+      color: white;
+      background: darken(@brand-primary, 5%);
+    }
+  }
+}
