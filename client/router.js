@@ -137,7 +137,7 @@
 
             images.forEach(function (image, index) {
                 var parser = document.createElement('a');
-                parser.href = image.url({storage: 'm', download: true});
+                parser.href = image.url({storage: 'm'});
                 ogData.push({
                     property: 'og:image', content: 'http://' + parser.host + parser.pathname + parser.search
                 });
