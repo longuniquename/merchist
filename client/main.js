@@ -77,9 +77,11 @@
         return presence.state === 'online';
     });
 
-    Meteor.subscribe('serviceConfiguration', 'facebook', {
-        onReady: function () {
+    Meteor.startup(function () {
+        var h = Meteor.subscribe('serviceConfiguration', 'facebook', function(){
             var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
+            h.stop();
+
             if (facebookConfig && facebookConfig.appId) {
                 if (!Meteor.isCordova) {
                     FB.init({
@@ -92,7 +94,7 @@
                     facebookConnectPlugin.browserInit(facebookConfig.appId);
                 }
             }
-        }
+        });
     });
 
     if (Meteor.isCordova) {
