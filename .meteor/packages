@@ -33,3 +33,4 @@ tmeasday:presence
 cfs:gridfs
 merchist:roboto
 merchist:paypal
+merchist:accounts-paypal
