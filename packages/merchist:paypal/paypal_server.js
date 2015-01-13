@@ -168,6 +168,32 @@ Meteor.methods({
         var response = HTTP.post(url, {data: data, headers: headers});
 
         return response.data;
+    },
+    'PayPal:AdaptiveAccounts:GetVerifiedStatus':  function (emailAddress, firstName, lastName) {
+        var config = getConfig(),
+            url = apiEndpoint('AdaptiveAccounts/GetVerifiedStatus', config.sandbox),
+            data = {
+                requestEnvelope: {
+                    detailLevel:   'ReturnAll',
+                    errorLanguage: 'en_US'
+                },
+                emailAddress:    emailAddress,
+                firstName:       firstName,
+                lastName:        lastName,
+                matchCriteria:   'NAME'
+            },
+            headers = {
+                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+                "X-PAYPAL-APPLICATION-ID":       config.appId,
+                "X-PAYPAL-SECURITY-USERID":      config.userId,
+                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+            };
+
+        var response = HTTP.post(url, {data: data, headers: headers});
+
+        return response.data;
     }
 });
 
@@ -175,9 +201,10 @@ OAuth.registerService('paypal', 2, null, function (query) {
 
     var accessToken = getAccessToken(query),
         identity = getIdentity(accessToken),
+        verifiedStatus = getVerifiedStatus(identity),
         serviceData = {};
 
-    _.extend(serviceData, accessToken, identity);
+    _.extend(serviceData, accessToken, identity, verifiedStatus);
 
     return {
         serviceData: serviceData,
@@ -201,13 +228,21 @@ var getIdentity = function (accessToken) {
     var response = Meteor.call('PayPal:Permissions:GetAdvancedPersonalData', accessToken["token"], accessToken["tokenSecret"]),
         identity = {};
 
-    _.each(response.response.personalData, function(dataItem){
+    _.each(response.response.personalData, function (dataItem) {
         if (_.has(personalAttributesMap, dataItem.personalDataKey) && dataItem.personalDataValue) {
             identity[personalAttributesMap[dataItem.personalDataKey]] = dataItem.personalDataValue;
         }
     });
 
     return identity;
+};
+
+var getVerifiedStatus = function (identity) {
+    var response = Meteor.call('PayPal:AdaptiveAccounts:GetVerifiedStatus', identity["email"], identity["firstName"], identity["lastName"]);
+    return {
+        accountStatus: response.accountStatus,
+        accountType:   response.userInfo.accountType
+    };
 };
 
 PayPal.retrieveCredential = function (credentialToken, credentialSecret) {
