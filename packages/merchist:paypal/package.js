@@ -7,6 +7,7 @@ Package.onUse(function (api) {
     api.use('oauth2');
     api.use('oauth');
     api.use('http', 'server');
+    api.use('webapp', 'server');
     api.use('underscore');
     api.use('random', 'client');
     api.use('service-configuration');

@@ -257,3 +257,24 @@ var getIdentity = function (accessToken) {
 
     return identity;
 };
+
+WebApp.connectHandlers.use("/_paypal/requestPermissions", function(req, res, next) {
+
+    check(req.query.scope, String);
+    check(req.query.callback, String);
+
+    var config = getConfig();
+
+    var scope = _.map(req.query.scope.split(','), function(perm){
+        return perm.trim();
+    });
+
+    var callback = req.query.callback,
+        response = Meteor.call('PayPal:Permissions:RequestPermissions', scope, callback),
+        loginUrl = (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') +
+        'cgi-bin/webscr?cmd=_grant-permission&request_token=' + response.token;
+
+    res.statusCode = 302;
+    res.setHeader("Location", loginUrl);
+    res.end();
+});

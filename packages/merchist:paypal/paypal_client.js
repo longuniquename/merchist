@@ -16,30 +16,18 @@ PayPal.requestCredential = function (options, credentialRequestCompleteCallback)
         return;
     }
 
-    var credentialToken = Random.secret();
+    var credentialToken = Random.secret(),
+        scope = (options && options.requestPermissions) || ['ACCESS_BASIC_PERSONAL_DATA'],
+        callback = OAuth._redirectUri('paypal', config),
+        loginStyle = OAuth._loginStyle('paypal', config, options),
+        loginUrl = Meteor.absoluteUrl('/_paypal/requestPermissions?scope=' + scope.join(',') + '&callback=' + encodeURIComponent(callback));
 
-    var scope = (options && options.requestPermissions) || ['ACCESS_BASIC_PERSONAL_DATA'],
-        callback = OAuth._redirectUri('paypal', config);
-
-    Meteor.call('PayPal:Permissions:RequestPermissions', scope, callback, function (err, response) {
-        if (err) {
-            throw err;
-        }
-
-        var loginStyle = OAuth._loginStyle('paypal', config, options);
-
-        var loginUrl = (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') +
-            'cgi-bin/webscr?cmd=_grant-permission&request_token=' + response.token;
-
-        console.log(loginUrl);
-
-        OAuth.launchLogin({
-            loginService:                      "paypal",
-            loginStyle:                        loginStyle,
-            loginUrl:                          loginUrl,
-            credentialRequestCompleteCallback: credentialRequestCompleteCallback,
-            credentialToken:                   credentialToken,
-            popupOptions:                      {width: 900, height: 450}
-        });
+    OAuth.launchLogin({
+        loginService:                      "paypal",
+        loginStyle:                        loginStyle,
+        loginUrl:                          loginUrl,
+        credentialRequestCompleteCallback: credentialRequestCompleteCallback,
+        credentialToken:                   credentialToken,
+        popupOptions:                      {width: 900, height: 450}
     });
 };
