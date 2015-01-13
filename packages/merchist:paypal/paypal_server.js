@@ -169,19 +169,16 @@ Meteor.methods({
 
 OAuth.registerService('paypal', 2, null, function (query) {
 
-    var accessToken = getAccessToken(query);
-    var identity = getIdentity(accessToken);
+    var accessToken = getAccessToken(query),
+        identity = getIdentity(accessToken),
+        serviceData = {};
+
+    _.extend(serviceData, accessToken, identity);
 
     return {
-        serviceData: {
-            id:          identity.id,
-            accessToken: accessToken.token,
-            email:       identity.email,
-            username:    identity.email
-        },
+        serviceData: serviceData,
         options:     {
             profile: {
-                name:      identity.firstName + ' ' + identity.lastName,
                 firstName: identity.firstName,
                 lastName:  identity.lastName
             }
@@ -190,10 +187,10 @@ OAuth.registerService('paypal', 2, null, function (query) {
 });
 
 var getAccessToken = function (query) {
-    return _.pick(
-        Meteor.call('PayPal:Permissions:GetAccessToken', query["request_token"], query["verification_code"]),
-        'scope', 'token', 'tokenSecret'
-    );
+    var accessToken = Meteor.call('PayPal:Permissions:GetAccessToken', query["request_token"], query["verification_code"]),
+        whitelisted = ['scope', 'token', 'tokenSecret'];
+
+    return _.pick(accessToken, whitelisted);
 };
 
 var getIdentity = function (accessToken) {
