@@ -3,7 +3,7 @@
         <div class="image">
             <a href="{{pathFor route='products.view' data=this }}">
                 {{ #with image }}
-                    <img src="{{ url store='l' }}" />
+                    <img src="{{ url store='l' auth=false }}" />
                 {{ /with }}
             </a>
         </div>

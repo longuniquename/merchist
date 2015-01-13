@@ -1,7 +1,7 @@
 <template name="marketplaceProductsViewImages">
     <div class="images">
         {{ #each images }}
-        <img src="{{ url store='xl' }}" />
+        <img src="{{ url store='xl' auth=false }}" />
         {{ /each }}
     </div>
 </template>
