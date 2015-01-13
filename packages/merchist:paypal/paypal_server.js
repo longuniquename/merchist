@@ -73,6 +73,23 @@ var generateFullAuthString = function (consumerKey, consumerSecret, token, token
         ",timestamp=" + response['oauth_timestamp'];
 };
 
+var personalAttributesMap = {
+    'https://www.paypal.com/webapps/auth/schema/payerID': 'id',
+    'http://axschema.org/namePerson/first':               'firstName',
+    'http://axschema.org/namePerson/last':                'lastName',
+    'http://schema.openid.net/contact/fullname':          'fullName',
+    'http://axschema.org/birthDate':                      'birthDate',
+    'http://axschema.org/company/name':                   'company',
+    'http://axschema.org/contact/email':                  'email',
+    'http://axschema.org/contact/phone/default':          'phone',
+    'http://axschema.org/contact/country/home':           'country',
+    'http://axschema.org/contact/state/home':             'state',
+    'http://axschema.org/contact/city/home':              'city',
+    'http://schema.openid.net/contact/street1':           'street1',
+    'http://schema.openid.net/contact/street2':           'street2',
+    'http://axschema.org/contact/postalCode/home':        'postalCode'
+};
+
 Meteor.methods({
     'PayPal:Permissions:RequestPermissions':      function (scope, callback) {
         var config = getConfig(),
@@ -131,20 +148,7 @@ Meteor.methods({
                     errorLanguage: 'en_US'
                 },
                 attributeList:   {
-                    attribute: [
-                        'http://axschema.org/namePerson/first',
-                        'http://axschema.org/namePerson/last',
-                        'http://axschema.org/contact/email',
-                        'http://axschema.org/company/name',
-                        'http://axschema.org/contact/country/home',
-                        'http://axschema.org/contact/postalCode/home',
-                        'http://schema.openid.net/contact/street1',
-                        'http://schema.openid.net/contact/street2',
-                        'http://axschema.org/contact/city/home',
-                        'http://axschema.org/contact/state/home',
-                        'http://axschema.org/contact/phone/default',
-                        'https://www.paypal.com/webapps/auth/schema/payerID'
-                    ]
+                    attribute: _.keys(personalAttributesMap)
                 }
             },
             headers = {
@@ -197,58 +201,9 @@ var getIdentity = function (accessToken) {
     var response = Meteor.call('PayPal:Permissions:GetAdvancedPersonalData', accessToken["token"], accessToken["tokenSecret"]),
         identity = {};
 
-    Object.keys(response.response.personalData).map(function (i) {
-        var dataItem = response.response.personalData[i];
-
-        switch (dataItem.personalDataKey) {
-            case 'http://axschema.org/namePerson/first':
-                if (dataItem.personalDataValue)
-                    identity.firstName = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/namePerson/last':
-                if (dataItem.personalDataValue)
-                    identity.lastName = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/email':
-                if (dataItem.personalDataValue)
-                    identity.email = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/company/name':
-                if (dataItem.personalDataValue)
-                    identity.company = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/country/home':
-                if (dataItem.personalDataValue)
-                    identity.country = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/postalCode/home':
-                if (dataItem.personalDataValue)
-                    identity.postalCode = dataItem.personalDataValue;
-                break;
-            case 'http://schema.openid.net/contact/street1':
-                if (dataItem.personalDataValue)
-                    identity.street1 = dataItem.personalDataValue;
-                break;
-            case 'http://schema.openid.net/contact/street2':
-                if (dataItem.personalDataValue)
-                    identity.street2 = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/city/home':
-                if (dataItem.personalDataValue)
-                    identity.city = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/state/home':
-                if (dataItem.personalDataValue)
-                    identity.state = dataItem.personalDataValue;
-                break;
-            case 'http://axschema.org/contact/phone/default':
-                if (dataItem.personalDataValue)
-                    identity.phone = dataItem.personalDataValue;
-                break;
-            case 'https://www.paypal.com/webapps/auth/schema/payerID':
-                if (dataItem.personalDataValue)
-                    identity.id = dataItem.personalDataValue;
-                break;
+    _.each(response.response.personalData, function(dataItem){
+        if (_.has(personalAttributesMap, dataItem.personalDataKey) && dataItem.personalDataValue) {
+            identity[personalAttributesMap[dataItem.personalDataKey]] = dataItem.personalDataValue;
         }
     });
 
