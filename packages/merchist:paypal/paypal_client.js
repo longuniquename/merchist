@@ -20,7 +20,7 @@ PayPal.requestCredential = function (options, credentialRequestCompleteCallback)
         scope = (options && options.requestPermissions) || ['ACCESS_BASIC_PERSONAL_DATA'],
         callback = OAuth._redirectUri('paypal', config),
         loginStyle = OAuth._loginStyle('paypal', config, options),
-        loginUrl = Meteor.absoluteUrl('/_paypal/requestPermissions?scope=' + scope.join(',') + '&callback=' + encodeURIComponent(callback));
+        loginUrl = Meteor.absoluteUrl('_paypal/requestPermissions?scope=' + scope.join(',') + '&callback=' + encodeURIComponent(callback));
 
     OAuth.launchLogin({
         loginService:                      "paypal",
