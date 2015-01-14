@@ -1,3 +1,3 @@
-Order.prototype.pay = function () {
-    window.open(Meteor.absoluteUrl('_orders/pay?orderId=' + this._id), Meteor.isCordova ? '_system' : '_blank');
+Order.prototype.pay = function (callback) {
+    throw new Error("Order.prototype.pay must be implemented on this arch.");
 };

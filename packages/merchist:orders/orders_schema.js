@@ -92,6 +92,11 @@ OrdersSchema = new SimpleSchema({
         label: "Amount",
         min:   1
     },
+    "paypal.payKey":     {
+        type:     String,
+        label:    "PayKey",
+        optional: true
+    },
     createdAt:           {
         type:      Date,
         autoValue: function () {

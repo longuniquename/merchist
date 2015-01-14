@@ -40,6 +40,8 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
         return;
     }
 
+    console.log(order);
+
     if (order.paypal && order.paypal.payKey) {
         res.statusCode = 302;
         res.setHeader("Location", (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'cgi-bin/webscr?cmd=_ap-payment&paykey=' + order.paypal.payKey);

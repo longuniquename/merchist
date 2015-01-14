@@ -35,6 +35,7 @@
 
             if (order) {
                 order.pay();
+                Router.go('orders.view', order);
             }
         }
     });
