@@ -90,6 +90,45 @@ var personalAttributesMap = {
     'http://axschema.org/contact/postalCode/home':        'postalCode'
 };
 
+PayPal.AdaptivePayments = {
+    Pay: function(data){
+        var config = getConfig(),
+            url = apiEndpoint('AdaptivePayments/Pay', config.sandbox),
+            headers = {
+                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+                "X-PAYPAL-APPLICATION-ID":       config.appId,
+                "X-PAYPAL-SECURITY-USERID":      config.userId,
+                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+            };
+
+        _.defaults(data, {
+            requestEnvelope:                   {
+                detailLevel:   'ReturnAll',
+                errorLanguage: 'en_US'
+            },
+            actionType:                        'PAY',
+            currencyCode:                      'USD',
+            feesPayer:                         'PRIMARYRECEIVER',
+            payKeyDuration:                    'PT15M',
+            reverseAllParallelPaymentsOnError: true,
+            ipnNotificationUrl:                Meteor.absoluteUrl('_paypal/ipn'),
+            clientDetails:                     {
+                applicationId: 'Merchist',
+                partnerName:   'Mercher Inc.'
+            },
+            receiverList:                      {},
+            cancelUrl:                         Meteor.absoluteUrl(),
+            returnUrl:                         Meteor.absoluteUrl()
+        });
+
+        var response = HTTP.post(url, {data: data, headers: headers});
+
+        return response.data;
+    }
+};
+
 Meteor.methods({
     'PayPal:Permissions:RequestPermissions':      function (scope, callback) {
         var config = getConfig(),

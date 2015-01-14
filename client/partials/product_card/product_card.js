@@ -1,27 +1,27 @@
-(function(){
+(function () {
 
     Template.productCardPartial.helpers({
-        image:   function () {
+        image: function () {
             if (this.imageIds && this.imageIds.length) {
                 Meteor.subscribe("image", this.imageIds[0]);
                 return Images.findOne(this.imageIds[0]);
             }
         },
-        isMy: function(){
+        isMy: function () {
             return this.userId === Meteor.userId();
         }
     });
 
     Template.productCardPartial.events({
-        'click .buyBtn': function(e, template){
+        'click .buyBtn': function (e, template) {
             e.preventDefault();
 
             var order = new Order({
-                items:  [
+                items: [
                     {
                         productId: this._id,
-                        price:     this.price,
-                        amount:    1
+                        price: this.price,
+                        amount: 1
                     }
                 ],
                 status: 'new'
@@ -31,7 +31,11 @@
                 order.userId = Meteor.userId();
             }
 
-            Router.go('orders.view', {_id: Orders.insert(order)});
+            order = Orders.findOne(Orders.insert(order));
+
+            if (order) {
+                order.pay();
+            }
         }
     });
 

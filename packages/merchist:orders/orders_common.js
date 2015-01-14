@@ -10,6 +10,14 @@ Order.prototype = {
             total += item.price * item.amount;
         });
         return total;
+    },
+    sellerId: function() {
+        var sellerId;
+        _.each(this.items, function(orderItem){
+            var product = Products.findOne(orderItem.productId);
+            sellerId = product.userId;
+        });
+        return sellerId;
     }
 };
 
