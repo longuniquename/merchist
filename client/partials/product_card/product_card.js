@@ -12,4 +12,27 @@
         }
     });
 
+    Template.productCardPartial.events({
+        'click .buyBtn': function(e, template){
+            e.preventDefault();
+
+            var order = new Order({
+                items:  [
+                    {
+                        productId: this._id,
+                        price:     this.price,
+                        amount:    1
+                    }
+                ],
+                status: 'new'
+            });
+
+            if (Meteor.userId()) {
+                order.userId = Meteor.userId();
+            }
+
+            Router.go('orders.view', {_id: Orders.insert(order)});
+        }
+    });
+
 })();
