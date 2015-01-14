@@ -56,22 +56,22 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
             receiverList: {
                 receiver: [
                     {
-                        amount: order.total(),
-                        email: seller.services.paypal.email,
+                        amount:      order.total(),
+                        email:       seller.services.paypal.email,
                         paymentType: 'GOODS',
-                        primary: true
+                        primary:     true
                     },
                     {
-                        amount: Math.ceil(order.total() * 2) / 100,
-                        email: 'dmitriy.s.les-facilitator@gmail.com',
+                        amount:      Math.ceil(order.total() * 2) / 100,
+                        email:       'dmitriy.s.les-facilitator@gmail.com',
                         paymentType: 'SERVICE',
-                        primary: false
+                        primary:     false
                     }
                 ]
             },
-            trackingId: order._id,
-            cancelUrl: Meteor.absoluteUrl('_orders/pay/close'),
-            returnUrl: Meteor.absoluteUrl('_orders/pay/close')
+            trackingId:   order._id,
+            cancelUrl:    Meteor.absoluteUrl('_orders/pay/close'),
+            returnUrl:    Meteor.absoluteUrl('_orders/pay/close')
         });
     } catch (err) {
         console.error(err);
