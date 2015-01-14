@@ -47,7 +47,7 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
         return;
     }
 
-    var seller = Meteor.users.findOne(order.sellerId());
+    var seller = Meteor.users.findOne(order.sellerId);
 
     var result;
 
