@@ -1,7 +1,7 @@
 Orders.deny({
     insert: function (userId, doc) {
         //Initial status of order should be 'new'
-        if (doc.status !== 'new') {
+        if (doc.status !== 'NEW') {
             return true;
         }
 
@@ -40,8 +40,6 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
         return;
     }
 
-    console.log(order);
-
     if (order.paypal && order.paypal.payKey) {
         res.statusCode = 302;
         res.setHeader("Location", (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'cgi-bin/webscr?cmd=_ap-payment&paykey=' + order.paypal.payKey);
@@ -55,7 +53,7 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
 
     try {
         result = PayPal.AdaptivePayments.Pay({
-            receiverList: {
+            receiverList:       {
                 receiver: [
                     {
                         amount:      order.total(),
@@ -71,9 +69,10 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
                     }
                 ]
             },
-            trackingId:   order._id,
-            cancelUrl:    Meteor.absoluteUrl('_orders/pay/close'),
-            returnUrl:    Meteor.absoluteUrl('_orders/pay/close')
+            trackingId:         order._id,
+            ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
+            cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
+            returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
         });
     } catch (err) {
         console.error(err);

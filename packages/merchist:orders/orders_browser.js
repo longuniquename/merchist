@@ -5,7 +5,7 @@ Order.prototype.pay = function (callback) {
         480
     );
 
-    var checkPopupOpen = setInterval(function() {
+    var checkPopupOpen = setInterval(function () {
         try {
             var popupClosed = popup.closed || popup.closed === undefined;
         } catch (e) {
@@ -19,7 +19,7 @@ Order.prototype.pay = function (callback) {
     }, 100);
 };
 
-var openCenteredPopup = function(url, width, height) {
+var openCenteredPopup = function (url, width, height) {
     var screenX = typeof window.screenX !== 'undefined'
         ? window.screenX : window.screenLeft;
     var screenY = typeof window.screenY !== 'undefined'

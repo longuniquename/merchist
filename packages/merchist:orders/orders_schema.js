@@ -27,7 +27,15 @@ OrdersSchema = new SimpleSchema({
         type:          String,
         label:         "Status",
         allowedValues: [
-            'new'
+            'NEW',
+            'CANCELED',
+            'CREATED',
+            'PROCESSING',
+            'PENDING',
+            'COMPLETED',
+            'INCOMPLETE',
+            'ERROR',
+            'REVERSALERROR'
         ]
     },
     items:               {

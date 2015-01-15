@@ -17,13 +17,17 @@ Package.onUse(function (api) {
         'orders_common.js'
     ]);
 
-    api.addFiles('orders_server.js', 'server');
+    api.addFiles(['orders_server.js', 'orders_ipn.js'], 'server');
     api.addFiles('orders_client.js', 'web');
     api.addFiles('orders_browser.js', 'web.browser');
     api.addFiles('orders_cordova.js', 'web.cordova');
 
     api.export('Order');
     api.export('Orders');
+});
+
+Npm.depends({
+    "body-parser": "1.10.1"
 });
 
 Cordova.depends({
