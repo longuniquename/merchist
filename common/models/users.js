@@ -19,18 +19,6 @@ Schema.UserProfileSchema = new SimpleSchema({
         label:    "Last name",
         max:      32,
         optional: true
-    },
-    email: {
-        type:     String,
-        label:    "Contact email",
-        regEx: SimpleSchema.RegEx.Email,
-        optional: true
-    },
-    phone:  {
-        type:     String,
-        label:    "Contact phone",
-        max:      24,
-        optional: true
     }
 });
 
@@ -50,13 +38,28 @@ Schema.UserSchema = new SimpleSchema({
     "emails.$.verified": {
         type: Boolean
     },
-    createdAt:           {
-        type: Date
-    },
     services:            {
         type:     Object,
         optional: true,
         blackbox: true
+    },
+    createdAt:          {
+        type:      Date,
+        autoValue: function () {
+            if (this.isInsert) {
+                return new Date;
+            } else if (this.isUpsert) {
+                return {$setOnInsert: new Date};
+            } else {
+                this.unset();
+            }
+        }
+    },
+    updatedAt:          {
+        type:      Date,
+        autoValue: function () {
+            return new Date();
+        }
     }
 });
 

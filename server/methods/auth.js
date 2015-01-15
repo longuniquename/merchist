@@ -13,6 +13,9 @@
                 case 'twitter':
                     data = Twitter.retrieveCredential(token, secret).serviceData;
                     break;
+                case 'paypal':
+                    data = Twitter.retrieveCredential(token, secret).serviceData;
+                    break;
                 default:
                     return false;
             }

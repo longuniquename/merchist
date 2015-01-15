@@ -92,20 +92,6 @@
                     }
                 }
             );
-        },
-        'click .paypalBtn': function (e, template) {
-            e.preventDefault();
-
-            Meteor.loginWithPayPal(
-                {
-                    requestPermissions: ['REFUND', 'ACCESS_BASIC_PERSONAL_DATA', 'ACCESS_ADVANCED_PERSONAL_DATA']
-                },
-                function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                }
-            );
         }
     });
 
