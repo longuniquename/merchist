@@ -187,9 +187,8 @@
 
     Router.route('/orders', function () {
         this.layout('mainLayout');
-        var cartId = localStorage["cartId"];
 
-        this.wait(Meteor.subscribe('myOrders', cartId));
+        this.wait(Meteor.subscribe('orders'));
 
         ga('send', {
             hitType:  'pageview',
@@ -202,12 +201,7 @@
             this.render('ordersList', {
                 data: {
                     orders: function () {
-                        if (Meteor.userId()) {
-                            return Orders.find({userId: Meteor.userId()});
-                        } else {
-                            var cartId = localStorage["cartId"];
-                            return Orders.find({cartId: cartId});
-                        }
+                        return Orders.find();
                     }
                 }
             });

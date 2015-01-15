@@ -14,9 +14,8 @@
             return Images.findOne(this.logoId);
         },
         'ordersCount': function () {
-            var cartId = localStorage["cartId"];
-            Meteor.subscribe("myOrders", cartId);
-            return Orders.find().fetch().length;
+            Meteor.subscribe("orders");
+            return Orders.find().count();
         },
         'avatar': function(){
             Meteor.subscribe("image", this.profile.avatarId);

@@ -1,21 +1,70 @@
 Orders.deny({
-    insert: function (userId, doc) {
-        //Initial status of order should be 'new'
-        if (doc.status !== 'NEW') {
-            return true;
-        }
-
-        //Can't create orders for other users
-        if ((doc.userId || Meteor.userId()) && doc.userId !== Meteor.userId()) {
-            return true;
-        }
-
+    insert: function () {
+        // Order can't be created on client
         return false;
     }
 });
 
+Meteor.methods({
+    'Orders:createFromProduct': function(product){
+        var order = new Order({
+            items: [
+                {
+                    productId: product._id,
+                    price: product.price,
+                    amount: 1
+                }
+            ],
+            status: 'NEW',
+            connectionId: this.connection.id
+        });
+
+        if (this.userId) {
+            order.userId = this.userId;
+        }
+
+        return Orders.findOne(Orders.insert(order));
+    }
+});
+
 Meteor.publish("orders", function () {
-    return Orders.find();
+    if (this.userId) {
+        return Orders.find({
+            $or: [
+                {
+                    sellerId: this.userId
+                },
+                {
+                    userId: this.userId
+                }
+            ]
+        });
+    } else {
+        return Orders.find({connectionId: this.connection.id});
+    }
+});
+
+Meteor.publish('order', function (orderId) {
+    if (this.userId) {
+        return Orders.find({
+            $and: [
+                {
+                    _id: orderId
+                },
+                {
+                    $or: [
+                        {sellerId: this.userId},
+                        {userId: this.userId}
+                    ]
+                }
+            ]
+        });
+    } else {
+        return Orders.find({
+            _id:          orderId,
+            connectionId: this.connection.id
+        });
+    }
 });
 
 WebApp.connectHandlers.use("/_orders/pay/close", function (req, res, next) {

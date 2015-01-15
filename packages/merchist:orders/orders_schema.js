@@ -23,6 +23,10 @@ OrdersSchema = new SimpleSchema({
             }
         }
     },
+    connectionId:              {
+        type:     String,
+        label:    "Connection"
+    },
     status:              {
         type:          String,
         label:         "Status",

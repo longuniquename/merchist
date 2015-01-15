@@ -16,24 +16,9 @@
         'click .buyBtn': function (e, template) {
             e.preventDefault();
 
-            var order = new Order({
-                items: [
-                    {
-                        productId: this._id,
-                        price: this.price,
-                        amount: 1
-                    }
-                ],
-                status: 'NEW'
-            });
-
-            if (Meteor.userId()) {
-                order.userId = Meteor.userId();
-            }
-
-            Orders.insert(order, function(err, _id){
+            Meteor.call('Orders:createFromProduct', this, function(err, order){
                 if (!err) {
-                    Router.go('orders.view', {_id: _id});
+                    Router.go('orders.view', order);
                 }
             });
         }
