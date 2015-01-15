@@ -17,107 +17,34 @@
         name: 'root'
     });
 
-    Router.route('/splash', function () {
-        if (Meteor.isCordova) {
-            this.render('splash');
-        } else {
-            this.redirect('/marketplace');
-        }
-    }, {
-        name: 'splash'
+    Router.route('/splash', {
+        name:       'splash',
+        controller: 'SplashController'
     });
 
-    Router.route('/terms', function () {
-        this.layout('mainLayout');
-        this.render('terms');
-
-        ga('send', {
-            hitType:  'pageview',
-            location: Router.url('terms'),
-            page:     Router.path('terms'),
-            title:    'Terms of service'
-        });
-    }, {
-        name: 'terms'
+    Router.route('/marketplace', {
+        name:       'marketplace',
+        controller: 'MarketplaceController'
     });
 
-    Router.route('/policy', function () {
-        this.layout('mainLayout');
-        this.render('policy');
-
-        ga('send', {
-            hitType:  'pageview',
-            location: Router.url('policy'),
-            page:     Router.path('policy'),
-            title:    'Privacy policy'
-        });
-    }, {
-        name: 'policy'
+    Router.route('/products/my', {
+        name:      'products.my',
+        controller: 'MyProductsController'
     });
 
-    Router.route('/profile', function () {
-        this.layout('mainLayout');
-        this.wait(Meteor.subscribe('userData'));
-
-        ga('send', {
-            hitType:  'pageview',
-            location: Router.url('profile'),
-            page:     Router.path('profile'),
-            title:    'Profile'
-        });
-
-        if (this.ready()) {
-            this.render('profile');
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'profile'
+    Router.route('/terms', {
+        name:       'terms',
+        controller: 'TermsController'
     });
 
-    Router.route('/marketplace', function () {
-        this.layout('mainLayout');
-        this.wait(Meteor.subscribe('products'));
-
-        ga('send', {
-            hitType:  'pageview',
-            location: Router.url('marketplace'),
-            page:     Router.path('marketplace'),
-            title:    'Marketplace'
-        });
-
-        if (this.ready()) {
-            this.render('marketplace', {
-                data: {
-                    products: function () {
-                        return Products.find({isPublic: true}, {sort: {title: 1}, limit: 100});
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'marketplace'
+    Router.route('/policy', {
+        name:       'policy',
+        controller: 'PolicyController'
     });
 
-    Router.route('/products/my', function () {
-        this.layout('mainLayout');
-        this.wait(Meteor.subscribe('myProducts'));
-
-        if (this.ready()) {
-            this.render('myProductsView', {
-                data: {
-                    products: function () {
-                        return Products.find({userId: Meteor.userId()});
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'products.my'
+    Router.route('/profile', {
+        name:       'profile',
+        controller: 'ProfileController'
     });
 
     Router.route('/products/:_id', function () {

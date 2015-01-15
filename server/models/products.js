@@ -2,7 +2,7 @@ Meteor.publish('products', function () {
     return Products.find();
 });
 
-Meteor.publish('myProducts', function () {
+Meteor.publish('products.my', function () {
     return Products.find({userId: this.userId});
 });
 
