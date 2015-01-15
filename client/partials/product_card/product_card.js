@@ -24,19 +24,18 @@
                         amount: 1
                     }
                 ],
-                status: 'new'
+                status: 'NEW'
             });
 
             if (Meteor.userId()) {
                 order.userId = Meteor.userId();
             }
 
-            order = Orders.findOne(Orders.insert(order));
-
-            if (order) {
-                order.pay();
-                Router.go('orders.view', order);
-            }
+            Orders.insert(order, function(err, _id){
+                if (!err) {
+                    Router.go('orders.view', {_id: _id});
+                }
+            });
         }
     });
 
