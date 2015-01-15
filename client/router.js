@@ -28,7 +28,7 @@
     });
 
     Router.route('/products/my', {
-        name:      'products.my',
+        name:       'products.my',
         controller: 'MyProductsController'
     });
 
@@ -74,8 +74,9 @@
                     {property: 'og:description', content: product.description},
                     {property: 'product:price:amount', content: product.price},
                     {property: 'product:price:currency', content: 'USD'},
-                    {property:   'al:android:url',
-                        content: 'merchist://' + Router.path('products.view', product).replace(/^\/+/, '')
+                    {
+                        property: 'al:android:url',
+                        content:  'merchist://' + Router.path('products.view', product).replace(/^\/+/, '')
                     },
                     {property: 'al:android:package', content: 'com.merchist.client'},
                     {property: 'al:android:app_name', content: 'Merchist'}
@@ -112,31 +113,9 @@
         name: 'products.view'
     });
 
-    Router.route('/orders', function () {
-        this.layout('mainLayout');
-
-        this.wait(Meteor.subscribe('orders'));
-
-        ga('send', {
-            hitType:  'pageview',
-            location: Router.url('orders'),
-            page:     Router.path('orders'),
-            title:    'Orders'
-        });
-
-        if (this.ready()) {
-            this.render('ordersList', {
-                data: {
-                    orders: function () {
-                        return Orders.find();
-                    }
-                }
-            });
-        } else {
-            this.render('loading');
-        }
-    }, {
-        name: 'orders'
+    Router.route('/orders', {
+        name:       'orders',
+        controller: 'OrdersController'
     });
 
     Router.route('/orders/:_id', function () {
@@ -175,17 +154,9 @@
         name: 'orders.view'
     });
 
-    Router.route('/sell', function () {
-        this.layout('mainLayout', {
-            data: {
-                back: function () {
-                    return Router.path('marketplace');
-                }
-            }
-        });
-        this.render('sellView');
-    }, {
-        name: 'sell'
+    Router.route('/sell', {
+        name:       'sell',
+        controller: 'SellController'
     });
 
     Router.route('/management/products/:_id', function () {
@@ -222,16 +193,6 @@
         }
     }, {
         name: 'products.edit'
-    });
-
-    Router.route('/paypal/return', function () {
-        this.render('loading');
-
-        Meteor.call('PayPal:verifyAccountRequest', this.params.query, function (err, shopId) {
-            Router.go('shops.edit', {_id: shopId});
-        });
-    }, {
-        name: 'paypal.return'
     });
 
     if (Meteor.isCordova) {
