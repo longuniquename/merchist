@@ -5,10 +5,21 @@ OgMeta = {
     _value: [],
 
     _namespaces: [
-        'og',
-        'fb',
+        'article',
+        'book',
+        'books',
+        'business',
+        'fitness',
+        'game',
+        'music',
+        'place',
         'product',
-        'al'
+        'profile',
+        'restaurant',
+        'video',
+        'al',
+        'fb',
+        'og'
     ],
 
     get: function () {
@@ -40,18 +51,18 @@ OgMeta = {
     },
 
     print: function () {
-        var value = this.get();
-        console.log(value);
+        //clear old metadata
+        $('head ' + _.map(this._namespaces, function (namespace) {
+            return 'meta[property^="' + namespace + ':"]'
+        }).join(', ')).remove();
 
-        var metaQuery = 'head ' + _.map(this._namespaces, function (namespace) {
-                return 'meta[property^="' + namespace + ':"]'
-            }).join(', ');
-        $(metaQuery).remove();
-
-        _.each(this._value, function (data) {
-            var $meta = $('<meta/>');
-            $meta.attr(data);
-            $meta.appendTo('head');
+        //create new metadata
+        _.each(this.get(), function (data) {
+            if (data.property && data.content) {
+                var $meta = $('<meta/>');
+                $meta.attr(data);
+                $meta.appendTo('head');
+            }
         });
     }
 };
