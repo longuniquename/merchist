@@ -107,7 +107,7 @@
                 }
             });
         } else {
-            this.render('loading');
+            this.render('loadingView');
         }
     }, {
         name: 'products.view'
@@ -148,7 +148,7 @@
                 }
             });
         } else {
-            this.render('loading');
+            this.render('loadingView');
         }
     }, {
         name: 'orders.view'
@@ -181,7 +181,7 @@
                 title:    Products.findOne(productId).title
             });
 
-            this.render('managementProductsEdit', {
+            this.render('productEditView', {
                 data: {
                     product: function () {
                         return Products.findOne(productId);
@@ -189,7 +189,7 @@
                 }
             });
         } else {
-            this.render('loading');
+            this.render('loadingView');
         }
     }, {
         name: 'products.edit'

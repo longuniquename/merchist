@@ -1,6 +1,6 @@
 (function(){
 
-    Template.managementProductsEdit.helpers({
+    Template.productEditView.helpers({
         shop: function(){
             if (this.product()) {
                 Meteor.subscribe("shop", this.product().shopId);
