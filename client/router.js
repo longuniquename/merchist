@@ -140,7 +140,7 @@
                 title:    Orders.findOne(orderId)._id
             });
 
-            this.render('ordersView', {
+            this.render('orderView', {
                 data: {
                     order: function () {
                         return Orders.findOne(orderId);
