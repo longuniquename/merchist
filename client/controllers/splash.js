@@ -1,5 +1,5 @@
 SplashController = RouteController.extend({
-    template: 'splash',
+    template: 'splashView',
 
     action: function () {
         if (Meteor.isCordova) {

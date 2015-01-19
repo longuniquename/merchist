@@ -198,7 +198,7 @@
     if (Meteor.isCordova) {
         Router.onBeforeAction(function () {
             if (!Meteor.userId()) {
-                this.render('splash');
+                this.render('splashView');
             } else {
                 this.next();
             }

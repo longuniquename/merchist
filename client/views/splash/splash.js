@@ -1,6 +1,6 @@
 (function () {
 
-    Template.splash.events({
+    Template.splashView.events({
         'click .facebookBtn': function (e, template) {
             e.preventDefault();
             template.$('.auth').addClass('hidden');
