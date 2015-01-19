@@ -2,7 +2,7 @@ OrdersController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
     loadingTemplate: 'loadingView',
-    template:        'ordersList',
+    template:        'ordersListView',
 
     waitOn: function () {
         return Meteor.subscribe('orders');
