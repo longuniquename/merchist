@@ -99,7 +99,7 @@
                 title:    Products.findOne(productId).title
             });
 
-            this.render('marketplaceProductsView', {
+            this.render('productView', {
                 data: {
                     product: function () {
                         return Products.findOne(productId);
