@@ -1,16 +1,5 @@
 (function () {
 
-    var setOgMeta = function (data) {
-        $('meta[property^="og:"], meta[property^="fb:"], meta[property^="product:"], meta[property^="al:"]', $('head')).remove();
-        _.each(data, function (metaAttrs) {
-            if (metaAttrs.property && metaAttrs.content) {
-                var $meta = $('<meta/>');
-                $meta.attr(metaAttrs);
-                $meta.appendTo('head');
-            }
-        });
-    };
-
     Router.route('/', function () {
         this.redirect('/marketplace');
     }, {
@@ -47,70 +36,9 @@
         controller: 'ProfileController'
     });
 
-    Router.route('/products/:_id', function () {
-        var productId = this.params._id;
-
-        this.layout('mainLayout', {
-            data: {
-                back: function () {
-                    return Router.path('marketplace');
-                }
-            }
-        });
-        this.wait(Meteor.subscribe('product', productId));
-        this.wait(Meteor.subscribe("productImages", productId));
-        this.wait(Meteor.subscribe("serviceConfiguration", 'facebook'));
-
-        if (this.ready()) {
-            var product = Products.findOne(productId),
-                images = Images.find({_id: {$in: product.imageIds}}),
-                facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'}),
-                ogData = [
-                    {property: 'fb:app_id', content: facebookConfig.appId},
-                    {property: 'og:site_name', content: 'Merchist'},
-                    {property: 'og:type', content: 'product'},
-                    {property: 'og:url', content: Router.url('products.view', product)},
-                    {property: 'og:title', content: product.title},
-                    {property: 'og:description', content: product.description},
-                    {property: 'product:price:amount', content: product.price},
-                    {property: 'product:price:currency', content: 'USD'},
-                    {
-                        property: 'al:android:url',
-                        content:  'merchist://' + Router.path('products.view', product).replace(/^\/+/, '')
-                    },
-                    {property: 'al:android:package', content: 'com.merchist.client'},
-                    {property: 'al:android:app_name', content: 'Merchist'}
-                ];
-
-            images.forEach(function (image, index) {
-                var parser = document.createElement('a');
-                parser.href = image.url({store: 'xl', auth: false, download: true});
-                ogData.push({
-                    property: 'og:image', content: 'http://' + parser.host + parser.pathname + parser.search
-                });
-            });
-
-            setOgMeta(ogData);
-
-            ga('send', {
-                hitType:  'pageview',
-                location: Router.url('products.view', {_id: productId}),
-                page:     Router.path('products.view', {_id: productId}),
-                title:    Products.findOne(productId).title
-            });
-
-            this.render('productView', {
-                data: {
-                    product: function () {
-                        return Products.findOne(productId);
-                    }
-                }
-            });
-        } else {
-            this.render('loadingView');
-        }
-    }, {
-        name: 'products.view'
+    Router.route('/products/:_id', {
+        name:       'products.view',
+        controller: 'ProductViewController'
     });
 
     Router.route('/orders', {

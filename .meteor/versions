@@ -68,6 +68,7 @@ livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6
 merchist:accounts-paypal@0.0.0
+merchist:og@0.0.0
 merchist:orders@0.0.0
 merchist:paypal@0.0.0
 merchist:roboto@0.0.0
