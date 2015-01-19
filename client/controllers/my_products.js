@@ -1,7 +1,7 @@
 MyProductsController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
-    loadingTemplate: 'loading',
+    loadingTemplate: 'loadingView',
     template:        'myProductsView',
 
     waitOn: function () {

@@ -1,7 +1,7 @@
 OrdersController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
-    loadingTemplate: 'loading',
+    loadingTemplate: 'loadingView',
     template:        'ordersList',
 
     waitOn: function () {

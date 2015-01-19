@@ -1,7 +1,7 @@
 MarketplaceController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
-    loadingTemplate: 'loading',
+    loadingTemplate: 'loadingView',
     template:        'marketplace',
 
     waitOn: function () {
