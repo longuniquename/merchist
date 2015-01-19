@@ -1,0 +1,99 @@
+@import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
+
+#splash {
+  background: @brand-primary;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+
+  svg.logo {
+    polygon {
+      fill: white;
+    }
+  }
+
+  .wrapper {
+    width: 230px;
+    margin: 48px auto;
+
+    .logo {
+      width: 160px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .title {
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 300;
+      display: block;
+      text-align: center;
+      font-size: 32px;
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .content {
+      margin-top: 48px;
+    }
+
+    .auth {
+      display: block;
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .loading {
+      height: 32px;
+
+      .loader {
+        margin: 6px auto;
+        display: block;
+        height: 20px;
+        width: 70px;
+
+        circle {
+          fill: white;
+          -webkit-transform-origin: center;
+          -moz-transform-origin: center;
+          -o-transform-origin: center;
+          transform-origin: center;
+          -webkit-animation: loading 1.2s infinite;
+          -moz-animation: loading 1.2s infinite;
+          -o-animation: loading 1.2s infinite;
+          animation: loading 1.2s infinite;
+
+          &:nth-child(1) {
+            -webkit-animation-delay: .3s;
+            -moz-animation-delay: .3s;
+            -o-animation-delay: .3s;
+            animation-delay: .3s;
+          }
+          &:nth-child(2) {
+            -webkit-animation-delay: .5s;
+            -moz-animation-delay: .5s;
+            -o-animation-delay: .5s;
+            animation-delay: .5s;
+          }
+          &:nth-child(3) {
+            -webkit-animation-delay: .7s;
+            -moz-animation-delay: .7s;
+            -o-animation-delay: .7s;
+            animation-delay: .7s;
+          }
+        }
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+}

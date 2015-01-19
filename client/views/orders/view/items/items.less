@@ -1,0 +1,69 @@
+@import (reference) '../../../../lib/variables.import.less';
+@import (reference) '../../../../lib/mixins.import.less';
+
+.orders-view {
+  .items {
+    .item {
+      .clearfix();
+      padding-bottom: @grid-gutter-width / 2;
+      margin-bottom: @grid-gutter-width / 2;
+      border-bottom: 1px dotted @brand-primary;
+
+      > .image {
+        height: 60px;
+        width: 60px;
+        background: transparent;
+        border: 1px solid @brand-primary;
+        padding: 1px;
+        float: left;
+        margin-right: @grid-gutter-width / 2;
+
+        img {
+          height: 100%;
+          width: 100%;
+          background: white;
+        }
+      }
+
+      > .count, > .price{
+        line-height: 1;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 300;
+        float: right;
+        margin-left: @grid-gutter-width / 2;
+      }
+
+      > .price {
+        color: @brand-primary;
+      }
+
+      > .info {
+        margin-left: 60px + @grid-gutter-width / 2;
+        .title {
+          display: block;
+          color: @text-color;
+          font-weight: 500;
+
+          .subtitle {
+            font-weight: normal;
+          }
+        }
+
+        .price {
+          color: @brand-primary;
+        }
+      }
+    }
+    .total {
+      .clearfix();
+      font-size: 18px;
+      font-weight: 300;
+
+      .price {
+        float: right;
+        color: @brand-primary;
+      }
+    }
+  }
+}

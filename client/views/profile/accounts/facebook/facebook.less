@@ -1,0 +1,28 @@
+@import (reference) '../../../../lib/variables.import.less';
+@import (reference) '../../../../lib/mixins.import.less';
+
+.profile-view {
+  .accounts {
+    .facebook {
+      .clearfix();
+      margin-bottom: @grid-gutter-width / 2;
+
+      .image {
+        height: 48px;
+        width: 48px;
+        border: 1px solid @facebook-color;
+        padding: 1px;
+        border-radius: 100%;
+        float: left;
+        margin-right: @grid-gutter-width / 2;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 100%;
+          background: @facebook-color;
+        }
+      }
+    }
+  }
+}
