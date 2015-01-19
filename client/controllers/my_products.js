@@ -2,7 +2,7 @@ MyProductsController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
     loadingTemplate: 'loadingView',
-    template:        'myProductsView',
+    template:        'productsMyView',
 
     waitOn: function () {
         return Meteor.subscribe('products.my');
