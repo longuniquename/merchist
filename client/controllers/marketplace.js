@@ -2,7 +2,7 @@ MarketplaceController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
     loadingTemplate: 'loadingView',
-    template:        'marketplace',
+    template:        'marketplaceView',
 
     waitOn: function () {
         return Meteor.subscribe('products');
