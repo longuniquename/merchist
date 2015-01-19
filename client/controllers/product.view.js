@@ -22,8 +22,6 @@ ProductViewController = RouteController.extend({
     },
 
     action: function () {
-        console.log(this);
-
         var product = Products.findOne(this.params._id),
             images = Images.find({_id: {$in: product.imageIds}}),
             facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
