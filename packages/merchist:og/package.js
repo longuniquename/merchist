@@ -3,12 +3,10 @@ Package.describe({
     version: "0.0.0"
 });
 
-Package.onUse(function(api) {
-    api.use('tracker', 'client');
-    api.use('jquery', 'client');
-    api.use('underscore', 'client');
+Package.onUse(function (api) {
+    api.use(['tracker', 'jquery', 'underscore'], 'client');
+    api.use('iron:router', 'client', {weak: true});
 
     api.addFiles("og_client.js", 'client');
-
     api.export('OgMeta', 'client');
 });

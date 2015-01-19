@@ -59,3 +59,9 @@ OgMeta = {
 Tracker.autorun(function () {
     OgMeta.print();
 });
+
+if (typeof Package['iron:router'] !== 'undefined') {
+    Package['iron:router'].Router.onStop(function () {
+        OgMeta.clear();
+    });
+}
