@@ -9,7 +9,14 @@ SellController = RouteController.extend({
 
     action: function () {
         if (Meteor.userId()) {
-            this.render();
+            if (
+                !Meteor.user().services || !Meteor.user().services.paypal ||
+                Meteor.user().services.paypal.accountType !== 'BUSINESS'
+            ) {
+                this.render('authPayPalView');
+            } else {
+                this.render();
+            }
         } else {
             this.render('authView');
         }
