@@ -1,3 +1,8 @@
+Router.route('/products/my', {
+    name:       'products.my',
+    controller: 'MyProductsController'
+});
+
 MyProductsController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 

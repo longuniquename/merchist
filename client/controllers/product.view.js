@@ -1,8 +1,13 @@
+Router.route('/products/:_id', {
+    name:       'products.view',
+    controller: 'ProductViewController'
+});
+
 ProductViewController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
     loadingTemplate: 'loadingView',
-    template: 'productView',
+    template:        'productView',
 
     waitOn: function () {
         return [

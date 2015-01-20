@@ -1,3 +1,8 @@
+Router.route('/orders', {
+    name:       'orders',
+    controller: 'OrdersController'
+});
+
 OrdersController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 

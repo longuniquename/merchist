@@ -1,3 +1,14 @@
+Router.route('/', function () {
+    this.redirect('/marketplace');
+}, {
+    name: 'root'
+});
+
+Router.route('/marketplace', {
+    name:       'marketplace',
+    controller: 'MarketplaceController'
+});
+
 MarketplaceController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
