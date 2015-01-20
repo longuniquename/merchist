@@ -5,5 +5,13 @@ Router.route('/profile', {
 
 ProfileController = RouteController.extend({
     layoutTemplate: 'mainLayout',
-    template:       'profileView'
+    template:       'profileView',
+
+    action: function () {
+        if (Meteor.userId()) {
+            this.render();
+        } else {
+            this.render('authView');
+        }
+    }
 });

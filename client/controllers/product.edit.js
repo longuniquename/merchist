@@ -23,6 +23,10 @@ ProductEditController = RouteController.extend({
     },
 
     action: function () {
-        this.render();
+        if (Meteor.userId()) {
+            this.render();
+        } else {
+            this.render('authView');
+        }
     }
 });

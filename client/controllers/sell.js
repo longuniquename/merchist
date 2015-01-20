@@ -5,5 +5,13 @@ Router.route('/sell', {
 
 SellController = RouteController.extend({
     layoutTemplate: 'mainLayout',
-    template:       'sellView'
+    template:       'sellView',
+
+    action: function () {
+        if (Meteor.userId()) {
+            this.render();
+        } else {
+            this.render('authView');
+        }
+    }
 });
