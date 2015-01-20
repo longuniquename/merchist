@@ -23,7 +23,7 @@
       "longuniquename:bootstrap": {
         "git": "https://github.com/dmitriyles/meteor-bootstrap-less.git",
         "branch": "master",
-        "commit": "480c4bdbcc224031a56f9efd7e8ee8c78f328511"
+        "commit": "67c30a538c476735279a8829522d54b11e4f27ad"
       },
       "longuniquename:roboto": {
         "git": "https://github.com/dmitriyles/meteor-roboto.git",
@@ -33,7 +33,7 @@
       "longuniquename:bootstrap-material": {
         "git": "https://github.com/dmitriyles/meteor-bootstrap-material.git",
         "branch": "master",
-        "commit": "a70a572a2284549e4720698b5f140e3338067d48"
+        "commit": "cfae3405db56e96df3615890de408155ff892b9f"
       },
       "longuniquename:open-graph": {
         "git": "https://github.com/dmitriyles/meteor-open-graph.git",
