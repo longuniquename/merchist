@@ -31,8 +31,8 @@ aldeed:autoform
 aldeed:collection2
 tmeasday:presence
 cfs:gridfs
-merchist:roboto
 merchist:paypal
 merchist:accounts-paypal
 merchist:orders
 merchist:og
+longuniquename:bootstrap-material

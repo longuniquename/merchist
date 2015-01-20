@@ -1,0 +1,13 @@
+{
+  "packages": {
+    "longuniquename:bootstrap": {
+      "git": "https://github.com/dmitriyles/meteor-bootstrap-less.git"
+    },
+    "longuniquename:roboto": {
+      "git": "https://github.com/dmitriyles/meteor-roboto.git"
+    },
+    "longuniquename:bootstrap-material": {
+      "git": "https://github.com/dmitriyles/meteor-bootstrap-material.git"
+    }
+  }
+}

@@ -67,11 +67,13 @@ less@1.0.12
 livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6
+longuniquename:bootstrap@0.0.1
+longuniquename:bootstrap-material@0.0.1
+longuniquename:roboto@0.0.1
 merchist:accounts-paypal@0.0.0
 merchist:og@0.0.0
 merchist:orders@0.0.0
 merchist:paypal@0.0.0
-merchist:roboto@0.0.0
 meteor@1.1.4
 meteor-platform@1.2.1
 minifiers@1.1.3
