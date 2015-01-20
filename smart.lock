@@ -13,6 +13,10 @@
       "longuniquename:bootstrap-material": {
         "git": "https://github.com/dmitriyles/meteor-bootstrap-material.git",
         "branch": "master"
+      },
+      "longuniquename:open-graph": {
+        "git": "https://github.com/dmitriyles/meteor-open-graph.git",
+        "branch": "master"
       }
     },
     "packages": {
@@ -30,6 +34,11 @@
         "git": "https://github.com/dmitriyles/meteor-bootstrap-material.git",
         "branch": "master",
         "commit": "a70a572a2284549e4720698b5f140e3338067d48"
+      },
+      "longuniquename:open-graph": {
+        "git": "https://github.com/dmitriyles/meteor-open-graph.git",
+        "branch": "master",
+        "commit": "3498022651dda82e708dc65221998c008ccd7d06"
       }
     }
   }

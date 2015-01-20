@@ -8,6 +8,9 @@
     },
     "longuniquename:bootstrap-material": {
       "git": "https://github.com/dmitriyles/meteor-bootstrap-material.git"
+    },
+    "longuniquename:open-graph": {
+      "git": "https://github.com/dmitriyles/meteor-open-graph.git"
     }
   }
 }

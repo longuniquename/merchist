@@ -34,5 +34,5 @@ cfs:gridfs
 merchist:paypal
 merchist:accounts-paypal
 merchist:orders
-merchist:og
 longuniquename:bootstrap-material
+longuniquename:open-graph
