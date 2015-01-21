@@ -23,7 +23,7 @@
       "longuniquename:bootstrap": {
         "git": "https://github.com/dmitriyles/meteor-bootstrap-less.git",
         "branch": "master",
-        "commit": "67c30a538c476735279a8829522d54b11e4f27ad"
+        "commit": "6759b65f1427c0d90a78f21357ccfba9560e24c3"
       },
       "longuniquename:roboto": {
         "git": "https://github.com/dmitriyles/meteor-roboto.git",
