@@ -1,17 +1,30 @@
 (function () {
 
-    var shareOnFacebook = false;
-
     Template.sellView.rendered = function () {
         $.material.togglebutton();
-        $.material.input();
+        Session.setDefault('shareSalesOnFacebook', false);
     };
 
-    Template.sellView.helpers({});
+    Template.sellView.helpers({
+        shareSalesOnFacebook: function () {
+            return Session.get("shareSalesOnFacebook");
+        }
+    });
 
     Template.sellView.events({
         'change input[name="shareOnFacebook"]': function (e, template) {
-            shareOnFacebook = template.$('input[name="shareOnFacebook"]').is(':checked');
+            Session.set('shareSalesOnFacebook', template.$('input[name="shareOnFacebook"]').is(':checked'));
+
+            if (Session.get('shareSalesOnFacebook')) {
+                FbApi.ensurePermissions(['publish_actions', 'user_groups'])
+                    .then(function () {
+                        Session.set('shareSalesOnFacebook', true);
+                    })
+                    .catch(function (err) {
+                        console.error(err);
+                        Session.set('shareSalesOnFacebook', false);
+                    });
+            }
         }
     });
 
@@ -24,44 +37,48 @@
                 }
             },
             onSuccess: function (operation, productId, template) {
-                if (shareOnFacebook) {
+                if (Session.get("shareSalesOnFacebook")) {
 
-                    var actionData = {
-                        product:                Router.url('products.view', {_id: productId}),
-                        'fb:explicitly_shared': true,
-                        expires_in:             60 * 60 * 24 * 356 * 100,
-                        scrape:                 true
-                    };
+                    FbApi.ensurePermissions(['publish_actions', 'user_groups'])
+                        .then(function () {
+                            var actionData = {
+                                product:                Router.url('products.view', {_id: productId}),
+                                'fb:explicitly_shared': true,
+                                expires_in:             60 * 60 * 24 * 356 * 100,
+                                scrape:                 true
+                            };
 
-                    if (Meteor.isCordova) {
-                        facebookConnectPlugin.getLoginStatus(function (response) {
-                            if (response.status === 'connected') {
-                                actionData.method = 'POST';
+                            if (Meteor.isCordova) {
+                                facebookConnectPlugin.getLoginStatus(function (response) {
+                                    if (response.status === 'connected') {
+                                        actionData.method = 'POST';
 
-                                var userId = response.authResponse.userID,
-                                    fbUrl = userId + '/merchist_staging:sell_new?' + $.param(actionData);
+                                        var userId = response.authResponse.userID,
+                                            fbUrl = userId + '/merchist_staging:sell_new?' + $.param(actionData);
 
-                                facebookConnectPlugin.api(fbUrl, ['publish_actions'], function (actionObject) {
-                                    Products.update(productId, {$push: {'facebook.actions': actionObject.id}});
+                                        facebookConnectPlugin.api(fbUrl, ['publish_actions'], function (actionObject) {
+                                            Products.update(productId, {$push: {'facebook.actions': actionObject.id}});
+                                        });
+                                    }
+                                });
+                            } else {
+                                FB.getLoginStatus(function (response) {
+                                    if (response.status === 'connected') {
+                                        FB.api(
+                                            '/me/merchist_staging:sell_new',
+                                            'post',
+                                            actionData,
+                                            function (response) {
+                                                if (response && !response.error) {
+                                                    Products.update(productId, {$push: {'facebook.actions': response.id}});
+                                                }
+                                            }
+                                        );
+                                    }
                                 });
                             }
                         });
-                    } else {
-                        FB.getLoginStatus(function (response) {
-                            if (response.status === 'connected') {
-                                FB.api(
-                                    '/me/merchist_staging:sell_new',
-                                    'post',
-                                    actionData,
-                                    function (response) {
-                                        if (response && !response.error) {
-                                            Products.update(productId, {$push: {'facebook.actions': response.id}});
-                                        }
-                                    }
-                                );
-                            }
-                        });
-                    }
+
                 }
 
                 Router.go('products.view', {_id: productId});
