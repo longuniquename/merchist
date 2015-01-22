@@ -9,7 +9,7 @@
             var title = template.$('[name="title"]').val();
 
             Router.go(
-                'products.edit',
+                'products.view',
                 {
                     _id: Products.insert(
                         {

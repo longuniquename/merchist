@@ -8,6 +8,7 @@ ProductViewController = RouteController.extend({
 
     loadingTemplate: 'loadingView',
     template:        'productView',
+    editingTemplate: 'productEditView',
 
     waitOn: function () {
         return [
@@ -22,13 +23,16 @@ ProductViewController = RouteController.extend({
         return {
             product: function () {
                 return Products.findOne(self.params._id);
+            },
+            images:  function () {
+                return Images.find({_id: {$in: this.product().imageIds}})
             }
         }
     },
 
     action: function () {
-        var product = Products.findOne(this.params._id),
-            images = Images.find({_id: {$in: product.imageIds}}),
+        var product = this.data().product(),
+            images = this.data().images(),
             facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
 
         OgMeta.add('fb:app_id', facebookConfig.appId);
@@ -49,6 +53,11 @@ ProductViewController = RouteController.extend({
             OgMeta.add('og:image', 'http://' + parser.host + parser.pathname + parser.search);
         });
 
-        this.render();
+        if (Meteor.userId() && product.userId === Meteor.userId()) {
+            this.render(this.editingTemplate);
+        } else {
+            this.render();
+        }
+
     }
 });
