@@ -6,7 +6,7 @@
                 <div class="item">
                     {{ #with product }}
                         {{ #if image }}
-                        <a href="{{pathFor route='products.view' data=this }}" class="image">
+                        <a href="{{pathFor route='product' data=this }}" class="image">
                             <img src="{{ image.url }}" />
                         </a>
                         {{ /if }}
@@ -19,7 +19,7 @@
                     </div>
                     <div class="info">
                         {{ #with product }}
-                            <a href="{{pathFor route='products.view' data=this }}" class="title">
+                            <a href="{{pathFor route='product' data=this }}" class="title">
                                 {{ title }}
                                 {{ #if subtitle }}
                                     <span class="subtitle">

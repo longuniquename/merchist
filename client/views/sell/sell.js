@@ -50,7 +50,7 @@
                                 var facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
 
                                 var actionData = {
-                                    product:                Router.url('products.view', {_id: productId}),
+                                    product:                Router.url('product', {_id: productId}),
                                     'fb:explicitly_shared': true,
                                     expires_in:             60 * 60 * 24 * 356 * 100,
                                     scrape:                 true
@@ -90,7 +90,7 @@
 
                 }
 
-                Router.go('products.view', {_id: productId});
+                Router.go('product', {_id: productId});
             }
         }
     });

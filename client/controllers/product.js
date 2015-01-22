@@ -1,9 +1,9 @@
 Router.route('/products/:_id', {
-    name:       'products.view',
-    controller: 'ProductViewController'
+    name:       'product',
+    controller: 'ProductController'
 });
 
-ProductViewController = RouteController.extend({
+ProductController = RouteController.extend({
     layoutTemplate: 'mainLayout',
 
     loadingTemplate: 'loadingView',
@@ -38,12 +38,12 @@ ProductViewController = RouteController.extend({
         OgMeta.add('fb:app_id', facebookConfig.appId);
         OgMeta.add('og:site_name', 'Merchist');
         OgMeta.add('og:type', 'product');
-        OgMeta.add('og:url', Router.url('products.view', product));
+        OgMeta.add('og:url', Router.url('product', product));
         OgMeta.add('og:title', product.title);
         OgMeta.add('og:description', product.description);
         OgMeta.add('product:price:amount', product.price);
         OgMeta.add('product:price:currency', 'USD');
-        OgMeta.add('al:android:url', 'merchist://' + Router.path('products.view', product).replace(/^\/+/, ''));
+        OgMeta.add('al:android:url', 'merchist://' + Router.path('product', product).replace(/^\/+/, ''));
         OgMeta.add('al:android:package', 'com.merchist.client');
         OgMeta.add('al:android:app_name', 'Merchist');
 
