@@ -1,6 +1,6 @@
 (function(){
 
-    Template.managementProductsEditGeneral.helpers({
+    Template.productEditGeneralBlock.helpers({
         isInStock: function(){
             return this.availability == 'inStock';
         },
@@ -15,7 +15,7 @@
         }
     });
 
-    Template.managementProductsEditGeneral.events({
+    Template.productEditGeneralBlock.events({
         'change [name="title"]': function(e, template){
             Products.update(this._id, {$set: {title: template.$(e.currentTarget).val()}});
         },

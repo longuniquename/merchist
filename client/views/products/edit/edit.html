@@ -2,19 +2,9 @@
     <div class="product-edit-view">
         {{ #with product }}
 
-        {{> managementProductsEditImages }}
-        <div class="block">
-            <div class="container">
-                <h2 class="page-header">{{_ "management.product.edit.details.header"}}</h2>
-                {{> managementProductsEditGeneral }}
-            </div>
-        </div>
-        <div class="block">
-            <div class="container">
-                <h2 class="page-header text-danger">{{_ "management.product.edit.remove.header"}}</h2>
-                {{> managementProductsEditRemove }}
-            </div>
-        </div>
+        {{> productEditImagesBlock }}
+        {{> productEditGeneralBlock }}
+        {{> productEditRemoveBlock }}
 
         {{ /with }}
     </div>

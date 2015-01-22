@@ -4,9 +4,9 @@
         dragging = false,
         shift;
 
-    Template.managementProductsEditImages.rendered = function () {
+    Template.productEditImagesBlock.rendered = function () {
         var resizeImagesBlock = function () {
-            var imagesBlock = this.$('.images');
+            var imagesBlock = this.$('.images-block');
             imagesBlock.css({
                 height: imagesBlock.width()
             });
@@ -19,14 +19,14 @@
         resizeImagesBlock();
     };
 
-    Template.managementProductsEditImages.helpers({
+    Template.productEditImagesBlock.helpers({
         'image': function(){
             Meteor.subscribe("image", this.imageId);
             return Images.findOne(this.imageId);
         }
     });
 
-    Template.managementProductsEditImages.events({
+    Template.productEditImagesBlock.events({
         'change #uploadLogoFile': function(e, template){
             e.preventDefault();
             imageData = {};
