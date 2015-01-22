@@ -24,15 +24,6 @@ FbApi.checkPermissions = function (permissions) {
     });
 };
 
-FbApi.whitelistedPermissions = [
-    'public_profile',
-    'user_friends',
-    'email',
-    'user_groups',
-    'manage_pages',
-    'publish_actions'
-];
-
 function PermissionsMissingError(permissions) {
     this.name = 'PermissionsMissingError';
     this.message = 'Permissions missing';
@@ -47,10 +38,7 @@ FbApi.ensurePermissions = function (permissions) {
         .then(function (response) {
             if (response.status === 'connected') {
                 if (
-                    !Meteor.user() ||
-                    !Meteor.user().services ||
-                    !Meteor.user().services.facebook ||
-                    !Meteor.user().services.facebook.id ||
+                    !Meteor.user() || !Meteor.user().services || !Meteor.user().services.facebook || !Meteor.user().services.facebook.id ||
                     Meteor.user().services.facebook.id !== response.authResponse.userID
                 ) {
                     throw new Meteor.Error('logged-out', 'User is not logged in');

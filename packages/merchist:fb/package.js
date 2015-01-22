@@ -5,6 +5,7 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.use([
+        'tracker',
         'templating',
         'blaze',
         'underscore',
