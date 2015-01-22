@@ -1,8 +1,8 @@
-FbApi.getLoginStatus = function () {
+FbApi.getLoginStatus = function (force) {
     return new Promise(function (resovle) {
         FB.getLoginStatus(function (response) {
             resovle(response);
-        });
+        }, !!force);
     });
 };
 
@@ -42,10 +42,19 @@ function PermissionsMissingError(permissions) {
 PermissionsMissingError.prototype = new Error;
 
 FbApi.ensurePermissions = function (permissions) {
-    return FbApi.getLoginStatus()
+    return FbApi.getLoginStatus(true)
         //checking if user is logged in
         .then(function (response) {
             if (response.status === 'connected') {
+                if (
+                    !Meteor.user() ||
+                    !Meteor.user().services ||
+                    !Meteor.user().services.facebook ||
+                    !Meteor.user().services.facebook.id ||
+                    Meteor.user().services.facebook.id !== response.authResponse.userID
+                ) {
+                    throw new Meteor.Error('logged-out', 'User is not logged in');
+                }
                 return FbApi.checkPermissions(['publish_actions'])
             } else {
                 throw new Meteor.Error('logged-out', 'User is not logged in');
