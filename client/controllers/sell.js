@@ -17,6 +17,8 @@ SellController = RouteController.extend({
             } else {
                 this.render();
             }
+        } else if (Meteor.loggingIn()) {
+            this.render('loadingView');
         } else {
             this.render('authView');
         }

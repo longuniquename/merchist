@@ -7,6 +7,11 @@
                 </div>
                 <div class="modal-body">
                     <p>We need your permission to post reach story to your Facebook page.</p>
+                    <ul>
+                        {{#each permissions}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">

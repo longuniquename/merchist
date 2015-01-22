@@ -65,8 +65,8 @@ FbApi.ensurePermissions = function (permissions) {
         //request new permissions if they are missing
         .catch(PermissionsMissingError, function (err) {
             return new Promise(function (resovle, reject) {
-                var view = Blaze.render(Template.fbPermissionsRequestDlg, document.getElementsByTagName("body")[0]),
-                    $dlg = $(view.templateInstance().firstNode);
+                var view = Blaze.renderWithData(Template.fbPermissionsRequestDlg, {permissions: err.permissions}, document.getElementsByTagName("body")[0]),
+                    $dlg = $(view.firstNode());
                 $dlg.modal('show');
                 $dlg.on('hidden.bs.modal', function () {
                     Blaze.remove(view);
