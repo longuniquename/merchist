@@ -1,11 +1,14 @@
 <template name="productEditView">
     <div class="product-edit-view">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Product management</h1>
+            </div>
+        </div>
+
         {{ #with product }}
-
-        {{> productEditImagesBlock }}
-        {{> productEditGeneralBlock }}
-        {{> productEditRemoveBlock }}
-
+            {{> productEditGeneralBlock }}
+            {{> productEditRemoveBlock }}
         {{ /with }}
     </div>
 </template>

@@ -1,6 +1,6 @@
 var path = Npm.require('path');
 
-process.env.CLOUD_DIR = process.env.CLOUD_DIR || '../uploads';
+process.env.CLOUD_DIR = process.env.CLOUD_DIR || '~/uploads';
 
 var oStore = new FS.Store.FileSystem("o", {
     path: path.join(process.env.CLOUD_DIR, 'images'),
