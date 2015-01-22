@@ -16,7 +16,9 @@
             Session.set('shareSalesOnFacebook', template.$('input[name="shareOnFacebook"]').is(':checked'));
 
             if (Session.get('shareSalesOnFacebook')) {
-                FbApi.ensurePermissions(['publish_actions'])
+                FbApi.ensurePermissions({
+                    'publish_actions': 'Merchist needs it to post a story to your Facebook Timeline'
+                })
                     .then(function () {
                         Session.set('shareSalesOnFacebook', true);
                     })
@@ -39,7 +41,9 @@
             onSuccess: function (operation, productId, template) {
                 if (Session.get("shareSalesOnFacebook")) {
 
-                    FbApi.ensurePermissions(['publish_actions'])
+                    FbApi.ensurePermissions({
+                        'publish_actions': 'Merchist needs it to post a story to your Facebook Timeline'
+                    })
                         .then(function () {
                             var actionData = {
                                 product:                Router.url('products.view', {_id: productId}),

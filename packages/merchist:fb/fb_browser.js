@@ -55,15 +55,15 @@ FbApi.ensurePermissions = function (permissions) {
                 ) {
                     throw new Meteor.Error('logged-out', 'User is not logged in');
                 }
-                return FbApi.checkPermissions(['publish_actions'])
+                return FbApi.checkPermissions(_.keys(permissions))
             } else {
                 throw new Meteor.Error('logged-out', 'User is not logged in');
             }
         })
         //checking if we have enough permissions
-        .then(function (permissions) {
-            if (_.intersection(_.values(permissions), ['missing', 'declined']).length) {
-                throw new PermissionsMissingError(_.reduce(permissions, function (memo, status, permission) {
+        .then(function (permissionsStatus) {
+            if (_.intersection(_.values(permissionsStatus), ['missing', 'declined']).length) {
+                throw new PermissionsMissingError(_.reduce(permissionsStatus, function (memo, status, permission) {
                     if (status === 'missing' || status === 'declined') {
                         memo.push(permission);
                     }
@@ -74,7 +74,7 @@ FbApi.ensurePermissions = function (permissions) {
         //request new permissions if they are missing
         .catch(PermissionsMissingError, function (err) {
             return new Promise(function (resovle, reject) {
-                var view = Blaze.renderWithData(Template.fbPermissionsRequestDlg, {permissions: err.permissions}, document.getElementsByTagName("body")[0]),
+                var view = Blaze.renderWithData(Template.fbPermissionsRequestDlg, {permissions: _.pick(permissions, err.permissions)}, document.getElementsByTagName("body")[0]),
                     $dlg = $(view.firstNode());
                 $dlg.modal('show');
                 $dlg.on('hidden.bs.modal', function () {

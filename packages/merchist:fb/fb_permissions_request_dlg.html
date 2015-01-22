@@ -6,12 +6,13 @@
                     <h4 class="modal-title">Additional permissions needed</h4>
                 </div>
                 <div class="modal-body">
-                    <p>We need your permission to post reach story to your Facebook page.</p>
-                    <ul>
+                    <p>We need some additional permissions to do some new cool stuff for you:</p>
+                    <dl class="dl-horizontal">
                         {{#each permissions}}
-                            <li>{{this}}</li>
+                            <dt>{{permission}}</dt>
+                            <dd>{{description}}</dd>
                         {{/each}}
-                    </ul>
+                    </dl>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">

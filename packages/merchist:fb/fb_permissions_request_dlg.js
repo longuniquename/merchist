@@ -1,3 +1,20 @@
+Template.fbPermissionsRequestDlg.helpers({
+    permissions: function () {
+        return _.map(this.permissions, function (description, permissionKey) {
+            var permission = permissionKey;
+            switch (permissionKey) {
+                case 'publish_actions':
+                    permission = 'Publish actions';
+                    break;
+            }
+            return {
+                permission:  permission,
+                description: description
+            }
+        });
+    }
+});
+
 Template.fbPermissionsRequestDlg.events({
     'click .grantBtn': function (e, template) {
         var $dlg = $(template.firstNode);
