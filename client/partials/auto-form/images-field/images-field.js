@@ -1,6 +1,6 @@
 (function () {
 
-    function ImagesList (images) {
+    function ImagesList(images) {
         this._dep = new Tracker.Dependency;
         this.set(images);
     }
@@ -12,7 +12,7 @@
 
     ImagesList.prototype.toIds = function () {
         this._dep.depend();
-        return _.map(this._images, function(image){
+        return _.map(this._images, function (image) {
             return image._id;
         });
     };
@@ -84,15 +84,14 @@
     };
 
     Template.mcInputImages.helpers({
-        images: function () {
+        images:           function () {
             //return this.value.get();
             return Images.find({_id: {$in: this.value.toIds()}});
         },
-        isReady: function(store){
-            console.log(this._id, this.isUploaded(), this.hasStored(store));
+        isReady:          function (store) {
             return this.isUploaded() && this.hasStored(store);
         },
-        showCameraButton: function(){
+        showCameraButton: function () {
             return Meteor.isCordova
         }
     });
@@ -132,7 +131,7 @@
             var $fileInput = template.$('.uploadBtn input[type="file"]');
             $fileInput.remove();
 
-            _.each(e.currentTarget.files, function(file){
+            _.each(e.currentTarget.files, function (file) {
 
                 var fileName = file.name;
 
