@@ -1,5 +1,38 @@
 (function () {
 
+    function ImagesList (images) {
+        this._dep = new Tracker.Dependency;
+        this.set(images);
+    }
+
+    ImagesList.prototype.get = function () {
+        this._dep.depend();
+        return this._images;
+    };
+
+    ImagesList.prototype.toIds = function () {
+        this._dep.depend();
+        return _.map(this._images, function(image){
+            return image._id;
+        });
+    };
+
+    ImagesList.prototype.set = function (images) {
+        if (EJSON.equals(this._images, images))
+            return;
+
+        check(images, [FS.File]);
+        this._images = images;
+        this._dep.changed();
+    };
+
+    ImagesList.prototype.add = function (image) {
+        check(image, FS.File);
+        this._images.push(image);
+        Meteor.subscribe('image', image._id);
+        this._dep.changed();
+    };
+
     var getDataUrl = function (blob) {
         var reader = new FileReader();
         return new Promise(function (resolve, reject) {
@@ -50,17 +83,13 @@
         });
     };
 
-    Template.mcInputImages.created = function () {
-        this.data.imageIds = [];
-        this.data.imageIdsDep = new Tracker.Dependency;
-    };
-
     Template.mcInputImages.helpers({
         images: function () {
-            Template.instance().data.imageIdsDep.depend();
-            return Images.find({_id: {$in: Template.instance().data.imageIds}});
+            //return this.value.get();
+            return Images.find({_id: {$in: this.value.toIds()}});
         },
         isReady: function(store){
+            console.log(this._id, this.isUploaded(), this.hasStored(store));
             return this.isUploaded() && this.hasStored(store);
         },
         showCameraButton: function(){
@@ -119,10 +148,7 @@
 
                         Images.insert(newFile, function (err, fileObj) {
                             if (!err) {
-                                window.testImage = fileObj;
-
-                                template.data.imageIds.push(fileObj._id);
-                                template.data.imageIdsDep.changed();
+                                template.data.value.add(fileObj);
                             } else {
                                 alert(err);
                             }
@@ -147,10 +173,7 @@
 
                                 Images.insert(newFile, function (err, fileObj) {
                                     if (!err) {
-                                        window.testImage = fileObj;
-
-                                        template.data.imageIds.push(fileObj._id);
-                                        template.data.imageIdsDep.changed();
+                                        template.data.value.add(fileObj);
                                     } else {
                                         alert(err);
                                     }
@@ -181,16 +204,11 @@
             if (!value) {
                 value = [];
             }
-            return value;
+            check(value, [String]);
+            return new ImagesList(Images.find({_id: {$in: value}}).fetch());
         },
         valueOut: function () {
-            var schemaKey = this.attr('data-schema-key');
-            var imageIds = [],
-                $imageIds = $('input[name="' + schemaKey + '[]"]', this);
-            $imageIds.each(function () {
-                imageIds.push($(this).val());
-            });
-            return imageIds;
+            return Blaze.getData(this[0]).value.toIds();
         }
     });
 
