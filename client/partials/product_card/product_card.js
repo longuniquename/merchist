@@ -7,20 +7,32 @@
                 return Images.findOne(this.imageIds[0]);
             }
         },
-        isMy: function () {
+        isMy:  function () {
             return this.userId === Meteor.userId();
         }
     });
 
     Template.productCardPartial.events({
-        'click .buyBtn': function (e, template) {
+        'click .buyBtn':   function (e, template) {
             e.preventDefault();
 
-            Meteor.call('Orders:createFromProduct', this, function(err, order){
+            Meteor.call('Orders:createFromProduct', this, function (err, order) {
                 if (!err) {
                     Router.go('orders.view', order);
                 }
             });
+        },
+        'click .shareBtn': function (e, template) {
+            e.preventDefault();
+
+            console.log(this);
+
+            FB.ui(
+                {
+                    method: 'share',
+                    href:   Router.url('product', this)
+                }
+            );
         }
     });
 
