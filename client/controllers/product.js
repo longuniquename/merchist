@@ -49,7 +49,7 @@ ProductController = RouteController.extend({
 
         images.forEach(function (image, index) {
             var parser = document.createElement('a');
-            parser.href = image.url({store: 'xl', auth: false, download: true});
+            parser.href = image.url({store: 'm', auth: false, download: true});
             OgMeta.add('og:image', 'http://' + parser.host + parser.pathname + parser.search);
         });
 
