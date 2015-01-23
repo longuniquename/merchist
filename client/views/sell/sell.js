@@ -46,12 +46,12 @@
                     }).then(function () {
                         Meteor.call('FbApi:action:sell', productId, function (err, result) {
                             console.log(err, result);
-                        })
+                        });
                     });
 
                 }
 
-                Router.go('product', {_id: productId});
+                Router.go('product', {_id: productId}, {replaceState: true});
             }
         }
     });
