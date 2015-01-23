@@ -24,7 +24,7 @@ Meteor.methods({
             product:                Meteor.absoluteUrl('products/' + productId),
             'fb:explicitly_shared': true,
             start_time:             product.createdAt.toISOString(),
-            expires_in:             60 * 60 * 24 * 356 * 100,
+            expires_in:             60 * 60 * 24 * 365 * 100,
             scrape:                 true
         };
 
