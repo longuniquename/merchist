@@ -20,6 +20,7 @@ Package.onUse(function (api) {
     ], 'client');
     api.addFiles('fb_browser.js', 'web.browser');
     api.addFiles('fb_cordova.js', 'web.cordova');
+    api.addFiles('fb_server.js', 'server');
 
     api.export('FbApi', 'client');
 });
