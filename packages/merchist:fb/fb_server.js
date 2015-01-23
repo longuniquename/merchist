@@ -61,7 +61,7 @@ Meteor.methods({
             throw new Meteor.Error('facebook_error', 'Facebook error');
         }
 
-        Products.update(product._id, {$set: {'actions.sell': response.data.id}});
+        Products.update(product._id, {$set: {'facebookStories.sell': response.data.id}});
         return true;
     }
 });

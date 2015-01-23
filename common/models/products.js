@@ -37,9 +37,15 @@ Products = new Mongo.Collection('products');
             type:  String,
             label: "Seller"
         },
-        'facebook.actions': {
+        'facebookStories.sell': {
+            type:  String,
+            label: "Facebook sell story",
+            optional: true
+        },
+        'facebookStories.buy': {
             type:  [String],
-            label: "Facebook stories"
+            label: "Facebook buy stories",
+            optional: true
         },
         isPublic:           {
             type:         Boolean,
