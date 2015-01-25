@@ -160,6 +160,13 @@
                     }
                 );
             }
+        },
+        'click .removeBtn':                     function (e, template) {
+            e.preventDefault();
+            var ax;
+            while((ax = template.data.value.indexOf(this._id)) !== -1) {
+                template.data.value.splice(ax, 1);
+            }
         }
     });
 

@@ -21,10 +21,20 @@
     overflow: hidden;
     float: left;
     margin: 0 10px 10px 0;
+    position: relative;
 
     img {
       height: 100%;
       width: 100%;
+    }
+
+    .removeBtn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: @padding-base-vertical;
+      height: 32px;
+      width: 32px;
     }
 
     .loading {

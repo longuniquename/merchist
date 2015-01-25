@@ -13,7 +13,9 @@
                         </svg>
                     </div>
                 {{ /if }}
-                <input type="hidden" value="{{ this._id }}" name="{{ ../atts.name }}[]" />
+                <button type="button" class="btn btn-flat btn-default removeBtn">
+                    <i class="mdi-content-clear"></i>
+                </button>
             </div>
         {{ /each }}
 
