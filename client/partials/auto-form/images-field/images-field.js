@@ -1,38 +1,5 @@
 (function () {
 
-    function ImagesList(images) {
-        this._dep = new Tracker.Dependency;
-        this.set(images);
-    }
-
-    ImagesList.prototype.get = function () {
-        this._dep.depend();
-        return this._images;
-    };
-
-    ImagesList.prototype.toIds = function () {
-        this._dep.depend();
-        return _.map(this._images, function (image) {
-            return image._id;
-        });
-    };
-
-    ImagesList.prototype.set = function (images) {
-        if (EJSON.equals(this._images, images))
-            return;
-
-        check(images, [FS.File]);
-        this._images = images;
-        this._dep.changed();
-    };
-
-    ImagesList.prototype.add = function (image) {
-        check(image, FS.File);
-        this._images.push(image);
-        Meteor.subscribe('image', image._id);
-        this._dep.changed();
-    };
-
     var getDataUrl = function (blob) {
         var reader = new FileReader();
         return new Promise(function (resolve, reject) {
@@ -85,8 +52,7 @@
 
     Template.mcInputImages.helpers({
         images:           function () {
-            //return this.value.get();
-            return Images.find({_id: {$in: this.value.toIds()}});
+            return Images.find({_id: {$in: this.value.array()}});
         },
         isReady:          function (store) {
             return this.isUploaded() && this.hasStored(store);
@@ -147,7 +113,7 @@
 
                         Images.insert(newFile, function (err, fileObj) {
                             if (!err) {
-                                template.data.value.add(fileObj);
+                                template.data.value.push(fileObj._id);
                             } else {
                                 alert(err);
                             }
@@ -172,7 +138,7 @@
 
                                 Images.insert(newFile, function (err, fileObj) {
                                     if (!err) {
-                                        template.data.value.add(fileObj);
+                                        template.data.value.push(fileObj._id);
                                     } else {
                                         alert(err);
                                     }
@@ -204,10 +170,10 @@
                 value = [];
             }
             check(value, [String]);
-            return new ImagesList(Images.find({_id: {$in: value}}).fetch());
+            return new ReactiveArray(value);
         },
         valueOut: function () {
-            return Blaze.getData(this[0]).value.toIds();
+            return Blaze.getData(this[0]).value.array();
         }
     });
 
