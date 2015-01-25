@@ -18,15 +18,6 @@
                     <p>{{this}}</p>
                 {{ /each }}
             </div>
-            {{ #if inCart }}
-                <button class="btn btn-white btn-block btn-lg showCartBtn">
-                    In cart
-                </button>
-            {{ else }}
-                <button class="btn btn-white btn-block btn-lg buyBtn">
-                    {{_ "marketplace.products.view.details.buyBtn.text"}}
-                </button>
-            {{ /if }}
         {{ /with }}
     </div>
 </template>

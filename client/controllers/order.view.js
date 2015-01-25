@@ -23,11 +23,7 @@ OrderViewController = RouteController.extend({
     },
 
     action: function () {
-        if (Meteor.userId()) {
-            this.render();
-        } else {
-            this.render('authView');
-        }
+        this.render();
     }
 
 });
