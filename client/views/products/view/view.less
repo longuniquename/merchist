@@ -1,10 +1,12 @@
 @import (reference) '../../../lib/variables.import.less';
+@import (reference) '../../../lib/mixins.import.less';
 
 .product-view {
+  @import 'details/details.import.less';
+  @import 'images/images.import.less';
 
-  .btn.btn-icon.backBtn {
-    position: absolute;
-    z-index: 10;
-    display: block;
+  .well {
+    margin-top: @grid-gutter-width / 2;
+    overflow: hidden;
   }
 }

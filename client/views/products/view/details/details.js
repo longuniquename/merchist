@@ -1,6 +1,6 @@
 (function () {
 
-    Template.marketplaceProductsViewDetails.helpers({
+    Template.productViewDetailsBlock.helpers({
         'inCart':     function () {
             var cartId = localStorage["cartId"];
             return !!CartItems.findOne({cartId: cartId, productId: this._id});
@@ -14,7 +14,7 @@
         }
     });
 
-    Template.marketplaceProductsViewDetails.events({
+    Template.productViewDetailsBlock.events({
         'click .buyBtn':      function (e, template) {
             var cartId = localStorage["cartId"];
 

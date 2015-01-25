@@ -1,14 +1,14 @@
 <template name="productView">
     <div class="product-view">
-        {{ #with product }}
-
-            {{ #if imageIds }}
-            {{> marketplaceProductsViewImages }}
-            {{ /if }}
-
-            {{> marketplaceProductsViewDetails }}
-            {{> marketplaceProductsViewOther }}
-
-        {{ /with }}
+        <div class="container">
+            {{ #with product }}
+                <div class="well">
+                    {{ #if imageIds }}
+                    {{> productViewImagesBlock }}
+                    {{ /if }}
+                    {{> productViewDetailsBlock }}
+                </div>
+            {{ /with }}
+        </div>
     </div>
 </template>
