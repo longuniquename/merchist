@@ -45,14 +45,6 @@
                                 <i class="mdi-action-home"></i> {{_ "menu.mainLinks.marketplace.text"}}
                             </a>
                         </li>
-                        {{ #if ordersCount }}
-                        <li>
-                            <a href="{{pathFor route='orders'}}">
-                                <i class="mdi-action-receipt"></i> {{_ "menu.mainLinks.orders.text"}}
-                                <span class="badge pull-right">{{ ordersCount}}</span>
-                            </a>
-                        </li>
-                        {{ /if }}
                         {{ #if currentUser }}
                         <li>
                             <a href="{{pathFor route='products.my'}}">
@@ -62,6 +54,14 @@
                         <li>
                             <a href="{{pathFor route='profile'}}">
                                 <i class="mdi-social-person"></i> {{_ "menu.mainLinks.profile.text"}}
+                            </a>
+                        </li>
+                        {{ /if }}
+                        {{ #if ordersCount }}
+                        <li>
+                            <a href="{{pathFor route='orders'}}">
+                                <i class="mdi-action-receipt"></i> {{_ "menu.mainLinks.orders.text"}}
+                                <span class="badge pull-right">{{ ordersCount}}</span>
                             </a>
                         </li>
                         {{ /if }}
