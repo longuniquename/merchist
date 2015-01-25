@@ -1,12 +1,14 @@
 <template name="profileDetailsBasicInfo">
     <div class="basic-info">
         <div class="well">
-            {{#autoForm collection=collection doc=currentUser id="basicInfoForm" type="update" autosave=true removeEmptyStrings=false}}
+            {{#autoForm collection=collection doc=currentUser id="basicInfoForm" type="update" removeEmptyStrings=false}}
                 <fieldset>
                     <legend>Basic info</legend>
                     {{> afQuickField name='profile.firstName'}}
                     {{> afQuickField name='profile.lastName'}}
                 </fieldset>
+                <hr>
+                <button type="submit" class="btn btn-primary">Update</button>
             {{/autoForm}}
         </div>
     </div>
