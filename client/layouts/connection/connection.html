@@ -1,27 +1,27 @@
 <template name="connectionInfo">
     <div id="connectionInfo">
-        <div class="wrapper">
-            <div class="info">
-                {{ #if isConnecting }}
-                <p>{{_ "connectionInfo.connecting.text"}}</p>
-                {{ /if }}
+        <p class="info">
+            {{ #if isConnecting }}
+                {{_ "connectionInfo.connecting.text"}}
+            {{ /if }}
 
-                {{ #if isOffline }}
-                <p>{{_ "connectionInfo.offline.text"}}</p>
-                {{ /if }}
+            {{ #if isOffline }}
+                {{_ "connectionInfo.offline.text"}}
+            {{ /if }}
 
-                {{ #if isConnectionFailed }}
-                <p>{{_ "connectionInfo.failed.text"}}</p>
-                {{ /if }}
+            {{ #if isConnectionFailed }}
+                {{_ "connectionInfo.failed.text"}}
+            {{ /if }}
 
-                {{ #if isConnectionWaiting }}
-                <p>
-                    {{_ "connectionInfo.waiting.text"}}
-                    {{_ "connectionInfo.waiting.reconnection" count=secondsToConnection}}
-                </p>
-                <button class="btn btn-inverted reconnectBtn">{{_ "connectionInfo.reconnectBtn.text"}}</button>
-                {{ /if }}
-            </div>
-        </div>
+            {{ #if isConnectionWaiting }}
+                {{_ "connectionInfo.waiting.text"}}
+                {{_ "connectionInfo.waiting.reconnection" count=secondsToConnection}}
+            {{ /if }}
+        </p>
+        {{ #if isConnectionWaiting }}
+            <button class="btn btn-flat btn-default btn-block btn-lg reconnectBtn">
+                <i class="mdi-notification-sync"></i>
+            </button>
+        {{ /if }}
     </div>
 </template>

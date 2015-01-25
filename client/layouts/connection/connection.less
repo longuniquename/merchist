@@ -1,27 +1,25 @@
 @import (reference) '../../lib/variables.import.less';
+@import (reference) '../../lib/mixins.import.less';
 
 #connectionInfo {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: fadeout(black, 50%);
+  bottom: @grid-gutter-width / 2 + 4px;
+  left: @grid-gutter-width / 2 + 4px;
+  width: 50%;
+  min-width: 120px;
+  max-width: 300px;
+  background: fadeout(black, 25%);
   z-index: 2000;
+  padding: @grid-gutter-width / 2;
+  border-radius: @border-radius-base;
+  color: white;
+  .shadow-z(2);
 
-  .wrapper {
-    height: 0;
-    top: 50%;
-    position: absolute;
-    width: 100%;
+  .info {
+  }
 
-    .info {
-      top: -50px;
-      position: relative;
-      background: @brand-primary;
-      padding: 15px;
-      text-align: center;
-      color: white;
-    }
+  .reconnectBtn {
+    padding-left: 13px;
+    padding-right: 13px;
   }
 }

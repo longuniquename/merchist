@@ -9,7 +9,7 @@
     };
 
     var secondsToConnection = getSecondsToConnection(),
-        secondsToConnectionDep = new Tracker.Dependency;;
+        secondsToConnectionDep = new Tracker.Dependency;
 
     Meteor.setInterval(function(){
         var newSecondsToConnection = getSecondsToConnection();
