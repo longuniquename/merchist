@@ -25,14 +25,22 @@ ProductController = RouteController.extend({
                 return Products.findOne(self.params._id);
             },
             images:  function () {
-                return Images.find({_id: {$in: this.product().imageIds}})
+                if (this.product()) {
+                    return Images.find({_id: {$in: this.product().imageIds}})
+                }
             }
         }
     },
 
     action: function () {
-        var product = this.data().product(),
-            images = this.data().images(),
+        var product = this.data().product();
+
+        if (!product) {
+            this.render('productNotFoundView');
+            return;
+        }
+
+        var images = this.data().images(),
             facebookConfig = ServiceConfiguration.configurations.findOne({service: 'facebook'});
 
         OgMeta.add('fb:app_id', facebookConfig.appId);
