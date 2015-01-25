@@ -15,7 +15,7 @@ MyProductsController = RouteController.extend({
 
     data: {
         products: function () {
-            return Products.find({userId: Meteor.userId()});
+            return Products.find({userId: Meteor.userId()}, {sort: {createdAt: -1}});
         }
     },
 

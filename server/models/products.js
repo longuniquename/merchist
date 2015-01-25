@@ -1,5 +1,5 @@
 Meteor.publish('products', function () {
-    return Products.find();
+    return Products.find({isPublic: true});
 });
 
 Meteor.publish('products.my', function () {
@@ -8,8 +8,4 @@ Meteor.publish('products.my', function () {
 
 Meteor.publish('product', function (productId) {
     return Products.find({ _id: productId });
-});
-
-Meteor.publish('shopProducts', function (shopId) {
-    return Products.find({ shopId: shopId });
 });

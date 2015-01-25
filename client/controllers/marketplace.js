@@ -21,7 +21,7 @@ MarketplaceController = RouteController.extend({
 
     data: {
         products: function () {
-            return Products.find({isPublic: true}, {sort: {title: 1}, limit: 100});
+            return Products.find({}, {sort: {createdAt: -1}});
         }
     },
 
