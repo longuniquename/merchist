@@ -23,7 +23,60 @@ Meteor.methods({
             order.userId = this.userId;
         }
 
-        return Orders.findOne(Orders.insert(order));
+        return Orders.insert(order);
+    },
+    'Orders:getPayUrl': function(orderId){
+        var order = Orders.findOne(orderId);
+
+        if (!order) {
+            throw new Meteor.Error('not-found', 'Order was not found');
+        }
+
+        var config = ServiceConfiguration.configurations.findOne({service: 'paypal'});
+        if (!config) {
+            throw new ServiceConfiguration.ConfigError();
+        }
+
+        if (order.paypal && order.paypal.payKey) {
+            return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + order.paypal.payKey;
+        }
+
+        var seller = Meteor.users.findOne(order.sellerId);
+
+        var result;
+
+        try {
+            result = PayPal.AdaptivePayments.Pay({
+                receiverList:       {
+                    receiver: [
+                        {
+                            amount:      order.total(),
+                            email:       seller.services.paypal.email,
+                            paymentType: 'GOODS',
+                            primary:     true
+                        },
+                        {
+                            amount:      Math.ceil(order.total() * 2) / 100,
+                            email:       'dmitriy.s.les-facilitator@gmail.com',
+                            paymentType: 'SERVICE',
+                            primary:     false
+                        }
+                    ]
+                },
+                trackingId:         order._id,
+                ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
+                cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
+                returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
+            });
+        } catch (err) {
+            console.error(err);
+            throw new Meteor.Error('paypal-error');
+        }
+
+        if (result.payKey) {
+            Orders.update(order, {$set: {'paypal.payKey': result.payKey}});
+            return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
+        }
     }
 });
 

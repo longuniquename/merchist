@@ -16,9 +16,10 @@
         'click .buyBtn':   function (e, template) {
             e.preventDefault();
 
-            Meteor.call('Orders:createFromProduct', this, function (err, order) {
+            Meteor.call('Orders:createFromProduct', this, function (err, orderId) {
                 if (!err) {
-                    Router.go('orders.view', order);
+                    var order = Orders.findOne(orderId);
+                    order.pay();
                 }
             });
         },

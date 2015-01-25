@@ -1,44 +1,19 @@
 Order.prototype.pay = function (callback) {
-    var popup = openCenteredPopup(
-        Meteor.absoluteUrl('_orders/pay?orderId=' + this._id),
-        1024,
-        480
-    );
-
-    var checkPopupOpen = setInterval(function () {
-        try {
-            var popupClosed = popup.closed || popup.closed === undefined;
-        } catch (e) {
-            return;
+    var self = this;
+    Meteor.call('Orders:getPayUrl', this._id, function(err, url) {
+        if (!err) {
+            var embeddedPPFlow = new PAYPAL.apps.DGFlow({expType: 'light'});
+            embeddedPPFlow.startFlow(url);
+            var handle = Orders.find({_id: self._id}).observeChanges({
+                changed: function(id, fields){
+                    if (fields && fields.status && fields.status === "COMPLETED") {
+                        handle.stop();
+                        if (embeddedPPFlow.isOpen()) {
+                            embeddedPPFlow.closeFlow();
+                        }
+                    }
+                }
+            })
         }
-
-        if (popupClosed) {
-            clearInterval(checkPopupOpen);
-            callback && callback();
-        }
-    }, 100);
-};
-
-var openCenteredPopup = function (url, width, height) {
-    var screenX = typeof window.screenX !== 'undefined'
-        ? window.screenX : window.screenLeft;
-    var screenY = typeof window.screenY !== 'undefined'
-        ? window.screenY : window.screenTop;
-    var outerWidth = typeof window.outerWidth !== 'undefined'
-        ? window.outerWidth : document.body.clientWidth;
-    var outerHeight = typeof window.outerHeight !== 'undefined'
-        ? window.outerHeight : (document.body.clientHeight - 22);
-    // XXX what is the 22?
-
-    // Use `outerWidth - width` and `outerHeight - height` for help in
-    // positioning the popup centered relative to the current window
-    var left = screenX + (outerWidth - width) / 2;
-    var top = screenY + (outerHeight - height) / 2;
-    var features = ('width=' + width + ',height=' + height +
-    ',left=' + left + ',top=' + top + ',scrollbars=yes');
-
-    var newwindow = window.open(url, 'Login', features);
-    if (newwindow.focus)
-        newwindow.focus();
-    return newwindow;
+    });
 };
