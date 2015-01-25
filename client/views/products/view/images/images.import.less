@@ -1,12 +1,41 @@
 .images-block {
-  width: auto;
-  overflow: hidden;
   margin: -19px -19px 0 -19px;
 
   img {
     width: 100%;
-    height: 100%;
-    position: relative;
-    top: 0;
+  }
+
+  .carousel-control {
+    .mdi-navigation-chevron-left,
+    .mdi-navigation-chevron-right {
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      display: inline-block;
+    }
+    .mdi-navigation-chevron-left {
+      left: 50%;
+      margin-left: -10px;
+    }
+    .mdi-navigation-chevron-right {
+      right: 50%;
+      margin-right: -10px;
+    }
+    @media screen and (min-width: @screen-sm-min) {
+      .mdi-navigation-chevron-left,
+      .mdi-navigation-chevron-right {
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        font-size: 30px;
+      }
+      .mdi-navigation-chevron-left {
+        margin-left: -15px;
+      }
+      .mdi-navigation-chevron-right, {
+        margin-right: -15px;
+      }
+    }
+
   }
 }
