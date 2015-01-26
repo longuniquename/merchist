@@ -17,64 +17,19 @@
             Meteor.subscribe("orders");
             return Orders.find().count();
         },
-        'avatar': function(){
+        'avatar':      function () {
             Meteor.subscribe("image", this.profile.avatarId);
             return Images.findOne(this.profile.avatarId);
         }
     });
 
     Template.mainMenu.events({
-        "click .logoutBtn":     function (e) {
+        "click .logoutBtn":   function (e) {
             e.preventDefault();
             Meteor.logout();
         },
-        'click .createShopBtn': function (e) {
-            e.preventDefault();
-
-            var openAuthDlg = function (closed) {
-                var view = Blaze.render(Template.authDlg, document.getElementsByTagName("body")[0]),
-                    $dlg = $(view.templateInstance().firstNode);
-
-                $dlg.modal('show');
-                $dlg.on('hidden.bs.modal', function () {
-                    Blaze.remove(view);
-                    closed();
-                });
-            };
-
-            var openCreateShopDlg = function () {
-                var view = Blaze.render(Template.createShopDlg, document.getElementsByTagName("body")[0]),
-                    $dlg = $(view.templateInstance().firstNode);
-
-                $dlg.modal('show');
-                $dlg.on('hidden.bs.modal', function () {
-                    Blaze.remove(view);
-                });
-            };
-
-            if (Meteor.user()) {
-                openCreateShopDlg();
-            } else {
-                openAuthDlg(function () {
-                    if (Meteor.user()) {
-                        openCreateShopDlg();
-                    }
-                });
-            }
-        },
-        'click .nav a':         function (e, template) {
+        'click .nav a':       function (e, template) {
             $(template.firstNode).modal('hide');
-        },
-        'click .authBtn':       function (e, template) {
-            e.preventDefault();
-
-            var view = Blaze.render(Template.authDlg, document.getElementsByTagName("body")[0]),
-                $dlg = $(view.templateInstance().firstNode);
-
-            $dlg.modal('show');
-            $dlg.on('hidden.bs.modal', function (e) {
-                Blaze.remove(view);
-            })
         },
         'click .facebookBtn': function (e, template) {
             e.preventDefault();
