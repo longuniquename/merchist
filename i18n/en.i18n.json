@@ -245,14 +245,6 @@
       "text": "Reconnect"
     }
   },
-  "cart":           {
-    "header":      "Cart",
-    "subtotal":    "Subtotal:",
-    "purchaseBtn": {
-      "text":       "Purchase",
-      "generating": "Generating order..."
-    }
-  },
   "menu":           {
     "mainLinks":  {
       "header":      "My Merchist",

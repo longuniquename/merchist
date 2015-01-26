@@ -5,14 +5,6 @@
     Meteor.subscribe("myImages");
     Meteor.subscribe('userPresence');
 
-    var cartId = localStorage["cartId"];
-
-    if (!cartId) {
-        cartId = localStorage["cartId"] = Meteor.uuid();
-    }
-
-    Meteor.subscribe("myCart", cartId);
-
     var getUserLanguage = function () {
         var userLanguage = _.find(navigator.languages, function (userLanguage) {
             return _.has(TAPi18n.getLanguages(), userLanguage);
