@@ -10,9 +10,7 @@ OrdersSchema = new SimpleSchema({
             } else {
                 this.unset();
             }
-        },
-        index: true,
-        unique: true
+        }
     },
     userId:              {
         type:     String,
