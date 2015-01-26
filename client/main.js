@@ -97,12 +97,4 @@
         });
     });
 
-    if (Meteor.isCordova) {
-        Tracker.autorun(function () {
-            if (!Meteor.user()) {
-                Router.go('splash');
-            }
-        });
-    }
-
 })();

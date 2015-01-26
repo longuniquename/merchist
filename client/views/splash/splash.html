@@ -8,20 +8,21 @@
                 Merchist
             </span>
             <section class="content">
-                <div class="auth">
-                    <button type="button" class="btn btn-facebook btn-block facebookBtn">
-                        Sign In with Facebook
-                    </button>
-                </div>
-                <div class="loading hidden">
-                    <svg class="loader" height="20px" width="70px" viewBox="0 0 70 20">
-                        <circle r="4" cy="10" cx="10" ></circle>
-                        <circle r="4" cy="10" cx="35" ></circle>
-                        <circle r="4" cy="10" cx="60" ></circle>
-                    </svg>
-                </div>
-
-                <i>* This application is in development, use it only for preview.</i>
+                {{ #if loggingIn }}
+                    <div class="loading">
+                        <svg class="loader" height="20px" width="70px" viewBox="0 0 70 20">
+                            <circle r="4" cy="10" cx="10" ></circle>
+                            <circle r="4" cy="10" cx="35" ></circle>
+                            <circle r="4" cy="10" cx="60" ></circle>
+                        </svg>
+                    </div>
+                {{ else }}
+                    <div class="auth">
+                        <button type="button" class="btn btn-facebook btn-block facebookBtn">
+                            Sign In with Facebook
+                        </button>
+                    </div>
+                {{ /if }}
             </section>
         </div>
     </section>

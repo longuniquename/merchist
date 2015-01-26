@@ -8,10 +8,6 @@ ProfileController = RouteController.extend({
     template:       'profileView',
 
     action: function () {
-        if (Meteor.userId()) {
-            this.render();
-        } else {
-            this.render('authView');
-        }
+        this.render();
     }
 });

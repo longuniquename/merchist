@@ -26,9 +26,7 @@
     Template.mainMenu.events({
         "click .logoutBtn":     function (e) {
             e.preventDefault();
-            Meteor.logout(function () {
-                Router.go('marketplace');
-            });
+            Meteor.logout();
         },
         'click .createShopBtn': function (e) {
             e.preventDefault();
