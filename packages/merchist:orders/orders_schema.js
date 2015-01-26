@@ -1,5 +1,5 @@
 OrdersSchema = new SimpleSchema({
-    uuid:              {
+    uid:              {
         type:     String,
         label:    "Universally unique identifier",
         autoValue: function () {
