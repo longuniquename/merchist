@@ -7,13 +7,31 @@
   border-radius: @border-radius-base;
   overflow: hidden;
 
-  > .image {
+  > .image-wrapper {
     width: 100%;
+    display: inline-block;
+    position: relative;
 
-    img {
+    &:after {
+      padding-top: 100%;
       display: block;
-      height: 100%;
-      width: 100%;
+      content: '';
+    }
+
+    .image-holder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: darken(white, 3%);
+      display: block;
+
+      img {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
     }
   }
   > .action {

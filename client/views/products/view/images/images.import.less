@@ -1,10 +1,30 @@
 .images-block {
   margin: -19px -19px 0 -19px;
-  min-height: 48px;
-  background: darken(white, 3%);
 
-  img {
+  .images-wrapper {
     width: 100%;
+    display: inline-block;
+    position: relative;
+
+    &:after {
+      padding-top: 100%;
+      display: block;
+      content: '';
+    }
+
+    .images-holder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: darken(white, 3%);
+      display: block;
+
+      img {
+        width: 100%;
+      }
+    }
   }
 
   .carousel-control {
