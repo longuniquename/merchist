@@ -1,4 +1,19 @@
 OrdersSchema = new SimpleSchema({
+    uuid:              {
+        type:     String,
+        label:    "Universally unique identifier",
+        autoValue: function () {
+            if (this.isInsert) {
+                return Meteor.uuid();
+            } else if (this.isUpsert) {
+                return {$setOnInsert: Meteor.uuid()};
+            } else {
+                this.unset();
+            }
+        },
+        index: true,
+        unique: true
+    },
     userId:              {
         type:     String,
         label:    "Buyer",
