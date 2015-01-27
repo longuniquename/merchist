@@ -4,6 +4,7 @@ Order.prototype.pay = function (callback) {
         if (!err) {
             var embeddedPPFlow = new PAYPAL.apps.DGFlow({expType: 'light'});
             embeddedPPFlow.startFlow(url);
+
             var handle = Orders.find({_id: self._id}).observeChanges({
                 changed: function (id, fields) {
                     if (fields && fields.status && fields.status === "COMPLETED") {
@@ -27,6 +28,14 @@ Order.prototype.pay = function (callback) {
                     }
                 }
             });
+
+            $('#PPDGFrame .mask').on('click', function () {
+                handle.stop();
+                if (embeddedPPFlow.isOpen()) {
+                    embeddedPPFlow.closeFlow();
+                }
+            });
+
         }
     });
 };
