@@ -7,5 +7,5 @@ Meteor.publish('products.my', function () {
 });
 
 Meteor.publish('product', function (productId) {
-    return Products.find({ _id: productId });
+    return Products.find({_id: productId});
 });

@@ -14,6 +14,7 @@
                     data = Twitter.retrieveCredential(token, secret).serviceData;
                     break;
                 case 'paypal':
+                    //TODO: something is wrong here...
                     data = Twitter.retrieveCredential(token, secret).serviceData;
                     break;
                 default:
