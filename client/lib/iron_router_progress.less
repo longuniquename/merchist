@@ -2,9 +2,11 @@
 @import (reference) 'mixins.import.less';
 
 #iron-router-progress {
+  @iron-router-progress-height: 1px;
+
   background-color: fadeout(white, 25%);
-  height: 1px;
-  top: @navbar-height;
+  height: @iron-router-progress-height;
+  top: @navbar-height - @iron-router-progress-height;
   box-shadow: none;
-  z-index: @zindex-navbar-fixed;
+  z-index: @zindex-navbar-fixed + 1;
 }
