@@ -13,6 +13,14 @@
                     </div>
                 {{ /each }}
             </div>
+
+            {{#if nextPath}}
+                <a class="btn btn-primary btn-flat btn-block" href="{{nextPath}}">Load more</a>
+            {{else}}
+                {{#unless ready}}
+                    loading...
+                {{/unless}}
+            {{/if}}
         </div>
     </div>
 </template>
