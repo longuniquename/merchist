@@ -13,9 +13,15 @@
                     <i class="mdi-content-create"></i>
                 </a>
             {{ else }}
-                <button type="button" class="btn btn-fab btn-raised btn-primary buyBtn">
-                    <i class="mdi-action-shopping-basket"></i>
-                </button>
+                {{ #if isReserved }}
+                    <button type="button" class="btn btn-fab btn-raised btn-primary" disabled>
+                        <i class="mdi-action-lock"></i>
+                    </button>
+                {{ else }}
+                    <button type="button" class="btn btn-fab btn-raised btn-primary buyBtn">
+                        <i class="mdi-action-shopping-basket"></i>
+                    </button>
+                {{ /if }}
             {{ /if }}
         </div>
         <div class="info">
