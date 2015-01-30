@@ -1,7 +1,104 @@
-OrdersSchema = new SimpleSchema({
-    uid:              {
+PayPalPaymentSchema = new SimpleSchema({
+    payKey:                            {
+        type:  String,
+        label: "Payment Key"
+    },
+    status:                            {
+        type:          String,
+        label:         "Payment Status",
+        allowedValues: [
+            'CANCELED',
+            'CREATED',
+            'COMPLETED',
+            'INCOMPLETE',
+            'ERROR',
+            'REVERSALERROR',
+            'PROCESSING',
+            'PENDING'
+        ]
+    },
+    transactionType:                   {
         type:     String,
-        label:    "Universally unique identifier",
+        label:    "Transaction Type",
+        optional: true
+    },
+    senderEmail:                       {
+        type:     String,
+        regEx:    SimpleSchema.RegEx.Email,
+        label:    "Sender Email",
+        optional: true
+    },
+    actionType:                        {
+        type:          String,
+        label:         "Action Type",
+        allowedValues: [
+            'PAY',
+            'CREATE'
+        ],
+        optional:      true
+    },
+    paymentRequestDate:                {
+        type:     Date,
+        label:    "Payment Request Date",
+        optional: true
+    },
+    reverseAllParallelPaymentsOnError: {
+        type:     Boolean,
+        label:    "Reverse All Parallel Payments On Error",
+        optional: true
+    },
+    returnUrl:                         {
+        type:     String,
+        label:    "Return URL",
+        optional: true
+    },
+    cancelUrl:                         {
+        type:     String,
+        label:    "Cancel URL",
+        optional: true
+    },
+    ipnNotificationUrl:                {
+        type:     String,
+        label:    "IPN Notification URL",
+        optional: true
+    },
+    memo:                              {
+        type:     String,
+        label:    "Memo",
+        optional: true
+    },
+    feesPayer:                         {
+        type:          String,
+        label:         "Fees Payer",
+        allowedValues: [
+            'SENDER',
+            'PRIMARYRECEIVER',
+            'EACHRECEIVER',
+            'SECONDARYONLY'
+        ],
+        optional:      true
+    },
+    trackingId:                        {
+        type:     String,
+        label:    "Tracking ID",
+        optional: true
+    },
+    preapprovalKey:                    {
+        type:     String,
+        label:    "Preapproval Key",
+        optional: true
+    },
+    reasonCode:                        {
+        type:     String,
+        label:    "Reason Code",
+        optional: true
+    }
+});
+
+OrdersSchema = new SimpleSchema({
+    uid:                 {
+        type:      String,
+        label:     "Universally unique identifier",
         autoValue: function () {
             if (this.isInsert) {
                 return Meteor.uuid();
@@ -36,24 +133,9 @@ OrdersSchema = new SimpleSchema({
             }
         }
     },
-    connectionId:              {
-        type:     String,
-        label:    "Connection"
-    },
-    status:              {
-        type:          String,
-        label:         "Status",
-        allowedValues: [
-            'NEW',
-            'CANCELED',
-            'CREATED',
-            'PROCESSING',
-            'PENDING',
-            'COMPLETED',
-            'INCOMPLETE',
-            'ERROR',
-            'REVERSALERROR'
-        ]
+    connectionId:        {
+        type:  String,
+        label: "Connection"
     },
     items:               {
         type:     [Object],
@@ -117,9 +199,9 @@ OrdersSchema = new SimpleSchema({
         label: "Amount",
         min:   1
     },
-    "paypal.payKey":     {
-        type:     String,
-        label:    "PayKey",
+    paypal:              {
+        type:     PayPalPaymentSchema,
+        label:    "PayPal Payment",
         optional: true
     },
     createdAt:           {

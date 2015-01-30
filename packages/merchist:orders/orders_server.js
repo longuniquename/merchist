@@ -6,16 +6,15 @@ Orders.deny({
 });
 
 Meteor.methods({
-    'Orders:createFromProduct': function(product){
+    'Orders:createFromProduct': function (product) {
         var order = new Order({
-            items: [
+            items:        [
                 {
                     productId: product._id,
-                    price: product.price,
-                    amount: 1
+                    price:     product.price,
+                    amount:    1
                 }
             ],
-            status: 'NEW',
             connectionId: this.connection.id
         });
 
@@ -25,7 +24,7 @@ Meteor.methods({
 
         return Orders.insert(order);
     },
-    'Orders:getPayUrl': function(orderId){
+    'Orders:getPayUrl':         function (orderId) {
         var order = Orders.findOne(orderId);
 
         if (!order) {
@@ -74,7 +73,14 @@ Meteor.methods({
         }
 
         if (result.payKey) {
-            Orders.update(order, {$set: {'paypal.payKey': result.payKey}});
+            Orders.update(order, {
+                $set: {
+                    paypal: {
+                        payKey: result.payKey,
+                        status: result.paymentExecStatus
+                    }
+                }
+            });
             return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
         }
     }
@@ -182,7 +188,14 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
     }
 
     if (result.payKey) {
-        Orders.update(order, {$set: {'paypal.payKey': result.payKey}});
+        Orders.update(order, {
+            $set: {
+                paypal: {
+                    payKey: result.payKey,
+                    status: result.paymentExecStatus
+                }
+            }
+        });
 
         res.statusCode = 302;
         res.setHeader("Location", (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'cgi-bin/webscr?cmd=_ap-payment&paykey=' + result.payKey);

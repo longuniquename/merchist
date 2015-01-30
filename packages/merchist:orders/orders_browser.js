@@ -7,7 +7,7 @@ Order.prototype.pay = function (callback) {
 
             var handle = Orders.find({_id: self._id}).observeChanges({
                 changed: function (id, fields) {
-                    if (fields && fields.status && fields.status === "COMPLETED") {
+                    if (fields && fields.paypal && fields.paypal.status && fields.paypal.status === "COMPLETED") {
                         handle.stop();
                         if (embeddedPPFlow.isOpen()) {
                             embeddedPPFlow.closeFlow();
