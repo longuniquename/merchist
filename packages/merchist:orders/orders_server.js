@@ -63,6 +63,7 @@ Meteor.methods({
                     ]
                 },
                 trackingId:         order._id,
+                payKeyDuration:     'PT15M',
                 ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
                 cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
                 returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
@@ -73,7 +74,7 @@ Meteor.methods({
         }
 
         if (result.payKey) {
-            Orders.update(order, {
+            Orders.update({_id: order._id}, {
                 $set: {
                     paypal: {
                         payKey: result.payKey,
@@ -81,6 +82,58 @@ Meteor.methods({
                     }
                 }
             });
+
+            var paymentDetailsResult;
+
+            try {
+                paymentDetailsResult = PayPal.AdaptivePayments.PaymentDetails({
+                    payKey: result.payKey
+                });
+            } catch (err) {
+                console.error(err);
+                throw new Meteor.Error('paypal-error');
+            }
+
+            var paymentInfo = {};
+
+            if (paymentDetailsResult["actionType"]) {
+                paymentInfo['paypal.actionType'] = paymentDetailsResult["actionType"];
+            }
+
+            if (paymentDetailsResult["currencyCode"]) {
+                paymentInfo['paypal.currencyCode'] = paymentDetailsResult["currencyCode"];
+            }
+
+            if (paymentDetailsResult["feesPayer"]) {
+                paymentInfo['paypal.feesPayer'] = paymentDetailsResult["feesPayer"];
+            }
+
+            if (paymentDetailsResult["memo"]) {
+                paymentInfo['paypal.memo'] = paymentDetailsResult["memo"];
+            }
+
+            if (paymentDetailsResult["payKey"]) {
+                paymentInfo['paypal.payKey'] = paymentDetailsResult["payKey"];
+            }
+
+            if (paymentDetailsResult["payKeyExpirationDate"]) {
+                paymentInfo['paypal.payKeyExpirationDate'] = new Date(paymentDetailsResult["payKeyExpirationDate"]);
+            }
+
+            if (paymentDetailsResult["reverseAllParallelPaymentsOnError"]) {
+                paymentInfo['paypal.reverseAllParallelPaymentsOnError'] = paymentDetailsResult["reverseAllParallelPaymentsOnError"] === 'true';
+            }
+
+            if (paymentDetailsResult["status"]) {
+                paymentInfo['paypal.status'] = paymentDetailsResult["status"];
+            }
+
+            if (paymentDetailsResult["trackingId"]) {
+                paymentInfo['paypal.trackingId'] = paymentDetailsResult["trackingId"];
+            }
+
+            Orders.update({'paypal.payKey': result.payKey}, {$set: paymentInfo});
+
             return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
         }
     }

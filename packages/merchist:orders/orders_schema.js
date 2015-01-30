@@ -47,21 +47,6 @@ PayPalPaymentSchema = new SimpleSchema({
         label:    "Reverse All Parallel Payments On Error",
         optional: true
     },
-    returnUrl:                         {
-        type:     String,
-        label:    "Return URL",
-        optional: true
-    },
-    cancelUrl:                         {
-        type:     String,
-        label:    "Cancel URL",
-        optional: true
-    },
-    ipnNotificationUrl:                {
-        type:     String,
-        label:    "IPN Notification URL",
-        optional: true
-    },
     memo:                              {
         type:     String,
         label:    "Memo",
@@ -92,6 +77,42 @@ PayPalPaymentSchema = new SimpleSchema({
         type:     String,
         label:    "Reason Code",
         optional: true
+    },
+    payKeyExpirationDate:              {
+        type:     Date,
+        label:    "PayKey Expiration Date",
+        optional: true
+    },
+    currencyCode:                      {
+        type:          String,
+        label:         "Currency Code",
+        allowedValues: [
+            'AUD',
+            'BRL',
+            'CAD',
+            'CZK',
+            'DKK',
+            'EUR',
+            'HKD',
+            'HUF',
+            'ILS',
+            'JPY',
+            'MYR',
+            'MXN',
+            'NOK',
+            'NZD',
+            'PHP',
+            'PLN',
+            'GBP',
+            'SGD',
+            'SEK',
+            'CHF',
+            'TWD',
+            'THB',
+            'TRY',
+            'USD'
+        ],
+        optional:      true
     }
 });
 

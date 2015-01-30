@@ -21,64 +21,52 @@ WebApp.connectHandlers.use('/_orders/ipn', function (req, res, next) {
         payPalResponse.on('data', function (d) {
             if (d.toString() === 'VERIFIED') {
                 var paymentInfo = {
-                    payKey: ipnMessageData["pay_key"],
-                    status: ipnMessageData['status']
+                    'paypal.payKey': ipnMessageData["pay_key"],
+                    'paypal.status': ipnMessageData['status']
                 };
 
                 if (ipnMessageData["transaction_type"]) {
-                    paymentInfo.transactionType = ipnMessageData["transaction_type"];
+                    paymentInfo["paypal.transactionType"] = ipnMessageData["transaction_type"];
                 }
 
                 if (ipnMessageData["sender_email"]) {
-                    paymentInfo.senderEmail = ipnMessageData["sender_email"];
+                    paymentInfo["paypal.senderEmail"] = ipnMessageData["sender_email"];
                 }
 
                 if (ipnMessageData["action_type"]) {
-                    paymentInfo.actionType = ipnMessageData["action_type"];
+                    paymentInfo["paypal.actionType"] = ipnMessageData["action_type"];
                 }
 
                 if (ipnMessageData["payment_request_date"]) {
-                    paymentInfo.paymentRequestDate = new Date(ipnMessageData["payment_request_date"]);
+                    paymentInfo["paypal.paymentRequestDate"] = new Date(ipnMessageData["payment_request_date"]);
                 }
 
                 if (ipnMessageData["reverse_all_parallel_payments_on_error"]) {
-                    paymentInfo.reverseAllParallelPaymentsOnError = ipnMessageData["reverse_all_parallel_payments_on_error"] === 'true';
-                }
-
-                if (ipnMessageData["return_url"]) {
-                    paymentInfo.returnUrl = ipnMessageData["return_url"];
-                }
-
-                if (ipnMessageData["cancel_url"]) {
-                    paymentInfo.cancelUrl = ipnMessageData["cancel_url"];
-                }
-
-                if (ipnMessageData["ipn_notification_url"]) {
-                    paymentInfo.ipnNotificationUrl = ipnMessageData["ipn_notification_url"];
+                    paymentInfo["paypal.reverseAllParallelPaymentsOnError"] = ipnMessageData["reverse_all_parallel_payments_on_error"] === 'true';
                 }
 
                 if (ipnMessageData["memo"]) {
-                    paymentInfo.memo = ipnMessageData["memo"];
+                    paymentInfo["paypal.memo"] = ipnMessageData["memo"];
                 }
 
                 if (ipnMessageData["fees_payer"]) {
-                    paymentInfo.feesPayer = ipnMessageData["fees_payer"];
+                    paymentInfo["paypal.feesPayer"] = ipnMessageData["fees_payer"];
                 }
 
                 if (ipnMessageData["trackingId"]) {
-                    paymentInfo.trackingId = ipnMessageData["trackingId"];
+                    paymentInfo["paypal.trackingId"] = ipnMessageData["trackingId"];
                 }
 
                 if (ipnMessageData["preapproval_key"]) {
-                    paymentInfo.preapprovalKey = ipnMessageData["preapproval_key"];
+                    paymentInfo["paypal.preapprovalKey"] = ipnMessageData["preapproval_key"];
                 }
 
                 if (ipnMessageData["reason_code"]) {
-                    paymentInfo.reasonCode = ipnMessageData["reason_code"];
+                    paymentInfo["paypal.reasonCode"] = ipnMessageData["reason_code"];
                 }
 
                 if (ipnMessageData["transaction_type"]) {
-                    paymentInfo.transactionType = ipnMessageData["transaction_type"];
+                    paymentInfo["paypal.transactionType"] = ipnMessageData["transaction_type"];
                 }
 
                 new Fiber(function () {
@@ -87,9 +75,7 @@ WebApp.connectHandlers.use('/_orders/ipn', function (req, res, next) {
                             'paypal.payKey': ipnMessageData["pay_key"]
                         },
                         {
-                            $set: {
-                                paypal: paymentInfo
-                            }
+                            $set: paymentInfo
                         }
                     );
                 }).run();

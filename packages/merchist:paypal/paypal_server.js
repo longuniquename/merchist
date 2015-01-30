@@ -91,7 +91,7 @@ var personalAttributesMap = {
 };
 
 PayPal.AdaptivePayments = {
-    Pay: function(data){
+    Pay:            function (data) {
         var config = getConfig(),
             url = apiEndpoint('AdaptivePayments/Pay', config.sandbox),
             headers = {
@@ -121,6 +121,29 @@ PayPal.AdaptivePayments = {
             receiverList:                      {},
             cancelUrl:                         Meteor.absoluteUrl(),
             returnUrl:                         Meteor.absoluteUrl()
+        });
+
+        var response = HTTP.post(url, {data: data, headers: headers});
+
+        return response.data;
+    },
+    PaymentDetails: function (data) {
+        var config = getConfig(),
+            url = apiEndpoint('AdaptivePayments/PaymentDetails', config.sandbox),
+            headers = {
+                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+                "X-PAYPAL-APPLICATION-ID":       config.appId,
+                "X-PAYPAL-SECURITY-USERID":      config.userId,
+                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+            };
+
+        _.defaults(data, {
+            requestEnvelope: {
+                detailLevel:   'ReturnAll',
+                errorLanguage: 'en_US'
+            }
         });
 
         var response = HTTP.post(url, {data: data, headers: headers});
