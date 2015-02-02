@@ -90,10 +90,45 @@ var personalAttributesMap = {
     'http://axschema.org/contact/postalCode/home':        'postalCode'
 };
 
+PayPal.request = function (endpoint, data, headers) {
+    var config = getConfig(),
+        url = apiEndpoint(endpoint, config.sandbox);
+
+    _.defaults(data, {
+        requestEnvelope: {
+            detailLevel:   'ReturnAll',
+            errorLanguage: 'en_US'
+        }
+    });
+
+    try {
+        var response = HTTP.post(url, {data: data, headers: headers});
+    } catch (err) {
+        console.error(err);
+        throw new Meteor.Error('paypal-error');
+    }
+
+    if (!response.data.responseEnvelope) {
+        throw new Meteor.Error('paypal-error');
+    }
+
+    switch (response.data.responseEnvelope.ack) {
+        case 'Success':
+        case 'SuccessWithWarning':
+            return _.omit(response.data, 'responseEnvelope');
+            break;
+        case 'Failure':
+        case 'FailureWithWarning':
+            console.log(response.data.error);
+            throw new Meteor.Error('paypal-error', response.data.error.message);
+            break;
+    }
+
+};
+
 PayPal.AdaptivePayments = {
     Pay:            function (data) {
         var config = getConfig(),
-            url = apiEndpoint('AdaptivePayments/Pay', config.sandbox),
             headers = {
                 "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
                 "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
@@ -104,10 +139,6 @@ PayPal.AdaptivePayments = {
             };
 
         _.defaults(data, {
-            requestEnvelope:                   {
-                detailLevel:   'ReturnAll',
-                errorLanguage: 'en_US'
-            },
             actionType:                        'PAY',
             currencyCode:                      'USD',
             feesPayer:                         'PRIMARYRECEIVER',
@@ -123,13 +154,10 @@ PayPal.AdaptivePayments = {
             returnUrl:                         Meteor.absoluteUrl()
         });
 
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.request('AdaptivePayments/Pay', data, headers);
     },
     PaymentDetails: function (data) {
         var config = getConfig(),
-            url = apiEndpoint('AdaptivePayments/PaymentDetails', config.sandbox),
             headers = {
                 "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
                 "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
@@ -139,16 +167,7 @@ PayPal.AdaptivePayments = {
                 "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
             };
 
-        _.defaults(data, {
-            requestEnvelope: {
-                detailLevel:   'ReturnAll',
-                errorLanguage: 'en_US'
-            }
-        });
-
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.request('AdaptivePayments/PaymentDetails', data, headers);
     }
 };
 

@@ -42,36 +42,29 @@ Meteor.methods({
 
         var seller = Meteor.users.findOne(order.sellerId);
 
-        var result;
-
-        try {
-            result = PayPal.AdaptivePayments.Pay({
-                receiverList:       {
-                    receiver: [
-                        {
-                            amount:      order.total(),
-                            email:       seller.services.paypal.email,
-                            paymentType: 'GOODS',
-                            primary:     true
-                        },
-                        {
-                            amount:      Math.ceil(order.total() * 2) / 100,
-                            email:       'dmitriy.s.les-facilitator@gmail.com',
-                            paymentType: 'SERVICE',
-                            primary:     false
-                        }
-                    ]
-                },
-                trackingId:         order._id,
-                payKeyDuration:     'PT15M',
-                ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
-                cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
-                returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
-            });
-        } catch (err) {
-            console.error(err);
-            throw new Meteor.Error('paypal-error');
-        }
+        var result = PayPal.AdaptivePayments.Pay({
+            receiverList:       {
+                receiver: [
+                    {
+                        amount:      order.total(),
+                        email:       seller.services.paypal.email,
+                        paymentType: 'GOODS',
+                        primary:     true
+                    },
+                    {
+                        amount:      Math.ceil(order.total() * 2) / 100,
+                        email:       'dmitriy.s.les-facilitator@gmail.com',
+                        paymentType: 'SERVICE',
+                        primary:     false
+                    }
+                ]
+            },
+            trackingId:         order._id,
+            payKeyDuration:     'PT15M',
+            ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
+            cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
+            returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
+        });
 
         if (result.payKey) {
             Orders.update({_id: order._id}, {
