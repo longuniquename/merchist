@@ -90,7 +90,17 @@ Meteor.methods({
         var setPaymentOptionsRequest = {
             payKey:          result.payKey,
             senderOptions:   {
-                requireShippingAddressSelection: true
+                requireShippingAddressSelection: true/*,
+                addressOverride: true,
+                shippingAddress: {
+                    addresseeName: 'addresseeName',
+                    street1: 'street1',
+                    street2: 'street2',
+                    city: 'city',
+                    state: 'CA',
+                    zip: '012345',
+                    country: 'UA'
+                }*/
             },
             receiverOptions: {
                 invoiceData: {
