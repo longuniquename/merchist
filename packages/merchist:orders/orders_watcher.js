@@ -2,6 +2,10 @@
 Orders.find({status: 'NEW', 'paypal.payKey': {$exists: true}}).observe({
     added:   function (document) {
         Orders.update({_id: document._id}, {$set: {status: 'REQUESTED'}});
+        _.each(document.items, function(orderItem){
+            // transfer items from available to reserved
+            Products.update(orderItem.productId, {$inc: {'inventory.available': -orderItem.amount, 'inventory.reserved': orderItem.amount}});
+        });
     }
 });
 
@@ -24,6 +28,10 @@ Orders.find({status: 'REQUESTED', 'paypal.payKeyExpirationDate': {$exists: true}
 Orders.find({'paypal.status': 'EXPIRED', status: {$ne: 'EXPIRED'}}).observe({
     added:   function (document) {
         Orders.update({_id: document._id}, {$set: {status: 'EXPIRED'}});
+        _.each(document.items, function(orderItem){
+            // transfer items from reserved to available
+            Products.update(orderItem.productId, {$inc: {'inventory.reserved': -orderItem.amount, 'inventory.available': orderItem.amount}});
+        });
     }
 });
 
@@ -31,5 +39,9 @@ Orders.find({'paypal.status': 'EXPIRED', status: {$ne: 'EXPIRED'}}).observe({
 Orders.find({'paypal.status': 'COMPLETED', status: {$ne: 'PAID'}}).observe({
     added:   function (document) {
         Orders.update({_id: document._id}, {$set: {status: 'PAID'}});
+        _.each(document.items, function(orderItem){
+            // transfer items from reserved to sold
+            Products.update(orderItem.productId, {$inc: {'inventory.reserved': -orderItem.amount, 'inventory.sold': orderItem.amount}});
+        });
     }
 });
