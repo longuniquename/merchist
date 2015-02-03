@@ -6,6 +6,7 @@ Package.describe({
 Package.onUse(function (api) {
     api.use('mongo');
     api.use('ejson');
+    api.use('underscore');
     api.use('webapp', 'server');
     api.use('aldeed:collection2');
     api.use('merchist:paypal');
@@ -17,7 +18,7 @@ Package.onUse(function (api) {
         'orders_common.js'
     ]);
 
-    api.addFiles(['orders_server.js', 'orders_ipn.js'], 'server');
+    api.addFiles(['orders_server.js', 'orders_ipn.js', 'orders_watcher.js'], 'server');
     api.addFiles('orders_client.js', 'web');
     api.addFiles('orders_browser.js', 'web.browser');
     api.addFiles('orders_cordova.js', 'web.cordova');

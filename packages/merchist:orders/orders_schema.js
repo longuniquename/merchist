@@ -14,7 +14,8 @@ PayPalPaymentSchema = new SimpleSchema({
             'ERROR',
             'REVERSALERROR',
             'PROCESSING',
-            'PENDING'
+            'PENDING',
+            'EXPIRED'
         ]
     },
     transactionType:                   {
@@ -157,6 +158,25 @@ OrdersSchema = new SimpleSchema({
     connectionId:        {
         type:  String,
         label: "Connection"
+    },
+    status:              {
+        type:          String,
+        label:         "Status",
+        allowedValues: [
+            'NEW',          // new order, payment not assigned
+            'REQUESTED',    // payment requested
+            'EXPIRED',      // payment expired
+            'PAID',         // bill is paid
+            'REJECTED',     // order rejected by seller
+            'COMPLETED'     // order approved by seller
+        ],
+        autoValue: function () {
+            if (this.isInsert) {
+                return 'NEW';
+            } else if (this.isUpsert) {
+                return {$setOnInsert: 'NEW'};
+            }
+        }
     },
     items:               {
         type:     [Object],
