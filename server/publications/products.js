@@ -17,18 +17,18 @@ Meteor.publish('products', function (options) {
         initializing = true,
         productsHandle = productsCursor.observeChanges({
             added:   function (id, product) {
-                console.log('product ' + id + ' "' + product.title + '" added');
+                //console.log('product ' + id + ' "' + product.title + '" added');
                 if (!initializing) {
                     ordersHandlers[id] = watchReservations(id, sub);
                 }
                 sub.added('products', id, product);
             },
             changed: function (id, fields) {
-                console.log('product ' + id + ' "' + product.title + '" changed');
+                //console.log('product ' + id + ' "' + product.title + '" changed');
                 sub.changed('products', id, fields);
             },
             removed: function (id) {
-                console.log('product ' + id + ' removed');
+                //console.log('product ' + id + ' removed');
                 ordersHandlers[id] && ordersHandlers[id].stop();
                 delete ordersHandlers[id];
                 sub.removed('products', id);
@@ -71,7 +71,7 @@ var checkReserved = function (productId, sub) {
         }
     });
 
-    console.log('checking orders for product ' + productId, orders.fetch());
+    //console.log('checking orders for product ' + productId, orders.fetch());
 
     var maxExpirationDate = new Date();
     maxExpirationDate.setTime(0);
@@ -81,18 +81,18 @@ var checkReserved = function (productId, sub) {
 
         if (order.paypal.payKeyExpirationDate.getTime() > (new Date()).getTime()) {
             var delay = Math.max(1000, order.paypal.payKeyExpirationDate.getTime() - (new Date()).getTime() + 1000);
-            console.log('will expire in ' + (order.paypal.payKeyExpirationDate.getTime() - (new Date()).getTime()) / 1000 + ' seconds');
-            console.log('check postponed for ' + delay / 1000 + ' seconds');
+            //console.log('will expire in ' + (order.paypal.payKeyExpirationDate.getTime() - (new Date()).getTime()) / 1000 + ' seconds');
+            //console.log('check postponed for ' + delay / 1000 + ' seconds');
             Meteor.setTimeout(function () {
                 checkReserved(productId, sub);
             }, delay);
         }
     });
 
-    console.log({
+    /*console.log({
         isReserved:  !!orders.count(),
         reservedDue: (maxExpirationDate.getTime() > (new Date()).getTime()) ? maxExpirationDate : undefined
-    });
+    });*/
 
     sub.changed(
         'products',
@@ -113,17 +113,17 @@ var watchReservations = function (productId, sub) {
         }),
         ordersHandle = ordersCursor.observeChanges({
             added:   function (orderId, order) {
-                console.log('order ' + orderId + ' added for product ' + productId);
+                //console.log('order ' + orderId + ' added for product ' + productId);
                 if (!initializing) {
                     checkReserved(productId, sub);
                 }
             },
             changed: function (orderId, fields) {
-                console.log('order ' + orderId + ' changed for product ' + productId);
+                //console.log('order ' + orderId + ' changed for product ' + productId);
                 checkReserved(productId, sub);
             },
             removed: function (orderId) {
-                console.log('order ' + orderId + ' removed for product ' + productId);
+                //console.log('order ' + orderId + ' removed for product ' + productId);
                 checkReserved(productId, sub);
             }
         });
