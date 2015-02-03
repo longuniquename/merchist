@@ -1,21 +1,20 @@
-(function(){
+(function () {
 
     Template.ordersViewDetails.helpers({
-        'logo': function(){
-            Meteor.subscribe("image", this.logoId);
-            return Images.findOne(this.logoId);
-        },
-        'itemsCount': function(){
+        'itemsCount': function () {
             var itemsCount = 0;
-            _.each(this.items, function(orderItem){
-                itemsCount += orderItem.itemCount;
+            _.each(this.items, function (orderItem) {
+                itemsCount += orderItem.amount;
             });
             return itemsCount;
+        },
+        'payable':    function () {
+            return this.status === 'NEW' || this.status === 'REQUESTED';
         }
     });
 
     Template.ordersViewDetails.events({
-        'click .payWithPayPalBtn': function(e, template){
+        'click .payWithPayPalBtn': function (e, template) {
             this.pay();
         }
     });

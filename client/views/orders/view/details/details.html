@@ -6,8 +6,12 @@
             <i>
                 {{itemsCount}} items from
             </i>
-            <button class="btn btn-primary btn-block payWithPayPalBtn" data-generating-text="Generating invoice..." data-redirecting-text="Redirecting to PayPal...">Pay with PayPal</button>
-            {{ paypal.status }}
+            {{ #if payable }}
+                <button class="btn btn-primary btn-block payWithPayPalBtn" data-generating-text="Generating invoice..." data-redirecting-text="Redirecting to PayPal...">Pay with PayPal</button>
+            {{ /if }}
+            <div>
+                {{ status }}
+            </div>
         </div>
     </div>
 </template>
