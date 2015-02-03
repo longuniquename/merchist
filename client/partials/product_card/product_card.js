@@ -20,6 +20,7 @@
                 if (!err) {
                     var order = Orders.findOne(orderId);
                     order.pay();
+                    Router.go('orders.view', order);
                 }
             });
         },
