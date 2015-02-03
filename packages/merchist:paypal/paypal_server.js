@@ -146,22 +146,6 @@ PayPal.AdaptivePayments.Pay = function (data) {
             "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
         };
 
-    _.defaults(data, {
-        actionType:                        'PAY',
-        currencyCode:                      'USD',
-        feesPayer:                         'PRIMARYRECEIVER',
-        payKeyDuration:                    'PT15M',
-        reverseAllParallelPaymentsOnError: true,
-        ipnNotificationUrl:                Meteor.absoluteUrl('_paypal/ipn'),
-        clientDetails:                     {
-            applicationId: 'Merchist',
-            partnerName:   'Mercher Inc.'
-        },
-        receiverList:                      {},
-        cancelUrl:                         Meteor.absoluteUrl(),
-        returnUrl:                         Meteor.absoluteUrl()
-    });
-
     return PayPal.request('AdaptivePayments/Pay', data, headers);
 };
 
@@ -177,6 +161,20 @@ PayPal.AdaptivePayments.PaymentDetails = function (data) {
         };
 
     return PayPal.request('AdaptivePayments/PaymentDetails', data, headers);
+};
+
+PayPal.AdaptivePayments.SetPaymentOptions = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
+
+    return PayPal.request('AdaptivePayments/SetPaymentOptions', data, headers);
 };
 
 PayPal.Permissions = {};

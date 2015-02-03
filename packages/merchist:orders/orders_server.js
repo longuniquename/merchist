@@ -6,7 +6,7 @@ Orders.deny({
 });
 
 Meteor.methods({
-    'Orders:createFromProduct': function (product) {
+    'Orders:createFromProduct':    function (product) {
         var order = new Order({
             items:        [
                 {
@@ -24,7 +24,7 @@ Meteor.methods({
 
         return Orders.insert(order);
     },
-    'Orders:getPayUrl':         function (orderId) {
+    'Orders:getPayUrl':            function (orderId) {
         var order = Orders.findOne(orderId);
 
         if (!order) {
@@ -43,7 +43,13 @@ Meteor.methods({
         var seller = Meteor.users.findOne(order.sellerId);
 
         var result = PayPal.AdaptivePayments.Pay({
-            receiverList:       {
+            trackingId:                        order._id,
+            actionType:                        'CREATE',
+            currencyCode:                      'USD',
+            feesPayer:                         'PRIMARYRECEIVER',
+            payKeyDuration:                    'PT15M',
+            reverseAllParallelPaymentsOnError: true,
+            receiverList:                      {
                 receiver: [
                     {
                         amount:      order.total(),
@@ -59,78 +65,112 @@ Meteor.methods({
                     }
                 ]
             },
-            trackingId:         order._id,
-            payKeyDuration:     'PT15M',
-            ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
-            cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
-            returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
+            ipnNotificationUrl:                Meteor.absoluteUrl('_orders/ipn'),
+            cancelUrl:                         Meteor.absoluteUrl('_orders/pay/close'),
+            returnUrl:                         Meteor.absoluteUrl('_orders/pay/close'),
+            clientDetails:                     {
+                applicationId: 'Merchist',
+                partnerName:   'Mercher, Inc.'
+            }
         });
 
-        if (result.payKey) {
-            Orders.update({_id: order._id}, {
-                $set: {
-                    paypal: {
-                        payKey: result.payKey,
-                        status: result.paymentExecStatus
-                    }
-                }
-            });
-
-            var paymentDetailsResult;
-
-            try {
-                paymentDetailsResult = PayPal.AdaptivePayments.PaymentDetails({
-                    payKey: result.payKey
-                });
-            } catch (err) {
-                console.error(err);
-                throw new Meteor.Error('paypal-error');
-            }
-
-            var paymentInfo = {};
-
-            if (paymentDetailsResult["actionType"]) {
-                paymentInfo['paypal.actionType'] = paymentDetailsResult["actionType"];
-            }
-
-            if (paymentDetailsResult["currencyCode"]) {
-                paymentInfo['paypal.currencyCode'] = paymentDetailsResult["currencyCode"];
-            }
-
-            if (paymentDetailsResult["feesPayer"]) {
-                paymentInfo['paypal.feesPayer'] = paymentDetailsResult["feesPayer"];
-            }
-
-            if (paymentDetailsResult["memo"]) {
-                paymentInfo['paypal.memo'] = paymentDetailsResult["memo"];
-            }
-
-            if (paymentDetailsResult["payKey"]) {
-                paymentInfo['paypal.payKey'] = paymentDetailsResult["payKey"];
-            }
-
-            if (paymentDetailsResult["payKeyExpirationDate"]) {
-                paymentInfo['paypal.payKeyExpirationDate'] = new Date(paymentDetailsResult["payKeyExpirationDate"]);
-            }
-
-            if (paymentDetailsResult["reverseAllParallelPaymentsOnError"]) {
-                paymentInfo['paypal.reverseAllParallelPaymentsOnError'] = paymentDetailsResult["reverseAllParallelPaymentsOnError"] === 'true';
-            }
-
-            if (paymentDetailsResult["status"]) {
-                paymentInfo['paypal.status'] = paymentDetailsResult["status"];
-            }
-
-            if (paymentDetailsResult["trackingId"]) {
-                paymentInfo['paypal.trackingId'] = paymentDetailsResult["trackingId"];
-            }
-
-            Orders.update({'paypal.payKey': result.payKey}, {$set: paymentInfo});
-
-            return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
+        if (!result.payKey) {
+            return null;
         }
+
+        Orders.update({_id: order._id}, {
+            $set: {
+                paypal: {
+                    payKey: result.payKey,
+                    status: result.paymentExecStatus
+                }
+            }
+        });
+
+        var setPaymentOptionsRequest = {
+            payKey:          result.payKey,
+            senderOptions:   {
+                requireShippingAddressSelection: true
+            },
+            receiverOptions: {
+                invoiceData: {
+                    item:          [],
+                    totalTax:      0,
+                    totalShipping: 0
+                },
+                receiver:    {
+                    email: seller.services.paypal.email
+                }
+            }
+        };
+
+        _.each(order.items, function (orderItem) {
+            var product = Products.findOne(orderItem.productId);
+            setPaymentOptionsRequest.receiverOptions.invoiceData.item.push({
+                identifier: product._id,
+                name:       product.title,
+                itemPrice:  product.price,
+                itemCount:  orderItem.amount,
+                price:      product.price * orderItem.amount
+            });
+        });
+
+        PayPal.AdaptivePayments.SetPaymentOptions(setPaymentOptionsRequest);
+
+        var paymentDetailsResult;
+
+        try {
+            paymentDetailsResult = PayPal.AdaptivePayments.PaymentDetails({
+                payKey: result.payKey
+            });
+        } catch (err) {
+            console.error(err);
+            throw new Meteor.Error('paypal-error');
+        }
+
+        var paymentInfo = {};
+
+        if (paymentDetailsResult["actionType"]) {
+            paymentInfo['paypal.actionType'] = paymentDetailsResult["actionType"];
+        }
+
+        if (paymentDetailsResult["currencyCode"]) {
+            paymentInfo['paypal.currencyCode'] = paymentDetailsResult["currencyCode"];
+        }
+
+        if (paymentDetailsResult["feesPayer"]) {
+            paymentInfo['paypal.feesPayer'] = paymentDetailsResult["feesPayer"];
+        }
+
+        if (paymentDetailsResult["memo"]) {
+            paymentInfo['paypal.memo'] = paymentDetailsResult["memo"];
+        }
+
+        if (paymentDetailsResult["payKey"]) {
+            paymentInfo['paypal.payKey'] = paymentDetailsResult["payKey"];
+        }
+
+        if (paymentDetailsResult["payKeyExpirationDate"]) {
+            paymentInfo['paypal.payKeyExpirationDate'] = new Date(paymentDetailsResult["payKeyExpirationDate"]);
+        }
+
+        if (paymentDetailsResult["reverseAllParallelPaymentsOnError"]) {
+            paymentInfo['paypal.reverseAllParallelPaymentsOnError'] = paymentDetailsResult["reverseAllParallelPaymentsOnError"] === 'true';
+        }
+
+        if (paymentDetailsResult["status"]) {
+            paymentInfo['paypal.status'] = paymentDetailsResult["status"];
+        }
+
+        if (paymentDetailsResult["trackingId"]) {
+            paymentInfo['paypal.trackingId'] = paymentDetailsResult["trackingId"];
+        }
+
+        Orders.update({'paypal.payKey': result.payKey}, {$set: paymentInfo});
+
+        return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
     },
-    'Orders:updatePaymentDetails': function(orderId){
+    'Orders:updatePaymentDetails': function (orderId) {
         var order = Orders.findOne(orderId);
 
         if (!order) {
@@ -254,7 +294,13 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
 
     try {
         result = PayPal.AdaptivePayments.Pay({
-            receiverList:       {
+            trackingId:                        order._id,
+            actionType:                        'CREATE',
+            currencyCode:                      'USD',
+            feesPayer:                         'PRIMARYRECEIVER',
+            payKeyDuration:                    'PT15M',
+            reverseAllParallelPaymentsOnError: true,
+            receiverList:                      {
                 receiver: [
                     {
                         amount:      order.total(),
@@ -270,10 +316,13 @@ WebApp.connectHandlers.use("/_orders/pay", function (req, res, next) {
                     }
                 ]
             },
-            trackingId:         order._id,
-            ipnNotificationUrl: Meteor.absoluteUrl('_orders/ipn'),
-            cancelUrl:          Meteor.absoluteUrl('_orders/pay/close'),
-            returnUrl:          Meteor.absoluteUrl('_orders/pay/close')
+            ipnNotificationUrl:                Meteor.absoluteUrl('_orders/ipn'),
+            cancelUrl:                         Meteor.absoluteUrl('_orders/pay/close'),
+            returnUrl:                         Meteor.absoluteUrl('_orders/pay/close'),
+            clientDetails:                     {
+                applicationId: 'Merchist',
+                partnerName:   'Mercher, Inc.'
+            }
         });
     } catch (err) {
         console.error(err);
