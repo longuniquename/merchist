@@ -10,5 +10,8 @@ Order.prototype = {
             total += item.price * item.amount;
         });
         return total;
+    },
+    updatePaymentDetails: function(){
+        Meteor.call('Orders:updatePaymentDetails', this._id);
     }
 };

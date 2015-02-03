@@ -129,6 +129,53 @@ Meteor.methods({
 
             return (config.sandbox ? 'https://sandbox.paypal.com/' : 'https://www.paypal.com/') + 'webapps/adaptivepayment/flow/pay?paykey=' + result.payKey;
         }
+    },
+    'Orders:updatePaymentDetails': function(orderId){
+        var order = Orders.findOne(orderId);
+
+        if (!order) {
+            throw new Meteor.Error('not-found', 'Order was not found');
+        }
+
+        var result = PayPal.AdaptivePayments.PaymentDetails({
+            trackingId: order._id
+        });
+
+        var modifier = {};
+
+        if (result.payKey) {
+            modifier['paypal.payKey'] = result.payKey;
+        }
+
+        if (result.status) {
+            modifier['paypal.status'] = result.status;
+        }
+
+        if (result.currencyCode) {
+            modifier['paypal.currencyCode'] = result.currencyCode;
+        }
+
+        if (result.trackingId) {
+            modifier['paypal.trackingId'] = result.trackingId;
+        }
+
+        if (result.actionType) {
+            modifier['paypal.actionType'] = result.actionType;
+        }
+
+        if (result.feesPayer) {
+            modifier['paypal.feesPayer'] = result.feesPayer;
+        }
+
+        if (result.reverseAllParallelPaymentsOnError) {
+            modifier['paypal.reverseAllParallelPaymentsOnError'] = result.reverseAllParallelPaymentsOnError === 'true';
+        }
+
+        if (result.payKeyExpirationDate) {
+            modifier['paypal.payKeyExpirationDate'] = new Date(result.payKeyExpirationDate);
+        }
+
+        Orders.update({_id: order._id}, {$set: modifier});
     }
 });
 
