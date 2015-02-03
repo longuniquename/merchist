@@ -30,6 +30,12 @@
             </h3>
             <span class="price">
                 {{currency price}}
+
+                {{ #if inventory.available }}
+                    ({{inventory.available}} left)
+                {{ else }}
+                    (Sold out)
+                {{ /if }}
             </span>
             <div class="actions">
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
