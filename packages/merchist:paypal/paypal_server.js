@@ -126,155 +126,148 @@ PayPal.request = function (endpoint, data, headers) {
 
 };
 
-PayPal.AdaptivePayments = {
-    Pay:            function (data) {
-        var config = getConfig(),
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-SECURITY-USERID":      config.userId,
-                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
-                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
-            };
+PayPal.AdaptivePayments = {};
 
-        _.defaults(data, {
-            actionType:                        'PAY',
-            currencyCode:                      'USD',
-            feesPayer:                         'PRIMARYRECEIVER',
-            payKeyDuration:                    'PT15M',
-            reverseAllParallelPaymentsOnError: true,
-            ipnNotificationUrl:                Meteor.absoluteUrl('_paypal/ipn'),
-            clientDetails:                     {
-                applicationId: 'Merchist',
-                partnerName:   'Mercher Inc.'
-            },
-            receiverList:                      {},
-            cancelUrl:                         Meteor.absoluteUrl(),
-            returnUrl:                         Meteor.absoluteUrl()
-        });
+PayPal.AdaptivePayments.Pay = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
 
-        return PayPal.request('AdaptivePayments/Pay', data, headers);
-    },
-    PaymentDetails: function (data) {
-        var config = getConfig(),
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-SECURITY-USERID":      config.userId,
-                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
-                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
-            };
+    _.defaults(data, {
+        actionType:                        'PAY',
+        currencyCode:                      'USD',
+        feesPayer:                         'PRIMARYRECEIVER',
+        payKeyDuration:                    'PT15M',
+        reverseAllParallelPaymentsOnError: true,
+        ipnNotificationUrl:                Meteor.absoluteUrl('_paypal/ipn'),
+        clientDetails:                     {
+            applicationId: 'Merchist',
+            partnerName:   'Mercher Inc.'
+        },
+        receiverList:                      {},
+        cancelUrl:                         Meteor.absoluteUrl(),
+        returnUrl:                         Meteor.absoluteUrl()
+    });
 
-        return PayPal.request('AdaptivePayments/PaymentDetails', data, headers);
-    }
+    return PayPal.request('AdaptivePayments/Pay', data, headers);
+};
+
+PayPal.AdaptivePayments.PaymentDetails = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
+
+    return PayPal.request('AdaptivePayments/PaymentDetails', data, headers);
+};
+
+PayPal.Permissions = {};
+
+PayPal.Permissions.RequestPermissions = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
+
+    return PayPal.request('Permissions/RequestPermissions', data, headers);
+};
+
+PayPal.Permissions.GetAccessToken = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
+
+    return PayPal.request('Permissions/GetAccessToken', data, headers);
+};
+
+PayPal.Permissions.GetAdvancedPersonalData = function (data, auth) {
+    var config = getConfig(),
+        url = apiEndpoint('Permissions/GetAdvancedPersonalData', config.sandbox),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-AUTHORIZATION":        generateFullAuthString(
+                config.userId,
+                config.password,
+                auth.token,
+                auth.tokenSecret,
+                'POST',
+                url
+            )
+        };
+
+    return PayPal.request('Permissions/GetAdvancedPersonalData', data, headers);
+};
+
+PayPal.AdaptiveAccounts = {};
+
+PayPal.AdaptiveAccounts.GetVerifiedStatus = function (data) {
+    var config = getConfig(),
+        headers = {
+            "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
+            "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
+            "X-PAYPAL-APPLICATION-ID":       config.appId,
+            "X-PAYPAL-SECURITY-USERID":      config.userId,
+            "X-PAYPAL-SECURITY-PASSWORD":    config.password,
+            "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
+        };
+
+    return PayPal.request('AdaptiveAccounts/GetVerifiedStatus', data, headers);
 };
 
 Meteor.methods({
     'PayPal:Permissions:RequestPermissions':      function (scope, callback) {
-        var config = getConfig(),
-            url = apiEndpoint('Permissions/RequestPermissions', config.sandbox),
-            data = {
-                requestEnvelope: {
-                    detailLevel:   'ReturnAll',
-                    errorLanguage: 'en_US'
-                },
-                scope:           scope,
-                callback:        callback
-            },
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-SECURITY-USERID":      config.userId,
-                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
-                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
-            };
-
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.Permissions.RequestPermissions({
+            scope:    scope,
+            callback: callback
+        });
     },
     'PayPal:Permissions:GetAccessToken':          function (requestToken, verificationCode) {
-        var config = getConfig(),
-            url = apiEndpoint('Permissions/GetAccessToken', config.sandbox),
-            data = {
-                requestEnvelope: {
-                    detailLevel:   'ReturnAll',
-                    errorLanguage: 'en_US'
-                },
-                token:           requestToken,
-                verifier:        verificationCode
-            },
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-SECURITY-USERID":      config.userId,
-                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
-                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
-            };
-
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.Permissions.GetAccessToken({
+            token:    requestToken,
+            verifier: verificationCode
+        });
     },
     'PayPal:Permissions:GetAdvancedPersonalData': function (token, tokenSecret) {
-        var config = getConfig(),
-            url = apiEndpoint('Permissions/GetAdvancedPersonalData', config.sandbox),
-            data = {
-                requestEnvelope: {
-                    detailLevel:   'ReturnAll',
-                    errorLanguage: 'en_US'
-                },
-                attributeList:   {
-                    attribute: _.keys(personalAttributesMap)
-                }
-            },
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-AUTHORIZATION":        generateFullAuthString(
-                    config.userId,
-                    config.password,
-                    token,
-                    tokenSecret,
-                    'POST',
-                    url
-                )
-            };
-
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.Permissions.GetAdvancedPersonalData({
+            attributeList: {
+                attribute: _.keys(personalAttributesMap)
+            }
+        }, {
+            token:       token,
+            tokenSecret: tokenSecret
+        });
     },
     'PayPal:AdaptiveAccounts:GetVerifiedStatus':  function (emailAddress, firstName, lastName) {
-        var config = getConfig(),
-            url = apiEndpoint('AdaptiveAccounts/GetVerifiedStatus', config.sandbox),
-            data = {
-                requestEnvelope: {
-                    detailLevel:   'ReturnAll',
-                    errorLanguage: 'en_US'
-                },
-                emailAddress:    emailAddress,
-                firstName:       firstName,
-                lastName:        lastName,
-                matchCriteria:   'NAME'
-            },
-            headers = {
-                "X-PAYPAL-REQUEST-DATA-FORMAT":  "JSON",
-                "X-PAYPAL-RESPONSE-DATA-FORMAT": "JSON",
-                "X-PAYPAL-APPLICATION-ID":       config.appId,
-                "X-PAYPAL-SECURITY-USERID":      config.userId,
-                "X-PAYPAL-SECURITY-PASSWORD":    config.password,
-                "X-PAYPAL-SECURITY-SIGNATURE":   config.signature
-            };
-
-        var response = HTTP.post(url, {data: data, headers: headers});
-
-        return response.data;
+        return PayPal.AdaptiveAccounts.GetVerifiedStatus({
+            emailAddress:  emailAddress,
+            firstName:     firstName,
+            lastName:      lastName,
+            matchCriteria: 'NAME'
+        });
     }
 });
 
