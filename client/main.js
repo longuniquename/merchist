@@ -1,7 +1,6 @@
 (function () {
 
     Meteor.subscribe("userData");
-    Meteor.subscribe("myShops");
     Meteor.subscribe("myImages");
     Meteor.subscribe('userPresence');
 

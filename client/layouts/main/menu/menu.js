@@ -1,14 +1,6 @@
 (function () {
 
     Template.mainMenu.helpers({
-        'shops':       function () {
-            if (Meteor.user()) {
-                Meteor.subscribe("myShops");
-                return Shops.find({"managers.userId": Meteor.userId()}, {sort: {title: 1}});
-            } else {
-                return false;
-            }
-        },
         'logo':        function () {
             Meteor.subscribe("image", this.logoId);
             return Images.findOne(this.logoId);

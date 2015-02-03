@@ -1,10 +1,6 @@
 (function(){
 
     Template.ordersViewDetails.helpers({
-        'shop': function(){
-            Meteor.subscribe('shop', this.shopId);
-            return Shops.findOne(this.shopId);
-        },
         'logo': function(){
             Meteor.subscribe("image", this.logoId);
             return Images.findOne(this.logoId);
