@@ -1,3 +1,5 @@
+var PayPalLog = new Meteor.Collection('_paypal_requests_log');
+
 var apiEndpoint = function (url, sandbox) {
     return (sandbox ? 'https://svcs.sandbox.paypal.com/' : 'https://svcs.paypal.com/') + url;
 };
@@ -101,12 +103,17 @@ PayPal.request = function (endpoint, data, headers) {
         }
     });
 
+    var logRecordId = PayPalLog.insert({endpoint: endpoint, time: new Date(), request: {data: data, headers: headers}});
+
     try {
         var response = HTTP.post(url, {data: data, headers: headers});
     } catch (err) {
+        PayPalLog.update({_id: logRecordId}, {$set: {response: {error: err}}});
         console.error(err);
         throw new Meteor.Error('paypal-error');
     }
+
+    PayPalLog.update({_id: logRecordId}, {$set: {response: response}});
 
     if (!response.data.responseEnvelope) {
         throw new Meteor.Error('paypal-error');
