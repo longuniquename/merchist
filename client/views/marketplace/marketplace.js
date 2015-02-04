@@ -25,6 +25,9 @@ Template.marketplaceView.helpers({
     loading: function(){
         return !sub.ready();
     },
+    hasMore: function(){
+        return Products.find({}, findOptions()).count() === Session.get('marketplaceView:limit');
+    },
     products: function(){
         return Products.find({}, findOptions());
     }
