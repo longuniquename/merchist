@@ -2,15 +2,25 @@ Meteor.publish('products', function (options) {
 
     _.defaults(options, {
         sort:  {createdAt: -1},
-        limit: 12
+        limit: 12,
+        my:    false
     });
 
     check(options, {
         sort:  Object,
-        limit: Number
+        limit: Number,
+        my:    Boolean
     });
 
-    return Products.find({isPublic: true}, options);
+    var criteria = {};
+
+    if (options.my) {
+        criteria.userId = Meteor.userId();
+    } else {
+        criteria.isPublic = true;
+    }
+
+    return Products.find(criteria, {sort: options.sort, limit: options.limit});
 });
 
 Meteor.publish('products.my', function () {

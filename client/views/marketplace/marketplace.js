@@ -2,6 +2,14 @@ Session.setDefault('marketplaceView:filter', 'all');
 Session.setDefault('marketplaceView:sort', {createdAt: -1});
 Session.setDefault('marketplaceView:limit', 12);
 
+var findCriteria = function () {
+    var criteria = {};
+    if (Session.get('marketplaceView:filter') === 'my') {
+        criteria.userId = Meteor.userId();
+    }
+    return criteria;
+};
+
 var findOptions = function () {
     return {sort: Session.get('marketplaceView:sort'), limit: Session.get('marketplaceView:limit')};
 };
@@ -26,10 +34,10 @@ Template.marketplaceView.helpers({
         return !sub.ready();
     },
     hasMore: function(){
-        return Products.find({}, findOptions()).count() === Session.get('marketplaceView:limit');
+        return Products.find(findCriteria(), findOptions()).count() === Session.get('marketplaceView:limit');
     },
     products: function(){
-        return Products.find({}, findOptions());
+        return Products.find(findCriteria(), findOptions());
     }
 });
 
@@ -41,6 +49,6 @@ Template.marketplaceView.events({
         Session.set('marketplaceView:filter', 'my');
     },
     'click .btnMore': function(){
-        Session.set('marketplaceView:limit', (Math.floor(Products.find({}, findOptions()).count() / 12) + 1) * 12);
+        Session.set('marketplaceView:limit', (Math.floor(Products.find(findCriteria(), findOptions()).count() / 12) + 1) * 12);
     }
 });
