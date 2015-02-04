@@ -5,7 +5,23 @@
                 <h1>Marketplace</h1>
             </div>
         </div>
-        {{> productsListPartial}}
+        <div class="container">
+            <div>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-primary {{#if showAll}}active{{/if}} btnShowAll">
+                        All
+                    </button>
+                    <button type="button" class="btn btn-primary {{#if showMy}}active{{/if}} btnShowMy">
+                        My
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{> productsListPartial products}}
+
+        <div class="container">
+            <button type="button" class="btn btn-primary btn-flat btn-block btnMore" disabled="{{loading}}">Show more</button>
+        </div>
     </div>
     {{> sellButtonPartial}}
 </template>

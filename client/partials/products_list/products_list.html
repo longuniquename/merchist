@@ -2,7 +2,7 @@
     <div class="products-list-partial">
         <div class="container">
             <div class="row">
-                {{ #each products }}
+                {{ #each this }}
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="item">
                             {{ #with seller }}
@@ -13,14 +13,6 @@
                     </div>
                 {{ /each }}
             </div>
-
-            {{#if nextPath}}
-                <a class="btn btn-primary btn-flat btn-block" href="{{nextPath}}">Load more</a>
-            {{else}}
-                {{#unless ready}}
-                    loading...
-                {{/unless}}
-            {{/if}}
         </div>
     </div>
 </template>
